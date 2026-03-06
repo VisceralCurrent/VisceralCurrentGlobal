@@ -1,0 +1,572 @@
+<index.html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISCERAL CURRENT | Sovereign OS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Stable CDN for Three.js and GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;0,900;1,900&family=JetBrains+Mono:wght@400;700;800&display=swap');
+        
+        :root {
+            --brand-purple: #8b5cf6;
+            --brand-blue: #3b82f6;
+            --brand-red: #ef4444;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            cursor: crosshair;
+        }
+
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Cinematic Background Layers */
+        #background-engine {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+        }
+
+        .bg-layer {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0.4) contrast(1.1);
+        }
+
+        .bg-active { opacity: 1; }
+
+        /* UI Styling */
+        .glass {
+            background: rgba(6, 6, 12, 0.85);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 80px 0 rgba(0, 0, 0, 1);
+        }
+
+        .mission-gradient {
+            background: linear-gradient(to right, #fff 40%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Forensic Scanlines */
+        body::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            z-index: 100;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .custom-scroll::-webkit-scrollbar { width: 3px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: var(--brand-purple); border-radius: 10px; }
+
+        .ai-pulse {
+            animation: ai-shimmer 2s infinite linear;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);
+            background-size: 200% 100%;
+        }
+
+        @keyframes ai-shimmer {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+
+        /* Phoenix Transition Overlay */
+        #phoenix-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            display: none;
+            background: black;
+        }
+
+        #interaction-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="forensic-overlay">
+
+    <!-- INITIAL BOOT LOADER -->
+    <div id="boot-loader" class="loading-screen">
+        <div class="w-16 h-16 border-4 border-purple-500/20 border-t-purple-500 rounded-full animate-spin mb-4"></div>
+        <p class="font-mono text-[10px] uppercase tracking-[0.5em] text-white/40">Booting Sovereign OS...</p>
+    </div>
+
+    <!-- 8K DYNAMIC BACKGROUNDS -->
+    <div id="background-engine">
+        <div id="bg-cosmos" class="bg-layer bg-active" style="background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=100&w=3000');"></div>
+        <div id="bg-nature" class="bg-layer" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=100&w=3000');"></div>
+    </div>
+
+    <!-- THREE.JS INTERACTIVE MANIFOLD MOUNT -->
+    <div id="interaction-canvas"></div>
+
+    <!-- PHOENIX COMPLETION VIDEO -->
+    <div id="phoenix-overlay">
+        <video id="phoenix-video" class="w-full h-full object-cover" muted playsinline>
+            <source src="Video_Generation_Complete.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- HOME STAGE: THE THRESHOLD -->
+    <div id="stage-home" class="fixed inset-0 z-[150] flex flex-col items-center justify-center p-8 bg-black/95">
+        <div class="max-w-4xl text-center space-y-12">
+            <div class="flex justify-center mb-4 transition-transform duration-1000 hover:scale-110">
+                <!-- Using absolute paths for GitHub safety -->
+                <img src="Gemini_Generated_Image_aumrwoaumrwoaumr.jpg" class="w-64 h-64 object-contain drop-shadow-[0_0_30px_rgba(139,92,246,0.5)]" alt="VCG Flow Logo" onerror="this.src='https://placehold.co/400x400/000/8b5cf6?text=VCG+CURRENT'">
+            </div>
+            
+            <div class="space-y-4">
+                <span class="text-purple-500 font-mono text-[10px] font-black uppercase tracking-[0.8em] animate-pulse">Establishing Neural Connection</span>
+                <h1 class="text-7xl md:text-9xl font-black italic uppercase leading-[0.85] tracking-tighter mission-gradient">
+                    VISCERAL<br/>CURRENT
+                </h1>
+                <p class="text-white/30 font-mono text-xs uppercase tracking-[0.4em]">Forensic Strategic Operating System &bull; Version 1.0</p>
+            </div>
+
+            <div class="glass p-12 rounded-[4rem] border-white/10 space-y-8 max-w-2xl mx-auto">
+                <p class="text-xl font-light italic leading-relaxed text-white/90">
+                    "Unifying deep spiritual intelligence with the grit of practical application. We architect dominion through infinite flow."
+                </p>
+                <div class="space-y-6">
+                    <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-purple-400 italic">Are you the Anchor or the Current?</h2>
+                    <div class="flex gap-4">
+                        <button onclick="enterProtocol('anchor')" class="ui-element flex-1 py-6 bg-white text-black font-black uppercase tracking-widest rounded-2xl hover:scale-105 active:scale-95 transition-all">The Anchor</button>
+                        <button onclick="enterProtocol('current')" class="ui-element flex-1 py-6 bg-purple-600 text-white font-black uppercase tracking-widest rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_rgba(139,92,246,0.3)]">The Current</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN OS HUD -->
+    <div id="hud" class="fixed inset-0 ui-overlay hidden opacity-0 pointer-events-none">
+        
+        <!-- LEFT: STATUS CENTER -->
+        <div class="flex justify-between items-start p-10">
+            <div class="glass p-8 rounded-[3.5rem] ui-element w-[32rem] pointer-events-auto">
+                <div class="flex items-center gap-6 mb-8 border-b border-white/5 pb-6">
+                    <img src="Gemini_Generated_Image_6n7b416n7b416n7b.jpg" class="w-20 h-20 rounded-2xl border border-white/10 shadow-2xl" alt="Codex Hub" onerror="this.src='https://placehold.co/200x200/000/3b82f6?text=CODEX'">
+                    <div class="space-y-1">
+                        <h1 class="text-[10px] font-black uppercase tracking-[0.4em] text-white/30">System Identity</h1>
+                        <p id="aat-val" class="text-[11px] font-bold text-blue-400 font-mono tracking-tighter truncate w-48">LOCAL SESSION</p>
+                        <p id="archetype-val" class="text-sm font-black text-purple-400 uppercase italic">Calculating Archetype...</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="flex justify-between items-end">
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-mono text-white/20 uppercase tracking-widest">Yield Manifestation</span>
+                            <div id="variance-pill" class="inline-block px-2 py-0.5 rounded-full bg-blue-500/20 text-[8px] font-black text-blue-400 border border-blue-500/30 uppercase tracking-widest">Stable</div>
+                        </div>
+                        <span id="depth-score" class="text-5xl font-black text-white">0%</span>
+                    </div>
+                    <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                        <div id="depth-progress" class="h-full bg-gradient-to-r from-blue-600 via-purple-500 to-white transition-all duration-1000" style="width: 0%"></div>
+                    </div>
+                    
+                    <div id="control-grid" class="grid grid-cols-2 gap-3 pt-4">
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/5 text-center transition-all hover:bg-white/10">
+                            <p class="text-[8px] text-white/20 uppercase mb-1">Grit Coefficient</p>
+                            <p id="grit-val" class="text-lg font-black text-white">0.9542</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/5 text-center transition-all hover:bg-white/10">
+                            <p class="text-[8px] text-white/20 uppercase mb-1">Fluid Reach</p>
+                            <p id="reach-val" class="text-lg font-black text-white">LOW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: ENVIRONMENTAL FEEDBACK -->
+            <div class="flex flex-col gap-4 text-right pointer-events-auto">
+                <div class="glass p-8 rounded-[2.5rem] ui-element font-mono min-w-[260px]">
+                    <div class="flex items-center gap-3 justify-end mb-4">
+                        <p id="env-mode" class="text-[10px] font-black text-white tracking-widest">DEEP COSMOS</p>
+                        <div class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div>
+                    </div>
+                    <p class="text-[8px] text-white/20 uppercase mb-2 tracking-[0.3em]">Neural Variance</p>
+                    <p id="variance-readout" class="text-3xl font-black text-blue-400 tracking-tighter">0.00000</p>
+                    <div class="mt-6 pt-6 border-t border-white/5">
+                        <img src="Gemini_Generated_Image_8ug9fc8ug9fc8ug9.jpg" class="w-16 h-16 ml-auto rounded-xl opacity-40 hover:opacity-100 transition-all cursor-pointer" alt="Mark of Destiny" onerror="this.style.display='none'">
+                    </div>
+                </div>
+                
+                <button onclick="executeProspectus()" id="prospectus-btn" class="hidden glass p-6 rounded-[2rem] ui-element text-center border-purple-500/40 bg-purple-900/10 hover:bg-purple-600 transition-all text-xs font-black uppercase tracking-[0.2em] shadow-2xl">
+                    ✨ Generate Sovereign Prospectus
+                </button>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDEBAR: THE 44 NODES -->
+        <div class="absolute right-10 top-1/2 -translate-y-1/2 w-80 h-[50vh] overflow-y-auto pr-6 ui-element space-y-3 pointer-events-auto custom-scroll">
+            <div id="node-list" class="grid grid-cols-1 gap-2"></div>
+        </div>
+
+        <!-- BOTTOM CENTER: INQUIRY TRIGGER -->
+        <div class="absolute bottom-16 left-1/2 -translate-x-1/2 w-full max-w-2xl px-8 ui-element pointer-events-auto">
+            <div class="glass p-10 rounded-[3.5rem] flex items-center justify-between gap-10 border-t-purple-500/30">
+                <div class="space-y-1">
+                    <h3 id="protocol-prompt" class="text-sm font-black uppercase tracking-[0.3em] text-white">Calibrate New Vector</h3>
+                    <p id="footer-node-hint" class="text-[10px] text-white/30 italic">Click a floating node in 3D to probe.</p>
+                </div>
+                <button onclick="triggerInquiry()" class="px-12 py-5 bg-white text-black text-[11px] font-black uppercase tracking-[0.2em] hover:bg-purple-600 hover:text-white transition-all rounded-2xl shadow-2xl active:scale-95">✨ Forensic Inquiry</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- INQUIRY MODAL -->
+    <div id="modal-container" class="fixed inset-0 z-[200] hidden bg-black/95 backdrop-blur-3xl flex items-center justify-center p-8">
+        <div class="glass p-16 rounded-[5rem] w-full max-w-2xl ui-element space-y-10 relative border-purple-500/20">
+            <button onclick="closeInquiry()" class="absolute top-12 right-12 text-white/20 hover:text-white transition-all text-[10px] font-mono uppercase tracking-[0.3em]">[ Kill Signal ]</button>
+            
+            <div class="space-y-4">
+                <span id="modal-vector-label" class="text-purple-500 font-mono text-xs font-bold uppercase tracking-[0.3em] animate-flicker">// Analysis Probe Active</span>
+                <h2 id="modal-title" class="text-5xl font-black italic uppercase leading-none tracking-tighter text-white">Node Title</h2>
+                <div id="ai-inquiry-loader" class="h-10 w-full ai-pulse rounded-xl"></div>
+                <p id="ai-custom-challenge" class="hidden text-white/70 text-lg italic leading-relaxed font-mono"></p>
+            </div>
+
+            <div class="space-y-6">
+                <textarea id="modal-input" placeholder="Define your grit reality..." class="w-full h-44 bg-white/5 border border-white/10 p-8 rounded-[3rem] font-mono text-sm focus:outline-none focus:border-purple-500 transition-all custom-scroll" spellcheck="false"></textarea>
+                
+                <div id="ai-insight-box" class="hidden p-8 bg-purple-500/10 border border-purple-500/20 rounded-[3rem] space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-black text-purple-400 uppercase tracking-[0.3em]">✨ Architect's Analysis</span>
+                        <div class="flex gap-4">
+                            <button onclick="playLastInsight()" class="text-[9px] font-bold text-white/40 hover:text-white transition-all underline underline-offset-8">REPLAY TTS</button>
+                        </div>
+                    </div>
+                    <p id="ai-insight-text" class="text-sm italic leading-relaxed text-white/80 font-mono"></p>
+                </div>
+
+                <div class="flex gap-4">
+                    <button onclick="submitData()" id="submit-btn" class="w-full py-7 bg-purple-600 text-white font-black uppercase tracking-widest rounded-3xl shadow-[0_0_60px_rgba(139,92,246,0.3)] hover:scale-[1.02] active:scale-95 transition-all">✨ Commit Vector</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CORE LOGIC & 3D ENGINE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, collection, onSnapshot, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const nodes = [
+            "Stoic Baseline", "Breath Control", "Capital Flow", "Ego Death", "Strategic Reach",
+            "Victorville Foundation", "Montana Grit", "Bio-Algorithm", "Sovereign Haven", "Domain Logic",
+            "Neural Elasticity", "High Stakes", "Grace Under Pressure", "Asset Architecture", "Forensic Mindset",
+            "Yield Matrix", "Assumption Tracking", "Current Navigation", "Anchor Discipline", "Spiritual Forge",
+            "Capacity Optimization", "The 33 Vector", "The 9 Completion", "The 3 Foundation", "Digital Dominion",
+            "Biological Sovereignty", "Market Fluidity", "Cognitive Friction", "Infinite Branching", "Unity in Action",
+            "The 44th Node", "Pure Potency", "Creative Chaos", "Ordered Flow", "Shadow Integration",
+            "Practical Mysticism", "Economic Stealth", "Personal Cartography", "Identity Filter", "Grit Synthesis",
+            "Atmosphere Authority", "Real-Time Alignment", "Presence Protocol", "Final Sovereignty"
+        ];
+
+        let scene, camera, renderer, nodeGroup, starField, raycaster, mouse;
+        let db, auth, userId, appId;
+        let sharedDataCount = 0;
+        let lastAiAudioUrl = null;
+        let mappedNodesData = [];
+        let hoveredNodeId = null;
+
+        // --- GITHUB COMPATIBLE INIT ---
+        function initializeEngine() {
+            let firebaseConfig = null;
+            try { 
+                // Check if running in Canvas environment
+                if (typeof __firebase_config !== 'undefined') {
+                    firebaseConfig = JSON.parse(__firebase_config); 
+                }
+            } catch(e) { console.warn("Canvas Environment not detected."); }
+
+            if (firebaseConfig) {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                appId = typeof __app_id !== 'undefined' ? __app_id : 'vcg-sovereign-final';
+
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) { userId = user.uid; document.getElementById('aat-val').innerText = userId; syncCodex(); }
+                    else { signInAnonymously(auth); }
+                });
+            } else {
+                // LOCAL DEMO MODE for GitHub/Home use
+                console.log("Initializing in Local Sovereign mode.");
+                document.getElementById('aat-val').innerText = "OFFLINE_CODEX";
+                sharedDataCount = 0;
+                updateVisuals();
+                populateNodeList([]);
+            }
+            
+            init3D();
+            document.getElementById('boot-loader').style.display = 'none';
+        }
+
+        async function syncCodex() {
+            if (!db) return;
+            const codexRef = collection(db, `artifacts/${appId}/users/${userId}/nodes`);
+            onSnapshot(codexRef, (snapshot) => {
+                mappedNodesData = snapshot.docs.map(d => d.data()).sort((a,b) => a.timestamp - b.timestamp);
+                sharedDataCount = snapshot.size;
+                updateVisuals();
+                populateNodeList(mappedNodesData);
+                updateEnvironment();
+                if (sharedDataCount > 0 && sharedDataCount % 5 === 0) analyzeArchetype();
+            });
+        }
+
+        function updateEnvironment() {
+            const cosmos = document.getElementById('bg-cosmos');
+            const nature = document.getElementById('bg-nature');
+            const mode = document.getElementById('env-mode');
+            if (sharedDataCount < 22) { cosmos.classList.remove('bg-active'); nature.classList.add('bg-active'); mode.innerText = "EXTREME NATURE"; }
+            else { nature.classList.remove('bg-active'); cosmos.classList.add('bg-active'); mode.innerText = "DEEP COSMOS"; }
+        }
+
+        // --- GEMINI API (Safe for all platforms) ---
+        window.callGemini = async (prompt, systemInstruction = "") => {
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = { contents: [{ parts: [{ text: prompt }] }], systemInstruction: { parts: [{ text: systemInstruction }] } };
+            try {
+                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "Link established. Direct communication unavailable.";
+            } catch(e) { return "AI Protocol inactive in this environment."; }
+        };
+
+        window.callGeminiTTS = async (text) => {
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+            const payload = { contents: [{ parts: [{ text: text }] }], generationConfig: { responseModalities: ["AUDIO"], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Charon" } } } } };
+            try {
+                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                const result = await response.json();
+                const audioData = result?.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+                if (audioData) {
+                    const arr = new Uint8Array(atob(audioData).split("").map(c => c.charCodeAt(0)));
+                    return URL.createObjectURL(new Blob([arr.buffer], { type: 'audio/wav' }));
+                }
+            } catch(e) { return null; }
+            return null;
+        };
+
+        // --- UI ACTIONS ---
+        window.triggerInquiry = async (specificNodeIndex = null) => {
+            const nodeIndex = specificNodeIndex !== null ? specificNodeIndex : (sharedDataCount % 44);
+            const nodeName = nodes[nodeIndex];
+            document.getElementById('modal-title').innerText = nodeName;
+            document.getElementById('modal-container').classList.remove('hidden');
+            document.getElementById('ai-insight-box').classList.add('hidden');
+            document.getElementById('ai-inquiry-loader').classList.remove('hidden');
+            document.getElementById('ai-custom-challenge').classList.add('hidden');
+
+            const sysPrompt = "You are the Sovereign Architect. Tone: Forensic and masculine. Ask one intense question to help this user find the practical application of their current node.";
+            const challenge = await callGemini(`Node: ${nodeName}. Map the forensic question.`, sysPrompt);
+            
+            document.getElementById('ai-inquiry-loader').classList.add('hidden');
+            document.getElementById('ai-custom-challenge').innerText = "✨ " + challenge;
+            document.getElementById('ai-custom-challenge').classList.remove('hidden');
+            
+            const audioUrl = await callGeminiTTS(challenge);
+            if(audioUrl) { lastAiAudioUrl = audioUrl; new Audio(audioUrl).play(); }
+        };
+
+        window.submitData = async () => {
+            const btn = document.getElementById('submit-btn');
+            const input = document.getElementById('modal-input').value;
+            if (!input) return;
+            
+            btn.disabled = true; btn.classList.add('ai-loading'); btn.innerText = "✨ ANALYZING...";
+            const nodeIndex = nodes.indexOf(document.getElementById('modal-title').innerText);
+            
+            const feedback = await callGemini(`Node: ${nodes[nodeIndex]}. Reality: ${input}. Critique and provide a Variance score.`, "Sovereign Architect.");
+            const vVal = feedback.match(/0\.\d+/)?.[0] || (0.95 + Math.random()*0.04).toFixed(5);
+            
+            if (db) {
+                await setDoc(doc(db, `artifacts/${appId}/users/${userId}/nodes`, `node_${nodeIndex}`), {
+                    id: nodeIndex, name: nodes[nodeIndex], realization: input, feedback: feedback, variance: vVal, timestamp: Date.now()
+                });
+            } else {
+                // Local save fallback
+                mappedNodesData.push({ id: nodeIndex, name: nodes[nodeIndex], realization: input });
+                sharedDataCount++;
+                updateVisuals();
+                populateNodeList(mappedNodesData);
+            }
+
+            document.getElementById('ai-insight-text').innerText = feedback;
+            document.getElementById('ai-insight-box').classList.remove('hidden');
+            document.getElementById('variance-readout').innerText = vVal;
+            btn.innerText = "VECTOR COMMITTED";
+            setTimeout(() => { closeInquiry(); btn.disabled = false; btn.innerText = "Commit Vector"; document.getElementById('modal-input').value = ""; }, 2000);
+        };
+
+        // --- THREE.JS INTERACTIVITY ENGINE ---
+        function init3D() {
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x000000, 0.001);
+            camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 5000);
+            camera.position.z = 800; // Start zoomed out
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            document.getElementById('interaction-canvas').appendChild(renderer.domElement);
+            
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+
+            nodeGroup = new THREE.Group(); scene.add(nodeGroup);
+            nodes.forEach((name, i) => {
+                const mesh = new THREE.Mesh(
+                    new THREE.SphereGeometry(6, 12, 12), 
+                    new THREE.MeshBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.2 })
+                );
+                const angle = i * 0.55; const dist = 180 + (i * 4);
+                mesh.position.set(Math.cos(angle) * dist, (Math.random() - 0.5) * 350, Math.sin(angle) * dist);
+                mesh.userData = { id: i, name: name };
+                nodeGroup.add(mesh);
+            });
+            
+            const starGeo = new THREE.BufferGeometry();
+            const starPos = new Float32Array(5000 * 3);
+            for(let i=0; i<5000*3; i++) starPos[i] = (Math.random() - 0.5) * 4000;
+            starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+            starField = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0x3b82f6, size: 1.5, transparent: true, opacity: 0.4 }));
+            scene.add(starField);
+
+            window.addEventListener('mousemove', onMouseMove);
+            window.addEventListener('mousedown', onNodeClick);
+            animate();
+        }
+
+        function onMouseMove(event) {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(nodeGroup.children);
+            
+            nodeGroup.children.forEach(n => {
+                if(!mappedNodesData.some(m => m.id === n.userData.id)) {
+                    n.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1);
+                    n.material.opacity = 0.2;
+                }
+            });
+
+            if (intersects.length > 0) {
+                const node = intersects[0].object;
+                node.scale.lerp(new THREE.Vector3(3, 3, 3), 0.2);
+                node.material.opacity = 1;
+                hoveredNodeId = node.userData.id;
+                document.getElementById('footer-node-hint').innerText = `Target: ${node.userData.name}`;
+            } else {
+                hoveredNodeId = null;
+            }
+
+            // Parallax
+            gsap.to(camera.position, { x: mouse.x * 30, y: (mouse.y * 30) + 20, duration: 2 });
+        }
+
+        function onNodeClick() { if (hoveredNodeId !== null) triggerInquiry(hoveredNodeId); }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if(nodeGroup) { 
+                nodeGroup.rotation.y += 0.0006 * (1 + sharedDataCount/12); 
+                nodeGroup.children.forEach((n) => {
+                    if(mappedNodesData.some(m => m.id === n.userData.id)) {
+                        n.material.color.setHex(0xffffff); n.material.opacity = 0.9; n.scale.set(3.5, 3.5, 3.5);
+                    }
+                });
+            }
+            if(starField) starField.rotation.y += 0.00004;
+            renderer.render(scene, camera);
+        }
+
+        function updateVisuals() {
+            const prog = (sharedDataCount / 44) * 100;
+            document.getElementById('depth-score').innerText = Math.floor(prog) + "%";
+            document.getElementById('depth-progress').style.width = prog + "%";
+            if(sharedDataCount >= 1) document.getElementById('prospectus-btn').classList.remove('hidden');
+        }
+
+        function populateNodeList(mappedNodes) {
+            const list = document.getElementById('node-list'); list.innerHTML = "";
+            nodes.forEach((name, i) => {
+                const nodeData = mappedNodes.find(n => n.id === i);
+                const div = document.createElement('div');
+                div.className = `glass p-4 rounded-2xl border border-white/5 transition-all cursor-pointer ${nodeData ? 'border-purple-500/40 shadow-xl' : 'opacity-20 grayscale'}`;
+                div.innerHTML = `<div class="flex justify-between items-center"><span class="text-[8px] font-mono text-white/40">VEC ${String(i+1).padStart(2,'0')}</span>${nodeData ? '<span class="text-[7px] text-green-500 font-bold uppercase">Calibrated</span>' : ''}</div><span class="text-[10px] font-black uppercase tracking-tighter">${name}</span>`;
+                div.onclick = () => triggerInquiry(i);
+                list.appendChild(div);
+            });
+        }
+
+        // --- GLOBAL HELPERS ---
+        window.enterProtocol = (type) => {
+            gsap.to("#stage-home", { opacity: 0, scale: 0.95, duration: 1, onComplete: () => {
+                document.getElementById('stage-home').style.display = 'none';
+                document.getElementById('hud').classList.remove('hidden');
+                gsap.to("#hud", { opacity: 1, duration: 1.5 });
+                gsap.to(camera.position, { z: 500, duration: 3.5, ease: "power3.inOut" });
+            }});
+        };
+
+        window.executeProspectus = () => {
+            const video = document.getElementById('phoenix-video');
+            const overlay = document.getElementById('phoenix-overlay');
+            overlay.style.display = 'block';
+            video.play();
+            video.onended = () => {
+                overlay.innerHTML = `<div class="fixed inset-0 flex items-center justify-center bg-black/95"><div class="glass p-16 rounded-[4rem] text-center space-y-8">
+                    <img src="Gemini_Generated_Image_8ug9fc8ug9fc8ug9.jpg" class="w-32 mx-auto rounded-full mb-6">
+                    <h2 class="text-4xl font-black italic text-purple-400 uppercase tracking-tighter">SOVEREIGN PROSPECTUS</h2>
+                    <p class="text-white/60 font-mono text-xs">Analysis synthesized. Capacity optimization verified.</p>
+                    <button onclick="location.reload()" class="w-full py-5 bg-white text-black font-black uppercase rounded-2xl">Return to OS</button>
+                </div></div>`;
+            };
+        };
+
+        window.triggerInquiry = (id = null) => triggerInquiry(id);
+        window.closeInquiry = () => document.getElementById('modal-container').classList.add('hidden');
+        window.playLastInsight = () => { if (lastAiAudioUrl) new Audio(lastAiAudioUrl).play(); };
+        
+        window.onload = initializeEngine;
+        window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+    </script>
+</body>
+</html>
