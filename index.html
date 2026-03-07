@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #cacaca; -webkit-text-stroke: #cacaca}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #cacaca; -webkit-text-stroke: #cacaca; min-height: 16.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;index.html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;VISCERAL CURRENT | Sovereign OS v5.3-Codex&lt;/title&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- 2026 Sovereign Tech Stack --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"&gt;&lt;/script&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- React &amp; Babel for Single-File Execution --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/@babel/standalone/babel.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;0,900;1,900&amp;family=JetBrains+Mono:wght@400;700;800&amp;display=swap');</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">        </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>:root {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--brand-purple: #8b5cf6;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--brand-blue: #3b82f6;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>--brand-red: #ef4444;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>overflow: hidden;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-color: #000;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>cursor: crosshair;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.font-mono { font-family: 'JetBrains Mono', monospace; }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Cinematic Manifold Layers */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#background-engine {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: fixed;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>top: 0; left: 0; width: 100vw; height: 100vh;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>z-index: -1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.bg-layer {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>inset: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-size: cover;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-position: center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>opacity: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: opacity 3s cubic-bezier(0.16, 1, 0.3, 1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>filter: brightness(0.4) contrast(1.25);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.bg-active { opacity: 1; }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* HUD Component Styles */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.glass {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: rgba(4, 4, 10, 0.9);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(60px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(255, 255, 255, 0.08);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 40px 120px 0 rgba(0, 0, 0, 1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.mission-gradient {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: linear-gradient(to right, #fff 30%, var(--brand-purple) 100%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>-webkit-background-clip: text;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>-webkit-text-fill-color: transparent;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Forensic Scanlines */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body::after {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>content: " ";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: block;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>top: 0; left: 0; bottom: 0; right: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.015), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.015));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>z-index: 100;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-size: 100%_2px, 3px_100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>pointer-events: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.custom-scroll::-webkit-scrollbar { width: 2px; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.custom-scroll::-webkit-scrollbar-thumb { background: var(--brand-purple); border-radius: 10px; }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.ai-shimmer {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.3), transparent);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background-size: 200% 100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>animation: shimmer 2s infinite linear;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#canvas-mount {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: fixed;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>inset: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>z-index: 10;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Phoenix Overlay */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>#phoenix-mount {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>position: fixed;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>inset: 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>z-index: 200;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: #000;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="root"&gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- PHOENIX TRANSITION OVERLAY --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="phoenix-mount"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;video id="phoenix-video" class="w-full h-full object-cover" muted playsinline&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;source src="Video_Generation_Complete.mp4" type="video/mp4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/video&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- MAIN OS APPLICATION CORE --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script type="text/babel"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const { useState, useEffect, useRef, useMemo } = React;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const App = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const mountRef = useRef(null);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const [isBooted, setIsBooted] = useState(false);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const [stage, setStage] = useState('threshold'); // threshold, os, prospectus</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const [activeNode, setActiveNode] = useState(null);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const [sharedDataCount, setSharedDataCount] = useState(0);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const [depth, setDepth] = useState(0);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const [isAiThinking, setIsAiThinking] = useState(false);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const [aiResponse, setAiResponse] = useState("");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const [aiChallenge, setAiChallenge] = useState("");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const [userInput, setUserInput] = useState("");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const [variance, setVariance] = useState("1.00000");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const [archetype, setArchetype] = useState("Establishing Profile...");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const [audioStarted, setAudioStarted] = useState(false);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const nodes = useMemo(() =&gt; [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"Stoic Baseline", "Breath Control", "Capital Flow", "Ego Death", "Strategic Reach",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"Victorville Foundation", "Montana Grit", "Bio-Algorithm", "Sovereign Haven", "Domain Logic",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"Neural Elasticity", "High Stakes", "Grace Under Pressure", "Asset Architecture", "Forensic Mindset",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"Yield Matrix", "Assumption Tracking", "Current Navigation", "Anchor Discipline", "Spiritual Forge",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"Capacity Optimization", "The 33 Vector", "The 9 Completion", "The 3 Foundation", "Digital Dominion",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"Biological Sovereignty", "Market Fluidity", "Cognitive Friction", "Infinite Branching", "Unity in Action",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"The 44th Node", "Pure Potency", "Creative Chaos", "Ordered Flow", "Shadow Integration",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"Practical Mysticism", "Economic Stealth", "Personal Cartography", "Identity Filter", "Grit Synthesis",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>"Atmosphere Authority", "Real-Time Alignment", "Presence Protocol", "Final Sovereignty"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>], []);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 1. INTERACTIVE 3D ENGINE (THREE.JS)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const nodeGroupRef = useRef(null);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const cameraRef = useRef(null);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>useEffect(() =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (!mountRef.current) return;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const scene = new THREE.Scene();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.fog = new THREE.FogExp2(0x000000, 0.0008);</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 1, 5000);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>camera.position.z = 1500;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>cameraRef.current = camera;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>renderer.setSize(window.innerWidth, window.innerHeight);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>mountRef.current.appendChild(renderer.domElement);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const nodeGroup = new THREE.Group();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.add(nodeGroup);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>nodeGroupRef.current = nodeGroup;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// Build the 44-Node Manifold</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>nodes.forEach((name, i) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const geo = new THREE.SphereGeometry(7, 24, 24);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const mat = new THREE.MeshBasicMaterial({<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>color: 0x8b5cf6,<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>transparent: true,<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>opacity: 0.15<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const mesh = new THREE.Mesh(geo, mat);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const angle = i * 0.55;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const dist = 300 + (i * 8);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>mesh.position.set(Math.cos(angle) * dist, (Math.random() - 0.5) * 600, Math.sin(angle) * dist);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>mesh.userData = { id: i, name: name };</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>nodeGroup.add(mesh);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// Add Cosmic Environment Particles</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const starGeo = new THREE.BufferGeometry();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const starPos = new Float32Array(7000 * 3);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>for (let i = 0; i &lt; 7000 * 3; i++) starPos[i] = (Math.random() - 0.5) * 8000;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const starField = new THREE.Points(starGeo, new THREE.PointsMaterial({<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>color: 0x3b82f6,<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>size: 1.5,<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>transparent: true,<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>opacity: 0.4,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>blending: THREE.AdditiveBlending</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>scene.add(starField);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const raycaster = new THREE.Raycaster();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const mouse = new THREE.Vector2();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const onMouseMove = (e) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>mouse.x = (e.clientX / window.innerWidth) * 2 - 1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>gsap.to(camera.position, { x: mouse.x * 120, y: mouse.y * 120 + 50, duration: 3 });</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const onMouseDown = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>raycaster.setFromCamera(mouse, camera);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const intersects = raycaster.intersectObjects(nodeGroup.children);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (intersects.length &gt; 0) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>triggerInquiry(intersects[0].object.userData.id);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>window.addEventListener('mousemove', onMouseMove);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>window.addEventListener('mousedown', onMouseDown);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const animate = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>requestAnimationFrame(animate);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>nodeGroup.rotation.y += 0.0003 * (1 + sharedDataCount / 10);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>starField.rotation.y += 0.00002;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>renderer.render(scene, camera);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>};</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>animate();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>gsap.to(camera.position, { z: 1200, duration: 4, ease: "power4.inOut", delay: 1 });</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setTimeout(() =&gt; setIsBooted(true), 2000);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const handleResize = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>camera.aspect = window.innerWidth / window.innerHeight;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>camera.updateProjectionMatrix();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>renderer.setSize(window.innerWidth, window.innerHeight);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>};</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>window.addEventListener('resize', handleResize);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>return () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>window.removeEventListener('mousemove', onMouseMove);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>window.removeEventListener('mousedown', onMouseDown);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>window.removeEventListener('resize', handleResize);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>};</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}, []);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 2. AI INTELLIGENCE HANDLERS (GEMINI)</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const callGemini = async (prompt, sys = "", useSearch = false) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>try {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const response = await fetch(apiUrl, {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>method: 'POST',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>headers: { 'Content-Type': 'application/json' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>body: JSON.stringify({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>contents: [{ parts: [{ text: prompt }] }],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>systemInstruction: { parts: [{ text: sys }] },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>tools: useSearch ? [{ "google_search": {} }] : []</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>})</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const data = await response.json();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>return data.candidates?.[0]?.content?.parts?.[0]?.text || "Calibration link lost.";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>} catch (e) { return "Protocol error: Link Server Offline."; }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const callGeminiTTS = async (text) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>try {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const response = await fetch(url, {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>method: 'POST',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>headers: { 'Content-Type': 'application/json' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>body: JSON.stringify({</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>contents: [{ parts: [{ text: text }] }],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>generationConfig: {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>responseModalities: ["AUDIO"],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Charon" } } }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>})</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const result = await response.json();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const audioData = result?.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (audioData) new Audio(`data:audio/wav;base64,${audioData}`).play();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>} catch (e) {}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 3. UI LOGIC</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const triggerInquiry = async (id = null) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const idx = id !== null ? id : (sharedDataCount % 44);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setActiveNode(nodes[idx]);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setAiResponse("");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setAiChallenge("Architect is generating a specific forensic probe...");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setIsAiThinking(true);</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const prompt = `Node: "${nodes[idx]}". Progress: ${sharedDataCount}/44. Provide one intense forensic question. Tone: Commanding.`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const res = await callGemini(prompt, "Sovereign Architect.");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setAiChallenge(res);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setIsAiThinking(false);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>callGeminiTTS(res);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const submitVector = async () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setIsAiThinking(true);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const res = await callGemini(`Node "${activeNode}": realization "${userInput}". Audit it for grit and provide a 5-digit AAT Variance score.`, "Sovereign Auditor.");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setAiResponse(res);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const vMatch = res.match(/0\.\d+/);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (vMatch) setVariance(vMatch[0]);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setSharedDataCount(prev =&gt; prev + 1);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setDepth(Math.floor(((sharedDataCount + 1) / 44) * 100));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setIsAiThinking(false);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (nodeGroupRef.current) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>const mesh = nodeGroupRef.current.children[nodes.indexOf(activeNode)];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (mesh) {<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>mesh.material.color.setHex(0xffffff);<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>mesh.material.opacity = 1;<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>mesh.scale.set(4, 4, 4);<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const runArchetypeSync = async () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (sharedDataCount &lt; 3) return;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const res = await callGemini(`Realization data: ${userInput}. Define my Sovereign Archetype in 2 words.`, "Architect.");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setArchetype(res.replace(/"/g, ''));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>useEffect(() =&gt; { if (sharedDataCount &gt; 0 &amp;&amp; sharedDataCount % 3 === 0) runArchetypeSync(); }, [sharedDataCount]);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const startOS = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>setStage('os');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>gsap.to(cameraRef.current.position, { z: 800, duration: 4, ease: "power4.inOut" });</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>return (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div className="relative w-full h-screen bg-black overflow-hidden selection:bg-purple-500/40"&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                    </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{/* 8K VISUAL MANIFOLD BACKGROUNDS */}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div id="background-engine"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className={`bg-layer bg-active`} style={{ backgroundImage: `url('Gemini_Generated_Image_4bzl0r4bzl0r4bzl.jpg')` }} /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className={`bg-layer ${sharedDataCount &gt;= 22 ? 'bg-active' : ''}`} style={{ backgroundImage: `url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&amp;fit=crop&amp;q=100&amp;w=3000')` }} /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="absolute inset-0 bg-black/60" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div id="canvas-mount" ref={mountRef} /&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{/* BOOT LOADER */}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{!isBooted &amp;&amp; (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="fixed inset-0 z-[1000] bg-black flex flex-col items-center justify-center"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="w-24 h-1 border border-white/5 relative overflow-hidden mb-6 rounded-full"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="absolute inset-0 bg-purple-500 w-0 animate-shimmer" style={{ width: '100%' }} /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p className="font-mono text-[9px] uppercase tracking-[0.6em] text-white/30"&gt;Initializing Codex Environment...&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>)}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{/* STAGE: THRESHOLD (HOME) */}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{stage === 'threshold' &amp;&amp; (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="fixed inset-0 z-[150] flex items-center justify-center bg-black/80 backdrop-blur-xl p-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="max-w-6xl w-full text-center space-y-16 animate-in fade-in zoom-in duration-1000"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="relative group mx-auto w-fit"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;div className="absolute -inset-10 bg-purple-500/20 rounded-full blur-[80px] group-hover:bg-purple-500/40 transition duration-1000" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;img<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>src="Gemini_Generated_Image_aumrwoaumrwoaumr.jpg"<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>className="w-80 h-80 relative z-10 object-contain drop-shadow-[0_0_60px_rgba(139,92,246,0.5)] transition-transform duration-1000 group-hover:scale-105"<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>alt="VCG Flow Logo"<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>onError={(e) =&gt; e.target.src = 'https://placehold.co/500x500/000/8b5cf6?text=VCG+FLOW'}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>/&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="space-y-6"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;span className="text-purple-500 font-mono text-[10px] font-black uppercase tracking-[1em] animate-pulse block"&gt;Neural Alignment Required&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;h1 className="text-8xl md:text-[11rem] font-black italic uppercase leading-[0.8] tracking-tighter mission-gradient drop-shadow-2xl"&gt;VISCERAL&lt;br/&gt;CURRENT&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="glass p-16 rounded-[6rem] border-white/5 space-y-10 max-w-4xl mx-auto relative overflow-hidden"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;p className="text-2xl font-light italic text-white/95 relative z-10 font-serif leading-relaxed"&gt;"Unifying deep spiritual intelligence with the grit of practical application."&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;div className="flex gap-8 relative z-10"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;button onClick={startOS} className="flex-1 py-9 bg-white text-black font-black uppercase tracking-widest rounded-[2.5rem] hover:scale-105 active:scale-95 transition-all text-sm"&gt;Establish Anchor&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;button onClick={startOS} className="flex-1 py-9 bg-purple-600 text-white font-black uppercase tracking-widest rounded-[2.5rem] hover:scale-105 active:scale-95 transition-all shadow-[0_0_100px_rgba(139,92,246,0.4)] text-sm"&gt;Establish Current&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>)}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{/* STAGE: OS HUD */}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{stage === 'os' &amp;&amp; (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="fixed inset-0 z-50 flex flex-col justify-between p-12 pointer-events-none animate-in fade-in duration-1000"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="flex justify-between items-start"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="glass p-10 rounded-[4rem] w-[34rem] border-t-white/10 pointer-events-auto shadow-2xl"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;div className="flex items-center gap-8 mb-10 pb-8 border-b border-white/5"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;img<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                            </span>src="Gemini_Generated_Image_6n7b416n7b416n7b.jpg"<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                            </span>className="w-24 h-24 rounded-3xl border border-white/10 shadow-2xl"<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                            </span>alt="Codex"<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                            </span>onError={(e) =&gt; e.target.src = 'https://placehold.co/200x200/000/3b82f6?text=CODEX'}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>/&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;div className="space-y-1"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                            </span>&lt;h2 className="text-[11px] font-black uppercase tracking-[0.5em] text-white/30 font-mono italic"&gt;Sovereign Profile&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                            </span>&lt;p className="text-xs font-bold text-blue-400 font-mono tracking-widest uppercase"&gt;ID: OS_SESS_ALPHA&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                            </span>&lt;p className="text-[10px] font-black text-purple-400 uppercase italic mt-1"&gt;{archetype}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;div className="space-y-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;div className="flex justify-between items-end"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                            </span>&lt;span className="text-[11px] font-mono uppercase text-white/20 tracking-[0.4em]"&gt;Manifold Depth&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                            </span>&lt;span className="text-7xl font-black"&gt;{depth}%&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;div className="w-full h-2 bg-white/5 rounded-full overflow-hidden"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                            </span>&lt;div className="h-full bg-gradient-to-r from-blue-600 via-purple-500 to-white transition-all duration-1000" style={{ width: `${depth}%` }} /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="glass p-10 rounded-[4rem] text-right pointer-events-auto min-w-[320px] border-r-purple-500/20 shadow-2xl"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;p className="text-[11px] font-mono text-white/20 uppercase tracking-[0.4em] mb-4"&gt;Neural Variance&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;p className="text-5xl font-black text-blue-400 tracking-tighter font-mono"&gt;{variance}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;div className="mt-8 pt-8 border-t border-white/5 flex flex-col items-end gap-4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;p className="text-[10px] text-white font-black uppercase tracking-widest"&gt;{sharedDataCount &lt; 22 ? 'FORGE_MODE' : 'INFINITE_FLOW'}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;img src="Gemini_Generated_Image_8ug9fc8ug9fc8ug9.jpg" className="w-20 h-20 rounded-2xl opacity-30 hover:opacity-100 transition-all cursor-pointer shadow-xl" alt="Mark" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>{/* RIGHT NODE SIDEBAR */}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="absolute right-12 top-1/2 -translate-y-1/2 w-80 h-[50vh] overflow-y-auto pr-8 pointer-events-auto custom-scroll space-y-4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>{nodes.map((n, i) =&gt; (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;div<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>key={i}<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>className={`glass p-6 rounded-[2.5rem] border border-white/5 transition-all cursor-pointer ${i &lt; sharedDataCount ? 'border-purple-500 bg-purple-500/10 opacity-100 shadow-xl' : 'opacity-20 hover:opacity-100'}`}<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>onClick={() =&gt; triggerInquiry(i)}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;span className="text-[10px] font-mono text-white/40 block mb-1 uppercase tracking-widest"&gt;VECTOR {String(i+1).padStart(2,'0')}&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;span className="text-[11px] font-black uppercase tracking-[0.2em]"&gt;{n}&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>))}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="flex justify-center mb-16"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="glass p-12 rounded-[5rem] w-full max-w-3xl flex items-center justify-between border-t-purple-500/30 pointer-events-auto shadow-2xl relative overflow-hidden group"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;div className="absolute inset-0 bg-purple-500/5 translate-x-full group-hover:translate-x-0 transition-transform duration-700" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;div className="space-y-1 relative"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;h3 className="text-lg font-black uppercase tracking-[0.4em] text-white"&gt;Initialize Forensic Vector&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;p className="text-[11px] text-white/30 italic font-mono uppercase tracking-[0.5em]"&gt;Manifold sync engaged.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;button<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>onClick={() =&gt; triggerInquiry()}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>className="px-16 py-8 bg-white text-black font-black uppercase tracking-[0.4em] rounded-[3.5rem] hover:bg-purple-600 hover:text-white transition-all shadow-2xl active:scale-95 relative text-xs"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>✨ Forensic Probe</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>)}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{/* INQUIRY MODAL */}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{activeNode &amp;&amp; (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div className="fixed inset-0 z-[200] bg-black/99 backdrop-blur-3xl flex items-center justify-center p-12 animate-in fade-in duration-500"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div className="glass p-24 rounded-[7rem] w-full max-w-5xl border-purple-500/20 space-y-16 relative shadow-[0_0_150px_rgba(0,0,0,1)]"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;button onClick={() =&gt; setActiveNode(null)} className="absolute top-16 right-16 text-white/10 hover:text-white transition-all text-xs font-mono uppercase tracking-[0.5em]"&gt;[ Kill Protocol ]&lt;/button&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                                </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="space-y-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;span className="text-purple-500 font-mono text-xs font-bold uppercase tracking-[0.8em] block animate-pulse"&gt;// Forensic Protocol Active&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;h2 className="text-7xl font-black italic uppercase leading-none tracking-tighter text-white drop-shadow-2xl"&gt;{activeNode}&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;p className="text-white/60 text-2xl italic leading-relaxed font-mono border-l-2 border-purple-500 pl-12 py-4"&gt;✨ {aiChallenge}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;div className="space-y-12"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;textarea<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>value={userInput}<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>onChange={(e) =&gt; setUserInput(e.target.value)}<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>placeholder="Map your practical realization with cold grit..."<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>className="w-full h-64 bg-white/5 border border-white/10 p-12 rounded-[5rem] font-mono text-xl focus:outline-none focus:border-purple-500 transition-all custom-scroll resize-none text-white/90 shadow-inner"<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>spellcheck="false"<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>/&gt;</span></p>
+<p class="p2"><span class="s1"><span class="Apple-converted-space">                                    </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>{aiResponse &amp;&amp; (</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;div className="p-12 bg-purple-500/10 border border-purple-500/20 rounded-[5rem] space-y-8 animate-in slide-in-from-bottom-12 duration-700 text-left"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                            </span>&lt;span className="text-[11px] font-black text-purple-400 uppercase tracking-[0.5em]"&gt;Forensic Auditor interpretation&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                            </span>&lt;p className="text-xl italic text-white/90 font-mono leading-relaxed"&gt;{aiResponse}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>)}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;button<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>onClick={submitVector}<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>disabled={isAiThinking || !userInput}<span class="Apple-converted-space"> </span></span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>className="w-full py-12 bg-purple-600 text-white font-black uppercase tracking-[0.5em] rounded-[4rem] shadow-[0_0_120px_rgba(139,92,246,0.5)] hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-10 disabled:opacity-30 text-sm"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                        </span>{isAiThinking ? &lt;div className="w-10 h-10 border-4 border-white/20 border-t-white rounded-full animate-spin" /&gt; : "Commit Vector to Forensic Codex"}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>)}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const container = document.getElementById('root');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const root = ReactDOM.createRoot(container);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>root.render(&lt;App /&gt;);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
