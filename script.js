@@ -113,28 +113,45 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Use library data if available, otherwise fallback
                 let description = '';
                 let title = '';
-                let realm = '';
+                let zone = '';
 
-                if (typeof getNodeData !== 'undefined') {
-                    const nodeData = getNodeData(nodeId);
+                if (typeof getNodeResearch !== 'undefined') {
+                    const nodeData = getNodeResearch(nodeId);
                     if (nodeData) {
                         title = nodeData.title;
                         description = nodeData.content;
-                        const realmData = getRealmByNode(nodeId);
-                        realm = realmData ? realmData.name : '';
+                        const zoneData = getZoneByNode(nodeId);
+                        zone = zoneData ? zoneData.name : '';
                     }
                 } else {
                     // Fallback descriptions
                     if (nodeId <= 9) {
-                        title = `Origin Node ${nodeId}`;
-                        description = `Foundational Phase Shift parameter. This node represents the initial input for the Visceral Current transformation.`;
+                        title = `Foundation Node ${nodeId}`;
+                        description = `Human Capacity Optimization & The Origin (o). This node represents the initial input for the Visceral Current transformation.`;
+                    } else if (nodeId <= 18) {
+                        title = `Phase Shift Node ${nodeId}`;
+                        description = `Integrating the Past (p) and the ϕ factor.`;
+                    } else if (nodeId <= 27) {
+                        title = `Mechanical Flow Node ${nodeId}`;
+                        description = `Mathematical Precision & Synchronicity.`;
+                    } else if (nodeId <= 36) {
+                        title = `Resonance Node ${nodeId}`;
+                        description = `The Frequency Equation V(t) and 528 Hz.`;
+                    } else if (nodeId <= 45) {
+                        title = `Codex Core Node ${nodeId}`;
+                        description = `The Center Point—The integration of Soul and Strategy.`;
+                    } else if (nodeId <= 54) {
+                        title = `Strategic Mastery Node ${nodeId}`;
+                        description = `Mastery and Influence (VanFlowCo).`;
+                    } else if (nodeId <= 63) {
+                        title = `Area of Impact Node ${nodeId}`;
+                        description = `Scaling to Infinity (A=∫∞).`;
                     } else if (nodeId <= 72) {
-                        const layer = Math.floor((nodeId - 10) / 9) + 2;
-                        title = `Current Node ${nodeId}`;
-                        description = `Operational Visceral Current multiplier in Layer ${layer}.`;
+                        title = `Empire Build Node ${nodeId}`;
+                        description = `ScarlettSkyProductions & Legacy.`;
                     } else {
-                        title = `Infinite Node ${nodeId}`;
-                        description = `Convergence layer for Undeniable impact.`;
+                        title = `Infinite Return Node ${nodeId}`;
+                        description = `Completion and the t→∞ state.`;
                     }
                 }
 
@@ -142,9 +159,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 nodeNumber.textContent = nodeId;
                 nodeDescription.textContent = description;
                 
-                // Add realm if available
-                if (realm) {
-                    nodeNumber.innerHTML = `${nodeId} <span style="font-size: 0.8rem; opacity: 0.7;">• ${realm}</span>`;
+                // Add zone if available
+                if (zone) {
+                    nodeNumber.innerHTML = `${nodeId} <span style="font-size: 0.8rem; opacity: 0.7;">• ${zone}</span>`;
                 }
 
                 nodeDetail.classList.remove('hidden');

@@ -1,168 +1,237 @@
-// Visceral Current Library - 81 Node Matrix with 9 Realms & Research
+// Visceral Current Library - 81 Node Matrix with 9 Zones & Research
 
 const viscleralLibrary = {
-    realms: [
+    zones: [
         {
             id: 1,
-            name: "The Origin Realm",
-            description: "Foundational Phase Shifts & Initial Parameters",
+            name: "The Foundation",
             nodes: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            focus: "Human Capacity Optimization & The Origin (o)",
+            library: [
+                { author: "David Hawkins", work: "Power vs. Force", principle: "Understanding the calibration of consciousness as the bedrock of the matrix" },
+                { author: "C.G. Jung", work: "Man and His Symbols", principle: "Identifying the archetypes that exist before the 'Phase Shift'" },
+                { author: "Alfie Kohn", work: "Punished by Rewards", principle: "Challenging the standard reward systems to find intrinsic 'Purpose' (P)" }
+            ],
             research: [
-                { node: 1, title: "Human Capacity vs. Human Capital", content: "The fundamental distinction: Human Capital treats humans as depleting assets (batteries). Human Capacity recognizes humans as infinite generators (reactors) when friction is removed." },
-                { node: 2, title: "The Phase Shift (ϕ)", content: "The moment where past trauma becomes refined fuel. Application of the Codex to history creates diamond-pressure transformation. This is the mathematical pivot point." },
-                { node: 3, title: "Raw Data Acquisition (p)", content: "Gathering the necessary variables through high-entropy periods. Life's crashes are input volatility—measurement points for the Success Equation." },
-                { node: 4, title: "Narrative Forensic Engineering", content: "The practice of deconstructing personal history to find the 'undeniable truths' that seed all future power. Results in integrated identity, not healed trauma." },
-                { node: 5, title: "The Visceral Current Flow", content: "When system alignment is achieved, energy flows without push. This is the difference between Force (battery extraction) and Power (reactor resonance)." },
-                { node: 6, title: "Complexity Tax of the Ego", content: "Every unit of unintegrated ego costs exponential bandwidth. Removing ego friction unlocks Systemic Bandwidth—the true measure of human capacity." },
-                { node: 7, title: "Undeniable Truth", content: "The irreducible fact extracted from integration. When a human knows what they truly believe (not what they're supposed to), Power becomes infinite." },
-                { node: 8, title: "Aligned Intent", content: "When personal purpose aligns with systemic flow, friction dissolves. This is the foundation of "The W ork Is The Offer" business model." },
-                { node: 9, title: "The Closed Circuit", content: "Perfect alignment between individual frequency and systemic demand. The state where personal growth and business impact become indistinguishable." }
+                { node: 1, title: "Consciousness Calibration", content: "The logarithmic scale of human consciousness provides the foundation for measuring intent and capacity. Every interaction calibrates your frequency." },
+                { node: 2, title: "Archetypal Recognition", content: "Before transformation, we must recognize the universal patterns within ourselves. The collective unconscious holds the blueprint for integration." },
+                { node: 3, title: "Intrinsic Motivation", content: "External rewards create dependency. True power comes from aligning with internal purpose, not manufactured incentives." },
+                { node: 4, title: "Capacity Foundation", content: "Human potential begins with recognizing that we are not batteries to be drained, but reactors to be ignited." },
+                { node: 5, title: "Origin Point (o)", content: "The mathematical starting point where raw potential exists. This is where the Success Equation begins its integration." },
+                { node: 6, title: "Consciousness Mapping", content: "Using Hawkins' scale to navigate from lower vibrations (shame, guilt) to higher states (love, peace, enlightenment)." },
+                { node: 7, title: "Archetypal Integration", content: "The hero's journey, the shadow, the anima/animus—all must be acknowledged before transformation can occur." },
+                { node: 8, title: "Purpose-Driven Action", content: "When motivation comes from within, effort becomes effortless. This is the foundation of sustainable achievement." },
+                { node: 9, title: "The Matrix Grounding", content: "All 81 nodes rest upon this foundation. Without consciousness calibration, the entire system becomes unstable." }
             ]
         },
         {
             id: 2,
-            name: "The Current Realm",
-            description: "Operational Visceral Current Multipliers (Nodes 10-72)",
-            nodes: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72],
+            name: "The Phase Shift",
+            nodes: [10, 11, 12, 13, 14, 15, 16, 17, 18],
+            focus: "Integrating the Past (p) and the ϕ factor",
+            library: [
+                { author: "Robert Greene", work: "The 48 Laws of Power", principle: "Navigating the harsh mechanics of reality during the 'incarceration/despair' phases" },
+                { author: "Carlos Castaneda", work: "The Teachings of Don Juan", principle: "The 'Warrior's Way'—learning to use the shift in perception as a tool for survival and growth" },
+                { author: "Robert Greene & 50 Cent", work: "The 50th Law", principle: "Overcoming fear during the transition from the 'Run' to the 'Return'" }
+            ],
             research: [
-                { node: 10, title: "Business as Highest Expression", content: "Business is the arena where human capacity is tested, proven, and scaled. Not just commerce—the highest expression of integrated human potential." },
-                { node: 11, title: "The Success Equation (A=∞)", content: "Area of Impact = ∫(Visceral Frequency × Phase Shift) dt = Infinity. This proves that proper alignment creates unlimited scale." },
-                { node: 12, title: "Frequency (ν) Alignment", content: "Each human has a natural frequency. Business systems succeed when they amplify this frequency instead of suppressing it." },
-                { node: 13, title: "The Codex Core", content: "A living algorithm that translates human insight into business mechanics. Self-correcting, fractal, recursive." },
-                { node: 14, title: "Family as Closed Circuit", content: "When family members align on frequency, the home becomes a reactor that charges members instead of draining them." },
-                { node: 15, title: "Educational Transmutation", content: "Teaching systems thinking instead of memorization. The Syllabus of Mastery teaches students to become architects." },
-                { node: 16, title: "Rehabilitation Through Integration", content: "Extract power from integrated past instead of managing trauma deficits. This flips the mental health paradigm." },
-                { node: 17, title: "Marketing as Transmission", content: "Your message's power equals your integrated truth. Authenticity is the highest-yield marketing edge." },
-                { node: 18, title: "The Flow State Formula", content: "When capacity matches demand and alignment is perfect, effort disappears. This is infinite scaling rhythm." },
-                { node: 19, title: "Founder-Market Fit", content: "The founder's integrated narrative must become the market's narrative. This is how 10x scaling happens." },
-                { node: 20, title: "Team Resonance Protocol", content: "Assembling people on the same frequency is exponentially more powerful than hiring for skill alone." },
-                { node: 21, title: "The 48-Hour Audit", content: "A deep systems audit revealing where friction exists in capacity. The data itself becomes your offer." },
-                { node: 22, title: "Systemic Bandwidth", content: "The true measure of scalability. Not effort—it's how much integrated capacity your system can hold." },
-                { node: 23, title: "Friction Elimination", content: "Identifying and removing bottlenecks is core to operational optimization. Every system has drag." },
-                { node: 24, title: "Infinite Scaling Architecture", content: "Systems designed so growth doesn't require proportional founder energy increase. This is leverage." },
-                { node: 25, title: "Market Resonance", content: "When your frequency matches unmet market demand, sales become effortless. This is magnetic positioning." },
-                { node: 26, title: "Temporal Synchronicity", content: "Perfect timing in business results from such alignment that opportunities appear. Not luck—physics." },
-                { node: 27, title: "Power vs. Force in Execution", content: "Force requires constant push (battery). Power creates self-sustaining momentum. Always choose power." },
-                { node: 28, title: "Organizational Phase Shift", content: "When a company transitions from founder-dependent to system-dependent, it achieves true scaling." },
-                { node: 29, title: "Customer as Proof", content: "Your best customers are living proof of your integrated narrative. They become your amplifiers." },
-                { node: 30, title: "Revenue as Validation", content: "Money is the market's confirmation of alignment. If revenue is a struggle, something is misaligned." },
-                { node: 31, title: "Product as Expression", content: "Not what you sell—what you stand for. Product should be inseparable from your integrated narrative." },
-                { node: 32, title: "Pricing Power", content: "High prices reflect high integration. Discount pricing signals misalignment. Price according to impact." },
-                { node: 33, title: "The Offer Hierarchy", content: "Level 1: Products. Level 2: Services. Level 3: Transformation. Level 4: Transmission. Climb the levels." },
-                { node: 34, title: "Owner Psychology", content: "Your internal state determines your business state. Fix self first, business follows perfectly." },
-                { node: 35, title: "Decision Making Framework", content: "Decisions aligned with integrated narrative make themselves. Confusion signals misalignment to fix." },
-                { node: 36, title: "Strategic Clarity", content: "When integrated, strategy becomes obvious. Complexity in strategy signals ego noise." },
-                { node: 37, title: "Growth as Proof", content: "Exponential growth without proportional struggle proves system design. Linear growth signals force-based working." },
-                { node: 38, title: "Competitive Advantage", content: "Your unfair advantage is your integrated narrative. No competitor can authentically copy this." },
-                { node: 39, title: "Market Position", content: "Don't fight in crowded markets. Find the frequency no one else is transmitting and own it." },
-                { node: 40, title: "Category Creation", content: "When aligned to your true frequency, you don't compete—you create entirely new categories." },
-                { node: 41, title: "Disruption Through Integration", content: "The most disruptive forces aren't clever strategies—they're founders who've achieved radical alignment." },
-                { node: 42, title: "Scaling Without Dilution", content: "Proper system design allows 10x growth without diluting quality or founder energy requirements." },
-                { node: 43, title: "Team Leverage", content: "A small team of people on your frequency outperforms large teams operating in misalignment." },
-                { node: 44, title: "Cultural Transmission", content: "Company culture isn't rules—it's the frequency you transmit. Strong culture attracts resonant people." },
-                { node: 45, title: "Adversity as Refinement", content: "Business challenges are refinement opportunities. Setbacks reveal where friction still exists." },
-                { node: 46, title: "Patience as Power", content: "Founders who refuse to force growth activate exponential compounding. Patience proves confidence." },
-                { node: 47, title: "Iteration as Mastery", content: "Each business iteration increases integration. Failure is just feedback on alignment." },
-                { node: 48, title: "Profitability as Truth", content: "Profit isn't greed—it's the market confirming your integrated value. Unprofitable businesses are misaligned." },
-                { node: 49, title: "Cash Flow as Lifeblood", content: "Cash flow is systemic health. Problems here signal operational misalignment to fix." },
-                { node: 50, title: "Exit Strategy", content: "The best exit is having a business that doesn't need you. This is the ultimate proof of integration." },
-                { node: 51, title: "Legacy Thinking", content: "Build systems that outlive you. This proves you've transcended ego and achieved true alignment." },
-                { node: 52, title: "Industry Transformation", content: "When you're truly aligned, you don't just grow—you shift your entire industry's frequency." },
-                { node: 53, title: "Next Generation Leadership", content: "Raise leaders who amplify your frequency. Multiplication through people is the highest leverage." },
-                { node: 54, title: "Institution Building", content: "From business to movement. This happens when one founder's alignment becomes cultural amplitude." },
-                { node: 55, title: "Economic Impact", content: "Aligned businesses create economic ecosystems. You don't just make money—you generate prosperity." },
-                { node: 56, title: "Social Proof Chain", content: "One integrated founder creates customers who become advocates who become partners. This is viral alignment." },
-                { node: 57, title: "Authority Through Integration", content: "You don't need to claim authority. Integrated founders naturally become thought leaders." },
-                { node: 58, title: "Media Magnetism", content: "Journalists are attracted to integrated narratives. PR becomes effortless when you stand for something real." },
-                { node: 59, title: "Speaking to Audiences", content: "Your ability to move audiences equals your integration. Authentic transmission is magnetic." },
-                { node: 60, title: "Content as Transmission", content: "Content marketing isn't tactics—it's sharing the frequency that got you here. Give away your best insights." },
-                { node: 61, title: "The 10x Opportunity", content: "Every major breakthrough comes when someone finds a frequency gap the market didn't know existed." },
-                { node: 62, title: "Resilience Architecture", content: "Systems built on alignment are resilient. Economic downturns actually strengthen integrated businesses." },
-                { node: 63, title: "Global Scaling Physics", content: "When aligned, geographic expansion isn't harder—it's just frequency transmission at scale." },
-                { node: 64, title: "Technology as Leverage", content: "Tech is only a multiplier. Good tech with bad alignment amplifies failure. Tech + alignment = exponential." },
-                { node: 65, title: "Automation and Freedom", content: "Proper automation frees founders to do what they do best. This is how capacity truly multiplies." },
-                { node: 66, title: "Data-Driven Integration", content: "Metrics confirm alignment. If data contradicts your narrative, alignment needs work, not data interpretation." },
-                { node: 67, title: "Customer Lifetime Value", content: "When aligned, customers stay forever. High churn signals frequency mismatch to address." },
-                { node: 68, title: "Referral Economics", content: "Word-of-mouth in aligned businesses becomes exponential. This is the highest-yield acquisition channel." },
-                { node: 69, title: "Partnership Cascades", content: "Strategic partnerships emerge naturally when you're transmitting a frequency others want to amplify." },
-                { node: 70, title: "Ecosystem Design", content: "The best businesses aren't competitive—they're ecosystem centers. You become the frequency others orbit." },
-                { node: 71, title: "Wealth Creation", content: "Making money becomes inevitable when aligned. Wealth follows naturally from authentic value transmission." },
-                { node: 72, title: "The Current Converges", content: "As Current Realm nodes integrate, they point toward Infinite Realm convergence. Impact approaches infinity." }
+                { node: 10, title: "Power Dynamics Navigation", content: "Understanding the laws of power is essential during the darkest phases of transformation. Reality has harsh mechanics that must be mastered." },
+                { node: 11, title: "Warrior's Perception", content: "The shift in perception is not philosophical—it's a survival tool. Seeing the world as energy rather than solid matter." },
+                { node: 12, title: "Fear Transmutation", content: "The 50th Law: Fear is not meant to be conquered, but redirected. Use it as fuel for the return journey." },
+                { node: 13, title: "Past Integration (p)", content: "The variable 'p' represents all past data points. Integration, not deletion, is the path to power." },
+                { node: 14, title: "Phase Shift (ϕ)", content: "The mechanical pivot where carbon becomes diamond. This is the mathematical moment of transformation." },
+                { node: 15, title: "Reality's Harsh Mechanics", content: "During incarceration/despair phases, you learn that the world doesn't care about your feelings—it responds to power." },
+                { node: 16, title: "Perception as Weapon", content: "Castaneda's teachings show how shifting perception creates options where none seemed to exist." },
+                { node: 17, title: "From Run to Return", content: "The coward runs, the warrior returns with strategy. Fear becomes your greatest teacher." },
+                { node: 18, title: "Integration Mathematics", content: "Past (p) × Phase Shift (ϕ) = Transformed Future. This equation governs all human evolution." }
             ]
         },
         {
             id: 3,
-            name: "The Infinite Realm",
-            description: "Convergence Layer & Undeniable Impact (Nodes 73-81)",
-            nodes: [73, 74, 75, 76, 77, 78, 79, 80, 81],
+            name: "The Mechanical Flow",
+            nodes: [19, 20, 21, 22, 23, 24, 25, 26, 27],
+            focus: "Mathematical Precision & Synchronicity",
+            library: [
+                { author: "Donella Meadows", work: "Thinking in Systems", principle: "Mapping how the nodes interconnect and feed back into the system" },
+                { author: "Aristotle", work: "The Great Books", principle: "Logic and the classical structure of the universe's workings" },
+                { author: "Plato", work: "The Republic", principle: "The ideal forms and the structure of reality" }
+            ],
             research: [
-                { node: 73, title: "The Limit as t→∞", content: "The Success Equation proves that with proper alignment, impact approaches infinity over time. This is mathematical certainty, not aspiration." },
-                { node: 74, title: "Harmonious Synergy", content: "When all 81 nodes operate in synchronization, the output is not the sum—it's exponential multiplication." },
-                { node: 75, title: "360° Vision", content: "The circumferential boundary that ensures no node operates in isolation. Full system awareness is where power concentrates." },
-                { node: 76, title: "The Undeniable Current", content: "When a system achieves critical alignment, its impact becomes undeniable—to markets, to families, to individuals. This is proof." },
-                { node: 77, title: "Infinite Potential Unlocked", content: "Capacity, when fully optimized, has no ceiling. This is not metaphorical—the math proves it." },
-                { node: 78, title: "The Circuit Closes", content: "When output feeds back as input, and the system sustains itself, you've achieved a perpetual reactor. Friction-free perpetuity." },
-                { node: 79, title: "Cascade Effect", content: "One optimized human creates ripples through family, then organization, then market. This is how movements begin." },
-                { node: 80, title: "The Work Becomes Offer", content: "When a founder's integration is complete, their work is no longer a product—it's a transmission. This attracts ideal clients naturally." },
-                { node: 81, title: "The Visceral Current Lives", content: "The final proof: A fully optimized system doesn't require external energy. It generates its own momentum. The current is eternal." }
+                { node: 19, title: "Systems Thinking", content: "Understanding how nodes interconnect creates feedback loops. What you do to one part affects the whole system." },
+                { node: 20, title: "Classical Logic", content: "Aristotle's laws of thought provide the framework for understanding cause and effect in human systems." },
+                { node: 21, title: "Ideal Forms", content: "Plato's theory of forms shows that perfect patterns exist beyond the physical world. These are the blueprints for mastery." },
+                { node: 22, title: "Synchronicity Mapping", content: "When systems align perfectly, meaningful coincidences become the norm. This is the universe's way of communicating." },
+                { node: 23, title: "Mathematical Precision", content: "Every human interaction follows mathematical laws. Understanding these creates predictability in chaos." },
+                { node: 24, title: "Feedback Loops", content: "Positive and negative feedback loops determine whether systems grow or collapse. Master the loops, master the outcomes." },
+                { node: 25, title: "Causal Chains", content: "Every action creates ripples. Understanding the chain of causality allows you to predict and influence outcomes." },
+                { node: 26, title: "Universal Structure", content: "The same patterns that govern atoms govern empires. This fractal nature is the key to scaling." },
+                { node: 27, title: "Precision Execution", content: "When mechanics are understood, execution becomes surgical. No more guesswork, only mathematical certainty." }
+            ]
+        },
+        {
+            id: 4,
+            name: "The Resonance",
+            nodes: [28, 29, 30, 31, 32, 33, 34, 35, 36],
+            focus: "The Frequency Equation V(t) and 528 Hz",
+            library: [
+                { author: "Deepak Chopra", work: "The Seven Spiritual Laws of Success", principle: "Aligning the frequency of the self with the frequency of the miracle" },
+                { author: "Wayne Dyer", work: "The Power of Intention", principle: "Using the Amplitude (A) of one's will to manifest the 'Miracle' resonance" }
+            ],
+            research: [
+                { node: 28, title: "Seven Spiritual Laws", content: "The universe operates on spiritual laws that, when followed, create effortless success. These are the operating system of miracles." },
+                { node: 29, title: "Power of Intention", content: "Your thoughts have amplitude. When intention is pure and focused, it manifests reality. This is quantum creation." },
+                { node: 30, title: "Frequency Equation V(t)", content: "Voltage over time creates the waveform of your life. The frequency you transmit determines what you attract." },
+                { node: 31, title: "528 Hz Love Frequency", content: "The miracle tone that repairs DNA and aligns with universal love. This frequency is the bridge between human and divine." },
+                { node: 32, title: "Miracle Resonance", content: "When your frequency matches the universe's, miracles become normal. This is not belief—it's physics." },
+                { node: 33, title: "Amplitude of Will", content: "The strength of your intention determines the power of manifestation. Weak will creates weak results." },
+                { node: 34, title: "Self-Universal Alignment", content: "The goal is not to change the universe, but to align your frequency with its natural flow." },
+                { node: 35, title: "Intention as Creation", content: "Every thought is a seed. The quality of your intention determines the harvest you reap." },
+                { node: 36, title: "Resonance Mastery", content: "When you master your frequency, you become a tuning fork for miracles. The universe responds in kind." }
+            ]
+        },
+        {
+            id: 5,
+            name: "The Codex Core",
+            nodes: [37, 38, 39, 40, 41, 42, 43, 44, 45],
+            focus: "The Center Point—The integration of Soul and Strategy",
+            library: [
+                { author: "Alan Watts", work: "The Way of Zen", principle: "Finding the 'Now' within the Visceral Current" },
+                { author: "Various", work: "The Holy Bible / Ancient Texts", principle: "The 'written in the stars' destiny and the spiritual origin of the word" }
+            ],
+            research: [
+                { node: 37, title: "The Way of Zen", content: "Finding presence within the flow. The 'Now' is where strategy and soul become one. This is the center point of mastery." },
+                { node: 38, title: "Written in the Stars", content: "Ancient texts reveal that destiny is not random—it's written in the cosmos. Your path was chosen before birth." },
+                { node: 39, title: "Soul-Strategy Integration", content: "The ultimate synthesis: spiritual wisdom applied to strategic action. This creates unstoppable momentum." },
+                { node: 40, title: "The Center Point", content: "The mathematical center of the 81-node matrix. Here, all forces balance and amplify each other." },
+                { node: 41, title: "Spiritual Origin of Strategy", content: "The greatest strategies come from spiritual insight. The word creates worlds, literally." },
+                { node: 42, title: "Presence in Action", content: "Zen teaches that true power comes from being fully present. Distraction is the enemy of mastery." },
+                { node: 43, title: "Cosmic Destiny", content: "Your life is part of a larger story written in the stars. Understanding this creates profound purpose." },
+                { node: 44, title: "Integration Point", content: "Where soul (vertical) meets strategy (horizontal). This intersection creates the cross that crucifies limitation." },
+                { node: 45, title: "The Codex Heart", content: "The living algorithm at the center of everything. This is where theory becomes practice, and practice becomes transformation." }
+            ]
+        },
+        {
+            id: 6,
+            name: "Strategic Mastery",
+            nodes: [46, 47, 48, 49, 50, 51, 52, 53, 54],
+            focus: "Mastery and Influence (VanFlowCo)",
+            library: [
+                { author: "Robert Greene", work: "Mastery", principle: "Transitioning from a seeker to a master of the craft (Web Design/Business Strategy)" },
+                { author: "Robert Greene", work: "The Art of Seduction", principle: "The marketing psychology of making a brand 'Undeniable'" }
+            ],
+            research: [
+                { node: 46, title: "The Path to Mastery", content: "From apprentice to master: the journey requires deep practice, mentorship, and the discovery of your unique voice." },
+                { node: 47, title: "Art of Seduction", content: "Marketing is seduction. Creating desire through psychology, timing, and irresistible positioning." },
+                { node: 48, title: "Craft Mastery", content: "Whether web design or business strategy, mastery comes from 10,000 hours of deliberate practice." },
+                { node: 49, title: "Influence Architecture", content: "Building systems that influence others naturally. This is the difference between pushing and attracting." },
+                { node: 50, title: "Undeniable Positioning", content: "When your brand becomes so compelling that rejection feels impossible. This is magnetic marketing." },
+                { node: 51, title: "Strategic Depth", content: "Mastery requires understanding not just what to do, but why and how it fits into the larger system." },
+                { node: 52, title: "Psychological Leverage", content: "Using human psychology to create advantage. Seduction is the ultimate form of influence." },
+                { node: 53, title: "VanFlowCo Mastery", content: "The convergence of strategic thinking and creative flow. This is where business becomes art." },
+                { node: 54, title: "Influence at Scale", content: "Mastery creates ripple effects. One master influences thousands through their work and teaching." }
+            ]
+        },
+        {
+            id: 7,
+            name: "The Area of Impact",
+            nodes: [55, 56, 57, 58, 59, 60, 61, 62, 63],
+            focus: "Scaling to Infinity (A=∫∞)",
+            library: [
+                { author: "Robert Greene", work: "The Laws of Human Nature", principle: "Understanding the 'Connection' (C) aspect of the success equation" },
+                { author: "Viktor Frankl", work: "Man's Search for Meaning", principle: "Proving that impact is born from the ability to endure and transmute suffering" }
+            ],
+            research: [
+                { node: 55, title: "Laws of Human Nature", content: "Understanding human irrationality creates connection and influence. This is the 'C' variable in the success equation." },
+                { node: 56, title: "Meaning Through Suffering", content: "Frankl proved that even in hell, meaning can be found. Suffering becomes the forge of character." },
+                { node: 57, title: "Infinite Impact (A=∫∞)", content: "Area of Impact approaches infinity when connection and meaning align perfectly." },
+                { node: 58, title: "Human Connection", content: "Understanding others' irrational patterns creates deep bonds. This is the foundation of influence." },
+                { node: 59, title: "Transmutation of Pain", content: "Suffering is not the end—it's raw material for transformation. This creates unbreakable resilience." },
+                { node: 60, title: "Scaling Through Connection", content: "Impact grows exponentially when you connect with others on a human level, not just a transactional one." },
+                { node: 61, title: "Meaning as Fuel", content: "When your work has deep meaning, fatigue becomes impossible. Purpose creates infinite energy." },
+                { node: 62, title: "Irrational Wisdom", content: "Human nature's irrationality contains hidden wisdom. Understanding it creates mastery over chaos." },
+                { node: 63, title: "Impact Convergence", content: "When connection and meaning reach critical mass, impact becomes infinite. This is the ultimate scaling." }
+            ]
+        },
+        {
+            id: 8,
+            name: "The Empire Build",
+            nodes: [64, 65, 66, 67, 68, 69, 70, 71, 72],
+            focus: "ScarlettSkyProductions & Legacy",
+            library: [
+                { author: "Robert Greene", work: "The 33 Strategies of War", principle: "Protecting the empire and ensuring the 'Succession' for Scarlett Delaine" },
+                { author: "Napoleon Hill", work: "Think and Grow Rich", principle: "The mental blueprint for building physical wealth from spiritual truth" }
+            ],
+            research: [
+                { node: 64, title: "33 Strategies of War", content: "The complete playbook for protecting and expanding empires. Defense and offense in perfect balance." },
+                { node: 65, title: "Think and Grow Rich", content: "The mental blueprint: desire, faith, autosuggestion, knowledge, imagination, organization, decision, persistence, power of the mastermind, and the mystery of sex transmutation." },
+                { node: 66, title: "Empire Protection", content: "Building systems that survive attacks and internal threats. This is the art of strategic defense." },
+                { node: 67, title: "Succession Planning", content: "Ensuring the empire continues beyond the founder. This is the legacy architecture." },
+                { node: 68, title: "Mental Wealth Creation", content: "Hill's philosophy: all wealth begins in the mind. Spiritual truth creates physical abundance." },
+                { node: 69, title: "Strategic Expansion", content: "Growing without vulnerability. Each expansion strengthens the core rather than weakening it." },
+                { node: 70, title: "ScarlettSkyProductions", content: "The convergence of strategic empire-building and creative production. This is where legacy meets art." },
+                { node: 71, title: "Wealth Transmutation", content: "Converting spiritual insight into physical wealth. The mastermind principle amplifies everything." },
+                { node: 72, title: "Empire Convergence", content: "When protection, succession, and expansion align perfectly, the empire becomes self-sustaining and infinite." }
+            ]
+        },
+        {
+            id: 9,
+            name: "The Infinite Return",
+            nodes: [73, 74, 75, 76, 77, 78, 79, 80, 81],
+            focus: "Completion and the t→∞ state",
+            library: [
+                { author: "Rumi", work: "Sufi Poetry", principle: "The final dissolution of the ego into the 'Infinite Sum'" },
+                { author: "Three Initiates", work: "The Kybalion", principle: "Hermetic principles that tie the entire 81-node matrix back to the 'All is Mind' truth" }
+            ],
+            research: [
+                { node: 73, title: "Sufi Dissolution", content: "Rumi's poetry teaches the final dissolution of ego into infinite love. The drop becomes the ocean." },
+                { node: 74, title: "Hermetic Principles", content: "The Kybalion's seven principles: Mentalism, Correspondence, Vibration, Polarity, Rhythm, Cause & Effect, Gender. These govern all reality." },
+                { node: 75, title: "Infinite Return (t→∞)", content: "As time approaches infinity, all returns to source. This is the completion of the cycle." },
+                { node: 76, title: "Ego Dissolution", content: "The final stage: transcending the illusion of separation. The self merges with the infinite." },
+                { node: 77, title: "All is Mind", content: "The fundamental hermetic truth: the universe is mental. Consciousness creates reality." },
+                { node: 78, title: "Completion Cycle", content: "The 81-node journey completes the human potential cycle. What began in consciousness returns to consciousness." },
+                { node: 79, title: "Infinite Sum", content: "All nodes converge to infinity. Individual limitations dissolve into universal potential." },
+                { node: 80, title: "The Return Journey", content: "From foundation to infinity and back. The cycle completes, but transformed." },
+                { node: 81, title: "Matrix Completion", content: "The 9×9 grid achieves perfect harmony. All is Mind, all is infinite, all is one." }
             ]
         }
     ],
     
-    // Additional library resources by realm
+    // Additional resources by zone
     resources: {
-        business: [
-            "The Success Equation: How alignment scales without limit",
-            "Founder-Market Fit: Making your narrative the market's narrative",
-            "The Work Is The Offer: Business as the highest expression of integration",
-            "Infinite Scaling Architecture: Growth without proportional founder energy",
-            "Team Resonance: Building power through frequency alignment"
+        analytical: [
+            "Power vs. Force (David Hawkins)",
+            "The 48 Laws of Power (Robert Greene)",
+            "Thinking in Systems (Donella Meadows)",
+            "The Laws of Human Nature (Robert Greene)",
+            "The 33 Strategies of War (Robert Greene)"
         ],
-        family: [
-            "Family as Closed Circuit: From obligation to resonance",
-            "Parenting as Coaxing Capacity: Replacing control with frequency alignment",
-            "The Home as Haven: A space that recharges by existing in harmony",
-            "Generational Frequency: Breaking cycles through integrated narrative",
-            "Sibling Resonance: Creating familial alignment beyond obligation"
-        ],
-        education: [
-            "From Memorization to Transmutation: The Syllabus of Mastery",
-            "Teaching Systems Thinking: Mathematical certainty applied to passion",
-            "Grading Resonance: Replacing retention metrics with frequency assessment",
-            "The Classroom as Forge: Building architects, not knowledge consumers",
-            "Education as Integration: Learning as identity transformation"
-        ],
-        individual: [
-            "Narrative Forensic Engineering: Transmuting trauma into power",
-            "The Phase Shift: From survival to sovereign flow",
-            "Complexity Tax of the Ego: Removing the friction that blocks capacity",
-            "Frequency Discovery: Finding your natural resonance point",
-            "Integrated Identity: The practice of becoming undeniably yourself"
+        spiritual: [
+            "The Seven Spiritual Laws of Success (Deepak Chopra)",
+            "The Power of Intention (Wayne Dyer)",
+            "The Way of Zen (Alan Watts)",
+            "Man's Search for Meaning (Viktor Frankl)",
+            "The Kybalion (Hermetic Principles)"
         ]
     }
 };
 
-// Function to get node data by ID
-function getNodeData(nodeId) {
-    for (let realm of viscleralLibrary.realms) {
-        for (let research of realm.research) {
-            if (research.node === nodeId) {
-                return {
-                    realm: realm.name,
-                    title: research.title,
-                    content: research.content
-                };
-            }
+// Function to get zone data by node ID
+function getZoneByNode(nodeId) {
+    for (let zone of viscleralLibrary.zones) {
+        if (zone.nodes.includes(nodeId)) {
+            return zone;
         }
     }
     return null;
 }
 
-// Function to get realm by node ID
-function getRealmByNode(nodeId) {
-    for (let realm of viscleralLibrary.realms) {
-        if (realm.nodes.includes(nodeId)) {
-            return realm;
+// Function to get node research by ID
+function getNodeResearch(nodeId) {
+    for (let zone of viscleralLibrary.zones) {
+        for (let research of zone.research) {
+            if (research.node === nodeId) {
+                return research;
+            }
         }
     }
     return null;
