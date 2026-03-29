@@ -15,6 +15,104 @@ body {
     transition: all 0.5s ease;
 }
 
+/* Dynamic Background System */
+.dynamic-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0;
+    transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1.1);
+    transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), transform 2s ease-out;
+}
+
+.bg-layer.active {
+    opacity: 0.25;
+    transform: scale(1);
+}
+
+/* Mobile adjustments for background */
+@media (max-width: 768px) {
+    .bg-layer {
+        background-attachment: scroll;
+        transform: none !important;
+    }
+
+    .bg-layer.active {
+        opacity: 0.15;
+    }
+}
+
+/* Background Images - Visceral Current Theme */
+.bg-layer-1 {
+    background-image: linear-gradient(135deg, rgba(5, 7, 10, 0.9) 0%, rgba(10, 26, 31, 0.9) 50%, rgba(5, 7, 10, 0.9) 100%),
+                     url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    /* Mountain peaks - Foundation/Origin theme */
+}
+
+.bg-layer-2 {
+    background-image: linear-gradient(135deg, rgba(5, 7, 10, 0.9) 0%, rgba(10, 26, 31, 0.9) 50%, rgba(5, 7, 10, 0.9) 100%),
+                     url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    /* Lightning storm - Phase Shift theme */
+}
+
+.bg-layer-3 {
+    background-image: linear-gradient(135deg, rgba(5, 7, 10, 0.9) 0%, rgba(10, 26, 31, 0.9) 50%, rgba(5, 7, 10, 0.9) 100%),
+                     url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    /* Sacred geometry - Mechanical Flow theme */
+}
+
+.bg-layer-4 {
+    background-image: linear-gradient(135deg, rgba(5, 7, 10, 0.9) 0%, rgba(10, 26, 31, 0.9) 50%, rgba(5, 7, 10, 0.9) 100%),
+                     url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    /* Sound waves - Resonance theme */
+}
+
+.bg-layer-5 {
+    background-image: linear-gradient(135deg, rgba(5, 7, 10, 0.9) 0%, rgba(10, 26, 31, 0.9) 50%, rgba(5, 7, 10, 0.9) 100%),
+                     url('https://images.unsplash.com/photo-1446776877081-d282a0f896e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    /* Zen garden - Codex Core theme */
+}
+
+.bg-layer-6 {
+    background-image: linear-gradient(135deg, rgba(5, 7, 10, 0.9) 0%, rgba(10, 26, 31, 0.9) 50%, rgba(5, 7, 10, 0.9) 100%),
+                     url('https://images.unsplash.com/photo-1464822759844-d150f39b8b3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    /* Chess pieces - Strategic Mastery theme */
+}
+
+.bg-layer-7 {
+    background-image: linear-gradient(135deg, rgba(5, 7, 10, 0.9) 0%, rgba(10, 26, 31, 0.9) 50%, rgba(5, 7, 10, 0.9) 100%),
+                     url('https://images.unsplash.com/photo-1508193638394-2472a42ff2a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    /* Infinity symbol - Area of Impact theme */
+}
+
+.bg-layer-8 {
+    background-image: linear-gradient(135deg, rgba(5, 7, 10, 0.9) 0%, rgba(10, 26, 31, 0.9) 50%, rgba(5, 7, 10, 0.9) 100%),
+                     url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    /* Crown/jewels - Empire Build theme */
+}
+
+.bg-layer-9 {
+    background-image: linear-gradient(135deg, rgba(5, 7, 10, 0.9) 0%, rgba(10, 26, 31, 0.9) 50%, rgba(5, 7, 10, 0.9) 100%),
+                     url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+    /* Spiral galaxy - Infinite Return theme */
+}
+
 /* Glassmorphism effect for the Formula */
 .formula-display {
     background: var(--glass);

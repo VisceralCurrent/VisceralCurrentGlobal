@@ -191,4 +191,71 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Dynamic Background Scroll System
+    const bgLayers = document.querySelectorAll('.bg-layer');
+    const sections = document.querySelectorAll('section, header');
+    let currentBgIndex = 0;
+
+    function updateBackground() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+
+        // Calculate scroll progress (0 to 1)
+        const scrollProgress = scrollY / (documentHeight - windowHeight);
+
+        // Determine which background to show based on scroll position
+        let newBgIndex = 0;
+
+        if (scrollProgress < 0.1) {
+            newBgIndex = 0; // Hero section
+        } else if (scrollProgress < 0.25) {
+            newBgIndex = 1; // Origin section
+        } else if (scrollProgress < 0.4) {
+            newBgIndex = 2; // Core values section
+        } else if (scrollProgress < 0.55) {
+            newBgIndex = 3; // Realms section
+        } else if (scrollProgress < 0.7) {
+            newBgIndex = 4; // Team section
+        } else if (scrollProgress < 0.8) {
+            newBgIndex = 5; // Engine section
+        } else if (scrollProgress < 0.9) {
+            newBgIndex = 6; // Codex section
+        } else {
+            newBgIndex = 7; // Ecosystem section
+        }
+
+        // Update active background layer
+        if (newBgIndex !== currentBgIndex) {
+            bgLayers.forEach((layer, index) => {
+                if (index === newBgIndex) {
+                    layer.classList.add('active');
+                } else {
+                    layer.classList.remove('active');
+                }
+            });
+            currentBgIndex = newBgIndex;
+        }
+    }
+
+    // Throttle scroll events for better performance
+    let scrollTimeout;
+    function throttledUpdateBackground() {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(() => {
+                updateBackground();
+                scrollTimeout = null;
+            }, 16); // ~60fps
+        }
+    }
+
+    // Initialize background on load
+    updateBackground();
+
+    // Add scroll listener
+    window.addEventListener('scroll', throttledUpdateBackground);
+
+    // Also update on resize
+    window.addEventListener('resize', updateBackground);
 });
