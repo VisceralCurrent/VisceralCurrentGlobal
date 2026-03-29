@@ -553,3 +553,74 @@ nav {
 .side-nav-links a:hover {
     color: var(--accent-cyan);
 }
+
+/* Mastery 360 Matrix Styles */
+.matrix-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.matrix-grid {
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+    gap: 2px;
+    background: rgba(0, 242, 255, 0.1);
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.matrix-row {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 2px;
+}
+
+.matrix-cell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    position: relative;
+}
+
+.matrix-cell.origin {
+    background: linear-gradient(45deg, rgba(0, 242, 255, 0.2), rgba(0, 188, 255, 0.1));
+    color: var(--accent-cyan);
+}
+
+.matrix-cell.current {
+    background: linear-gradient(45deg, rgba(0, 255, 204, 0.2), rgba(0, 204, 170, 0.1));
+    color: var(--marianas-teal);
+}
+
+.matrix-cell.infinite {
+    background: linear-gradient(45deg, rgba(255, 0, 204, 0.2), rgba(204, 0, 170, 0.1));
+    color: #ff00cc;
+}
+
+.matrix-cell:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+}
+
+.node-detail {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.node-detail.hidden {
+    display: none;
+}

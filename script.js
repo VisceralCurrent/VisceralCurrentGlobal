@@ -76,4 +76,33 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.boxShadow = '';
         });
     });
+
+    // Mastery 360 Matrix interactions
+    const matrixCells = document.querySelectorAll('.matrix-cell');
+    const nodeDetail = document.getElementById('node-detail');
+    const nodeNumber = document.getElementById('node-number');
+    const nodeDescription = document.getElementById('node-description');
+    const closeDetail = document.getElementById('close-detail');
+
+    if (matrixCells.length > 0) {
+        matrixCells.forEach(cell => {
+            cell.addEventListener('click', function() {
+                const nodeId = this.getAttribute('data-node');
+                nodeNumber.textContent = nodeId;
+                // Placeholder descriptions - can be expanded with actual content
+                if (nodeId <= 9) {
+                    nodeDescription.textContent = `Origin Node ${nodeId}: Foundational Phase Shift parameter.`;
+                } else if (nodeId <= 72) {
+                    nodeDescription.textContent = `Current Node ${nodeId}: Operational Visceral Current multiplier.`;
+                } else {
+                    nodeDescription.textContent = `Infinite Node ${nodeId}: Convergence layer for Undeniable impact.`;
+                }
+                nodeDetail.classList.remove('hidden');
+            });
+        });
+
+        closeDetail.addEventListener('click', function() {
+            nodeDetail.classList.add('hidden');
+        });
+    }
 });
