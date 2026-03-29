@@ -99,7 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Click to show details
-            cell.addEventListener('click', function() {
+            cell.addEventListener('click', function(e) {
+                e.stopPropagation();
                 if (activeCell) {
                     activeCell.classList.remove('active');
                 }
@@ -109,18 +110,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 const nodeId = parseInt(this.getAttribute('data-node'));
                 nodeNumber.textContent = nodeId;
 
-                // Detailed descriptions based on node
+                // Use library data if available, otherwise fallback
                 let description = '';
-                if (nodeId <= 9) {
-                    description = `Origin Node ${nodeId}: Foundational Phase Shift parameter. This node represents the initial input for the Visceral Current transformation. It handles the raw data points (p) that seed the Success Equation A=∞.`;
-                } else if (nodeId <= 72) {
-                    const layer = Math.floor((nodeId - 10) / 9) + 2;
-                    description = `Current Node ${nodeId}: Operational Visceral Current multiplier in Layer ${layer}. This node processes real-time variables through the Area of Impact formula ∫(ν⋅ϕ)dt. It amplifies the flow between origin and convergence.`;
+                let title = '';
+                let realm = '';
+
+                if (typeof getNodeData !== 'undefined') {
+                    const nodeData = getNodeData(nodeId);
+                    if (nodeData) {
+                        title = nodeData.title;
+                        description = nodeData.content;
+                        const realmData = getRealmByNode(nodeId);
+                        realm = realmData ? realmData.name : '';
+                    }
                 } else {
-                    description = `Infinite Node ${nodeId}: Convergence layer for Undeniable impact. This node scales output to infinite potential using the Success Equation lim(t→∞) ∑ ϕ_n P⋅C. It ensures the circuit remains closed and live.`;
+                    // Fallback descriptions
+                    if (nodeId <= 9) {
+                        title = `Origin Node ${nodeId}`;
+                        description = `Foundational Phase Shift parameter. This node represents the initial input for the Visceral Current transformation.`;
+                    } else if (nodeId <= 72) {
+                        const layer = Math.floor((nodeId - 10) / 9) + 2;
+                        title = `Current Node ${nodeId}`;
+                        description = `Operational Visceral Current multiplier in Layer ${layer}.`;
+                    } else {
+                        title = `Infinite Node ${nodeId}`;
+                        description = `Convergence layer for Undeniable impact.`;
+                    }
                 }
 
+                // Update modal content
+                nodeNumber.textContent = nodeId;
                 nodeDescription.textContent = description;
+                
+                // Add realm if available
+                if (realm) {
+                    nodeNumber.innerHTML = `${nodeId} <span style="font-size: 0.8rem; opacity: 0.7;">• ${realm}</span>`;
+                }
+
                 nodeDetail.classList.remove('hidden');
                 if (modalOverlay) modalOverlay.classList.add('active');
             });

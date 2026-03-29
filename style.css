@@ -732,3 +732,74 @@ nav {
 .modal-overlay.active {
     display: block;
 }
+
+/* Mastery 360 CTA Section */
+.mastery-360-cta {
+    background: linear-gradient(135deg, rgba(0, 242, 255, 0.1), rgba(0, 188, 255, 0.05));
+    border: 2px solid rgba(0, 242, 255, 0.3);
+    border-radius: 15px;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.mastery-360-cta::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 242, 255, 0.1), transparent);
+    animation: pulse-glow 4s ease-in-out infinite;
+    z-index: 0;
+}
+
+.mastery-360-cta .cta-content {
+    position: relative;
+    z-index: 1;
+}
+
+.mastery-360-cta h2 {
+    color: var(--accent-cyan);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+}
+
+.mastery-360-cta p {
+    font-size: 1.1rem;
+    color: rgba(240, 240, 240, 0.9);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.mastery-360-cta p strong {
+    color: var(--marianas-teal);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--marianas-teal));
+    color: var(--bg-dark);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(0, 242, 255, 0.6);
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes pulse-glow {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
