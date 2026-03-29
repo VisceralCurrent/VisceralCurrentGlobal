@@ -80,29 +80,72 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mastery 360 Matrix interactions
     const matrixCells = document.querySelectorAll('.matrix-cell');
     const nodeDetail = document.getElementById('node-detail');
+    const modalOverlay = document.getElementById('modal-overlay');
     const nodeNumber = document.getElementById('node-number');
     const nodeDescription = document.getElementById('node-description');
     const closeDetail = document.getElementById('close-detail');
 
     if (matrixCells.length > 0) {
+        let activeCell = null;
+
         matrixCells.forEach(cell => {
+            // Hover effects
+            cell.addEventListener('mouseenter', function() {
+                this.classList.add('active');
+            });
+
+            cell.addEventListener('mouseleave', function() {
+                this.classList.remove('active');
+            });
+
+            // Click to show details
             cell.addEventListener('click', function() {
-                const nodeId = this.getAttribute('data-node');
-                nodeNumber.textContent = nodeId;
-                // Placeholder descriptions - can be expanded with actual content
-                if (nodeId <= 9) {
-                    nodeDescription.textContent = `Origin Node ${nodeId}: Foundational Phase Shift parameter.`;
-                } else if (nodeId <= 72) {
-                    nodeDescription.textContent = `Current Node ${nodeId}: Operational Visceral Current multiplier.`;
-                } else {
-                    nodeDescription.textContent = `Infinite Node ${nodeId}: Convergence layer for Undeniable impact.`;
+                if (activeCell) {
+                    activeCell.classList.remove('active');
                 }
+                activeCell = this;
+                this.classList.add('active');
+
+                const nodeId = parseInt(this.getAttribute('data-node'));
+                nodeNumber.textContent = nodeId;
+
+                // Detailed descriptions based on node
+                let description = '';
+                if (nodeId <= 9) {
+                    description = `Origin Node ${nodeId}: Foundational Phase Shift parameter. This node represents the initial input for the Visceral Current transformation. It handles the raw data points (p) that seed the Success Equation A=∞.`;
+                } else if (nodeId <= 72) {
+                    const layer = Math.floor((nodeId - 10) / 9) + 2;
+                    description = `Current Node ${nodeId}: Operational Visceral Current multiplier in Layer ${layer}. This node processes real-time variables through the Area of Impact formula ∫(ν⋅ϕ)dt. It amplifies the flow between origin and convergence.`;
+                } else {
+                    description = `Infinite Node ${nodeId}: Convergence layer for Undeniable impact. This node scales output to infinite potential using the Success Equation lim(t→∞) ∑ ϕ_n P⋅C. It ensures the circuit remains closed and live.`;
+                }
+
+                nodeDescription.textContent = description;
                 nodeDetail.classList.remove('hidden');
+                if (modalOverlay) modalOverlay.classList.add('active');
             });
         });
 
-        closeDetail.addEventListener('click', function() {
+        // Close modal
+        const closeModal = () => {
             nodeDetail.classList.add('hidden');
+            if (modalOverlay) modalOverlay.classList.remove('active');
+            if (activeCell) {
+                activeCell.classList.remove('active');
+                activeCell = null;
+            }
+        };
+
+        closeDetail.addEventListener('click', closeModal);
+
+        // Close on overlay click
+        if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && !nodeDetail.classList.contains('hidden')) {
+                closeModal();
+            }
         });
     }
 });
