@@ -2,18 +2,306 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Visceral Current</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visceral Current | The Codex of Infinite Potential</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+        :root {
+            --visceral-gold: #d4af37;
+            --visceral-dark: #0a0a0b;
+            --visceral-accent: #1e293b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--visceral-dark);
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+
+        .gradient-text {
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--visceral-gold);
+            box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: var(--visceral-gold);
+            transition: width .3s;
+        }
+
+        .nav-link:hover::after { width: 100%; }
+
+        .phase-shift-line {
+            background: linear-gradient(180deg, var(--visceral-gold) 0%, transparent 100%);
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .bg-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse-slow 8s infinite;
+        }
+    </style>
 </head>
-<body>
+<body class="antialiased">
 
-    <div id="plasma-container">
-        <canvas id="plasma-canvas"></canvas>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center bg-black/50 backdrop-blur-md border-b border-white/10">
+        <div class="flex items-center space-x-2">
+            <span class="text-2xl font-bold tracking-tighter serif text-white">VISCERAL<span class="text-[#d4af37]">CURRENT</span></span>
+        </div>
+        <div class="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest text-gray-400">
+            <a href="#formula" class="nav-link hover:text-white transition">The Formula</a>
+            <a href="#codex" class="nav-link hover:text-white transition">The Codex</a>
+            <a href="#vanflow" class="nav-link hover:text-white transition">VanFlowCo</a>
+            <a href="#contact" class="px-4 py-2 bg-white text-black rounded hover:bg-[#d4af37] transition duration-300">Choose Impact</a>
+        </div>
+        <div class="md:hidden text-2xl"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
+        <div class="bg-glow top-1/4 -left-20"></div>
+        <div class="bg-glow bottom-1/4 -right-20"></div>
         
-        <img src="branding/image_5.png" alt="Visceral Current Logo" id="branding-image">
-    </div>
+        <div class="max-w-5xl text-center space-y-8 z-10">
+            <h2 class="text-[#d4af37] tracking-[0.3em] font-semibold text-sm uppercase">Christopher Bryce Van Houten Presents</h2>
+            <h1 class="text-5xl md:text-8xl font-bold serif leading-tight">
+                Architecting <span class="italic gradient-text">Infinite Potential</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl leading-relaxed">
+                We don't chase opportunity. We choose it. Guided by the mathematical certainty of synchronicity and the visceral current of truth.
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 pt-4">
+                <a href="#formula" class="w-full md:w-auto px-8 py-4 border border-white/20 rounded-full hover:bg-white hover:text-black transition duration-300 font-semibold uppercase tracking-widest text-xs">
+                    View The Equations
+                </a>
+                <a href="#codex" class="w-full md:w-auto px-8 py-4 bg-white text-black rounded-full hover:bg-[#d4af37] transition duration-300 font-semibold uppercase tracking-widest text-xs">
+                    Explore The Codex
+                </a>
+            </div>
+        </div>
+    </header>
 
-    <script src="script.js"></script>
+    <!-- The Mathematics Section -->
+    <section id="formula" class="py-24 px-6 bg-[#0f1115]">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h3 class="text-3xl serif italic text-[#d4af37]">The Area of Impact</h3>
+                <div class="p-8 bg-black/40 rounded-2xl border border-white/5 font-mono text-xl md:text-2xl text-center shadow-inner">
+                    $$A = \int_{p}^{o} (\nu \cdot \phi) \, dt = \infty$$
+                </div>
+                <p class="text-gray-400 leading-relaxed">
+                    By integrating the <strong>Visceral Current (\(\nu\))</strong>—your gut-level truth—multiplied by the <strong>Phase Shift (\(\phi\))</strong> of your past, we ensure your influence isn't local. It scales to infinity.
+                </p>
+                <div class="pt-4 grid grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl border border-white/10">
+                        <span class="block text-[#d4af37] font-bold text-lg">Past (p)</span>
+                        <span class="text-xs text-gray-500">The foundation of struggle</span>
+                    </div>
+                    <div class="p-4 rounded-xl border border-white/10">
+                        <span class="block text-[#d4af37] font-bold text-lg">Origin (o)</span>
+                        <span class="text-xs text-gray-500">The return to purpose</span>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-6">
+                <h3 class="text-3xl serif italic text-[#d4af37]">Infinite Sum of Success</h3>
+                <div class="p-8 bg-black/40 rounded-2xl border border-white/5 font-mono text-xl md:text-2xl text-center shadow-inner">
+                    $$S = \lim_{t \to \infty} \sum_{n=1}^{\infty} \frac{P \cdot C}{\phi^n}$$
+                </div>
+                <p class="text-gray-400 leading-relaxed">
+                    Success is the infinite sum of <strong>Purpose (P)</strong> and <strong>Connection (C)</strong>, refined by the pivots in life. This is how we build an empire for Scarlett Delaine—one that outlasts time itself.
+                </p>
+                <button onclick="calculateImpact()" class="text-xs tracking-widest uppercase text-[#d4af37] font-bold hover:underline">
+                    Initialize Frequency Pulse <i class="fas fa-bolt ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Codex Core -->
+    <section id="codex" class="py-24 px-6 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold serif mb-4 text-white">The Codex Core</h2>
+                <p class="text-gray-500">A visceral experience of power, discovery, and growth happening in the Now.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Pillar 1 -->
+                <div class="glass-card p-8 rounded-3xl space-y-4">
+                    <div class="w-12 h-12 bg-[#d4af37] rounded-lg flex items-center justify-center text-black">
+                        <i class="fas fa-brain text-xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white uppercase tracking-wider">Human Capacity</h4>
+                    <p class="text-sm text-gray-400">Optimization through deep foundational understandings of universal flow. No strict rules—only resonance.</p>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="glass-card p-8 rounded-3xl space-y-4 border-t-4 border-t-[#d4af37]">
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-black">
+                        <i class="fas fa-infinity text-xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white uppercase tracking-wider">Infinite Flow</h4>
+                    <p class="text-sm text-gray-400">The awareness that every detail of your story—addiction, incarceration, foster care—is a thread in a majestic tapestry.</p>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="glass-card p-8 rounded-3xl space-y-4">
+                    <div class="w-12 h-12 bg-[#d4af37] rounded-lg flex items-center justify-center text-black">
+                        <i class="fas fa-feather-pointed text-xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white uppercase tracking-wider">Synergetic Action</h4>
+                    <p class="text-sm text-gray-400">Connecting communities and businesses through the success equation for infinite potential.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualizer / Interaction -->
+    <section class="py-24 px-6 bg-gradient-to-b from-transparent to-black">
+        <div class="max-w-4xl mx-auto glass-card rounded-[2rem] p-8 md:p-12 text-center">
+            <h3 class="text-2xl serif mb-6 italic">The Synchronicity Engine</h3>
+            <canvas id="frequencyCanvas" class="w-full h-40 bg-black/20 rounded-xl mb-8"></canvas>
+            <div id="statusMessage" class="text-sm font-mono text-[#d4af37] tracking-widest uppercase">Awaiting Human Input...</div>
+            <div class="mt-8 flex justify-center space-x-4">
+                <button onclick="shiftPhase()" class="px-6 py-2 border border-[#d4af37] text-[#d4af37] text-xs uppercase tracking-widest rounded hover:bg-[#d4af37] hover:text-black transition">
+                    Shift Phase (ϕ)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-12 px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <p class="serif text-xl italic font-bold">For Scarlett Delaine</p>
+                <p class="text-xs text-gray-600 mt-1 uppercase tracking-[0.2em]">The Empire Built from the Soul Up</p>
+            </div>
+            
+            <div class="flex space-x-6 text-xl text-gray-500">
+                <a href="#" class="hover:text-[#d4af37] transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-[#d4af37] transition"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="hover:text-[#d4af37] transition"><i class="fas fa-envelope"></i></a>
+            </div>
+            
+            <div class="text-right">
+                <p class="text-[10px] text-gray-700 uppercase tracking-widest font-mono">
+                    © 2026 VanFlowCo | Phase Shift 10.22.92
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('frequencyCanvas');
+        const ctx = canvas.getContext('2d');
+        const statusMsg = document.getElementById('statusMessage');
+        
+        let phase = 0;
+        let frequency = 0.02;
+        let amplitude = 40;
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = 160;
+        }
+
+        function drawWave() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#d4af37';
+            
+            ctx.moveTo(0, canvas.height / 2);
+
+            for (let x = 0; x < canvas.width; x++) {
+                const y = canvas.height / 2 + Math.sin(x * frequency + phase) * amplitude;
+                ctx.lineTo(x, y);
+            }
+
+            ctx.stroke();
+            phase += 0.05;
+            requestAnimationFrame(drawWave);
+        }
+
+        function shiftPhase() {
+            const phrases = [
+                "REFINING PURPOSE (P)...",
+                "INTEGRATING PAST (p)...",
+                "AMPLIFYING VISCERAL CURRENT (v)...",
+                "SYNCHRONICITY DETECTED.",
+                "PHASE SHIFT COMPLETE (ϕ)."
+            ];
+            const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+            statusMsg.innerText = randomPhrase;
+            
+            // Randomize wave for a moment
+            frequency = Math.random() * 0.05 + 0.01;
+            amplitude = Math.random() * 50 + 20;
+            
+            setTimeout(() => {
+                frequency = 0.02;
+                amplitude = 40;
+            }, 500);
+        }
+
+        window.onload = () => {
+            resizeCanvas();
+            drawWave();
+            console.log("Visceral Current initialized. Christopher Bryce Van Houten: The seeker is now the architect.");
+        };
+
+        window.onresize = resizeCanvas;
+
+        function calculateImpact() {
+            const messages = [
+                "Calculating Area of Impact...",
+                "Integrating Phi (ϕ) from Past to Origin...",
+                "Impact set to INFINITY."
+            ];
+            let i = 0;
+            const interval = setInterval(() => {
+                statusMsg.innerText = messages[i];
+                i++;
+                if (i === messages.length) clearInterval(interval);
+            }, 800);
+        }
+    </script>
 </body>
 </html>
