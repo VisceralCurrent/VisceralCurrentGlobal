@@ -48,6 +48,70 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
 
 revealElements.forEach(el => revealObserver.observe(el));
 
+// --- Interactive Lightning Background ---
+const lightningCanvas = document.getElementById('lightning-canvas');
+const lightningCtx = lightningCanvas.getContext('2d');
+let lightningWidth, lightningHeight, lightningOriginX;
+let mouse = { x: 0, y: 0, active: false };
+const TWO_PI = Math.PI * 2;
+
+function resizeLightningCanvas() {
+    lightningWidth = lightningCanvas.width = window.innerWidth;
+    lightningHeight = lightningCanvas.height = window.innerHeight;
+}
+
+const startInteraction = (e) => {
+    mouse.active = true;
+    // Pick a random starting X coordinate along the width of the screen
+    lightningOriginX = Math.random() * lightningWidth;
+    updateMouse(e);
+};
+
+const endInteraction = () => {
+    mouse.active = false;
+};
+
+const updateMouse = (e) => {
+    const event = e.touches ? e.touches[0] : e;
+    mouse.x = event.clientX;
+    mouse.y = event.clientY;
+};
+
+function drawLightning(x1, y1, x2, y2, segments, color, width, jitter = 25) {
+    lightningCtx.beginPath();
+    lightningCtx.moveTo(x1, y1);
+    
+    for (let i = 1; i <= segments; i++) {
+        const t = i / segments;
+        const px = x1 + (x2 - x1) * t + (Math.random() - 0.5) * jitter;
+        const py = y1 + (y2 - y1) * t + (Math.random() - 0.5) * jitter;
+        lightningCtx.lineTo(px, py);
+    }
+
+    lightningCtx.strokeStyle = color;
+    lightningCtx.lineWidth = width;
+    lightningCtx.shadowBlur = 15;
+    lightningCtx.shadowColor = color;
+    lightningCtx.stroke();
+}
+
+function lightningRender() {
+    lightningCtx.shadowBlur = 0;
+    // Clear with a trail effect using the site's dark background color
+    lightningCtx.fillStyle = 'rgba(5, 5, 6, 0.2)';
+    lightningCtx.fillRect(0, 0, lightningWidth, lightningHeight);
+
+    if (mouse.active) {
+        // Core (White)
+        drawLightning(lightningOriginX, 0, mouse.x, mouse.y, 8, '#ffffff', 1.5, 30);
+        // Glow (Visceral Gold)
+        drawLightning(lightningOriginX, 0, mouse.x, mouse.y, 12, 'rgba(212, 175, 55, 0.4)', 4, 45);
+    }
+
+    requestAnimationFrame(lightningRender);
+}
+
+
 // --- Enhanced Canvas Synchronicity Engine ---
 const canvas = document.getElementById('frequencyCanvas');
 const ctx = canvas.getContext('2d');
@@ -190,10 +254,17 @@ function calculateImpact() {
     document.getElementById('frequencyCanvas').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-// Initialize Canvas
+// --- Initialization & Global Event Listeners ---
+
 window.addEventListener('load', () => {
+    // Initialize Synchronicity Engine
     resizeCanvas();
     drawWaves();
+
+    // Initialize Lightning Background
+    resizeLightningCanvas();
+    lightningRender();
+
     console.log("%c[VISCERAL CURRENT ONLINE]", "color: #d4af37; font-weight: bold; font-size: 14px;");
     console.log("%cArchitecture for Infinite Potential successfully initialized.", "color: #94a3b8;");
 });
@@ -202,5 +273,16 @@ window.addEventListener('load', () => {
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(resizeCanvas, 250);
+    resizeTimeout = setTimeout(() => {
+        resizeCanvas();
+        resizeLightningCanvas();
+    }, 250);
 });
+
+// Lightning interaction listeners
+window.addEventListener('mousedown', startInteraction);
+window.addEventListener('touchstart', (e) => { e.preventDefault(); startInteraction(e); }, { passive: false });
+window.addEventListener('mousemove', updateMouse);
+window.addEventListener('touchmove', (e) => { updateMouse(e); }, { passive: false });
+window.addEventListener('mouseup', endInteraction);
+window.addEventListener('touchend', endInteraction);
