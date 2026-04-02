@@ -759,18 +759,18 @@ function drawMatrix() {
 
 // --- Initialization & Global Event Listeners ---
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Smoothly fade out and remove the loading overlay
-    // (Moved to the very top to guarantee the site unlocks immediately)
+function bootstrapApplication() {
     const loadingOverlay = document.getElementById('loading-overlay');
     if (loadingOverlay) {
-        setTimeout(() => {
-            loadingOverlay.style.opacity = '0';
-            setTimeout(() => loadingOverlay.remove(), 1000); // Remove from DOM after fade completes
-        }, 100); 
+        loadingOverlay.style.opacity = '0';
+        loadingOverlay.style.pointerEvents = 'none';
+        setTimeout(() => loadingOverlay.remove(), 1000);
     }
 
     try {
+        if (window.appInitialized) return; // Prevent double-execution
+        window.appInitialized = true;
+        
         // Initialize Synchronicity Engine
         resizeCanvas();
 
@@ -782,13 +782,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Start the single, unified animation loop
         masterLoop();
+        
+        console.log("%c[VISCERAL CURRENT ONLINE]", "color: #00e5ff; font-weight: bold; font-size: 14px;");
+        console.log("%cArchitecture for Infinite Potential successfully initialized.", "color: #94a3b8;");
     } catch (error) {
         console.error("Initialization Error:", error);
     }
+}
 
-    console.log("%c[VISCERAL CURRENT ONLINE]", "color: #00e5ff; font-weight: bold; font-size: 14px;");
-    console.log("%cArchitecture for Infinite Potential successfully initialized.", "color: #94a3b8;");
-});
+// Bulletproof Initialization Logic
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrapApplication);
+} else {
+    bootstrapApplication(); // Document already finished loading, execute immediately
+}
 
 // --- MASTER ANIMATION LOOP ---
 function masterLoop() {

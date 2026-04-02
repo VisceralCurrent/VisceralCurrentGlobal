@@ -86,6 +86,19 @@
         </div>
     </div>
 
+    <!-- Failsafe Initialization Script -->
+    <script>
+        // Guarantees the loading screen drops even if primary scripts are cached or delayed
+        setTimeout(() => {
+            const loader = document.getElementById('loading-overlay');
+            if (loader && loader.style.opacity !== '0') {
+                loader.style.opacity = '0';
+                loader.style.pointerEvents = 'none';
+                setTimeout(() => loader.remove(), 1000);
+            }
+        }, 2000);
+    </script>
+
     <!-- Ambient Background Glows -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div class="absolute rounded-full blur-[120px] glow-entity w-[600px] h-[600px] bg-visceral-gold/15 top-[-20%] left-[-10%] animate-pulse-glow"></div>
