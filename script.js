@@ -862,7 +862,7 @@ function drawMatrix() {
 
 // --- Initialization & Global Event Listeners ---
 
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // Initialize Synchronicity Engine
     resizeCanvas();
 
