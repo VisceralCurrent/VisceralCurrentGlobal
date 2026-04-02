@@ -760,25 +760,30 @@ function drawMatrix() {
 // --- Initialization & Global Event Listeners ---
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Synchronicity Engine
-    resizeCanvas();
-
-    // Initialize 81 Node Matrix
-    initMatrix();
-
-    // Setup performance observers
-    setupPerformanceObservers();
-
-    // Start the single, unified animation loop
-    masterLoop();
-
     // Smoothly fade out and remove the loading overlay
+    // (Moved to the very top to guarantee the site unlocks immediately)
     const loadingOverlay = document.getElementById('loading-overlay');
     if (loadingOverlay) {
         setTimeout(() => {
             loadingOverlay.style.opacity = '0';
             setTimeout(() => loadingOverlay.remove(), 1000); // Remove from DOM after fade completes
-        }, 600); // Brief delay to ensure canvases have painted their first frames
+        }, 100); 
+    }
+
+    try {
+        // Initialize Synchronicity Engine
+        resizeCanvas();
+
+        // Initialize 81 Node Matrix
+        initMatrix();
+
+        // Setup performance observers
+        setupPerformanceObservers();
+
+        // Start the single, unified animation loop
+        masterLoop();
+    } catch (error) {
+        console.error("Initialization Error:", error);
     }
 
     console.log("%c[VISCERAL CURRENT ONLINE]", "color: #00e5ff; font-weight: bold; font-size: 14px;");
