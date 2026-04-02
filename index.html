@@ -23,6 +23,9 @@
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+    <!-- Three.js for 3D Interactive Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -64,12 +67,12 @@
 <body class="antialiased selection:bg-visceral-gold selection:text-black">
 
     <!-- Interactive Lightning Background -->
-    <canvas id="lightning-canvas"></canvas>
+    <canvas id="lightning-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
     <!-- Ambient Background Glows -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="glow-entity w-[600px] h-[600px] bg-visceral-gold/5 top-[-20%] left-[-10%] animate-pulse-glow"></div>
-        <div class="glow-entity w-[800px] h-[800px] bg-indigo-900/10 bottom-[-20%] right-[-10%] animate-pulse-glow" style="animation-delay: 2s;"></div>
+        <div class="absolute rounded-full blur-[120px] glow-entity w-[600px] h-[600px] bg-visceral-gold/15 top-[-20%] left-[-10%] animate-pulse-glow"></div>
+        <div class="absolute rounded-full blur-[150px] glow-entity w-[800px] h-[800px] bg-indigo-900/20 bottom-[-20%] right-[-10%] animate-pulse-glow" style="animation-delay: 2s;"></div>
     </div>
 
     <!-- Navigation -->
@@ -92,6 +95,10 @@
                     The Codex
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
                 </a>
+                <a href="#matrix" class="hover:text-visceral-gold transition duration-300 relative group">
+                    The Matrix
+                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
                 <a href="#contact" class="hover:text-visceral-gold transition duration-300 relative group">
                     Legacy
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
@@ -112,6 +119,7 @@
     <div id="mobile-menu" class="fixed inset-0 bg-visceral-dark/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-500 flex flex-col justify-center items-center space-y-8 text-center">
         <a href="#formula" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">The Formula</a>
         <a href="#codex" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">The Codex</a>
+        <a href="#matrix" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">The Matrix</a>
         <a href="#contact" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Legacy</a>
         <button id="close-menu-btn" class="absolute top-8 right-8 text-3xl text-gray-500 hover:text-white">
             <i class="fas fa-times"></i>
@@ -128,21 +136,21 @@
             </div>
             
             <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif leading-[1.1] font-normal tracking-tight">
-                Architecting <br>
-                <span class="italic font-light gradient-text-gold">Infinite Potential</span>
+                Mastery 360: <br>
+                <span class="italic font-light gradient-text-gold">The Visceral Current</span>
             </h1>
             
             <p class="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl leading-relaxed font-light reveal delay-100">
-                We don't chase opportunity. We manifest it. Guided by the mathematical certainty of synchronicity and the visceral current of absolute truth.
+                Human Capacity Optimation through the Mathematics of Synchronicity. We do not chase; we choose. By understanding the foundational flow of the universe, we engineer precision across all walks of life.
             </p>
             
             <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8 reveal delay-200">
                 <a href="#formula" class="group w-full sm:w-auto px-8 py-4 bg-transparent border border-gray-700 rounded-sm hover:border-visceral-gold transition duration-300 font-semibold uppercase tracking-widest text-xs flex items-center justify-center">
                     View Equations <i class="fas fa-arrow-down ml-3 group-hover:translate-y-1 transition-transform"></i>
                 </a>
-                <a href="#codex" class="btn-gold w-full sm:w-auto px-8 py-4 bg-visceral-gold text-black rounded-sm hover:bg-yellow-500 transition duration-300 font-bold uppercase tracking-widest text-xs shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                <button onclick="openCodexModal()" class="btn-gold w-full sm:w-auto px-8 py-4 bg-visceral-gold text-black rounded-sm hover:bg-yellow-500 transition duration-300 font-bold uppercase tracking-widest text-xs shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                     Enter The Codex
-                </a>
+                </button>
             </div>
         </div>
 
@@ -167,12 +175,26 @@
                     <h3 class="text-3xl font-serif italic text-white flex items-center gap-4">
                         <span class="text-visceral-gold font-normal text-5xl">I.</span> The Area of Impact
                     </h3>
-                    <div class="glass-panel math-box rounded-2xl p-10 font-mono text-xl md:text-2xl text-center text-gray-200">
-                        $$A = \int_{p}^{o} (\nu \cdot \phi) \, dt = \infty$$
+                    <div class="parallax-anchor">
+                        <div class="parallax-element">
+                            <div class="glass-panel math-box rounded-2xl p-10 font-mono text-xl md:text-2xl text-center text-gray-200">
+                                $$A = \int_{p}^{o} (\nu \cdot \phi) \, dt = \infty$$
+                            </div>
+                        </div>
                     </div>
                     <p class="text-gray-400 leading-relaxed font-light text-lg">
-                        By integrating the <strong class="text-white font-medium">Visceral Current (\(\nu\))</strong>—your gut-level truth—multiplied by the <strong class="text-white font-medium">Phase Shift (\(\phi\))</strong> of your past, we ensure your influence escapes local boundaries and scales to absolute infinity.
+                        The area of impact must be infinite. We integrate the Past (\(p\)) into the Origin (\(o\)). By multiplying the gut-level truth of the <strong class="text-white font-medium">Visceral Current (\(\nu\))</strong> by the <strong class="text-white font-medium">Phase Shift (\(\phi\))</strong>, the volatility of the past is leveled out.
                     </p>
+                    
+                    <div class="mt-6 border-l-2 border-visceral-gold/50 pl-6 space-y-4">
+                        <p class="scroll-highlight text-sm text-gray-100 font-light leading-relaxed">
+                            We do not hide the past. From the origins in Victorville and foster care, through the movements across the west, to the 12-year absence, and the ultimate return to clarity—we frame these periods of darkness strictly as <strong class="text-visceral-gold">Phase Shifts (\(\phi\))</strong> that refined the current purpose.
+                        </p>
+                        <p class="scroll-highlight text-sm text-gray-100 font-light leading-relaxed">
+                            This creates a global system for those who have run, crashed, and returned.
+                        </p>
+                    </div>
+
                     <div class="grid grid-cols-2 gap-4 border-t border-gray-800 pt-6">
                         <div>
                             <span class="block text-visceral-gold font-cinzel font-bold text-lg">Past (p)</span>
@@ -190,8 +212,12 @@
                     <h3 class="text-3xl font-serif italic text-white flex items-center gap-4">
                         <span class="text-visceral-gold font-normal text-5xl">II.</span> Infinite Sum of Success
                     </h3>
-                    <div class="glass-panel math-box rounded-2xl p-10 font-mono text-xl md:text-2xl text-center text-gray-200">
-                        $$S = \lim_{t \to \infty} \sum_{n=1}^{\infty} \frac{P \cdot C}{\phi^n}$$
+                    <div class="parallax-anchor">
+                        <div class="parallax-element">
+                            <div class="glass-panel math-box rounded-2xl p-10 font-mono text-xl md:text-2xl text-center text-gray-200">
+                                $$S = \lim_{t \to \infty} \sum_{n=1}^{\infty} \frac{P \cdot C}{\phi^n}$$
+                            </div>
+                        </div>
                     </div>
                     <p class="text-gray-400 leading-relaxed font-light text-lg">
                         Success is the infinite sum of <strong class="text-white font-medium">Purpose (P)</strong> and <strong class="text-white font-medium">Connection (C)</strong>, refined by the pivots in life. This is the blueprint for an empire built for Scarlett Delaine—one designed to outlast time itself.
@@ -225,7 +251,7 @@
                 <div class="absolute inset-0 pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20"></div>
             </div>
 
-            <div id="statusMessage" class="text-sm font-mono text-visceral-gold tracking-[0.3em] uppercase min-h-[20px] mb-8 animate-pulse">Awaiting Human Input...</div>
+            <div id="statusMessage" class="text-sm font-mono text-visceral-gold tracking-[0.3em] uppercase min-h-[20px] mb-8 animate-pulse">Awaiting Zero Point Equilibrium...</div>
             
             <div class="flex justify-center">
                 <button onclick="shiftPhase()" class="btn-gold px-8 py-3 border border-visceral-gold/50 bg-visceral-gold/5 text-visceral-gold text-xs uppercase tracking-[0.2em] font-bold rounded-sm hover:bg-visceral-gold hover:text-black transition-all duration-500 shadow-[0_0_15px_rgba(212,175,55,0.1)] hover:shadow-[0_0_30px_rgba(212,175,55,0.4)]">
@@ -235,45 +261,255 @@
         </div>
     </section>
 
-    <!-- The Codex Core -->
+    <!-- The Sovereign Protocol -->
     <section id="codex" class="py-32 px-6 relative z-10">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20 reveal">
                 <span class="text-visceral-gold font-mono text-xs tracking-[0.3em] uppercase block mb-3">02 // Methodology</span>
-                <h2 class="text-4xl md:text-5xl font-cinzel font-bold text-white">The Codex Core</h2>
+                <h2 class="text-4xl md:text-5xl font-cinzel font-bold text-white">The Sovereign Protocol</h2>
                 <div class="w-24 h-[1px] bg-visceral-gold/50 mx-auto mt-8 mb-8"></div>
-                <p class="text-gray-400 max-w-2xl mx-auto text-lg font-light">A visceral framework of power, discovery, and limitless growth occurring strictly in the absolute Now.</p>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg font-light">The Ultimate Strategic Machine. Merging the composure of the Buddha, the strategy of the Mentalist, and the infinite potential of Christ-Consciousness into Three Triads of Perception.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Pillar 1 -->
+                <!-- Triad I -->
                 <div class="glass-panel p-10 rounded-2xl space-y-6 group reveal delay-100 relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-visceral-gold to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="w-14 h-14 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-visceral-gold group-hover:bg-visceral-gold group-hover:text-black transition-colors duration-500">
                         <i class="fas fa-brain text-2xl"></i>
                     </div>
-                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest">Human Capacity</h4>
-                    <p class="text-base text-gray-400 font-light leading-relaxed">Optimization through deep foundational understandings of universal flow. We discard strict rules in favor of pure, unadulterated resonance.</p>
+                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest">I. Internal Architecture</h4>
+                    <p class="text-base text-gray-400 font-light leading-relaxed">The Eye of the Storm. Grounding the "Power of One" through stoic neutrality and divine intention before the Visceral Current begins to flow.</p>
                 </div>
 
-                <!-- Pillar 2 -->
+                <!-- Triad II -->
                 <div class="glass-panel p-10 rounded-2xl space-y-6 group reveal delay-200 relative overflow-hidden border-t border-t-visceral-gold/50 transform md:-translate-y-6">
                     <div class="absolute inset-0 bg-gradient-to-b from-visceral-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="w-14 h-14 bg-visceral-gold rounded-xl flex items-center justify-center text-black shadow-[0_0_20px_rgba(212,175,55,0.4)]">
                         <i class="fas fa-infinity text-2xl"></i>
                     </div>
-                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest">Infinite Flow</h4>
-                    <p class="text-base text-gray-400 font-light leading-relaxed">The profound awareness that every fragmented detail of your story—addiction, incarceration, foster care—is a vital thread woven into a majestic tapestry.</p>
+                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest">II. Strategic Overlay</h4>
+                    <p class="text-base text-gray-400 font-light leading-relaxed">The Mentalist's Gambit. Navigating the 81 nodes of duality with formless precision, observing the hidden gravity of social dynamics.</p>
                 </div>
 
-                <!-- Pillar 3 -->
+                <!-- Triad III -->
                 <div class="glass-panel p-10 rounded-2xl space-y-6 group reveal delay-300 relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-visceral-gold to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div class="w-14 h-14 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-visceral-gold group-hover:bg-visceral-gold group-hover:text-black transition-colors duration-500">
                         <i class="fas fa-feather-pointed text-2xl"></i>
                     </div>
-                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest">Synergetic Action</h4>
-                    <p class="text-base text-gray-400 font-light leading-relaxed">Fusing fragmented communities and isolated businesses through the fundamental success equation for realizing infinite potential.</p>
+                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest">III. Expansion Equation</h4>
+                    <p class="text-base text-gray-400 font-light leading-relaxed">The Empire Builder. Transmuting the phase shifts of the past into mathematical destiny, ensuring every action scales to an infinite legacy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Empire Portfolio -->
+    <section id="services" class="py-32 px-6 relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <span class="text-visceral-gold font-mono text-xs tracking-[0.3em] uppercase block mb-3">03 // Application</span>
+                <h2 class="text-4xl md:text-5xl font-cinzel font-bold text-white">The Empire Portfolio</h2>
+                <div class="w-24 h-[1px] bg-visceral-gold/50 mx-auto mt-8 mb-8"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg font-light">The physical and digital application of the 81 Nodes. A clean, high-resolution showcase of the branches of the empire.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- VanFlowCo -->
+                <div class="node-card glass-panel p-8 rounded-xl border-l-2 border-l-visceral-gold/50 reveal delay-100">
+                    <h4 class="text-2xl font-cinzel font-bold text-white mb-2">VanFlowCo</h4>
+                    <p class="text-xs text-visceral-gold font-mono tracking-widest uppercase mb-6">Corporate Optimization</p>
+                    <p class="text-gray-400 font-light text-sm mb-6">The corporate entity focused exclusively on infinite potential. We align businesses with the mathematics of synchronicity and the Infinite Sum of Success.</p>
+                    <ul class="text-xs text-gray-500 space-y-2 font-mono">
+                        <li>> Digital Conduit Engineering</li>
+                        <li>> 81-Node Duality Mapping</li>
+                        <li>> Infinite Potential Scaling</li>
+                    </ul>
+                </div>
+                <!-- ScarlettSkyProductions -->
+                <div class="node-card glass-panel p-8 rounded-xl border-l-2 border-l-blue-500/50 reveal delay-200">
+                    <h4 class="text-2xl font-cinzel font-bold text-white mb-2">ScarlettSky</h4>
+                    <p class="text-xs text-blue-400 font-mono tracking-widest uppercase mb-6">Creative & Media Design</p>
+                    <p class="text-gray-400 font-light text-sm mb-6">The creative wing of the empire. Majestic, deeply considered web and media design built from the soul up for high-level clients and legacy seekers.</p>
+                    <ul class="text-xs text-gray-500 space-y-2 font-mono">
+                        <li>> Narrative Documenting</li>
+                        <li>> Formless UI/UX Aesthetic</li>
+                        <li>> Cinematic Visual Legacy</li>
+                    </ul>
+                </div>
+                <!-- Tension Treenets -->
+                <div class="node-card glass-panel p-8 rounded-xl border-l-2 border-l-red-500/50 reveal delay-300">
+                    <h4 class="text-2xl font-cinzel font-bold text-white mb-2">Tension Treenets</h4>
+                    <p class="text-xs text-red-400 font-mono tracking-widest uppercase mb-6">Structural Architecture</p>
+                    <p class="text-gray-400 font-light text-sm mb-6">A formless, highly professional showcase of structural and physical installations. Uncompromising craftsmanship and absolute physical precision.</p>
+                    <ul class="text-xs text-gray-500 space-y-2 font-mono">
+                        <li>> High-Tensile Rigging</li>
+                        <li>> Load-Bearing Geometry</li>
+                        <li>> Commercial Installations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The 81 Node Matrix & Trinity of Flow -->
+    <section id="matrix" class="py-32 px-6 relative z-10 border-t border-white/5 overflow-hidden">
+        <!-- Matrix Background Canvas -->
+        <canvas id="matrix-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-40"></canvas>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-20 reveal">
+                <span class="text-visceral-gold font-mono text-xs tracking-[0.3em] uppercase block mb-3">04 // Architecture of Impact</span>
+                <h2 class="text-4xl md:text-5xl font-cinzel font-bold text-white">The 81 Node Matrix</h2>
+                <div class="w-24 h-[1px] bg-visceral-gold/50 mx-auto mt-8 mb-8"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg font-light">A framework of \(9^2\) completion. Every node of existence must be activated through the Trinity of Flow to scale impact to absolute infinity.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Origin (p) -->
+                <div class="glass-panel p-10 rounded-2xl space-y-6 reveal delay-100 border-t-2 border-t-visceral-gold/20 hover:border-t-visceral-gold transition-all duration-500">
+                    <div class="text-visceral-gold font-serif text-5xl mb-2">\((p)\)</div>
+                    <h4 class="text-2xl font-cinzel font-bold text-white uppercase tracking-widest">The Origin</h4>
+                    <p class="text-xs text-visceral-gold font-mono tracking-widest uppercase border-b border-white/10 pb-4">Potential &amp; Past</p>
+                    <p class="text-gray-400 font-light leading-relaxed">Identifying the raw energy of the node. We integrate the Phase Shifts (\(\phi\)) here, converting the profound darkness of the past into undeniable kinetic fuel.</p>
+                </div>
+
+                <!-- Visceral Current (\nu) -->
+                <div class="glass-panel p-10 rounded-2xl space-y-6 reveal delay-200 border-t-2 border-t-visceral-gold/50 hover:border-t-visceral-gold transition-all duration-500 transform lg:-translate-y-6 shadow-[0_0_30px_rgba(212,175,55,0.1)]">
+                    <div class="text-visceral-gold font-serif text-5xl mb-2">\(\nu\)</div>
+                    <h4 class="text-2xl font-cinzel font-bold text-white uppercase tracking-widest">Visceral Current</h4>
+                    <p class="text-xs text-visceral-gold font-mono tracking-widest uppercase border-b border-white/10 pb-4">Kinetic Presence</p>
+                    <p class="text-gray-400 font-light leading-relaxed">The real-time application of the node. The exact frequency (\(\nu\)) of operation applying Human Capacity Optimization to manifest immediate momentum in the absolute Now.</p>
+                </div>
+
+                <!-- Infinite Sum (S) -->
+                <div class="glass-panel p-10 rounded-2xl space-y-6 reveal delay-300 border-t-2 border-t-visceral-gold/20 hover:border-t-visceral-gold transition-all duration-500">
+                    <div class="text-visceral-gold font-serif text-5xl mb-2">\((S)\)</div>
+                    <h4 class="text-2xl font-cinzel font-bold text-white uppercase tracking-widest">Infinite Sum</h4>
+                    <p class="text-xs text-visceral-gold font-mono tracking-widest uppercase border-b border-white/10 pb-4">Legacy &amp; Scaling</p>
+                    <p class="text-gray-400 font-light leading-relaxed">Calculating the Area of Impact (\(A\)). Ensuring synergetic output that builds a permanent, scalable empire (\(\lim_{t \to \infty}\)) for Scarlett Delaine.</p>
+                </div>
+            </div>
+            
+            <div class="mt-20 text-center reveal delay-200">
+                <div class="inline-block glass-panel px-8 py-4 rounded-full border border-visceral-gold/30 backdrop-blur-xl">
+                    <p class="text-gray-300 font-mono text-xs tracking-[0.2em] uppercase">
+                        System Status <span class="mx-3 text-visceral-gold">|</span> <span class="text-white font-bold tracking-widest animate-pulse">81 Nodes Aligned</span>
+                    </p>
+                </div>
+                
+                <div class="mt-8">
+                    <button onclick="downloadUserManual()" class="group relative inline-flex items-center justify-center px-8 py-4 font-mono font-bold text-visceral-gold transition-all duration-300 bg-visceral-dark/80 border border-visceral-gold/50 rounded-sm hover:bg-visceral-gold hover:text-black hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] focus:outline-none">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20 group-hover:opacity-0 transition-opacity"></div>
+                        <i class="fas fa-terminal mr-3 group-hover:animate-pulse"></i>
+                        <span class="relative uppercase tracking-[0.2em] text-xs">Initialize User Manual Extraction</span>
+                    </button>
+                </div>
+
+                <!-- Mastery 360: Library of Resonance -->
+                <div class="mt-32 border-t border-white/10 pt-20 reveal">
+                    <div class="text-center mb-16">
+                        <span class="text-visceral-gold font-mono text-xs tracking-[0.3em] uppercase block mb-3">Mastery 360</span>
+                        <h3 class="text-3xl md:text-4xl font-cinzel font-bold text-white">The Library of Resonance</h3>
+                        <p class="text-gray-400 mt-4 font-light max-w-2xl mx-auto">Each node acts as a resonance chamber across the multiverse. Below are the decrypted architectural blueprints for the first three primary sectors.</p>
+                    </div>
+
+                    <div class="space-y-16">
+                        <!-- Sector I -->
+                        <div class="space-y-6 reveal delay-100">
+                            <div class="border-b border-visceral-gold/30 pb-2">
+                                <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest"><span class="text-visceral-gold mr-2">Sector I:</span> Power &amp; Strategy</h4>
+                                <p class="text-xs text-gray-500 font-mono tracking-widest uppercase mt-1">Focus: Navigating the mechanics of human interaction.</p>
+                            </div>
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div class="node-card glass-panel p-6 rounded-lg border-l-2 border-l-visceral-gold/50 hover:border-l-visceral-gold transition-colors">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <span class="font-mono text-visceral-gold text-lg">Node 01</span>
+                                        <i class="fas fa-book text-gray-600"></i>
+                                    </div>
+                                    <p class="text-sm text-white font-medium mb-3">The 48 Laws of Power, The 33 Strategies of War, Mastery</p>
+                                    <p class="text-xs text-gray-400 mb-3"><span class="text-visceral-gold">Resonance:</span> Leverage, Timing, Discretion, Adaptability, Deception, Boldness, Surrender, Detachment, Dominance</p>
+                                    <ul class="text-[11px] text-gray-500 space-y-1 list-disc pl-4 font-mono">
+                                        <li>Perform a Phase Shift (\(\phi\)) on current conflicts.</li>
+                                        <li>Map the "Area of Impact" (A) of a bold move.</li>
+                                        <li>Recalibrate the social frequency to 528 Hz.</li>
+                                    </ul>
+                                </div>
+                                <div class="node-card glass-panel p-6 rounded-lg border-l-2 border-l-visceral-gold/30 hover:border-l-visceral-gold transition-colors">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <span class="font-mono text-visceral-gold text-lg">Node 02</span>
+                                        <i class="fas fa-book text-gray-600"></i>
+                                    </div>
+                                    <p class="text-sm text-white font-medium mb-3">The Art of War, The Prince, The 50th Law</p>
+                                    <p class="text-xs text-gray-400 mb-3"><span class="text-visceral-gold">Resonance:</span> Terrain, Logistics, Morale, Intelligence, Force, Efficiency, Structure, Vulnerability, Momentum</p>
+                                    <ul class="text-[11px] text-gray-500 space-y-1 list-disc pl-4 font-mono">
+                                        <li>Calculate the Infinite Sum (S) of a strategic alliance.</li>
+                                        <li>Identify the Amplitude of an opponent's move.</li>
+                                        <li>Deploy a silent web-dev strike to capture a niche.</li>
+                                    </ul>
+                                </div>
+                                <div class="node-card glass-panel p-6 rounded-lg border-l-2 border-l-visceral-gold/30 hover:border-l-visceral-gold transition-colors">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <span class="font-mono text-visceral-gold text-lg">Node 03</span>
+                                        <i class="fas fa-book text-gray-600"></i>
+                                    </div>
+                                    <p class="text-sm text-white font-medium mb-3">Laws of Human Nature, The Daily Laws, Concise 48 Laws</p>
+                                    <p class="text-xs text-gray-400 mb-3"><span class="text-visceral-gold">Resonance:</span> Envy, Narcissism, Compulsion, Purpose, Aggression, Short-sightedness, Conformity, Denial, Empathy</p>
+                                    <ul class="text-[11px] text-gray-500 space-y-1 list-disc pl-4 font-mono">
+                                        <li>Audit your Codex for emotional leaks.</li>
+                                        <li>Coax a client into action through understanding.</li>
+                                        <li>Establish a Visceral boundary in negotiation.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sector II & III Grid -->
+                        <div class="grid lg:grid-cols-2 gap-12 reveal delay-200">
+                            <div class="space-y-6">
+                                <div class="border-b border-visceral-gold/30 pb-2">
+                                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest"><span class="text-visceral-gold mr-2">Sector II:</span> Consciousness</h4>
+                                    <p class="text-xs text-gray-500 font-mono tracking-widest uppercase mt-1">Focus: Aligning with the certainty of synchronicity.</p>
+                                </div>
+                                <div class="node-card glass-panel p-6 rounded-lg border-l-2 border-l-blue-900/50 hover:border-l-blue-500 transition-colors">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="font-mono text-blue-400 text-lg">Node 10</span>
+                                    </div>
+                                    <p class="text-sm text-white font-medium mb-2">Power vs. Force, Letting Go, Map of Consciousness</p>
+                                    <p class="text-xs text-gray-400 mb-3"><span class="text-blue-400">Resonance:</span> Calibration, Integrity, Courage, Reason, Love, Peace, Enlightenment, Pride, Guilt</p>
+                                    <ul class="text-[10px] text-gray-500 space-y-1 list-disc pl-4 font-mono">
+                                        <li>Calibrate project Area of Impact against Log Scale.</li>
+                                        <li>Release resistance to a pending contract.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <div class="border-b border-visceral-gold/30 pb-2">
+                                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest"><span class="text-visceral-gold mr-2">Sector III:</span> Warrior</h4>
+                                    <p class="text-xs text-gray-500 font-mono tracking-widest uppercase mt-1">Focus: Breaking the mirrors of self-reflection.</p>
+                                </div>
+                                <div class="node-card glass-panel p-6 rounded-lg border-l-2 border-l-red-900/50 hover:border-l-red-500 transition-colors">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="font-mono text-red-400 text-lg">Node 19</span>
+                                    </div>
+                                    <p class="text-sm text-white font-medium mb-2">Journey to Ixtlan, A Separate Reality, Don Juan</p>
+                                    <p class="text-xs text-gray-400 mb-3"><span class="text-red-400">Resonance:</span> Awareness, Stalking, Dreaming, The Nagual, Intent, The Tonal, Stopping Time, Erasing History, The Flyer</p>
+                                    <ul class="text-[10px] text-gray-500 space-y-1 list-disc pl-4 font-mono">
+                                        <li>Erase a Phase Shift (\(\phi\)) to free up energy.</li>
+                                        <li>Stalk a business opportunity with predatory silence.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center pt-8 reveal delay-300">
+                            <button class="text-xs font-mono tracking-[0.3em] text-gray-500 hover:text-visceral-gold transition-colors uppercase border-b border-dashed border-gray-700 hover:border-visceral-gold pb-1">
+                                Awaiting Decryption: Sectors IV - IX
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -285,13 +521,20 @@
             
             <div class="text-center md:text-left space-y-2">
                 <p class="font-serif text-3xl text-white tracking-wide">Scarlett Delaine</p>
-                <p class="text-xs text-visceral-gold uppercase tracking-[0.3em] font-mono">The Empire Built from the Soul Up</p>
+                <p class="text-xs text-visceral-gold uppercase tracking-[0.3em] font-mono">An Empire Built for Scarlett Delaine</p>
+                <p class="text-sm text-gray-400 font-light mt-4 max-w-md hidden md:block">Synchronicity is a mathematical certainty. You only have to become a seeker of the infinite.</p>
             </div>
             
-            <div class="flex space-x-8 text-2xl text-gray-500">
-                <a href="#" class="hover:text-visceral-gold hover:scale-110 transition-all duration-300"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="hover:text-visceral-gold hover:scale-110 transition-all duration-300"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="hover:text-visceral-gold hover:scale-110 transition-all duration-300"><i class="fas fa-envelope"></i></a>
+            <div class="flex flex-col items-center">
+                <button onclick="downloadUserManual()" class="mb-6 px-6 py-3 border border-visceral-gold/50 text-visceral-gold font-mono text-xs uppercase tracking-widest hover:bg-visceral-gold hover:text-black hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300">
+                    [ Initiate Connection : Align with the Current ]
+                </button>
+                
+                <div class="flex space-x-8 text-2xl text-gray-500">
+                    <a href="#" class="hover:text-visceral-gold hover:scale-110 transition-all duration-300"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-visceral-gold hover:scale-110 transition-all duration-300"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="hover:text-visceral-gold hover:scale-110 transition-all duration-300"><i class="fas fa-envelope"></i></a>
+                </div>
             </div>
             
             <div class="text-center md:text-right">
@@ -305,6 +548,38 @@
             </div>
         </div>
     </footer>
+
+    <!-- Codex 3D Modal -->
+    <div id="codex-modal" class="fixed inset-0 z-[100] flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-500">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeCodexModal()"></div>
+        <div class="relative w-[90vw] max-w-4xl h-[80vh] glass-panel rounded-2xl flex flex-col items-center justify-center p-8 transform scale-95 opacity-0 transition-all duration-500 delay-100" id="codex-modal-content">
+            <button onclick="closeCodexModal()" class="absolute top-6 right-6 text-2xl text-gray-500 hover:text-white z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="w-full h-full relative overflow-hidden rounded-xl border border-white/5 bg-black/50 inset-shadow cursor-move" id="codex-3d-container">
+                <!-- 3D Scene will be injected here -->
+            </div>
+            <h3 class="mt-8 text-2xl font-cinzel text-visceral-gold uppercase tracking-[0.3em]">The Codex Unlocked</h3>
+        </div>
+    </div>
+
+    <!-- Terminal Printout Modal -->
+    <div id="terminal-modal" class="fixed inset-0 z-[110] flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-500">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeTerminal()"></div>
+        <div class="relative w-[90vw] max-w-3xl h-[60vh] glass-panel border border-visceral-gold/30 rounded-md p-6 font-mono text-xs md:text-sm flex flex-col transform scale-95 opacity-0 transition-all duration-500 delay-100" id="terminal-content">
+            <div class="absolute top-0 left-0 w-full h-8 bg-black/50 border-b border-white/10 flex items-center px-4 justify-between">
+                <span class="text-gray-400 text-[10px] tracking-widest uppercase">sys_terminal ~ legacy_extraction.sh</span>
+                <button onclick="closeTerminal()" class="text-gray-500 hover:text-white"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="terminal-output" class="mt-6 flex-1 overflow-y-auto whitespace-pre-wrap flex flex-col justify-start space-y-2 pb-4 pointer-events-auto shadow-inner text-green-500">
+                <!-- Terminal text will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor-dot" class="fixed top-0 left-0 w-2 h-2 bg-visceral-gold rounded-full pointer-events-none z-[9999] mix-blend-screen shadow-[0_0_10px_rgba(212,175,55,0.8)]"></div>
+    <div id="custom-cursor-ring" class="fixed top-0 left-0 w-8 h-8 border border-visceral-gold/50 rounded-full pointer-events-none z-[9998] transition-colors duration-300"></div>
 
     <script src="script.js"></script>
 </body>

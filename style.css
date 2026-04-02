@@ -1,69 +1,53 @@
-:root {
-    --visceral-gold: #d4af37;
-}
-
-/* Interactive Lightning Background Canvas */
-#lightning-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 1; /* Places it behind content (z-10) but above glows (z-0) */
-}
-:root {
-    --visceral-gold: #d4af37;
-}
-
-body {
-    background-color: #050506;
-    color: #f8fafc;
+/* Base overrides */
+html, body {
     overflow-x: hidden;
-    /* Subtle noise texture */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #050506; }
-::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--visceral-gold); }
-
-/* Gradients & Text Effects */
-.gradient-text-gold {
-    background: linear-gradient(135deg, #fef08a 0%, #d4af37 50%, #b45309 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+/* Custom Cursor Management */
+@media (pointer: fine) {
+    body, a, button, .node-card {
+        cursor: none !important;
+    }
+}
+@media (pointer: coarse) {
+    #custom-cursor-dot, #custom-cursor-ring {
+        display: none !important;
+    }
 }
 
-/* Glassmorphism Classes */
+/* Glassmorphism Framework */
 .glass-panel {
     background: rgba(15, 17, 21, 0.4);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(212, 175, 55, 0.1);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .glass-panel:hover {
-    border-color: rgba(212, 175, 55, 0.4);
-    box-shadow: 0 10px 40px -10px rgba(212, 175, 55, 0.15);
-    transform: translateY(-5px);
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+    transform: translateY(-2px);
 }
 
-/* Background Glow Entities */
-.glow-entity {
-    position: relative;
-    border-radius: 50%;
-    filter: blur(80px);
-    z-index: -1;
-    pointer-events: none;
+/* Majestic Typography */
+.gradient-text-gold {
+    background: linear-gradient(to right, #b5952f, #fdf0ba, #d4af37, #b5952f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: textShine 6s linear infinite;
 }
 
-/* Reveal Animations */
+@keyframes textShine {
+    to { background-position: 200% center; }
+}
+
+/* Scroll Reveal Sequencing */
 .reveal {
     opacity: 0;
     transform: translateY(40px);
-    transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.active {
@@ -75,37 +59,28 @@ body {
 .delay-200 { transition-delay: 200ms; }
 .delay-300 { transition-delay: 300ms; }
 
-/* Button Glitch/Hover effect */
-.btn-gold {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-.btn-gold::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
-}
-.btn-gold:hover::before {
-    left: 100%;
+/* Dynamic Text Highlight Masking */
+.scroll-highlight {
+    -webkit-mask-image: linear-gradient(to bottom right, #000 var(--scroll-pct, 0%), rgba(0,0,0,0.2) calc(var(--scroll-pct, 0%) + 15%));
+    mask-image: linear-gradient(to bottom right, #000 var(--scroll-pct, 0%), rgba(0,0,0,0.2) calc(var(--scroll-pct, 0%) + 15%));
 }
 
-.math-box {
-    position: relative;
-    z-index: 1;
+/* Deep Elements */
+.inset-shadow {
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.9);
 }
-.math-box::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.5s ease;
+
+/* Luxury Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
 }
-.math-box:hover::after {
-    opacity: 1;
+::-webkit-scrollbar-track {
+    background: #050506;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.3);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.6);
 }
