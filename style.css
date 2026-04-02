@@ -1,0 +1,59 @@
+/* 1. Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 1.5. Global Variables */
+:root {
+    --background-color: #000;
+}
+
+/* 2. Fullscreen Setup */
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color); /* Pure black to let the branding pop */
+    overflow: hidden; /* Prevents the bounce effect on mobile */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+/* 3. The Interactive Container */
+#plasma-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 4. Branding Image (Mobile First) */
+#branding-image {
+    position: relative;
+    z-index: 1; 
+    max-width: 85%; /* Keeps it from touching the edges of the phone */
+    height: auto;
+    pointer-events: none; /* Touches pass through to the canvas */
+}
+
+/* 5. The Plasma Canvas */
+#plasma-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Stays on top for interaction */
+}
+
+/* 6. Desktop Enhancement */
+@media (min-width: 768px) {
+    #branding-image {
+        max-width: 500px; /* Keeps the logo clean and focused on desktop */
+    }
+}
