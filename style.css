@@ -3,6 +3,15 @@ html, body {
     overflow-x: hidden;
 }
 
+body {
+    background-color: #050a0f;
+    background-image: 
+        linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center center;
+}
+
 /* Custom Cursor Management */
 @media (pointer: fine) {
     body, a, button, .node-card {
@@ -20,19 +29,19 @@ html, body {
     background: rgba(15, 17, 21, 0.4);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(0, 229, 255, 0.1);
     transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .glass-panel:hover {
-    border-color: rgba(212, 175, 55, 0.3);
-    box-shadow: 0 10px 40px rgba(212, 175, 55, 0.1);
+    border-color: rgba(0, 229, 255, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 229, 255, 0.15);
     transform: translateY(-2px);
 }
 
 /* Majestic Typography */
 .gradient-text-gold {
-    background: linear-gradient(to right, #b5952f, #fdf0ba, #d4af37, #b5952f);
+    background: linear-gradient(to right, #0088cc, #e0f7fa, #00e5ff, #0088cc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% auto;
@@ -75,12 +84,12 @@ html, body {
     width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: #050506;
+    background: #050a0f;
 }
 ::-webkit-scrollbar-thumb {
-    background: rgba(212, 175, 55, 0.3);
+    background: rgba(0, 229, 255, 0.3);
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(212, 175, 55, 0.6);
+    background: rgba(0, 229, 255, 0.6);
 }

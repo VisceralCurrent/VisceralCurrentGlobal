@@ -138,18 +138,36 @@ hoverTargets.forEach(target => {
     target.addEventListener('mouseenter', () => {
         targetScale = 2.5;
         if (cursorRing) {
-            cursorRing.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
-            cursorRing.style.borderColor = 'rgba(212, 175, 55, 0.8)';
+            cursorRing.style.backgroundColor = 'rgba(0, 229, 255, 0.1)';
+            cursorRing.style.borderColor = 'rgba(0, 229, 255, 0.8)';
         }
     });
     target.addEventListener('mouseleave', () => {
         targetScale = 1;
         if (cursorRing) {
             cursorRing.style.backgroundColor = 'transparent';
-            cursorRing.style.borderColor = 'rgba(212, 175, 55, 0.5)';
+            cursorRing.style.borderColor = 'rgba(0, 229, 255, 0.5)';
         }
     });
 });
+
+// --- Mastery 360 Accordion Logic ---
+function toggleAccordion(element) {
+    const content = element.querySelector('.accordion-content');
+    const icon = element.querySelector('.fa-chevron-down');
+    
+    if (element.classList.contains('active')) {
+        element.classList.remove('active');
+        content.style.maxHeight = '0px';
+        content.style.opacity = '0';
+        icon.style.transform = 'rotate(0deg)';
+    } else {
+        element.classList.add('active');
+        content.style.maxHeight = content.scrollHeight + 'px';
+        content.style.opacity = '1';
+        icon.style.transform = 'rotate(180deg)';
+    }
+}
 
 // --- 3D Tilt Effect for Node Cards ---
 const nodeCards = document.querySelectorAll('.node-card');
@@ -262,7 +280,7 @@ function triggerAutoStrike() {
 
         // Core (White) & Glow (Visceral Gold)
         drawLightning(startX, startY, endX, endY, Math.floor(8 + Math.random() * 5), '#ffffff', 1.5, 30);
-        drawLightning(startX, startY, endX, endY, Math.floor(12 + Math.random() * 5), 'rgba(212, 175, 55, 0.4)', 4, 45);
+        drawLightning(startX, startY, endX, endY, Math.floor(12 + Math.random() * 5), 'rgba(0, 229, 255, 0.4)', 4, 45);
     }
 }
 
@@ -275,8 +293,8 @@ function lightningRender() {
     if (mouse.active) {
         // Core (White)
         drawLightning(lightningOriginX, 0, mouse.x, mouse.y, 8, '#ffffff', 1.5, 30);
-        // Glow (Visceral Gold)
-        drawLightning(lightningOriginX, 0, mouse.x, mouse.y, 12, 'rgba(212, 175, 55, 0.4)', 4, 45);
+        // Glow (Electric Blue)
+        drawLightning(lightningOriginX, 0, mouse.x, mouse.y, 12, 'rgba(0, 229, 255, 0.4)', 4, 45);
     } else {
         triggerAutoStrike();
     }
@@ -361,9 +379,9 @@ function drawWaves() {
 
     // Define wave layers (Foreground, Midground, Background)
     const layers = [
-        { color: 'rgba(212, 175, 55, 0.15)', freqMod: 0.8, ampMod: 1.5, phaseMod: 0, lineWidth: 1 },
-        { color: 'rgba(212, 175, 55, 0.4)', freqMod: 1.2, ampMod: 0.8, phaseMod: 2, lineWidth: 2 },
-        { color: 'rgba(212, 175, 55, 1)', freqMod: 1.0, ampMod: 1.0, phaseMod: 1, lineWidth: 3 }
+        { color: 'rgba(0, 229, 255, 0.15)', freqMod: 0.8, ampMod: 1.5, phaseMod: 0, lineWidth: 1 },
+        { color: 'rgba(0, 229, 255, 0.4)', freqMod: 1.2, ampMod: 0.8, phaseMod: 2, lineWidth: 2 },
+        { color: 'rgba(0, 229, 255, 1)', freqMod: 1.0, ampMod: 1.0, phaseMod: 1, lineWidth: 3 }
     ];
 
     // The Breathing Universe Mechanic: Oscillates global amplitude smoothly
@@ -377,7 +395,7 @@ function drawWaves() {
         // Add a slight glow to the main wave
         if(layer.lineWidth === 3) {
             ctx.shadowBlur = 15;
-            ctx.shadowColor = 'rgba(212, 175, 55, 0.5)';
+            ctx.shadowColor = 'rgba(0, 229, 255, 0.5)';
         } else {
             ctx.shadowBlur = 0;
         }
@@ -457,7 +475,11 @@ function calculateImpact() {
         "AUDITING 81-NODE MATRIX...",
         "BALANCING TRIADS OF PERCEPTION...",
         "TRANSMUTING PAST INTO KINETIC FUEL...",
-        "ZERO POINT EQUILIBRIUM ACHIEVED."
+        "ZERO POINT EQUILIBRIUM ACHIEVED.",
+        "INTEGRATING PHASE SHIFT (ϕ)...",
+        "CALCULATING AREA OF IMPACT: A = ∫(ν⋅ϕ)dt...",
+        "VERIFYING INFINITE SUM (S)...",
+        "ZERO POINT EQUILIBRIUM ACHIEVED: ∞"
     ];
     
     let i = 0;
@@ -511,9 +533,9 @@ function init3DCodex() {
     // Create a mystical 3D object (Icosahedron)
     const geometry = new THREE.IcosahedronGeometry(2, 0);
     const material = new THREE.MeshStandardMaterial({ 
-        color: 0xd4af37, // Visceral Gold
+        color: 0x00e5ff, // Electric Blue
         wireframe: true,
-        emissive: 0x3a2c00,
+        emissive: 0x004466,
         emissiveIntensity: 0.5
     });
     
@@ -541,7 +563,7 @@ function init3DCodex() {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0xd4af37, 2, 100);
+    const pointLight = new THREE.PointLight(0x00e5ff, 2, 100);
     pointLight.position.set(5, 5, 5);
     scene.add(pointLight);
 
@@ -661,7 +683,7 @@ function downloadUserManual() {
         "[OK] TRIADS OF PERCEPTION ALIGNED.",
         "> COMPILING THE ORIGIN (p)... DONE.",
         "> MEASURING VISCERAL CURRENT (ν)... DONE.",
-        "> CALCULATING INFINITE SUM (S) FOR SCARLETT DELAINE... DONE.",
+        "> CALCULATING INFINITE SUM (S) FOR UNIVERSAL SOVEREIGNTY... DONE.",
         "> GENERATING USER_MANUAL_LEGACY.PDF...",
         "[SYS] ENCRYPTING WITH NARRATIVE FORENSIC ENGINEERING...",
         "[SYS] DOWNLOAD COMMENCING..."
@@ -700,7 +722,7 @@ function downloadUserManual() {
                 terminalOutput.scrollTop = terminalOutput.scrollHeight;
                 
                 // Trigger real browser download with the legacy parameters
-                const blobContent = `VISCERAL CURRENT: THE CODEX OF INFINITE POTENTIAL.\n\nTHE SOVEREIGN PROTOCOL: TRIADS OF PERCEPTION\n============================================\nI. Internal Architecture (The Eye of the Storm) - Composure & Neutrality.\nII. Strategic Overlay (The Mentalist's Gambit) - Formless Precision & 81-Node Duality.\nIII. Expansion Equation (The Empire Builder) - Christ-Consciousness & Infinite Legacy.\n\nTHE 81 NODE MATRIX\n==================\nEvery node of existence must be activated through the Trinity of Flow to scale impact to absolute infinity.\n\n1. The Origin (p) - Potential & Past\n2. Visceral Current (ν) - Kinetic Presence\n3. Infinite Sum (S) - Legacy & Scaling\n\nMASTERY 360: THE LIBRARY OF RESONANCE\n=====================================\n\nSECTOR I: POWER & STRATEGY\nFocus: Navigating the mechanics of human interaction.\n\nNODE 01\nBooks: The 48 Laws of Power, The 33 Strategies of War, Mastery\nPerceptions: Leverage, Timing, Discretion, Adaptability, Deception, Boldness, Surrender, Detachment, Dominance\nFlow: Perform a Phase Shift (ϕ), Map Area of Impact (A), Recalibrate to 528 Hz.\n\nNODE 02\nBooks: The Art of War, The Prince, The 50th Law\nPerceptions: Terrain, Logistics, Morale, Intelligence, Force, Efficiency, Structure, Vulnerability, Momentum\nFlow: Calculate Infinite Sum (S), Identify Amplitude, Deploy silent web-dev strike.\n\nSECTOR II: CONSCIOUSNESS & FREQUENCY\nFocus: Aligning with the mathematical certainty of synchronicity.\n\nNODE 10\nBooks: Power vs. Force, Letting Go, The Map of Consciousness\nPerceptions: Calibration, Integrity, Courage, Reason, Love, Peace, Enlightenment, Pride, Guilt\nFlow: Calibrate project Area of Impact, Release resistance, Shift from Chasing to Choosing.\n\nSECTOR III: WARRIOR & PERCEPTION\nFocus: Breaking the mirrors of self-reflection.\n\nNODE 19\nBooks: Journey to Ixtlan, A Separate Reality, The Teachings of Don Juan\nPerceptions: Awareness, Stalking, Dreaming, The Nagual, Intent, The Tonal, Stopping Time, Erasing History, The Flyer\nFlow: Erase a Phase Shift (ϕ), Stalk with predatory silence, Build Codex for the Dreaming body.\n\n\nFinal output calculated for: Scarlett Delaine\nResult: ∞\n\n[SYSTEM END]`;
+                const blobContent = `VISCERAL CURRENT: THE CODEX OF INFINITE POTENTIAL.\n\nTHE SOVEREIGN PROTOCOL: TRIADS OF PERCEPTION\n============================================\nI. Internal Architecture (The Eye of the Storm) - Composure & Neutrality.\nII. Strategic Overlay (The Mentalist's Gambit) - Formless Precision & 81-Node Duality.\nIII. Expansion Equation (The Empire Builder) - Christ-Consciousness & Infinite Legacy.\n\nTHE 81 NODE MATRIX\n==================\nEvery node of existence must be activated through the Trinity of Flow to scale impact to absolute infinity.\n\n1. The Origin (p) - Potential & Past\n2. Visceral Current (ν) - Kinetic Presence\n3. Infinite Sum (S) - Legacy & Scaling\n\nMASTERY 360: THE LIBRARY OF RESONANCE\n=====================================\n\nSECTOR I: POWER & STRATEGY\nFocus: Navigating the mechanics of human interaction.\n\nNODE 01\nBooks: The 48 Laws of Power, The 33 Strategies of War, Mastery\nPerceptions: Leverage, Timing, Discretion, Adaptability, Deception, Boldness, Surrender, Detachment, Dominance\nFlow: Perform a Phase Shift (ϕ), Map Area of Impact (A), Recalibrate to 528 Hz.\n\nNODE 02\nBooks: The Art of War, The Prince, The 50th Law\nPerceptions: Terrain, Logistics, Morale, Intelligence, Force, Efficiency, Structure, Vulnerability, Momentum\nFlow: Calculate Infinite Sum (S), Identify Amplitude, Deploy silent web-dev strike.\n\nSECTOR II: CONSCIOUSNESS & FREQUENCY\nFocus: Aligning with the mathematical certainty of synchronicity.\n\nNODE 10\nBooks: Power vs. Force, Letting Go, The Map of Consciousness\nPerceptions: Calibration, Integrity, Courage, Reason, Love, Peace, Enlightenment, Pride, Guilt\nFlow: Calibrate project Area of Impact, Release resistance, Shift from Chasing to Choosing.\n\nSECTOR III: WARRIOR & PERCEPTION\nFocus: Breaking the mirrors of self-reflection.\n\nNODE 19\nBooks: Journey to Ixtlan, A Separate Reality, The Teachings of Don Juan\nPerceptions: Awareness, Stalking, Dreaming, The Nagual, Intent, The Tonal, Stopping Time, Erasing History, The Flyer\nFlow: Erase a Phase Shift (ϕ), Stalk with predatory silence, Build Codex for the Dreaming body.\n\n\nFinal output calculated for: Universal Sovereignty\nResult: ∞\n\n[SYSTEM END]`;
                 
                 const blob = new Blob([blobContent], { type: 'text/plain' });
                 const url = window.URL.createObjectURL(blob);
@@ -784,7 +806,7 @@ function drawMatrix() {
     matrixTime += 0.015;
     
     // Draw connection grid
-    matrixCtx.strokeStyle = 'rgba(212, 175, 55, 0.05)';
+    matrixCtx.strokeStyle = 'rgba(0, 229, 255, 0.05)';
     matrixCtx.lineWidth = 1;
     matrixCtx.beginPath();
     
@@ -822,7 +844,7 @@ function drawMatrix() {
         // Node core
         matrixCtx.beginPath();
         matrixCtx.arc(node.x, node.y, node.baseRadius, 0, Math.PI * 2);
-        matrixCtx.fillStyle = `rgba(212, 175, 55, ${0.3 + totalGlow * 0.05})`;
+        matrixCtx.fillStyle = `rgba(0, 229, 255, ${0.3 + totalGlow * 0.05})`;
         matrixCtx.fill();
         
         // Node ethereal glow
@@ -830,8 +852,8 @@ function drawMatrix() {
             matrixCtx.beginPath();
             matrixCtx.arc(node.x, node.y, node.baseRadius + totalGlow, 0, Math.PI * 2);
             const gradient = matrixCtx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.baseRadius + totalGlow);
-            gradient.addColorStop(0, 'rgba(212, 175, 55, 0.3)');
-            gradient.addColorStop(1, 'rgba(212, 175, 55, 0)');
+            gradient.addColorStop(0, 'rgba(0, 229, 255, 0.3)');
+            gradient.addColorStop(1, 'rgba(0, 229, 255, 0)');
             matrixCtx.fillStyle = gradient;
             matrixCtx.fill();
         }
@@ -855,7 +877,7 @@ window.addEventListener('load', () => {
     initMatrix();
     if (matrixCanvas) drawMatrix();
 
-    console.log("%c[VISCERAL CURRENT ONLINE]", "color: #d4af37; font-weight: bold; font-size: 14px;");
+    console.log("%c[VISCERAL CURRENT ONLINE]", "color: #00e5ff; font-weight: bold; font-size: 14px;");
     console.log("%cArchitecture for Infinite Potential successfully initialized.", "color: #94a3b8;");
 });
 
