@@ -1,59 +1,100 @@
-/* 1. Global Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* 1.5. Global Variables */
 :root {
-    --background-color: #000;
+    --visceral-gold: #d4af37;
 }
 
-/* 2. Fullscreen Setup */
-body, html {
-    width: 100%;
-    height: 100%;
-    background-color: var(--background-color); /* Pure black to let the branding pop */
-    overflow: hidden; /* Prevents the bounce effect on mobile */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
+body {
+    background-color: #050506;
+    color: #f8fafc;
+    overflow-x: hidden;
+    /* Subtle noise texture */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
-/* 3. The Interactive Container */
-#plasma-container {
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #050506; }
+::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--visceral-gold); }
+
+/* Gradients & Text Effects */
+.gradient-text-gold {
+    background: linear-gradient(135deg, #fef08a 0%, #d4af37 50%, #b45309 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+    background: rgba(15, 17, 21, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 10px 40px -10px rgba(212, 175, 55, 0.15);
+    transform: translateY(-5px);
+}
+
+/* Background Glow Entities */
+.glow-entity {
     position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    pointer-events: none;
 }
 
-/* 4. Branding Image (Mobile First) */
-#branding-image {
+/* Reveal Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+
+/* Button Glitch/Hover effect */
+.btn-gold {
     position: relative;
-    z-index: 1; 
-    max-width: 85%; /* Keeps it from touching the edges of the phone */
-    height: auto;
-    pointer-events: none; /* Touches pass through to the canvas */
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
-
-/* 5. The Plasma Canvas */
-#plasma-canvas {
+.btn-gold::before {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2; /* Stays on top for interaction */
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+.btn-gold:hover::before {
+    left: 100%;
 }
 
-/* 6. Desktop Enhancement */
-@media (min-width: 768px) {
-    #branding-image {
-        max-width: 500px; /* Keeps the logo clean and focused on desktop */
-    }
+.math-box {
+    position: relative;
+    z-index: 1;
+}
+.math-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.math-box:hover::after {
+    opacity: 1;
 }
