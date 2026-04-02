@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visceral Current | The Codex of Infinite Potential</title>
     
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Visceral Current | The Codex of Infinite Potential">
+    <meta name="description" content="Human Capacity Optimization through the Mathematics of Synchronicity. We do not chase; we choose. An empire built on mathematical certainty.">
+    <meta name="author" content="Visceral Current">
+    <meta name="theme-color" content="#050a0f">
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:title" content="Visceral Current | The Codex of Infinite Potential">
+    <meta property="og:description" content="Human Capacity Optimization through the Mathematics of Synchronicity. We do not chase; we choose.">
+    <meta property="og:image" content="https://yourdomain.com/assets/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourdomain.com/">
+    <meta property="twitter:title" content="Visceral Current | The Codex of Infinite Potential">
+    <meta property="twitter:description" content="Human Capacity Optimization through the Mathematics of Synchronicity. We do not chase; we choose.">
+    <meta property="twitter:image" content="https://yourdomain.com/assets/og-image.jpg">
+
     <!-- Resource Hints for faster DNS connections -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -129,6 +149,10 @@
                     The Matrix
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
                 </a>
+                <a href="strategic.html" class="hover:text-visceral-gold transition duration-300 relative group">
+                    Executive
+                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
                 <a href="research.html" target="_blank" class="hover:text-visceral-gold transition duration-300 relative group">
                     Architecture
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
@@ -154,6 +178,8 @@
         <a href="#formula" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">The Formula</a>
         <a href="#codex" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">The Codex</a>
         <a href="#matrix" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">The Matrix</a>
+        <a href="strategic.html" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Executive</a>
+        <a href="research.html" target="_blank" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Architecture</a>
         <a href="#contact" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Legacy</a>
         <button id="close-menu-btn" class="absolute top-8 right-8 text-3xl text-gray-500 hover:text-white">
             <i class="fas fa-times"></i>
@@ -620,26 +646,52 @@
     <!-- Codex 3D Modal -->
     <div id="codex-modal" class="fixed inset-0 z-[100] flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-500">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeCodexModal()"></div>
-        <div class="relative w-[90vw] max-w-4xl h-[80vh] glass-panel rounded-2xl flex flex-col items-center justify-center p-8 transform scale-95 opacity-0 transition-all duration-500 delay-100" id="codex-modal-content">
-            <button onclick="closeCodexModal()" class="absolute top-6 right-6 text-2xl text-gray-500 hover:text-white z-10">
+        <div class="relative w-[95vw] md:w-[85vw] max-w-5xl h-[85vh] md:h-[75vh] glass-panel rounded-2xl flex flex-col md:flex-row overflow-hidden transform scale-95 opacity-0 transition-all duration-500 delay-100" id="codex-modal-content">
+            <button onclick="closeCodexModal()" class="absolute top-6 right-6 text-2xl text-gray-500 hover:text-white z-20">
                 <i class="fas fa-times"></i>
             </button>
-            <div class="w-full h-full relative overflow-hidden rounded-xl border border-white/5 bg-black/50 inset-shadow cursor-move" id="codex-3d-container">
+            
+            <!-- Left: 3D Scene -->
+            <div class="w-full md:w-1/2 h-64 md:h-full relative bg-black/50 border-b md:border-b-0 md:border-r border-white/10 inset-shadow cursor-move flex-shrink-0" id="codex-3d-container">
                 <!-- 3D Scene will be injected here -->
             </div>
-            <h3 class="mt-8 text-2xl font-cinzel text-visceral-gold uppercase tracking-[0.3em]">The Codex Unlocked</h3>
+            
+            <!-- Right: The Transmission -->
+            <div class="w-full md:w-1/2 h-full flex flex-col p-6 md:p-10 overflow-y-auto">
+                <div class="flex items-center gap-3 mb-6 codex-reveal opacity-0 translate-y-4 transition-all duration-500">
+                    <div class="w-2 h-2 bg-visceral-gold rounded-full animate-pulse"></div>
+                    <span id="codex-date" class="text-[10px] text-visceral-gold font-mono tracking-widest uppercase">Live Transmission // Calibration 04.01.2026</span>
+                </div>
+                
+                <h3 class="text-2xl md:text-3xl font-cinzel text-white mb-6 tracking-wide codex-reveal opacity-0 translate-y-4 transition-all duration-500">The Phase Shift of the Fool</h3>
+                
+                <div class="space-y-6 text-sm text-gray-400 font-light leading-relaxed pb-8">
+                    <p class="codex-reveal opacity-0 translate-y-4 transition-all duration-500"><strong class="text-white font-medium">1. The Paradox of the "Fool" (\(\phi\))</strong><br>
+                    The Fool is the 0 in the Tarot, the point of absolute potential before the first step. Today represents the Zero Point. Being a "seeker of the infinite" often looks like folly to those trapped in linear time. This is a reminder that the Phase Shift (\(\phi\)) is often most powerful when it defies conventional logic.</p>
+
+                    <p class="codex-reveal opacity-0 translate-y-4 transition-all duration-500"><strong class="text-white font-medium">2. The Libra Full Moon</strong><br>
+                    The celestial manifestation of the Connection (\(C\)) variable. Libra is the scales, forcing a decision climax between the Self (Purpose) and the Other (Connection). Today is about weighing the Area of Impact and finding radical clarity in partnerships. The frequency is high; the amplitude of opportunity is peaking.</p>
+
+                    <div class="p-5 border-l-2 border-visceral-gold/50 bg-white/5 space-y-3 mt-8 shadow-inner codex-reveal opacity-0 translate-y-4 transition-all duration-500">
+                        <span class="block text-[10px] font-mono text-visceral-gold tracking-widest uppercase mb-3">Standing Order // Visceral Command</span>
+                        <p><strong class="text-white">Composure:</strong> Maintain the frequency. Do not let the "Fool’s" energy manifest as an emotional outburst.</p>
+                        <p><strong class="text-white">Audit:</strong> Apply \( A = \int_{p}^{o} (\nu \cdot \phi) dt \) to current projects. Are they serving the Origin, or are they just noise?</p>
+                        <p><strong class="text-white">Choose:</strong> We aren't chasing—we are choosing. Resonate at 528 Hz.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Terminal Printout Modal -->
     <div id="terminal-modal" class="fixed inset-0 z-[110] flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-500">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeTerminal()"></div>
-        <div class="relative w-[90vw] max-w-3xl h-[60vh] glass-panel border border-visceral-gold/30 rounded-md p-6 font-mono text-xs md:text-sm flex flex-col transform scale-95 opacity-0 transition-all duration-500 delay-100" id="terminal-content">
+        <div class="relative w-[95vw] md:w-[90vw] max-w-3xl h-[65vh] md:h-[60vh] glass-panel border border-visceral-gold/30 rounded-md p-4 md:p-6 font-mono text-[10px] md:text-sm flex flex-col transform scale-95 opacity-0 transition-all duration-500 delay-100" id="terminal-content">
             <div class="absolute top-0 left-0 w-full h-8 bg-black/50 border-b border-white/10 flex items-center px-4 justify-between">
-                <span class="text-gray-400 text-[10px] tracking-widest uppercase">sys_terminal ~ legacy_extraction.sh</span>
-                <button onclick="closeTerminal()" class="text-gray-500 hover:text-white"><i class="fas fa-times"></i></button>
+                <span class="text-gray-400 text-[9px] md:text-[10px] tracking-widest uppercase truncate mr-4">sys_terminal ~ legacy_extraction.sh</span>
+                <button onclick="closeTerminal()" class="text-gray-500 hover:text-white flex-shrink-0"><i class="fas fa-times"></i></button>
             </div>
-            <div id="terminal-output" class="mt-6 flex-1 overflow-y-auto whitespace-pre-wrap flex flex-col justify-start space-y-2 pb-4 pointer-events-auto shadow-inner text-green-500">
+            <div id="terminal-output" class="mt-8 flex-1 overflow-y-auto whitespace-pre-wrap break-words flex flex-col justify-start space-y-2 pb-4 pointer-events-auto shadow-inner text-green-500">
                 <!-- Terminal text will be injected here -->
             </div>
         </div>

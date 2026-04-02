@@ -533,6 +533,22 @@ function openCodexModal() {
     codexModalContent.classList.remove('scale-95', 'opacity-0');
     document.body.style.overflow = 'hidden';
     appState.isModalOpen = true;
+
+    // Dynamic Date Update
+    const dateEl = document.getElementById('codex-date');
+    if (dateEl) {
+        const today = new Date();
+        const formattedDate = `${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}.${today.getFullYear()}`;
+        dateEl.innerText = `Live Transmission // Calibration ${formattedDate}`;
+    }
+
+    // Staggered Text Reveal
+    const revealElements = document.querySelectorAll('.codex-reveal');
+    revealElements.forEach((el, index) => {
+        setTimeout(() => {
+            el.classList.remove('opacity-0', 'translate-y-4');
+        }, 300 + (index * 150)); // Delay starts after the modal fade-in
+    });
     
     // Slight delay to allow modal to become visible before rendering
     setTimeout(() => {
@@ -554,6 +570,12 @@ function closeCodexModal() {
     if (animationId) {
         cancelAnimationFrame(animationId); // Stop the 3D render loop to save resources
     }
+    
+    // Reset Text Reveal for next time
+    const revealElements = document.querySelectorAll('.codex-reveal');
+    revealElements.forEach(el => {
+        el.classList.add('opacity-0', 'translate-y-4');
+    });
 }
 
 // --- Terminal Sequence Modal ---
