@@ -1,3 +1,10 @@
+// --- Global Application State ---
+const appState = {
+    isFrequencyCanvasVisible: false,
+    isMatrixCanvasVisible: false,
+    isModalOpen: false, // Already used, but good to group it
+};
+
 // --- Navigation Scroll Effect & Mobile Menu ---
 const navbar = document.getElementById('navbar');
 const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -93,12 +100,6 @@ function updateParallax() {
     });
 }
 
-window.addEventListener('scroll', () => {
-    updateScrollHighlights();
-    requestAnimationFrame(updateParallax);
-});
-updateParallax(); // Initial check
-
 // --- Custom Cursor Integration ---
 const cursorDot = document.getElementById('custom-cursor-dot');
 const cursorRing = document.getElementById('custom-cursor-ring');
@@ -128,9 +129,7 @@ function animateCursor() {
     if (cursorRing) {
         cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) scale(${currentScale})`;
     }
-    requestAnimationFrame(animateCursor);
 }
-animateCursor();
 
 // Hover Effect Triggers for Interactive Elements
 const hoverTargets = document.querySelectorAll('.node-card, a, button');
@@ -190,11 +189,11 @@ nodeCards.forEach(card => {
     card.addEventListener('mouseleave', () => {
         card.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease';
         card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)';
-        
-        setTimeout(() => {
+
+        card.addEventListener('transitionend', () => {
             card.style.transform = '';
             card.style.transition = '';
-        }, 500); // Clean up inline styles after reset transition completes
+        }, { once: true }); // Clean up inline styles after reset transition completes
     });
 });
 
@@ -202,8 +201,7 @@ nodeCards.forEach(card => {
 const lightningCanvas = document.getElementById('lightning-canvas');
 const lightningCtx = lightningCanvas.getContext('2d');
 let lightningWidth, lightningHeight, lightningOriginX;
-let mouse = { x: 0, y: 0, active: false };
-let isModalOpen = false;
+let mouse = { x: 0, y: 0, active: false }; // isModalOpen is now in appState
 const TWO_PI = Math.PI * 2;
 
 function resizeLightningCanvas() {
@@ -247,11 +245,11 @@ function drawLightning(x1, y1, x2, y2, segments, color, width, jitter = 25) {
 }
 
 function triggerAutoStrike() {
-    const strikeChance = isModalOpen ? 0.08 : 0.015;
+    const strikeChance = appState.isModalOpen ? 0.08 : 0.015;
     if (!mouse.active && Math.random() < strikeChance) {
         let startX, startY, endX, endY;
         
-        if (isModalOpen && typeof codex3dContainer !== 'undefined') {
+        if (appState.isModalOpen && typeof codex3dContainer !== 'undefined') {
             const rect = codex3dContainer.getBoundingClientRect();
             endX = rect.left + rect.width / 2 + (Math.random() - 0.5) * 100;
             endY = rect.top + rect.height / 2 + (Math.random() - 0.5) * 100;
@@ -299,7 +297,6 @@ function lightningRender() {
         triggerAutoStrike();
     }
 
-    requestAnimationFrame(lightningRender);
 }
 
 
@@ -422,7 +419,6 @@ function drawWaves() {
     });
 
     time += isPerturbed ? 0.15 : 0.03;
-    requestAnimationFrame(drawWaves);
 }
 
 function shiftPhase() {
@@ -639,14 +635,14 @@ function openCodexModal() {
     codexModal.classList.remove('pointer-events-none', 'opacity-0');
     codexModalContent.classList.remove('scale-95', 'opacity-0');
     document.body.style.overflow = 'hidden';
-    isModalOpen = true;
+    appState.isModalOpen = true;
     
     // Slight delay to allow modal to become visible before rendering
     setTimeout(() => {
         init3DCodex();
         if (camera && renderer) {
             const rect = codex3dContainer.getBoundingClientRect();
-            camera.aspect = rect.width / rect.height;
+            camera.aspect = rect.width / (rect.height || 1); // Avoid division by zero
             camera.updateProjectionMatrix();
             renderer.setSize(rect.width, rect.height);
         }
@@ -657,7 +653,10 @@ function closeCodexModal() {
     codexModal.classList.add('pointer-events-none', 'opacity-0');
     codexModalContent.classList.add('scale-95', 'opacity-0');
     document.body.style.overflow = 'auto';
-    isModalOpen = false;
+    appState.isModalOpen = false;
+    if (animationId) {
+        cancelAnimationFrame(animationId); // Stop the 3D render loop to save resources
+    }
 }
 
 // --- Terminal Sequence Modal ---
@@ -859,7 +858,6 @@ function drawMatrix() {
         }
     });
     
-    requestAnimationFrame(drawMatrix);
 }
 
 // --- Initialization & Global Event Listeners ---
@@ -867,19 +865,61 @@ function drawMatrix() {
 window.addEventListener('load', () => {
     // Initialize Synchronicity Engine
     resizeCanvas();
-    drawWaves();
 
-    // Initialize Lightning Background
-    resizeLightningCanvas();
-    lightningRender();
-    
     // Initialize 81 Node Matrix
     initMatrix();
-    if (matrixCanvas) drawMatrix();
+
+    // Setup performance observers
+    setupPerformanceObservers();
+
+    // Start the single, unified animation loop
+    masterLoop();
+
+    // Smoothly fade out and remove the loading overlay
+    const loadingOverlay = document.getElementById('loading-overlay');
+    if (loadingOverlay) {
+        setTimeout(() => {
+            loadingOverlay.style.opacity = '0';
+            setTimeout(() => loadingOverlay.remove(), 1000); // Remove from DOM after fade completes
+        }, 600); // Brief delay to ensure canvases have painted their first frames
+    }
 
     console.log("%c[VISCERAL CURRENT ONLINE]", "color: #00e5ff; font-weight: bold; font-size: 14px;");
     console.log("%cArchitecture for Infinite Potential successfully initialized.", "color: #94a3b8;");
 });
+
+// --- MASTER ANIMATION LOOP ---
+function masterLoop() {
+    // Always run these core animations
+    animateCursor();
+
+    // Conditionally run expensive canvas animations only when they are visible
+    if (appState.isFrequencyCanvasVisible) {
+        drawWaves();
+    }
+    if (appState.isMatrixCanvasVisible) {
+        drawMatrix();
+    }
+
+    // Run scroll-dependent animations
+    updateParallax();
+    updateScrollHighlights();
+
+    requestAnimationFrame(masterLoop);
+}
+
+// --- Intersection Observers for Performance ---
+function setupPerformanceObservers() {
+    const canvasObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.target.id === 'frequencyCanvas') appState.isFrequencyCanvasVisible = entry.isIntersecting;
+            if (entry.target.id === 'matrix-canvas') appState.isMatrixCanvasVisible = entry.isIntersecting;
+        });
+    }, { threshold: 0.01 });
+
+    if (canvas) canvasObserver.observe(canvas);
+    if (matrixCanvas) canvasObserver.observe(matrixCanvas);
+}
 
 // Debounced resize handler
 let resizeTimeout;
@@ -887,15 +927,6 @@ window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
         resizeCanvas();
-        resizeLightningCanvas();
         initMatrix();
     }, 250);
 });
-
-// Lightning interaction listeners
-window.addEventListener('mousedown', startInteraction);
-window.addEventListener('touchstart', (e) => { e.preventDefault(); startInteraction(e); }, { passive: false });
-window.addEventListener('mousemove', updateMouse);
-window.addEventListener('touchmove', (e) => { updateMouse(e); }, { passive: false });
-window.addEventListener('mouseup', endInteraction);
-window.addEventListener('touchend', endInteraction);

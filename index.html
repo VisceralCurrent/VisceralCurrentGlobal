@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visceral Current | The Codex of Infinite Potential</title>
     
+    <!-- Resource Hints for faster DNS connections -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Fonts & Icons -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,10 +26,10 @@
             chtml: { displayAlign: 'center' }
         };
     </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <!-- Three.js for 3D Interactive Modal -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Three.js for 3D Interactive Modal (Deferred to prevent render blocking) -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <script>
         tailwind.config = {
@@ -66,8 +71,25 @@
 </head>
 <body class="antialiased selection:bg-visceral-gold selection:text-black">
 
-    <!-- Interactive Lightning Background -->
-    <canvas id="lightning-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+    <!-- System Loading Overlay -->
+    <div id="loading-overlay" class="fixed inset-0 z-[99999] bg-[#050a0f] flex flex-col items-center justify-center transition-opacity duration-1000">
+        <div class="relative w-16 h-16 flex items-center justify-center mb-6">
+            <!-- Outer rotating ring -->
+            <svg class="absolute inset-0 w-full h-full animate-[spin_4s_linear_infinite]" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(0, 229, 255, 0.3)" stroke-width="1" stroke-dasharray="10 20" />
+            </svg>
+            <!-- Inner pulsing core -->
+            <div class="w-3 h-3 bg-visceral-gold rounded-full animate-pulse-glow"></div>
+        </div>
+        <div class="text-visceral-gold font-mono text-[10px] tracking-[0.4em] uppercase animate-pulse">
+            Zero Point Initialization
+        </div>
+    </div>
+
+    <!-- Cinematic Video Background -->
+    <video id="background-video" class="fixed inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-30 mix-blend-screen blur-md scale-105" autoplay loop muted playsinline>
+        <source src="assets/MVI_1995.mp4" type="video/mp4">
+    </video>
 
     <!-- Ambient Background Glows -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">

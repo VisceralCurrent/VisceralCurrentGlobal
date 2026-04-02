@@ -5,18 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visceral Current | Architecture Dashboard</title>
     
+    <!-- Resource Hints -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- FontAwesome Icons (Replaces Lucide-React) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
-    <!-- React & ReactDOM (Loaded via CDN for browser use) -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- React & ReactDOM (Deferred to unblock initial visual render) -->
+    <script defer crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script defer crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- Babel (Compiles the React JSX directly in the browser) -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Babel (Deferred to unblock initial visual render) -->
+    <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!--
+        PERFORMANCE ADVISORY:
+        This page uses Babel for in-browser JSX compilation (script type="text/babel").
+        While excellent for rapid prototyping, this is NOT suitable for a production environment
+        as it significantly slows down page load and rendering times. The browser must
+        download the entire Babel compiler and then compile this code every time a user visits.
+
+        For a performant, production-ready version, this React code should be "built" or
+        "transpiled" into standard JavaScript ahead of time using a tool like Vite,
+        Create React App, or Next.js.
+    -->
 
 </head>
 <body class="antialiased bg-[#050505] text-slate-200 m-0 p-0 overflow-hidden h-screen w-screen">
