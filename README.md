@@ -21,7 +21,7 @@ The architecture operates on strict mathematical principles, visually and logica
 
 ## 🏛️ Ecosystem Architecture
 
-The repository is divided into three highly synergistic environments:
+The repository is divided into six highly synergistic, standalone environments:
 
 ### 1. The Matrix (`index.html`)
 The root hub of the empire. Features an abyss-black, storm-rolling-in aesthetic with electric blue (`#00e5ff`) accents.
@@ -35,8 +35,20 @@ A condensed, high-impact landing page engineered for direct corporate alignment 
 - Utilizes the `miracle-gold` colorway and a formless, mathematically interpolated wave canvas that smoothly chases state changes without snapping.
 
 ### 3. The Architecture Dashboard (`research.html`)
-A structural deep-dive mapping the taxonomy of Education, Economics, and the Human Condition.
+A structural wireframe mapping the taxonomy of Education, Economics, and the Human Condition.
 - Utilizes an in-browser React and Babel compiler (via CDN) to render complex component-based UI without requiring a local Node.js build pipeline.
+
+### 4. Predictive Performance Architecture (`predictive.html`)
+A hyper-modern, cinematic alternative landing page focusing on the integration of deep accounting principles and business metrics into digital infrastructure.
+- Features bioluminescent SVG orbital animations and slate-toned glassmorphism.
+
+### 5. The Client Portal (`dashboard.html`)
+A mathematically verified client portal displaying the live "Budgetary Flow" and progression of the Infinite Sum.
+- Integrates **Recharts** to dynamically render Area of Impact metrics in real-time.
+
+### 6. The Codex 81: Visceral Alignment (`alignment.html`)
+An interactive, philosophical diagnostic tool mapping David Hawkins, Robert Greene, and universal dualities.
+- Features a "Chameleon Engine" that mathematically interpolates CSS colors from Electric Blue to Visceral Gold as the user scrolls into alignment.
 
 ---
 

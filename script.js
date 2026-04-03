@@ -12,6 +12,14 @@ const mobileMenu = document.getElementById('mobile-menu');
 const closeBtn = document.getElementById('close-menu-btn');
 const mobileLinks = document.querySelectorAll('.mobile-link');
 
+// Portal Sidebar Elements
+const masterySidebar = document.getElementById('mastery-sidebar');
+const portalToggles = document.querySelectorAll('.portal-toggle');
+const closePortalBtn = document.getElementById('close-portal-btn');
+
+const infiniteProgress = document.getElementById('infinite-progress');
+const infiniteMath = document.getElementById('infinite-math');
+
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
         navbar.classList.add('bg-visceral-dark/80', 'backdrop-blur-md', 'border-white/10', 'py-3');
@@ -19,6 +27,27 @@ window.addEventListener('scroll', () => {
     } else {
         navbar.classList.remove('bg-visceral-dark/80', 'backdrop-blur-md', 'border-white/10', 'py-3');
         navbar.classList.add('bg-transparent', 'border-transparent', 'py-4');
+    }
+
+    // Infinite Sum Progress Tracker Calculation
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = Math.min(scrollTop / (docHeight || 1), 1);
+    
+    if (infiniteProgress) infiniteProgress.style.width = `${scrollPercent * 100}%`;
+    
+    if (infiniteMath) {
+        if (scrollTop > 150) {
+            infiniteMath.style.opacity = '1';
+            if (scrollPercent >= 0.99) {
+                infiniteMath.innerHTML = `Area of Impact: S = <span class="text-white text-sm font-bold ml-2">∞</span>`;
+            } else {
+                const calculation = (scrollPercent * 100 * 3.14159).toFixed(2);
+                infiniteMath.innerText = `Integrating: S = ${calculation}`;
+            }
+        } else {
+            infiniteMath.style.opacity = '0';
+        }
     }
 });
 
@@ -36,6 +65,20 @@ function toggleMenu() {
 mobileBtn.addEventListener('click', toggleMenu);
 closeBtn.addEventListener('click', toggleMenu);
 mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+// --- Mastery 360 Portal Logic ---
+function togglePortal() {
+    const isClosed = masterySidebar.classList.contains('translate-x-full');
+    if (isClosed) {
+        masterySidebar.classList.remove('translate-x-full');
+        document.body.style.overflow = 'hidden';
+    } else {
+        masterySidebar.classList.add('translate-x-full');
+        document.body.style.overflow = 'auto';
+    }
+}
+portalToggles.forEach(btn => btn.addEventListener('click', togglePortal));
+if(closePortalBtn) closePortalBtn.addEventListener('click', togglePortal);
 
 // --- Scroll Reveal Animations ---
 const revealElements = document.querySelectorAll('.reveal');
