@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visceral Current | The 9 Realms</title>
+    <meta name="theme-color" content="#050a0f">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #050a0f;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+        .cinzel { font-family: 'Cinzel', serif; }
+        .mono { font-family: 'Space Mono', monospace; }
+        .glass {
+            background: rgba(15, 17, 21, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: all 0.4s ease;
+        }
+        .glass:hover { border-color: rgba(212, 175, 55, 0.4); }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050a0f; }
+        ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.3); border-radius: 4px; }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+            opacity: 0;
+        }
+        .glass.active .accordion-content {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="selection:bg-[#D4AF37]/30">
+
+    <!-- Ambient Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute w-[800px] h-[800px] bg-[#D4AF37]/5 blur-[150px] rounded-full top-[-20%] left-[-20%]"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass py-4 px-6 md:px-12 flex justify-between items-center border-t-0 border-l-0 border-r-0">
+        <a href="index.html" class="flex items-center gap-3 group">
+            <div class="w-8 h-8 rounded-full border border-[#D4AF37]/50 flex items-center justify-center group-hover:bg-[#D4AF37]/10 transition-colors">
+                <div class="w-1.5 h-1.5 bg-[#D4AF37] rounded-full group-hover:scale-150 transition-transform"></div>
+            </div>
+            <span class="cinzel text-lg font-bold tracking-widest uppercase text-white group-hover:text-[#D4AF37] transition-colors">Visceral Current</span>
+        </a>
+        <div class="mono text-[10px] text-gray-500 tracking-[0.2em] uppercase">
+            Library: <span class="text-[#D4AF37]">The 9 Realms</span>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-32 pb-24 px-4 md:px-8 max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <h1 class="cinzel text-4xl md:text-6xl font-bold tracking-widest mb-6 text-white uppercase">The 9 Realms <br><span class="text-[#D4AF37] text-2xl md:text-4xl block mt-2">Of Perception</span></h1>
+            <p class="text-gray-400 font-light text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+                To conquer the matrix of your own mind, you must navigate the 9 Realms. Acquire the 3-Fold Understanding, and execute the 3-Fold Strategy to align your life with the mathematical certainty of synchronicity.
+            </p>
+        </div>
+
+        <!-- Realms Container (Injected via JS to keep HTML clean) -->
+        <div id="realms-container" class="space-y-6"></div>
+        
+    </main>
+
+    <script>
+        const realmsData = [
+            { 
+                name: "REALM 1: FOUNDATION", duality: "Force vs. Potentiality", 
+                anchor: "Power vs. Force (Hawkins). Understanding the energetic drain of shame, guilt, and forcing outcomes.",
+                ascent: "The Seven Spiritual Laws (Chopra). The realization of pure potentiality; effortless universal provision.",
+                balance: "Calibrated Power. Using worldly laws not to attack, but to build an unbreakable fortress for spiritual laws.",
+                s1: "Map the Terrain: Identify where you are using 'Force' and struggling.",
+                s2: "Drop the Weight: Practice the Law of Least Effort. Stop defending your ego.",
+                s3: "Erect the Temple: Set absolute boundaries while remaining internally unbothered."
+            },
+            { 
+                name: "REALM 2: IDENTITY", duality: "Labels of the Past vs. The Void", 
+                anchor: "The heavy labels placed upon you by the system or society (e.g., your past failures).",
+                ascent: "The realization that you are 'nothing special'—just the universe experiencing itself.",
+                balance: "The Architect of Legacy. Mathematically converting past labels into kinetic Phase Shifts (ϕ).",
+                s1: "Own the Rap Sheet: Document every failure. They are raw data, not burdens.",
+                s2: "Dissolve the Story: Meditate on the insignificance of personal drama.",
+                s3: "Build the Empire: Use the data of your past to engineer an undeniable legacy."
+            },
+            { 
+                name: "REALM 3: ACTION", duality: "Brutal Grind vs. Passive Dreaming", 
+                anchor: "Hustle culture, 'making things happen' through sheer willpower, leading to burnout.",
+                ascent: "Wu-wei. Action through non-action. Allowing things to naturally unfold.",
+                balance: "Visceral Momentum. Finding the exact resonance where discipline becomes completely effortless.",
+                s1: "Audit the Friction: Cut actions that burn energy for minimal return.",
+                s2: "Find the Silence: Pause until you feel a 'gut-level' truth guiding you.",
+                s3: "Strike with Certainty: When the frequency aligns, move with absolute precision."
+            }
+            // Additional realms follow the exact same structure to build out the 9.
+        ];
+
+        const container = document.getElementById('realms-container');
+        
+        realmsData.forEach((realm, index) => {
+            const card = document.createElement('div');
+            card.className = 'glass rounded-2xl p-6 md:p-8 cursor-pointer group';
+            card.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="mono text-[10px] text-[#D4AF37] uppercase tracking-widest mb-2">${realm.name}</p>
+                        <h2 class="cinzel text-xl md:text-2xl font-bold text-white tracking-wide">${realm.duality}</h2>
+                    </div>
+                    <div class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:border-[#D4AF37] group-hover:text-[#D4AF37] transition-all">
+                        <i class="fas fa-plus transition-transform duration-500 toggle-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="accordion-content">
+                    <div class="pt-8 mt-6 border-t border-white/10 grid md:grid-cols-2 gap-10">
+                        <div class="space-y-6">
+                            <h3 class="mono text-xs text-white uppercase tracking-widest border-b border-white/10 pb-2">The 3-Fold Understanding</h3>
+                            <div><span class="text-[#D4AF37] text-xs font-bold uppercase tracking-widest block mb-1">Anchor (Low)</span><p class="text-sm text-gray-400 font-light">${realm.anchor}</p></div>
+                            <div><span class="text-white text-xs font-bold uppercase tracking-widest block mb-1">Ascent (High)</span><p class="text-sm text-gray-400 font-light">${realm.ascent}</p></div>
+                            <div><span class="text-[#00e5ff] text-xs font-bold uppercase tracking-widest block mb-1">Balance (Visceral)</span><p class="text-sm text-white font-medium">${realm.balance}</p></div>
+                        </div>
+                        <div class="space-y-6 bg-black/30 p-6 rounded-xl border border-white/5">
+                            <h3 class="mono text-xs text-white uppercase tracking-widest border-b border-white/10 pb-2">The 3-Fold Strategy</h3>
+                            <p class="text-sm text-gray-300"><span class="text-gray-500 font-mono text-[10px] block mb-1">STEP I</span> ${realm.s1}</p>
+                            <p class="text-sm text-gray-300"><span class="text-gray-500 font-mono text-[10px] block mb-1">STEP II</span> ${realm.s2}</p>
+                            <p class="text-sm text-white"><span class="text-[#D4AF37] font-mono text-[10px] block mb-1">STEP III</span> ${realm.s3}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            card.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const icon = this.querySelector('.toggle-icon');
+                const content = this.querySelector('.accordion-content');
+                icon.style.transform = this.classList.contains('active') ? 'rotate(45deg)' : 'rotate(0deg)';
+                content.style.maxHeight = this.classList.contains('active') ? content.scrollHeight + "px" : "0px";
+            });
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>
