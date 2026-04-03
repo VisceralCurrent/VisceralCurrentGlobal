@@ -1,15 +1,34 @@
 /* Base overrides */
 html, body {
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 body {
     background-color: #050a0f;
     background-image: 
-        linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
+        linear-gradient(rgba(0, 229, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
     background-position: center center;
+    background-attachment: fixed;
+}
+
+/* Cinematic Vignette Overlay - Frames the site like a camera lens */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, transparent 50%, rgba(5, 10, 15, 0.7) 130%);
+    pointer-events: none;
+    z-index: 40; /* Sits below the nav but above the background */
+}
+
+::selection {
+    background: rgba(0, 229, 255, 0.2);
+    color: #ffffff;
 }
 
 /* Custom Cursor Management */
@@ -26,20 +45,48 @@ body {
 
 /* Glassmorphism Framework */
 .glass-panel {
-    background: rgba(15, 17, 21, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(0, 229, 255, 0.1);
-    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    background: linear-gradient(145deg, rgba(15, 17, 21, 0.5) 0%, rgba(5, 7, 10, 0.8) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 229, 255, 0.08);
+    border-top: 1px solid rgba(0, 229, 255, 0.25);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s ease, box-shadow 0.6s ease;
+    will-change: transform, border-color, box-shadow;
+    position: relative;
+    overflow: hidden;
+}
+
+/* The Sovereign Sweep - Light reflection on hover */
+.glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 229, 255, 0.08), transparent);
+    transform: skewX(-20deg);
+    transition: left 0s;
+    pointer-events: none;
 }
 
 .glass-panel:hover {
     border-color: rgba(0, 229, 255, 0.3);
-    box-shadow: 0 10px 40px rgba(0, 229, 255, 0.15);
+    box-shadow: 0 10px 40px rgba(0, 229, 255, 0.25), inset 0 0 20px rgba(0, 229, 255, 0.05);
     transform: translateY(-2px);
 }
 
+.glass-panel:hover::before {
+    left: 150%;
+    transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* Majestic Typography */
+.cinzel, h1, h2, h3, h4 {
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
 .gradient-text-gold {
     background: linear-gradient(to right, #0088cc, #e0f7fa, #00e5ff, #0088cc);
     -webkit-background-clip: text;
@@ -57,6 +104,7 @@ body {
     opacity: 0;
     transform: translateY(40px);
     transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
 }
 
 .reveal.active {
