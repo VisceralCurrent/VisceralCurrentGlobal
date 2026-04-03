@@ -153,8 +153,16 @@
                     Executive
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
                 </a>
+                <a href="dashboard.html" target="_blank" class="hover:text-visceral-gold transition duration-300 relative group">
+                    Client Portal
+                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
                 <a href="research.html" target="_blank" class="hover:text-visceral-gold transition duration-300 relative group">
                     Architecture
+                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="alignment.html" class="hover:text-visceral-gold transition duration-300 relative group">
+                    Alignment
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="#contact" class="hover:text-visceral-gold transition duration-300 relative group">
@@ -174,13 +182,15 @@
     </nav>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 bg-visceral-dark/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-500 flex flex-col justify-center items-center space-y-8 text-center">
-        <a href="#formula" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">The Formula</a>
-        <a href="#codex" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">The Codex</a>
-        <a href="#matrix" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">The Matrix</a>
-        <a href="strategic.html" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Executive</a>
-        <a href="research.html" target="_blank" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Architecture</a>
-        <a href="#contact" class="text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Legacy</a>
+    <div id="mobile-menu" class="fixed inset-0 bg-visceral-dark/95 backdrop-blur-xl z-40 transform translate-x-full transition-transform duration-500 flex flex-col justify-center items-center space-y-6 overflow-y-auto py-20 text-center">
+        <a href="#formula" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">The Formula</a>
+        <a href="#codex" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">The Codex</a>
+        <a href="#matrix" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">The Matrix</a>
+        <a href="strategic.html" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Executive</a>
+        <a href="dashboard.html" target="_blank" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Portal</a>
+        <a href="research.html" target="_blank" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Architecture</a>
+        <a href="alignment.html" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Alignment</a>
+        <a href="#contact" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Legacy</a>
         <button id="close-menu-btn" class="absolute top-8 right-8 text-3xl text-gray-500 hover:text-white">
             <i class="fas fa-times"></i>
         </button>
@@ -597,10 +607,65 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Sector IV -->
+                        <div class="space-y-6 reveal delay-300 pt-8 border-t border-white/5 mt-12">
+                            <div class="border-b border-visceral-gold/30 pb-2">
+                                <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest"><span class="text-visceral-gold mr-2">Sector IV:</span> Resource Dynamics</h4>
+                                <p class="text-xs text-gray-500 font-mono tracking-widest uppercase mt-1">Focus: The practical refinement of energy into structured growth.</p>
+                            </div>
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div class="node-card glass-panel p-6 rounded-lg border-l-2 border-l-emerald-900/50 hover:border-l-emerald-500 transition-colors cursor-pointer group" onclick="toggleAccordion(this)">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="font-mono text-emerald-400 text-lg">Node 28</span>
+                                        <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+                                    </div>
+                                    <p class="text-sm text-white font-medium mb-1">Schedule 1: Sales Budget</p>
+                                    <p class="text-[10px] text-gray-500 uppercase tracking-widest font-mono mb-2">The Visceral Current (ν)</p>
+                                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 opacity-0">
+                                        <div class="pt-4 mt-2 border-t border-white/10 space-y-3">
+                                            <div class="text-[11px] text-gray-500 space-y-2 font-mono">
+                                                <p><strong class="text-emerald-400">Synthesis:</strong> The Origin (o) of all digital architecture. We do not write code until the market intent is quantified.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="node-card glass-panel p-6 rounded-lg border-l-2 border-l-emerald-900/50 hover:border-l-emerald-500 transition-colors cursor-pointer group" onclick="toggleAccordion(this)">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="font-mono text-emerald-400 text-lg">Node 29</span>
+                                        <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+                                    </div>
+                                    <p class="text-sm text-white font-medium mb-1">Schedule 2: Purchases</p>
+                                    <p class="text-[10px] text-gray-500 uppercase tracking-widest font-mono mb-2">The Purpose (P)</p>
+                                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 opacity-0">
+                                        <div class="pt-4 mt-2 border-t border-white/10 space-y-3">
+                                            <div class="text-[11px] text-gray-500 space-y-2 font-mono">
+                                                <p><strong class="text-emerald-400">Synthesis:</strong> Align resources exactly with the projected impact. Eliminate operational Phase Shifts (ϕ).</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="node-card glass-panel p-6 rounded-lg border-l-2 border-l-emerald-900/50 hover:border-l-emerald-500 transition-colors cursor-pointer group" onclick="toggleAccordion(this)">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="font-mono text-emerald-400 text-lg">Node 30</span>
+                                        <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+                                    </div>
+                                    <p class="text-sm text-white font-medium mb-1">Schedule 6: Net Income</p>
+                                    <p class="text-[10px] text-gray-500 uppercase tracking-widest font-mono mb-2">Area of Impact (A)</p>
+                                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 opacity-0">
+                                        <div class="pt-4 mt-2 border-t border-white/10 space-y-3">
+                                            <div class="text-[11px] text-gray-500 space-y-2 font-mono">
+                                                <p><strong class="text-emerald-400">Synthesis:</strong> The final integration over time (dt). If the result doesn't scale to infinity, pivot the frequency.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         
                         <div class="text-center pt-8 reveal delay-300">
                             <button class="text-xs font-mono tracking-[0.3em] text-gray-500 hover:text-visceral-gold transition-colors uppercase border-b border-dashed border-gray-700 hover:border-visceral-gold pb-1">
-                                Awaiting Decryption: Sectors IV - IX
+                                Awaiting Decryption: Sectors V - IX
                             </button>
                         </div>
                     </div>

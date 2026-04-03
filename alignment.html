@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Codex 81 | Visceral Alignment</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="theme-color" content="#050a0f">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;600;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #050a0f;
+            /* Electric Blue Starting Values */
+            --accent-r: 0;
+            --accent-g: 229;
+            --accent-b: 255;
+            --accent: rgb(var(--accent-r), var(--accent-g), var(--accent-b));
+        }
+        body {
+            background-color: var(--bg-color);
+            color: #f4f4f4;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
+        .mono { font-family: 'Space Mono', monospace; }
+        
+        .glow { text-shadow: 0 0 25px var(--accent); }
+        .text-accent { color: var(--accent); }
+        .border-accent { border-color: var(--accent); }
+        .bg-accent { background-color: var(--accent); }
+        
+        /* The Ambient Background */
+        .chameleon-bg {
+            background: radial-gradient(circle at 50% 0%, rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.1) 0%, var(--bg-color) 100%);
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(10, 12, 15, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass:hover {
+            border: 1px solid rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.6);
+            box-shadow: 0 10px 40px -10px rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.15);
+        }
+
+        /* Node Card Animations */
+        .node-card {
+            aspect-ratio: 1/1;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .node-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        .node-card:hover::before { transform: translateX(100%); }
+
+        /* Staggered Node Entrance */
+        .node-enter {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            animation: nodeFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes nodeFadeIn {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Overlay Logic */
+        #detail-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        #detail-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .formula-container {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body class="chameleon-bg selection:bg-[var(--accent)] selection:text-[#050a0f]">
+
+    <!-- Synchronicity Constellation Canvas -->
+    <canvas id="canvas-bg" class="fixed inset-0 -z-10 opacity-40"></canvas>
+
+    <!-- Node Detail Overlay (The Alignment Protocol) -->
+    <div id="detail-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#020305]/95 backdrop-blur-xl p-4 md:p-8" onclick="closeDetail()">
+        <div class="glass max-w-5xl w-full max-h-[90vh] overflow-y-auto rounded-2xl relative shadow-2xl" onclick="event.stopPropagation()">
+            <button class="absolute top-6 right-6 mono text-accent hover:text-white transition uppercase text-xs tracking-widest z-10" onclick="closeDetail()">[ Close ]</button>
+            <div id="detail-content" class="p-8 md:p-12"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass px-6 md:px-12 py-4 flex justify-between items-center border-t-0 border-l-0 border-r-0">
+        <a href="index.html" class="flex items-center gap-4 group cursor-pointer">
+            <div class="w-2 h-2 rounded-full animate-pulse shadow-[0_0_10px_var(--accent)] bg-accent transition-colors duration-300"></div>
+            <div class="text-lg cinzel font-black tracking-widest uppercase glow text-white">Visceral Current</div>
+        </a>
+        <div class="hidden md:flex gap-8 mono text-[10px] uppercase tracking-[0.2em] text-gray-500">
+            <span>Freq: <span class="text-white">528Hz</span></span>
+            <span>State: <span class="text-white">Seeking</span></span>
+            <span id="sync-status" class="text-accent transition-colors duration-300 font-bold">0% Aligned</span>
+        </div>
+    </nav>
+
+    <!-- Hero: The Summons -->
+    <section class="min-h-screen flex flex-col justify-center items-center px-6 text-center relative pt-20">
+        <div class="mono text-accent text-[10px] md:text-xs mb-8 tracking-[0.5em] md:tracking-[1em] uppercase opacity-70 transition-colors duration-300">
+            Total Individual Power Optimization
+        </div>
+        <h1 class="cinzel text-5xl md:text-7xl lg:text-[8rem] font-black mb-6 tracking-tight leading-[1] uppercase">
+            Infinite<br><span class="glow text-white">Potential</span>
+        </h1>
+        <div id="hero-math" class="formula-container my-10 text-accent transition-colors duration-300"></div>
+        <p class="max-w-2xl text-gray-400 font-light leading-relaxed text-sm md:text-lg px-4">
+            "Your detours were not delays; they were Phase Shifts (\(\phi\)) preparing you for this exact frequency. Identify your area of friction. Select your node. Map your visceral current to the mathematical certainty of the universe."
+        </p>
+        <div class="absolute bottom-10 animate-bounce opacity-50 cursor-pointer text-accent transition-colors duration-300" onclick="window.scrollTo(0, window.innerHeight)">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- The 81 Node Matrix -->
+    <section class="py-24 px-4 md:px-12 lg:px-24">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="cinzel text-3xl md:text-4xl font-bold uppercase tracking-widest mb-4">The Mastery 360 Grid</h2>
+                <p class="mono text-xs text-gray-500 uppercase tracking-[0.2em]">Select a node to initiate alignment protocol</p>
+            </div>
+
+            <!-- Life Areas Legend -->
+            <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-4 mb-12 text-center">
+                <div class="mono text-[9px] md:text-[10px] tracking-widest uppercase text-gray-400 border-b border-white/10 pb-2">I. Ego</div>
+                <div class="mono text-[9px] md:text-[10px] tracking-widest uppercase text-gray-400 border-b border-white/10 pb-2">II. Action</div>
+                <div class="mono text-[9px] md:text-[10px] tracking-widest uppercase text-gray-400 border-b border-white/10 pb-2">III. Path</div>
+                <div class="mono text-[9px] md:text-[10px] tracking-widest uppercase text-gray-400 border-b border-white/10 pb-2">IV. Mind</div>
+                <div class="mono text-[9px] md:text-[10px] tracking-widest uppercase text-gray-400 border-b border-white/10 pb-2">V. Wealth</div>
+                <div class="mono text-[9px] md:text-[10px] tracking-widest uppercase text-gray-400 border-b border-white/10 pb-2">VI. Chaos</div>
+                <div class="mono text-[9px] md:text-[10px] tracking-widest uppercase text-gray-400 border-b border-white/10 pb-2">VII. Peace</div>
+                <div class="mono text-[9px] md:text-[10px] tracking-widest uppercase text-gray-400 border-b border-white/10 pb-2">VIII. Flow</div>
+                <div class="mono text-[9px] md:text-[10px] tracking-widest uppercase text-gray-400 border-b border-white/10 pb-2">IX. Infinite</div>
+            </div>
+
+            <!-- Grid Container -->
+            <div class="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-9 gap-2 md:gap-4" id="node-container"></div>
+        </div>
+    </section>
+
+    <!-- Footer: The Legacy & Integration -->
+    <footer class="py-32 text-center px-6 relative overflow-hidden border-t border-white/5">
+        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-0"></div>
+        <div class="max-w-4xl mx-auto glass p-8 md:p-16 rounded-3xl relative z-10 shadow-2xl">
+            <div id="footer-math" class="mb-10 formula-container text-white/80"></div>
+            <h3 class="cinzel text-3xl md:text-5xl font-black mb-6 uppercase tracking-widest glow text-white">You Are The Architect</h3>
+            <p class="text-gray-400 mb-10 max-w-xl mx-auto leading-relaxed text-sm md:text-base font-light">
+                We are not chasing—we are choosing. By integrating your past into your origin, you ensure your area of impact is infinite. This system is synergetic. It is harmonious. It is undeniable.
+            </p>
+            <div class="flex flex-wrap justify-center gap-6 mono text-[10px] uppercase tracking-widest text-accent opacity-80 transition-colors duration-300">
+                <span>Codex Core</span>
+                <span class="hidden md:inline text-white/30">•</span>
+                <span>VanFlowCo</span>
+                <span class="hidden md:inline text-white/30">•</span>
+                <span>Visceral Current</span>
+                <span class="hidden md:inline text-white/30">•</span>
+                <span>ScarlettSky</span>
+            </div>
+            <p class="mt-12 mono text-[8px] md:text-[10px] text-gray-600 uppercase tracking-[0.3em]">Built for Universal Sovereignty. Scaled for the Infinite.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- CORE DATA ARCHITECTURE ---
+        const realms = [
+            { name: "Identity & Ego", duality: "Power vs Force", target: "When you feel the need to prove yourself." },
+            { name: "Action & Will", duality: "Stillness vs Motion", target: "When you are exhausted from constant grinding." },
+            { name: "Purpose & Path", duality: "Origin vs Destiny", target: "When you feel lost or disconnected from your 'Why'." },
+            { name: "Mind & Logic", duality: "Intuition vs Intellect", target: "When you are overthinking a simple truth." },
+            { name: "Wealth & Value", duality: "Equity vs Debt", target: "When you operate from scarcity instead of abundance." },
+            { name: "Order & Chaos", duality: "Structure vs Void", target: "When your environment feels out of your control." },
+            { name: "Peace & State", duality: "Silence vs Noise", target: "When the external world dictates your internal frequency." },
+            { name: "Flow & Friction", duality: "Acceptance vs Resistance", target: "When things aren't going your way and you fight it." },
+            { name: "The Infinite", duality: "Boundless vs Finite", target: "When you forget your true mathematical nature." }
+        ];
+
+        const libraryData = [
+            { quote: "Power is silent and effortless. Force requires a constant supply of energy.", author: "David Hawkins", principle: "True power does not need to announce itself." },
+            { quote: "Assume formlessness. By being as fluid as water, you are impossible to grasp.", author: "Robert Greene", principle: "Rigidity is the enemy of longevity." },
+            { quote: "The only way to make sense out of change is to plunge into it, move with it, and join the dance.", author: "Alan Watts", principle: "Resistance creates suffering; acceptance creates momentum." },
+            { quote: "In the middle of the movement and the chaos, keep stillness inside of you.", author: "Deepak Chopra", principle: "Your internal state commands your external reality." },
+            { quote: "A path without a heart is never enjoyable. You have to work hard even to take it.", author: "Carlos Castaneda", principle: "Alignment requires visceral, gut-level resonance." },
+            { quote: "When you change the way you look at things, the things you look at change.", author: "Wayne Dyer", principle: "Perception is the phase shift (ϕ) of reality." },
+            { quote: "The supreme art of war is to subdue the enemy without fighting.", author: "Sun Tzu", principle: "Victory is won through positioning, not collision." },
+            { quote: "The universe is change; our life is what our thoughts make it.", author: "Marcus Aurelius", principle: "Composure and self-respect are the ultimate armor." },
+            { quote: "He who has a why to live can bear almost any how.", author: "Friedrich Nietzsche", principle: "Purpose bridges the gap between chaos and order." }
+        ];
+
+        // Generate 81 Nodes
+        const nodes = Array.from({length: 81}, (_, i) => {
+            const realmIdx = Math.floor(i / 9);
+            const libIdx = i % 9;
+            return {
+                id: i + 1,
+                realm: realms[realmIdx],
+                insight: libraryData[libIdx]
+            };
+        });
+
+        // --- 528Hz VISCERAL AUDIO ENGINE ---
+        let audioCtx, oscillator, gainNode;
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                oscillator = audioCtx.createOscillator();
+                gainNode = audioCtx.createGain();
+                oscillator.type = 'sine'; // Pure mathematical wave
+                oscillator.frequency.value = 528; // The Miracle Resonance
+                gainNode.gain.value = 0;
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                oscillator.start();
+            }
+        }
+        function playResonance() {
+            if (!audioCtx) initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+            gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 1.5);
+        }
+        function stopResonance() {
+            if (audioCtx && gainNode) {
+                gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.0);
+            }
+        }
+
+        // Initialize Grid
+        const container = document.getElementById('node-container');
+        nodes.forEach((node, index) => {
+            const el = document.createElement('div');
+            // Add node-enter class and calculate staggered delay
+            el.className = 'node-card glass group flex flex-col items-center justify-center rounded-lg border border-white/5 transition-colors duration-300 node-enter';
+            el.style.animationDelay = `${index * 15}ms`;
+            
+            el.innerHTML = `
+                <div class="mono text-[8px] md:text-[10px] text-gray-600 group-hover:text-accent transition-colors mb-1 uppercase tracking-widest">R.0${Math.floor((node.id-1)/9)+1}</div>
+                <div class="cinzel text-accent font-bold text-lg md:text-xl group-hover:scale-125 transition-transform duration-300">${node.id}</div>
+            `;
+            
+            // Majestic 3D Tilt Effect on Hover (Desktop Only)
+            if (window.matchMedia("(pointer: fine)").matches) {
+                el.addEventListener('mousemove', (e) => {
+                    const rect = el.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -15;
+                    const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 15;
+                    el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+                    el.style.zIndex = '10';
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                    el.style.zIndex = '1';
+                });
+            }
+            
+            el.onclick = () => showDetail(node);
+            container.appendChild(el);
+        });
+
+        // --- UI DETAIL LOGIC (MODAL) ---
+        function showDetail(node) {
+            playResonance(); // Trigger 528Hz Audio
+            const overlay = document.getElementById('detail-overlay');
+            const content = document.getElementById('detail-content');
+            
+            content.innerHTML = `
+                <div class="grid lg:grid-cols-2 gap-10 items-start">
+                    <!-- Left: The Philosophy -->
+                    <div>
+                        <div class="mono text-accent text-xs mb-4 uppercase tracking-[0.2em] font-bold">${node.realm.name} Realm // Node ${node.id}</div>
+                        <h2 class="cinzel text-3xl md:text-5xl font-black mb-8 uppercase leading-[1.1] tracking-wide text-white">${node.realm.duality}</h2>
+                        
+                        <div class="pl-6 border-l-2 border-accent mb-8">
+                            <blockquote class="text-xl md:text-2xl font-serif italic mb-4 text-gray-300 leading-snug">
+                                "${node.insight.quote}"
+                            </blockquote>
+                            <cite class="block mono text-accent not-italic text-[10px] uppercase tracking-widest">— ${node.insight.author}</cite>
+                        </div>
+                    </div>
+
+                    <!-- Right: The Application -->
+                    <div class="bg-black/40 border border-white/10 rounded-xl p-6 md:p-8 inset-shadow">
+                        <div class="mb-8">
+                            <span class="block mono text-[10px] text-gray-500 uppercase mb-2 tracking-widest">Diagnostic Trigger</span>
+                            <p class="text-sm text-gray-300 font-light">Look to this node <span class="text-accent italic">${node.realm.target}</span></p>
+                        </div>
+                        
+                        <div class="mb-8 border-t border-white/5 pt-6">
+                            <span class="block mono text-[10px] text-gray-500 uppercase mb-2 tracking-widest">Visceral Principle (\(\\nu\))</span>
+                            <p class="text-base text-white font-medium tracking-wide">${node.insight.principle}</p>
+                        </div>
+
+                        <div class="pt-6 border-t border-white/5">
+                            <span class="block mono text-[10px] text-accent uppercase mb-3 tracking-[0.2em] font-bold">Integration Protocol</span>
+                            <p class="text-sm font-light text-gray-400 mb-6 leading-relaxed">Where in your life are you applying friction instead of finding the 528Hz flow? How can your past Phase Shifts (\(\\phi\)) serve as preparation for this exact moment?</p>
+                            <button onclick="closeDetail()" class="w-full py-4 bg-accent/10 text-accent border border-accent/50 hover:bg-accent hover:text-black transition-colors uppercase text-xs font-bold tracking-widest rounded-sm">
+                                Acknowledge & Align
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            overlay.classList.add('active');
+            // Trigger MathJax on newly injected dynamic math content
+            if(window.katex) {
+                renderMathInElement(content, { delimiters: [{left: "\\(", right: "\\)", display: false}] });
+            }
+        }
+
+        function closeDetail() {
+            stopResonance(); // Fade out 528Hz Audio
+            document.getElementById('detail-overlay').classList.remove('active');
+        }
+
+        // --- THE CHAMELEON ENGINE ---
+        // Mathematically interpolates RGB from Electric Blue (#00e5ff) to Visceral Gold (#d4af37)
+        window.addEventListener('scroll', () => {
+            const scrollH = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = Math.min(Math.max(window.scrollY / scrollH, 0), 1);
+            
+            const r = Math.round(0 + (212 - 0) * pct);
+            const g = Math.round(229 + (175 - 229) * pct);
+            const b = Math.round(255 + (55 - 255) * pct);
+            
+            document.documentElement.style.setProperty('--accent-r', r);
+            document.documentElement.style.setProperty('--accent-g', g);
+            document.documentElement.style.setProperty('--accent-b', b);
+            
+            const alignPct = Math.round(pct * 100);
+            document.getElementById('sync-status').innerText = `${alignPct}% Aligned`;
+            
+            // Canvas fades out slightly at the bottom to focus on the text
+            canvas.style.opacity = 0.4 - (pct * 0.2);
+        });
+
+        // --- CONSTELLATION CANVAS ENGINE ---
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const connectionDistance = 150;
+
+        function initCanvas() {
+            // High DPI (Retina) Support
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            ctx.scale(dpr, dpr);
+            
+            const particleCount = window.innerWidth < 768 ? 35 : 75; 
+            particles = Array.from({length: particleCount}, () => ({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                s: Math.random() * 1.5 + 0.5
+            }));
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+            
+            // Pull dynamic RGB color from root
+            const rootStyles = getComputedStyle(document.documentElement);
+            const r = rootStyles.getPropertyValue('--accent-r').trim();
+            const g = rootStyles.getPropertyValue('--accent-g').trim();
+            const b = rootStyles.getPropertyValue('--accent-b').trim();
+            
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${1 - distance/connectionDistance})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if(p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
+                if(p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.s, 0, Math.PI*2);
+                ctx.fill();
+            });
+            
+            requestAnimationFrame(draw);
+        }
+
+        // --- INITIALIZATION ---
+        window.addEventListener('load', () => {
+            initCanvas();
+            draw();
+            
+            // Initialize KaTeX Math
+            if (window.katex) {
+                katex.render("A = \\int_{p}^{o} (\\nu \\cdot \\phi) \\, dt = \\infty", document.getElementById('hero-math'), { displayMode: true });
+                katex.render("S = \\lim_{t \\to \\infty} \\sum_{n=1}^{81} \\frac{P \\cdot C}{\\phi^n}", document.getElementById('footer-math'), { displayMode: true });
+            }
+        });
+        
+        window.addEventListener('resize', initCanvas);
+    </script>
+</body>
+</html>
