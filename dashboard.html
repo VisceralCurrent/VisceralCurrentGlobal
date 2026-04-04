@@ -122,6 +122,7 @@
 
         function PortalApp() {
             const [activeProject, setActiveProject] = useState('vanflow');
+            const [isRechartsLoaded, setIsRechartsLoaded] = useState(false);
             const project = CLIENT_DATA[activeProject];
 
             // Add visceral-gold to Tailwind config manually for React context
@@ -129,6 +130,14 @@
                 tailwind.config = {
                     theme: { extend: { colors: { 'visceral-gold': '#00e5ff' } } }
                 };
+            }, []);
+            
+            // Safety check for CDN Library loading
+            useEffect(() => {
+                const checkRecharts = setInterval(() => {
+                    if (window.Recharts) { setIsRechartsLoaded(true); clearInterval(checkRecharts); }
+                }, 100);
+                return () => clearInterval(checkRecharts);
             }, []);
 
             // Extract Recharts components (Safeguard in case script is still loading)
@@ -233,7 +242,7 @@
                             </div>
 
                             {/* Infinite Sum Graph */}
-                            {window.Recharts && (
+                            {isRechartsLoaded && window.Recharts && (
                                 <div className="bg-[#0a0c10]/80 border border-white/5 rounded-2xl p-8 backdrop-blur">
                                     <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-6 border-b border-white/5 pb-4">Infinite Sum Progression</h3>
                                     <div className="h-72 w-full">

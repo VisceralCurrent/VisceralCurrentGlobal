@@ -33,7 +33,11 @@ body::after {
 
 /* Custom Cursor Management */
 @media (pointer: fine) {
-    body, a, button, .node-card {
+    body.custom-cursor-active, 
+    body.custom-cursor-active a, 
+    body.custom-cursor-active button, 
+    body.custom-cursor-active .node-card,
+    body.custom-cursor-active .glass-panel {
         cursor: none !important;
     }
 }
@@ -99,6 +103,15 @@ body::after {
     to { background-position: 200% center; }
 }
 
+/* Mystic Gradient Text (Purple, Teal, Gold) */
+.gradient-text-mystic {
+    background: linear-gradient(to right, #00e5ff, #a855f7, #D4AF37, #00e5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: textShine 8s linear infinite;
+}
+
 /* Scroll Reveal Sequencing */
 .reveal {
     opacity: 0;
@@ -121,6 +134,37 @@ body::after {
     -webkit-mask-image: linear-gradient(to bottom right, #000 var(--scroll-pct, 0%), rgba(0,0,0,0.2) calc(var(--scroll-pct, 0%) + 15%));
     mask-image: linear-gradient(to bottom right, #000 var(--scroll-pct, 0%), rgba(0,0,0,0.2) calc(var(--scroll-pct, 0%) + 15%));
 }
+
+/* 9-Dot Matrix Interaction */
+.node-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+}
+
+.node-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+}
+
+.glass-panel:hover .node-dot {
+    background-color: #D4AF37;
+    box-shadow: 0 0 8px #D4AF37;
+}
+
+/* Sequential delay for 9-dots on hover */
+.glass-panel:hover .node-dot:nth-child(1) { transition-delay: 0.0s; }
+.glass-panel:hover .node-dot:nth-child(2) { transition-delay: 0.05s; }
+.glass-panel:hover .node-dot:nth-child(3) { transition-delay: 0.1s; }
+.glass-panel:hover .node-dot:nth-child(4) { transition-delay: 0.15s; }
+.glass-panel:hover .node-dot:nth-child(5) { transition-delay: 0.2s; }
+.glass-panel:hover .node-dot:nth-child(6) { transition-delay: 0.25s; }
+.glass-panel:hover .node-dot:nth-child(7) { transition-delay: 0.3s; }
+.glass-panel:hover .node-dot:nth-child(8) { transition-delay: 0.35s; }
+.glass-panel:hover .node-dot:nth-child(9) { transition-delay: 0.4s; }
 
 /* Deep Elements */
 .inset-shadow {

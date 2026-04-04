@@ -21,12 +21,14 @@ const infiniteProgress = document.getElementById('infinite-progress');
 const infiniteMath = document.getElementById('infinite-math');
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add('bg-visceral-dark/80', 'backdrop-blur-md', 'border-white/10', 'py-3');
-        navbar.classList.remove('bg-transparent', 'border-transparent', 'py-4');
-    } else {
-        navbar.classList.remove('bg-visceral-dark/80', 'backdrop-blur-md', 'border-white/10', 'py-3');
-        navbar.classList.add('bg-transparent', 'border-transparent', 'py-4');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.classList.add('bg-visceral-dark/80', 'backdrop-blur-md', 'border-white/10', 'py-3');
+            navbar.classList.remove('bg-transparent', 'border-transparent', 'py-4');
+        } else {
+            navbar.classList.remove('bg-visceral-dark/80', 'backdrop-blur-md', 'border-white/10', 'py-3');
+            navbar.classList.add('bg-transparent', 'border-transparent', 'py-4');
+        }
     }
 
     // Infinite Sum Progress Tracker Calculation
@@ -52,6 +54,7 @@ window.addEventListener('scroll', () => {
 });
 
 function toggleMenu() {
+    if (!mobileMenu) return;
     const isClosed = mobileMenu.classList.contains('translate-x-full');
     if (isClosed) {
         mobileMenu.classList.remove('translate-x-full');
@@ -62,12 +65,13 @@ function toggleMenu() {
     }
 }
 
-mobileBtn.addEventListener('click', toggleMenu);
-closeBtn.addEventListener('click', toggleMenu);
+if (mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
+if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
 mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
 // --- Mastery 360 Portal Logic ---
 function togglePortal() {
+    if (!masterySidebar) return;
     const isClosed = masterySidebar.classList.contains('translate-x-full');
     if (isClosed) {
         masterySidebar.classList.remove('translate-x-full');
@@ -79,6 +83,24 @@ function togglePortal() {
 }
 portalToggles.forEach(btn => btn.addEventListener('click', togglePortal));
 if(closePortalBtn) closePortalBtn.addEventListener('click', togglePortal);
+
+// Automatically close portal when a navigational link inside it is clicked
+const portalLinks = document.querySelectorAll('#mastery-sidebar a');
+portalLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        
+        // If navigating to a new page, prevent default to avoid the browser dropping the navigation during the slide animation
+        if (href && !href.startsWith('#')) {
+            e.preventDefault();
+            setTimeout(() => { window.location.href = href; }, 300);
+        }
+        
+        if (!masterySidebar.classList.contains('translate-x-full')) {
+            togglePortal();
+        }
+    });
+});
 
 // --- Scroll Reveal Animations ---
 const revealElements = document.querySelectorAll('.reveal');
@@ -152,6 +174,11 @@ let ringX = cMouseX;
 let ringY = cMouseY;
 let targetScale = 1;
 let currentScale = 1;
+
+// Only hide the default cursor if the custom cursor HTML is actually on the page
+if (cursorDot && cursorRing) {
+    document.body.classList.add('custom-cursor-active');
+}
 
 window.addEventListener('mousemove', (e) => {
     cMouseX = e.clientX;
@@ -294,6 +321,7 @@ let currentAmplitude = 40;
 let isPerturbed = false;
 
 function resizeCanvas() {
+    if (!canvas || !canvas.parentElement) return;
     // High DPI support
     const rect = canvas.parentElement.getBoundingClientRect();
     canvas.width = rect.width * 2;
@@ -304,6 +332,7 @@ function resizeCanvas() {
 }
 
 function drawWaves() {
+    if (!canvas || !ctx) return;
     const rect = canvas.parentElement.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visceral Current | Human Capacity Optimization</title>
+    <meta name="theme-color" content="#050a0f">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;600&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- MathJax -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <style>
+        body {
+            background-color: #050a0f;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        .cinzel { font-family: 'Cinzel', serif; }
+        .mono { font-family: 'Space Mono', monospace; }
+        .space-grotesk { font-family: 'Space Grotesk', sans-serif; }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(15, 17, 21, 0.6) 0%, rgba(5, 7, 10, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 229, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(0, 229, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 229, 255, 0.15), inset 0 0 20px rgba(0, 229, 255, 0.05);
+            transform: translateY(-3px);
+        }
+
+        /* Gradient Texts */
+        .gradient-text-cyan {
+            background: linear-gradient(to right, #e0f7fa, #00e5ff, #0088cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-text-gold {
+            background: linear-gradient(to right, #FFF3B0, #D4AF37, #AA7C11);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.3); border-radius: 3px; }
+    </style>
+</head>
+<body class="selection:bg-[#00e5ff]/30 selection:text-white">
+
+    <!-- Ambient Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <!-- Organic Grid -->
+        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at center, rgba(0, 229, 255, 0.15) 0, rgba(0, 229, 255, 0.15) 1px, transparent 1px); background-size: 40px 40px;"></div>
+        <!-- Ambient Glows -->
+        <div class="absolute w-[800px] h-[800px] bg-[#00e5ff]/10 blur-[150px] rounded-full top-[-20%] left-[-10%]"></div>
+        <div class="absolute w-[600px] h-[600px] bg-[#D4AF37]/5 blur-[150px] rounded-full bottom-[-10%] right-[-10%]"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-panel py-4 px-6 md:px-12 flex justify-between items-center border-t-0 border-l-0 border-r-0 rounded-none bg-[#050a0f]/80">
+        <a href="index.html" class="flex items-center gap-4 group cursor-pointer">
+            <div class="w-8 h-8 rounded-full border border-[#00e5ff]/50 flex items-center justify-center group-hover:bg-[#00e5ff]/10 transition-colors">
+                <div class="w-1.5 h-1.5 bg-[#00e5ff] rounded-full group-hover:scale-150 transition-transform"></div>
+            </div>
+            <span class="cinzel text-lg tracking-widest font-bold text-white uppercase group-hover:text-[#00e5ff] transition-colors">Visceral Current</span>
+        </a>
+        <div class="hidden md:flex gap-8 text-[10px] uppercase tracking-[0.2em] text-gray-400 font-mono">
+            <a href="#manifesto" class="hover:text-[#00e5ff] transition-colors">The Manifesto</a>
+            <a href="#paradigm" class="hover:text-[#00e5ff] transition-colors">Paradigm Shift</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-24 px-6 max-w-5xl mx-auto text-center z-10">
+        <div class="inline-block mb-8 px-5 py-1.5 rounded-full border border-[#00e5ff]/30 bg-[#00e5ff]/5 text-[#00e5ff] text-xs tracking-[0.3em] uppercase space-grotesk reveal">
+            Codex Directive 04 // Capacity
+        </div>
+        <h1 class="cinzel text-5xl md:text-7xl lg:text-[6rem] font-bold mb-6 tracking-tighter text-white reveal delay-100 leading-[0.9]">
+            THE DEATH OF <br><span class="gradient-text-cyan drop-shadow-[0_0_20px_rgba(0,229,255,0.3)]">HUMAN CAPITAL</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-2xl font-light leading-relaxed max-w-3xl mx-auto space-grotesk reveal delay-200 mt-6">
+            We do not extract value from humans as if they are exhaustible resources. We optimize human capacity as an infinite, resonant frequency. 
+        </p>
+        <div class="mt-16 reveal delay-300">
+            <a href="#paradigm" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-[#00e5ff] hover:border-[#00e5ff] transition-all mx-auto animate-bounce">
+                <i class="fas fa-arrow-down"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- The Paradigm Shift Section -->
+    <section id="paradigm" class="py-24 px-6 max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-20 reveal">
+            <h2 class="cinzel text-3xl md:text-5xl font-bold text-white mb-6 uppercase tracking-widest">The Paradigm Shift</h2>
+            <div class="w-24 h-[1px] bg-[#00e5ff]/50 mx-auto"></div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-stretch">
+            
+            <!-- Old Paradigm: Human Capital -->
+            <div class="glass-panel p-8 md:p-12 rounded-2xl border-t-4 border-t-rose-500/50 reveal delay-100 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <h3 class="mono text-rose-400 text-sm tracking-[0.2em] uppercase mb-4">The Industrial Illusion</h3>
+                <h4 class="cinzel text-3xl text-white font-bold mb-8">Human Capital</h4>
+                
+                <ul class="space-y-6">
+                    <li class="flex items-start gap-4">
+                        <i class="fas fa-times text-rose-500 mt-1"></i>
+                        <div>
+                            <strong class="text-white block font-mono text-xs uppercase tracking-widest mb-1">Extractive Metric</strong>
+                            <p class="text-gray-400 text-sm font-light leading-relaxed">Treats the individual as a depreciating asset. Value is extracted through time and labor until exhaustion (burnout).</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i class="fas fa-times text-rose-500 mt-1"></i>
+                        <div>
+                            <strong class="text-white block font-mono text-xs uppercase tracking-widest mb-1">Linear Management</strong>
+                            <p class="text-gray-400 text-sm font-light leading-relaxed">Forces organic, dynamic human beings into rigid, algorithmic silos. Suppresses intuition in favor of compliance.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i class="fas fa-times text-rose-500 mt-1"></i>
+                        <div>
+                            <strong class="text-white block font-mono text-xs uppercase tracking-widest mb-1">Zero-Sum Growth</strong>
+                            <p class="text-gray-400 text-sm font-light leading-relaxed">Operates on scarcity. If the corporation wins, the individual's time and energy are sacrificed. The friction (ϕ) destroys the system.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- New Paradigm: Human Capacity Optimization -->
+            <div class="glass-panel p-8 md:p-12 rounded-2xl border-t-4 border-t-[#00e5ff] reveal delay-200 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-[#00e5ff]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <h3 class="mono text-[#00e5ff] text-sm tracking-[0.2em] uppercase mb-4">The Visceral Reality</h3>
+                <h4 class="cinzel text-3xl text-white font-bold mb-8">Capacity Optimization</h4>
+                
+                <ul class="space-y-6">
+                    <li class="flex items-start gap-4">
+                        <i class="fas fa-check text-[#00e5ff] mt-1"></i>
+                        <div>
+                            <strong class="text-white block font-mono text-xs uppercase tracking-widest mb-1">Infinite Resonance</strong>
+                            <p class="text-gray-400 text-sm font-light leading-relaxed">Treats the individual as a boundless frequency. Value is generated by aligning the person's true Origin (p) with their daily output.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i class="fas fa-check text-[#00e5ff] mt-1"></i>
+                        <div>
+                            <strong class="text-white block font-mono text-xs uppercase tracking-widest mb-1">Synergetic Architecture</strong>
+                            <p class="text-gray-400 text-sm font-light leading-relaxed">Builds ecosystems around human potential. Allows logic and intuition to co-exist, ensuring peak kinetic execution.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <i class="fas fa-check text-[#00e5ff] mt-1"></i>
+                        <div>
+                            <strong class="text-white block font-mono text-xs uppercase tracking-widest mb-1">The Infinite Sum (S)</strong>
+                            <p class="text-gray-400 text-sm font-light leading-relaxed">Operates on absolute abundance. The growth of the corporation exponentially scales the actualization of the individual.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- The 3 Pillars of Optimization -->
+    <section class="py-24 px-6 relative z-10 border-t border-white/5 bg-black/40">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <h2 class="cinzel text-3xl md:text-4xl font-bold text-white mb-6 uppercase tracking-widest">The Triad of Capacity</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto font-light">To shift a corporate or personal infrastructure into the Optimization paradigm, three mathematical nodes must be continuously balanced.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Node 1 -->
+                <div class="glass-panel p-8 rounded-xl text-center reveal delay-100 group">
+                    <div class="w-16 h-16 mx-auto bg-[#00e5ff]/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(0,229,255,0.2)]">
+                        <i class="fas fa-brain text-2xl text-[#00e5ff]"></i>
+                    </div>
+                    <h3 class="cinzel text-xl font-bold text-white mb-3">Cognitive Sovereignty</h3>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed mb-6">Freeing the mind from reactive survival states. Cultivating the space necessary for the "Surgical Mind" to execute.</p>
+                    <div class="text-[#00e5ff] font-mono text-[10px] uppercase tracking-widest">Realm IV: Intellect</div>
+                </div>
+
+                <!-- Node 2 -->
+                <div class="glass-panel p-8 rounded-xl text-center reveal delay-200 group border-t-2 border-t-[#D4AF37]/50">
+                    <div class="w-16 h-16 mx-auto bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                        <i class="fas fa-wave-square text-2xl text-[#D4AF37]"></i>
+                    </div>
+                    <h3 class="cinzel text-xl font-bold text-white mb-3">Energetic Resonance</h3>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed mb-6">Recalibrating the emotional baseline. Shifting away from the friction of Force, and aligning with the power of 528Hz.</p>
+                    <div class="text-[#D4AF37] font-mono text-[10px] uppercase tracking-widest">Realm VI: Frequency</div>
+                </div>
+
+                <!-- Node 3 -->
+                <div class="glass-panel p-8 rounded-xl text-center reveal delay-300 group">
+                    <div class="w-16 h-16 mx-auto bg-[#a855f7]/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+                        <i class="fas fa-network-wired text-2xl text-[#a855f7]"></i>
+                    </div>
+                    <h3 class="cinzel text-xl font-bold text-white mb-3">Synergetic Flow</h3>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed mb-6">Plugging the sovereign individual into the collective architecture, mapping their exact frequency into the perfect team matrix.</p>
+                    <div class="text-[#a855f7] font-mono text-[10px] uppercase tracking-widest">Realm IX: Legacy</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mathematical Proof & CTA -->
+    <section class="py-24 px-6 relative z-10">
+        <div class="max-w-4xl mx-auto glass-panel p-10 md:p-16 rounded-3xl text-center reveal">
+            <h2 class="cinzel text-3xl font-bold text-white mb-6">The Proof is in the Architecture</h2>
+            <p class="text-gray-300 font-light leading-relaxed mb-10 max-w-2xl mx-auto">
+                When you stop extracting and start optimizing, the friction of the Phase Shift ($\phi$) drops, and the Infinite Sum ($S$) expands exponentially. This is how empires outlast the humans who built them.
+            </p>
+            
+            <div class="bg-black/50 border border-white/5 rounded-xl p-8 mb-12 inset-shadow overflow-x-auto">
+                <div id="math-proof" class="text-2xl md:text-3xl text-[#00e5ff] opacity-90"></div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="dreamteam.html" class="w-full sm:w-auto px-8 py-4 bg-[#00e5ff]/10 border border-[#00e5ff]/50 text-[#00e5ff] rounded hover:bg-[#00e5ff] hover:text-black transition-all font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3">
+                    <i class="fas fa-satellite-dish"></i> Map Your Synergy
+                </a>
+                <a href="realms.html" class="w-full sm:w-auto px-8 py-4 bg-transparent border border-gray-600 text-gray-300 rounded hover:border-white hover:text-white transition-all font-bold uppercase tracking-widest text-xs">
+                    Enter the Realms
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 text-center border-t border-white/5 relative z-10 bg-[#050a0f]">
+        <div class="flex items-center justify-center gap-4 mb-6">
+            <div class="w-16 h-[1px] bg-[#00e5ff]/30"></div>
+            <div class="w-2 h-2 rounded-full bg-[#00e5ff]/50"></div>
+            <div class="w-16 h-[1px] bg-[#00e5ff]/30"></div>
+        </div>
+        <p class="text-gray-500 text-xs tracking-[0.4em] uppercase space-grotesk">
+            Visceral Current Global &copy; 2026
+        </p>
+    </footer>
+
+    <script>
+        // Scroll Reveal Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Render MathJax
+        window.addEventListener('load', () => {
+            if(window.katex) {
+                katex.render("S = \\lim_{t \\to \\infty} \\sum \\frac{P \\cdot C}{\\phi^n}", document.getElementById('math-proof'), { displayMode: true });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -127,22 +127,31 @@
 
     <!-- Ambient Background Glows -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute rounded-full blur-[120px] glow-entity w-[600px] h-[600px] bg-visceral-gold/15 top-[-20%] left-[-10%] animate-pulse-glow"></div>
-        <div class="absolute rounded-full blur-[150px] glow-entity w-[800px] h-[800px] bg-indigo-900/20 bottom-[-20%] right-[-10%] animate-pulse-glow" style="animation-delay: 2s;"></div>
+        <div class="absolute rounded-full blur-[150px] glow-entity w-[600px] h-[600px] bg-[#a855f7]/15 top-[10%] left-[-10%] animate-pulse-glow"></div>
+        <div class="absolute rounded-full blur-[150px] glow-entity w-[700px] h-[700px] bg-[#00e5ff]/10 bottom-[20%] right-[20%] animate-pulse-glow" style="animation-delay: 1s;"></div>
+        <div class="absolute rounded-full blur-[150px] glow-entity w-[800px] h-[800px] bg-[#D4AF37]/10 bottom-[-20%] right-[-10%] animate-pulse-glow" style="animation-delay: 2s;"></div>
     </div>
 
     <!-- Navigation -->
     <nav id="navbar" class="fixed w-full z-50 px-6 py-4 transition-all duration-300 bg-transparent border-b border-transparent">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-3 group cursor-pointer" onclick="window.scrollTo(0,0)">
-                <div class="w-8 h-8 flex items-center justify-center border border-visceral-gold/30 rounded-full group-hover:border-visceral-gold transition duration-500">
-                    <div class="w-2 h-2 bg-visceral-gold rounded-full group-hover:scale-150 transition duration-500"></div>
+        <div class="max-w-7xl mx-auto flex justify-between items-center w-full">
+            
+            <!-- LEFT: Universal Hamburger & Logo -->
+            <div class="flex items-center gap-4 md:gap-6">
+                <button class="portal-toggle flex items-center justify-center w-12 h-12 rounded-sm border border-visceral-gold/30 hover:border-visceral-gold hover:bg-visceral-gold/10 text-white hover:text-visceral-gold transition-all group backdrop-blur-md">
+                    <i class="fas fa-bars text-2xl group-hover:scale-110 transition-transform"></i>
+                </button>
+                
+                <div class="flex items-center space-x-3 group cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-8 h-8 flex items-center justify-center border border-visceral-gold/30 rounded-full group-hover:border-visceral-gold transition duration-500">
+                        <div class="w-2 h-2 bg-visceral-gold rounded-full group-hover:scale-150 transition duration-500"></div>
+                    </div>
+                    <span class="text-xl font-cinzel font-bold tracking-widest text-white hidden sm:block">VISCERAL<span class="text-visceral-gold">CURRENT</span></span>
                 </div>
-                <span class="text-xl font-cinzel font-bold tracking-widest text-white">VISCERAL<span class="text-visceral-gold">CURRENT</span></span>
             </div>
             
-            <!-- Desktop Nav -->
-            <div class="hidden md:flex items-center space-x-10 text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
+            <!-- RIGHT: Desktop Core Anchors -->
+            <div class="hidden lg:flex items-center space-x-10 text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
                 <a href="#formula" class="hover:text-visceral-gold transition duration-300 relative group">
                     The Formula
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
@@ -155,52 +164,9 @@
                     The Matrix
                     <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="strategic.html" class="hover:text-visceral-gold transition duration-300 relative group">
-                    Executive
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="predictive.html" class="hover:text-visceral-gold transition duration-300 relative group">
-                    Predictive
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="dashboard.html" target="_blank" class="hover:text-visceral-gold transition duration-300 relative group">
-                    Client Portal
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="research.html" target="_blank" class="hover:text-visceral-gold transition duration-300 relative group">
-                    Architecture
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="alignment.html" class="hover:text-visceral-gold transition duration-300 relative group">
-                    Alignment
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="matrix81.html" class="hover:text-visceral-gold transition duration-300 relative group">
-                    Sacred Matrix
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="#contact" class="hover:text-visceral-gold transition duration-300 relative group">
-                    Legacy
-                    <span class="absolute -bottom-2 left-0 w-0 h-[1px] bg-visceral-gold transition-all duration-300 group-hover:w-full"></span>
-                </a>
                 <a href="#contact" class="btn-gold px-6 py-2.5 bg-white/5 border border-visceral-gold/30 text-visceral-gold rounded-sm hover:bg-visceral-gold hover:text-black transition-all duration-300 backdrop-blur-sm">
                     Choose Impact
                 </a>
-                
-                <!-- The Mastery 360 Portal Trigger -->
-                <button class="portal-toggle ml-4 flex items-center gap-2 text-white hover:text-visceral-gold transition-colors">
-                    <i class="fas fa-layer-group text-xl"></i>
-                </button>
-            </div>
-
-            <!-- Mobile Hamburger -->
-            <div class="flex items-center gap-6 md:hidden">
-                <button class="portal-toggle text-xl text-white hover:text-visceral-gold transition-colors">
-                    <i class="fas fa-layer-group"></i>
-                </button>
-                <button id="mobile-menu-btn" class="text-2xl text-visceral-gold focus:outline-none">
-                <i class="fas fa-bars-staggered"></i>
-            </button>
             </div>
         </div>
     </nav>
@@ -237,8 +203,8 @@
 
             <div class="space-y-6">
                 <!-- Node 1 -->
-                <a href="realms.html" class="block group p-4 rounded-xl border border-white/5 hover:border-visceral-gold/50 bg-white/5 hover:bg-white/10 transition-all">
-                    <h3 class="text-lg font-cinzel text-white group-hover:text-visceral-gold transition-colors mb-1 flex justify-between items-center">
+                <a href="realms.html" class="block group p-4 rounded-xl border border-white/5 hover:border-visceral-gold hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] bg-white/5 hover:bg-visceral-gold/10 transition-all duration-500">
+                    <h3 class="text-lg font-cinzel text-white group-hover:text-visceral-gold group-hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.8)] transition-all duration-300 mb-1 flex justify-between items-center">
                         The 9 Realms <i class="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all"></i>
                     </h3>
                     <p class="text-xs text-gray-400 font-light leading-relaxed">Access the dualities, 3-Fold Understandings, and strategies for navigating perception.</p>
@@ -314,27 +280,53 @@
     <header class="relative min-h-screen flex items-center justify-center pt-20 px-6 z-10">
         <div class="max-w-5xl w-full text-center space-y-10 reveal">
             <div class="inline-block relative">
-                <h2 class="text-visceral-gold tracking-[0.4em] font-medium text-xs md:text-sm uppercase mb-4 opacity-80">System Directive: 001</h2>
+                <h2 class="text-visceral-gold tracking-[0.4em] font-semibold text-xs md:text-sm uppercase mb-4 drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]" style="font-family: 'Space Grotesk', sans-serif;">Christopher Bryce Van Houten | Architecting the Infinite</h2>
                 <div class="absolute -left-12 top-1/2 w-8 h-[1px] bg-visceral-gold/50 hidden md:block"></div>
                 <div class="absolute -right-12 top-1/2 w-8 h-[1px] bg-visceral-gold/50 hidden md:block"></div>
             </div>
+            <div class="flex justify-center mb-6 reveal delay-100">
+                <!-- Visceral Current Sacred Geometry Logo -->
+                <svg viewBox="0 0 100 100" class="w-32 h-32 md:w-40 md:h-40 drop-shadow-[0_0_25px_rgba(212,175,55,0.4)]" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00e5ff" />
+                            <stop offset="50%" stop-color="#a855f7" />
+                            <stop offset="100%" stop-color="#D4AF37" />
+                        </linearGradient>
+                        <filter id="logoGlow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="3" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+                    <!-- Orbitals -->
+                    <circle cx="50" cy="50" r="46" stroke="url(#logoGrad)" stroke-width="0.5" stroke-opacity="0.5" stroke-dasharray="2 4" class="animate-[spin_20s_linear_infinite]" style="transform-origin: center;" />
+                    <circle cx="50" cy="50" r="38" stroke="url(#logoGrad)" stroke-width="1" stroke-opacity="0.7" stroke-dasharray="8 4 2 4" class="animate-[spin_15s_linear_infinite_reverse]" style="transform-origin: center;" />
+                    <!-- Core V Shape -->
+                    <path d="M25 25 L50 80 L75 25 L60 25 L50 50 L40 25 Z" fill="url(#logoGrad)" fill-opacity="0.1" stroke="url(#logoGrad)" stroke-width="1.5" filter="url(#logoGlow)" />
+                    <!-- Inner Accents -->
+                    <path d="M34 25 L50 60 L66 25" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <!-- Energy Core -->
+                    <circle cx="50" cy="50" r="2" fill="white" filter="url(#logoGlow)" class="animate-pulse" />
+                    <circle cx="50" cy="50" r="10" stroke="url(#logoGrad)" stroke-width="0.5" fill="none" class="animate-ping" style="animation-duration: 3s;" />
+                </svg>
+            </div>
             
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif leading-[1.1] font-normal tracking-tight">
-                Mastery 360: <br>
-                <span class="italic font-light gradient-text-gold">The Visceral Current</span>
+            <h1 class="text-6xl md:text-7xl lg:text-[7rem] font-bold cinzel leading-[1.1] text-white tracking-tight drop-shadow-2xl reveal delay-100">
+                VISCERAL<br>
+                <span class="gradient-text-mystic drop-shadow-[0_0_30px_rgba(168,85,247,0.6)]">CURRENT</span>
             </h1>
             
-            <p class="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl leading-relaxed font-light reveal delay-100">
-                Human Capacity Optimation through the Mathematics of Synchronicity. We do not chase; we choose. By understanding the foundational flow of the universe, we engineer precision across all walks of life.
+            <p class="max-w-3xl mx-auto text-gray-300 text-lg md:text-xl font-light leading-relaxed reveal delay-100" style="font-family: 'Space Grotesk', sans-serif;">
+                Human Capacity Optimization through the Mathematics of Synchronicity. Mapping the 9 Realms of Perception from the Basement Libraries to the Event Horizon. Integrating the Phase Shift (\(\phi\)).
             </p>
             
             <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8 reveal delay-200">
-                <a href="#formula" class="group w-full sm:w-auto px-8 py-4 bg-transparent border border-gray-700 rounded-sm hover:border-visceral-gold transition duration-300 font-semibold uppercase tracking-widest text-xs flex items-center justify-center">
+                <button onclick="document.querySelector('.portal-toggle').click()" class="btn-gold w-full sm:w-auto px-10 py-4 bg-visceral-gold text-black rounded-sm hover:bg-yellow-500 transition duration-300 font-bold uppercase tracking-[0.2em] text-xs shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+                    Open The 360 Portal
+                </button>
+                <a href="#formula" class="group w-full sm:w-auto px-10 py-4 bg-transparent border border-white/20 rounded-sm hover:border-white hover:bg-white hover:text-black transition duration-300 font-semibold uppercase tracking-[0.2em] text-xs flex items-center justify-center" style="font-family: 'Space Grotesk', sans-serif;">
                     View Equations <i class="fas fa-arrow-down ml-3 group-hover:translate-y-1 transition-transform"></i>
                 </a>
-                <button onclick="openCodexModal()" class="btn-gold w-full sm:w-auto px-8 py-4 bg-visceral-gold text-black rounded-sm hover:bg-yellow-500 transition duration-300 font-bold uppercase tracking-widest text-xs shadow-[0_0_20px_rgba(212,175,55,0.3)]">
-                    Enter The Codex
-                </button>
             </div>
         </div>
 
@@ -459,32 +451,59 @@
                 <!-- Triad I -->
                 <div class="glass-panel p-10 rounded-2xl space-y-6 group reveal delay-100 relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-visceral-gold to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="w-14 h-14 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-visceral-gold group-hover:bg-visceral-gold group-hover:text-black transition-colors duration-500">
-                        <i class="fas fa-brain text-2xl"></i>
+                    <div class="flex justify-between items-start mb-2 relative z-10">
+                        <div class="w-14 h-14 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-visceral-gold group-hover:bg-visceral-gold group-hover:text-black transition-colors duration-500">
+                            <i class="fas fa-brain text-2xl"></i>
+                        </div>
+                        <div class="w-10 h-10 node-grid flex-shrink-0">
+                            <div class="node-dot"></div><div class="node-dot"></div><div class="node-dot"></div>
+                            <div class="node-dot"></div><div class="node-dot"></div><div class="node-dot"></div>
+                            <div class="node-dot"></div><div class="node-dot"></div><div class="node-dot"></div>
+                        </div>
                     </div>
-                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest">I. Internal Architecture</h4>
+                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest relative z-10">I. Internal Architecture</h4>
                     <p class="text-base text-gray-400 font-light leading-relaxed">The Eye of the Storm. Grounding the "Power of One" through stoic neutrality and divine intention before the Visceral Current begins to flow.</p>
                 </div>
 
                 <!-- Triad II -->
                 <div class="glass-panel p-10 rounded-2xl space-y-6 group reveal delay-200 relative overflow-hidden border-t border-t-visceral-gold/50 transform md:-translate-y-6">
                     <div class="absolute inset-0 bg-gradient-to-b from-visceral-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="w-14 h-14 bg-visceral-gold rounded-xl flex items-center justify-center text-black shadow-[0_0_20px_rgba(212,175,55,0.4)]">
-                        <i class="fas fa-infinity text-2xl"></i>
+                    <div class="flex justify-between items-start mb-2 relative z-10">
+                        <div class="w-14 h-14 bg-visceral-gold rounded-xl flex items-center justify-center text-black shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+                            <i class="fas fa-infinity text-2xl"></i>
+                        </div>
+                        <div class="w-10 h-10 node-grid flex-shrink-0">
+                            <div class="node-dot"></div><div class="node-dot"></div><div class="node-dot"></div>
+                            <div class="node-dot"></div><div class="node-dot"></div><div class="node-dot"></div>
+                            <div class="node-dot"></div><div class="node-dot"></div><div class="node-dot"></div>
+                        </div>
                     </div>
-                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest">II. Strategic Overlay</h4>
+                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest relative z-10">II. Strategic Overlay</h4>
                     <p class="text-base text-gray-400 font-light leading-relaxed">The Mentalist's Gambit. Navigating the 81 nodes of duality with formless precision, observing the hidden gravity of social dynamics.</p>
                 </div>
 
                 <!-- Triad III -->
                 <div class="glass-panel p-10 rounded-2xl space-y-6 group reveal delay-300 relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-visceral-gold to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="w-14 h-14 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-visceral-gold group-hover:bg-visceral-gold group-hover:text-black transition-colors duration-500">
-                        <i class="fas fa-feather-pointed text-2xl"></i>
+                    <div class="flex justify-between items-start mb-2 relative z-10">
+                        <div class="w-14 h-14 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-visceral-gold group-hover:bg-visceral-gold group-hover:text-black transition-colors duration-500">
+                            <i class="fas fa-feather-pointed text-2xl"></i>
+                        </div>
+                        <div class="w-10 h-10 node-grid flex-shrink-0">
+                            <div class="node-dot"></div><div class="node-dot"></div><div class="node-dot"></div>
+                            <div class="node-dot"></div><div class="node-dot"></div><div class="node-dot"></div>
+                            <div class="node-dot"></div><div class="node-dot"></div><div class="node-dot"></div>
+                        </div>
                     </div>
-                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest">III. Expansion Equation</h4>
+                    <h4 class="text-xl font-cinzel font-bold text-white uppercase tracking-widest relative z-10">III. Expansion Equation</h4>
                     <p class="text-base text-gray-400 font-light leading-relaxed">The Empire Builder. Transmuting the phase shifts of the past into mathematical destiny, ensuring every action scales to an infinite legacy.</p>
                 </div>
+            </div>
+            
+            <div class="mt-16 text-center reveal delay-300">
+                <button onclick="openCodexModal()" class="btn-gold px-10 py-4 border border-visceral-gold/50 bg-visceral-gold/10 text-visceral-gold text-xs uppercase tracking-[0.2em] font-bold rounded-sm hover:bg-visceral-gold hover:text-black transition-all duration-500 shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] backdrop-blur-md">
+                    <i class="fas fa-satellite-dish mr-2"></i> Receive Live Transmission
+                </button>
             </div>
         </div>
     </section>
@@ -537,6 +556,72 @@
         </div>
     </section>
 
+    <!-- Havens vs Jails Section -->
+    <section id="havens" class="py-32 px-6 relative z-10 border-t border-white/5 bg-gradient-to-b from-transparent to-[#050a0f]">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8 reveal">
+                    <span class="text-visceral-gold font-mono text-xs tracking-[0.3em] uppercase block">04 // The Ultimate Application</span>
+                    <h2 class="text-4xl md:text-5xl font-cinzel font-bold text-white leading-tight">
+                        Building Havens, <br>
+                        <span class="text-gray-500 line-through decoration-visceral-gold decoration-2">Not Cages</span>
+                    </h2>
+                    
+                    <p class="text-gray-400 leading-relaxed font-light text-lg">
+                        The modern world attempts to solve the friction of addiction and recidivism through isolation and punishment. Mathematically, this is a flawed equation. It treats human beings as depreciating capital rather than infinite capacity. 
+                    </p>
+                    
+                    <div class="border-l-2 border-visceral-gold/50 pl-6 space-y-4">
+                        <p class="text-sm text-gray-200 font-light leading-relaxed">
+                            <strong class="text-white font-medium">The Dream:</strong> We do not warehouse human potential. We architect physical havens—sanctuaries for recovery, fresh starts, and the complete optimization of the human spirit. 
+                        </p>
+                        <p class="text-sm text-gray-200 font-light leading-relaxed">
+                            By replacing the punitive cycle with the Mathematics of Synchronicity, we engineer a permanent Phase Shift (\(\phi\)) out of the system and into universal sovereignty.
+                        </p>
+                    </div>
+
+                    <a href="optimization.html" class="inline-flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-visceral-gold font-bold hover:text-white transition-colors group mt-4">
+                        Explore Capacity Optimization
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-2 transition-transform"></i>
+                    </a>
+                </div>
+
+                <div class="relative reveal delay-200">
+                    <div class="absolute inset-0 bg-visceral-gold/10 blur-[80px] rounded-full pointer-events-none"></div>
+                    
+                    <div class="glass-panel p-10 rounded-2xl relative z-10 border-t-2 border-t-visceral-gold/50 shadow-[0_0_40px_rgba(212,175,55,0.1)]">
+                        <div class="flex justify-between items-start mb-8 border-b border-white/10 pb-6">
+                            <div>
+                                <h3 class="text-2xl font-cinzel text-white mb-1">Systemic Refinement</h3>
+                                <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Recidivism vs. Optimization</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-visceral-gold/30 flex items-center justify-center text-visceral-gold">
+                                <i class="fas fa-dove"></i>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-6">
+                            <li class="flex items-start gap-4">
+                                <i class="fas fa-times text-red-500/80 mt-1"></i>
+                                <div>
+                                    <strong class="block text-white text-sm tracking-wide font-cinzel">The Old Paradigm (Jails)</strong>
+                                    <span class="text-xs text-gray-400 font-light">Zero-sum growth. Relies on force, shame, and isolation. Guarantees friction.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <i class="fas fa-check text-visceral-gold mt-1"></i>
+                                <div>
+                                    <strong class="block text-white text-sm tracking-wide font-cinzel">The Visceral Current (Havens)</strong>
+                                    <span class="text-xs text-gray-400 font-light">Infinite sum calculation. Relies on purpose, connection (C), and 528Hz resonance.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- The 81 Node Matrix & Trinity of Flow -->
     <section id="matrix" class="py-32 px-6 relative z-10 border-t border-white/5 overflow-hidden">
         <!-- Matrix Background Canvas -->
@@ -544,7 +629,7 @@
         
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-20 reveal">
-                <span class="text-visceral-gold font-mono text-xs tracking-[0.3em] uppercase block mb-3">04 // Architecture of Impact</span>
+                <span class="text-visceral-gold font-mono text-xs tracking-[0.3em] uppercase block mb-3">05 // Architecture of Impact</span>
                 <h2 class="text-4xl md:text-5xl font-cinzel font-bold text-white">The 81 Node Matrix</h2>
                 <div class="w-24 h-[1px] bg-visceral-gold/50 mx-auto mt-8 mb-8"></div>
                 <p class="text-gray-400 max-w-2xl mx-auto text-lg font-light">A framework of \(9^2\) completion. Every node of existence must be activated through the Trinity of Flow to scale impact to absolute infinity.</p>
