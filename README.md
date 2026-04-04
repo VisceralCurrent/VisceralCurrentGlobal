@@ -21,7 +21,7 @@ The architecture operates on strict mathematical principles, visually and logica
 
 ## 🏛️ Ecosystem Architecture
 
-The repository is divided into six highly synergistic, standalone environments:
+The repository is divided into seven highly synergistic, standalone environments:
 
 ### 1. The Matrix (`index.html`)
 The root hub of the empire. Features an abyss-black, storm-rolling-in aesthetic with electric blue (`#00e5ff`) accents.
@@ -49,6 +49,10 @@ A mathematically verified client portal displaying the live "Budgetary Flow" and
 ### 6. The Codex 81: Visceral Alignment (`alignment.html`)
 An interactive, philosophical diagnostic tool mapping David Hawkins, Robert Greene, and universal dualities.
 - Features a "Chameleon Engine" that mathematically interpolates CSS colors from Electric Blue to Visceral Gold as the user scrolls into alignment.
+
+### 7. The 81-Node Sacred Matrix (`matrix81.html`)
+A massive, interactive 9x9 sacred geometry grid deducing the square root of 81.
+- Cross-multiplies the 9 Realms of Perception with the 9 Stages of Phase Shift to generate 81 distinct, mathematically precise strategic protocols based on the Visceral Current model.
 
 ---
 

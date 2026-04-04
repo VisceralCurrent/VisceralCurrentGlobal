@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visceral Current | The 81-Node Sacred Matrix</title>
+    <meta name="theme-color" content="#050a0f">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <style>
+        body {
+            background-color: #050a0f;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            /* Sacred Geometry ambient pattern */
+            background-image: 
+                radial-gradient(circle at center, rgba(212, 175, 55, 0.03) 0, rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at center, rgba(0, 229, 255, 0.03) 0, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+        }
+        .cinzel { font-family: 'Cinzel', serif; }
+        .mono { font-family: 'Space Mono', monospace; }
+        .glass {
+            background: rgba(10, 12, 15, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        /* Matrix Grid System */
+        #matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 0.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 2rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(0, 229, 255, 0.1);
+            box-shadow: 0 0 50px rgba(0, 229, 255, 0.05), inset 0 0 50px rgba(212, 175, 55, 0.05);
+        }
+        .matrix-node {
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255,255,255,0.02);
+            position: relative;
+        }
+        .matrix-node:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #D4AF37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            transform: scale(1.2);
+            z-index: 10;
+        }
+        .matrix-node.highlight-row, .matrix-node.highlight-col {
+            background: rgba(0, 229, 255, 0.1);
+            border-color: rgba(0, 229, 255, 0.3);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.3); border-radius: 3px; }
+    </style>
+</head>
+<body class="selection:bg-[#00e5ff]/30">
+
+    <nav class="fixed top-0 w-full z-50 glass py-4 px-6 flex justify-between items-center border-t-0 border-l-0 border-r-0">
+        <a href="index.html" class="flex items-center gap-3 group">
+            <div class="w-8 h-8 rounded-full border border-[#00e5ff]/50 flex items-center justify-center group-hover:bg-[#00e5ff]/10 transition-colors">
+                <div class="w-1.5 h-1.5 bg-[#00e5ff] rounded-full group-hover:scale-150 transition-transform"></div>
+            </div>
+            <span class="cinzel text-lg font-bold tracking-widest uppercase text-white">Visceral Current</span>
+        </a>
+        <div class="mono text-[10px] text-gray-500 tracking-[0.2em] uppercase">
+            <span class="text-[#D4AF37]">81-Node Sacred Matrix</span>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-24 px-4 relative z-10">
+        <div class="text-center mb-16">
+            <div id="math-header" class="text-[#00e5ff] text-xl mb-6 opacity-80"></div>
+            <h1 class="cinzel text-4xl md:text-6xl font-bold tracking-widest mb-6 text-white uppercase">The Sacred Matrix</h1>
+            <p class="text-gray-400 font-light text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
+                The square root of 81 is 9. By cross-multiplying the <strong class="text-white">9 Realms of Perception</strong> with the <strong class="text-[#D4AF37]">9 Stages of Phase Shift</strong>, we calculate 81 exact, multidimensional coordinates. Select a node to extract the mathematical strategy required for universal success.
+            </p>
+        </div>
+
+        <!-- The Interactive 9x9 Grid -->
+        <div id="matrix-grid">
+            <!-- Nodes injected by JS -->
+        </div>
+        
+        <div class="text-center mt-12 mono text-[10px] text-gray-500 uppercase tracking-widest">
+            X-Axis: 9 Realms of Perception <span class="mx-2">|</span> Y-Axis: 9 Stages of Phase Shift
+        </div>
+    </main>
+
+    <!-- Detailed Node Modal -->
+    <div id="node-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#020305]/95 backdrop-blur-xl p-4 opacity-0 pointer-events-none transition-opacity duration-500">
+        <div class="glass max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl relative shadow-2xl p-8 md:p-12 border-t-4 border-t-[#D4AF37]">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors text-2xl z-20">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div id="modal-content" class="relative z-10">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // The 9 Realms (X-Axis) - The duality of perception
+        const realms = [
+            { id: 1, name: "Foundation", duality: "Force vs. Potentiality", book: "Power vs. Force (Hawkins)" },
+            { id: 2, name: "Identity", duality: "Labels vs. The Void", book: "On the Taboo Against Knowing Who You Are (Watts)" },
+            { id: 3, name: "Action", duality: "Grind vs. Wu-Wei", book: "Way of the Peaceful Warrior (Millman)" },
+            { id: 4, name: "Conflict", duality: "War vs. Synergy", book: "33 Strategies of War (Greene)" },
+            { id: 5, name: "Intellect", duality: "Dogma vs. Intuition", book: "Wishes Fulfilled (Dyer)" },
+            { id: 6, name: "Frequency", duality: "Despair vs. Awe", book: "Map of Consciousness (Hawkins)" },
+            { id: 7, name: "Time", duality: "Chronos vs. The Eternal Now", book: "Journey to Ixtlan (Castaneda)" },
+            { id: 8, name: "Purpose", duality: "Gain vs. Dharma", book: "The 50th Law (Greene)" },
+            { id: 9, name: "Legacy", duality: "Isolation vs. Collective", book: "The Art of War (Sun Tzu)" }
+        ];
+
+        // The 9 Stages of Phase Shift (Y-Axis) - The integration to infinity
+        const stages = [
+            { id: 1, name: "The Void (p)", phase: "Unconscious Chaos", strat: "Map the exact terrain of the resistance." },
+            { id: 2, name: "The Friction", phase: "Duality Realized", strat: "Audit the energetic drain of the obstacle." },
+            { id: 3, name: "The Observation", phase: "Stalking the Self", strat: "Detach entirely and witness the ego." },
+            { id: 4, name: "The Catalyst", phase: "The Pivot Point", strat: "Drop the weight of external validation." },
+            { id: 5, name: "Phase Shift (\\(\\phi\\))", phase: "Frequency Pivot", strat: "Shift the paradigm; stop chasing, start choosing." },
+            { id: 6, name: "The Current (\\(\\nu\\))", phase: "Kinetic Flow", strat: "Enter the stream of absolute precision." },
+            { id: 7, name: "The Origin (o)", phase: "Return to Truth", strat: "Execute flawlessly without hesitation." },
+            { id: 8, name: "Impact Area (A)", phase: "Material Integration", strat: "Measure the physical scale of the output." },
+            { id: 9, name: "Infinite Sum (S)", phase: "Universal Sovereignty", strat: "Publish the equation to forge a legacy." }
+        ];
+
+        const grid = document.getElementById('matrix-grid');
+        
+        // Generate the 81 Nodes mathematically
+        for (let y = 0; y < 9; y++) {
+            for (let x = 0; x < 9; x++) {
+                const node = document.createElement('div');
+                node.className = 'matrix-node';
+                node.dataset.x = x;
+                node.dataset.y = y;
+                
+                // Subtle node numbering
+                node.innerHTML = `<span class="mono text-[8px] text-white/20 select-none">${y+1}.${x+1}</span>`;
+                
+                // Hover Effects: Cross-hair highlighting
+                node.addEventListener('mouseenter', () => {
+                    document.querySelectorAll('.matrix-node').forEach(n => {
+                        if (n.dataset.x == x) n.classList.add('highlight-col');
+                        if (n.dataset.y == y) n.classList.add('highlight-row');
+                    });
+                });
+                
+                node.addEventListener('mouseleave', () => {
+                    document.querySelectorAll('.matrix-node').forEach(n => {
+                        n.classList.remove('highlight-col', 'highlight-row');
+                    });
+                });
+
+                // Click Event: Generate Dynamic Codex Synthesis
+                node.addEventListener('click', () => openModal(realms[x], stages[y], (y * 9) + x + 1));
+                
+                grid.appendChild(node);
+            }
+        }
+
+        function openModal(realm, stage, nodeNum) {
+            const modal = document.getElementById('node-modal');
+            const content = document.getElementById('modal-content');
+            
+            content.innerHTML = `
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-12 h-12 rounded-full border border-[#D4AF37] flex items-center justify-center text-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                        <span class="cinzel font-bold text-xl">${nodeNum}</span>
+                    </div>
+                    <div>
+                        <span class="mono text-[10px] text-gray-400 uppercase tracking-widest">Coordinates: Realm ${realm.id} × Stage ${stage.id}</span>
+                        <h2 class="cinzel text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">Node of ${realm.name} Integration</h2>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-10">
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                        <span class="mono text-[10px] text-[#00e5ff] uppercase tracking-widest block mb-2">The Duality (X-Axis)</span>
+                        <p class="text-xl font-cinzel text-white mb-2">${realm.duality}</p>
+                        <p class="text-sm text-gray-400 font-light">Sourced from the dimensional logic of <em class="text-gray-200">${realm.book}</em>.</p>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                        <span class="mono text-[10px] text-[#D4AF37] uppercase tracking-widest block mb-2">The Phase Shift (Y-Axis)</span>
+                        <p class="text-xl font-cinzel text-white mb-2">${stage.name}</p>
+                        <p class="text-sm text-gray-400 font-light">Current energetic state: <span class="text-white">${stage.phase}</span>.</p>
+                    </div>
+                </div>
+
+                <div class="border-l-2 border-[#D4AF37] pl-6 py-2 mb-10">
+                    <h3 class="mono text-[10px] text-gray-500 uppercase tracking-widest mb-4">3-Fold Strategic Synthesis</h3>
+                    <p class="text-base md:text-lg text-gray-200 font-light leading-relaxed">
+                        To transcend the duality of <strong class="text-[#00e5ff] font-normal">${realm.duality}</strong>, you must evaluate your position within the <strong class="text-white font-normal">${stage.phase}</strong>. 
+                        Applying the architectural principles of <em class="text-white">${realm.book}</em>, the Visceral Current mathematically demands that you execute the following directive: <strong class="text-[#D4AF37] font-normal uppercase tracking-wide">${stage.strat}</strong>
+                    </p>
+                </div>
+
+                <div class="bg-black/50 border border-white/5 rounded-xl p-8 text-center inset-shadow">
+                    <span class="mono text-[10px] text-gray-500 uppercase tracking-widest block mb-4">Calculated Outcome</span>
+                    <div class="text-xl md:text-2xl text-white font-mono tracking-widest opacity-90" id="dynamic-math-${nodeNum}">
+                        A = \\int_{p}^{o} (\\nu \\cdot \\phi) \\, dt = \\infty
+                    </div>
+                    <p class="text-xs text-gray-500 mt-4 font-light max-w-lg mx-auto">This is not a theoretical exercise. It is the mathematical transmutation of your specific coordinates into Universal Sovereignty.</p>
+                </div>
+            `;
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            
+            // Render MathJax dynamically inside the modal
+            if(window.katex) {
+                katex.render(
+                    `A = \\int_{p}^{o} (\\nu \\cdot \\phi) \\, dt = \\infty`, 
+                    document.getElementById(`dynamic-math-${nodeNum}`), 
+                    { displayMode: true }
+                );
+                // Re-render any inline math in the stage names
+                renderMathInElement(content, { delimiters: [{left: "\\(", right: "\\)", display: false}] });
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('node-modal').classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // Render initial Header Math
+        window.addEventListener('load', () => {
+            if(window.katex) {
+                katex.render("\\sqrt{81} = 9", document.getElementById('math-header'), { displayMode: true });
+            }
+        });
+    </script>
+</body>
+</html>
