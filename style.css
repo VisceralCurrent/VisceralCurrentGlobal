@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Base overrides */
 html, body {
     overflow-x: hidden;
@@ -24,6 +28,11 @@ body::after {
     background: radial-gradient(circle, transparent 50%, rgba(5, 10, 15, 0.7) 130%);
     pointer-events: none;
     z-index: 40; /* Sits below the nav but above the background */
+}
+
+/* Native App Feel: Disable tap highlight on touch devices */
+a, button, .node-card, .glass-panel {
+    -webkit-tap-highlight-color: transparent;
 }
 
 ::selection {
@@ -110,6 +119,22 @@ body::after {
     -webkit-text-fill-color: transparent;
     background-size: 200% auto;
     animation: textShine 8s linear infinite;
+}
+
+/* Storm Cloud & Scarlett Gradient */
+.gradient-text-storm {
+    background: linear-gradient(to right, #94a3b8, #ffffff, #e11d48, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: textShine 8s linear infinite;
+}
+
+/* Hardware Accelerated Ambient Glows */
+.glow-entity {
+    will-change: transform, opacity, filter;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 /* Scroll Reveal Sequencing */

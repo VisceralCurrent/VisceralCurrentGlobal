@@ -102,6 +102,28 @@ portalLinks.forEach(link => {
     });
 });
 
+// --- Interactive Phi Slider Logic ---
+window.updatePhi = function(value) {
+    const phiDisplay = document.getElementById('phi-display');
+    const sDisplay = document.getElementById('s-display');
+    if (phiDisplay) phiDisplay.innerText = parseFloat(value).toFixed(3);
+    
+    if (sDisplay) {
+        const inverse = 3.01 - parseFloat(value); 
+        const sum = Math.pow(10, inverse * 2.5).toFixed(0);
+        
+        if (value <= 1.05) {
+            sDisplay.innerHTML = 'S = <span class="text-white text-lg font-bold">∞</span>';
+        } else {
+            sDisplay.innerText = `S = ${parseInt(sum).toLocaleString()}`;
+        }
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    if(document.getElementById('phi-slider')) window.updatePhi(document.getElementById('phi-slider').value);
+});
+
 // --- Scroll Reveal Animations ---
 const revealElements = document.querySelectorAll('.reveal');
 
@@ -509,7 +531,8 @@ function init3DCodex() {
 
     // Add particle field around the codex
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 500;
+    // Throttle particles for mobile devices
+    const particlesCount = window.innerWidth < 768 ? 150 : 500;
     const posArray = new Float32Array(particlesCount * 3);
     for(let i = 0; i < particlesCount * 3; i++) {
         posArray[i] = (Math.random() - 0.5) * 15;
@@ -758,7 +781,8 @@ function initMatrix() {
     const rows = 9;
     
     // Make it a perfectly square grid dynamically centered
-    const gridSize = Math.min(matrixWidth, matrixHeight) * 0.85;
+    // Increase the grid width on mobile so it doesn't compress too tightly
+    const gridSize = Math.min(matrixWidth, matrixHeight) * (window.innerWidth < 768 ? 0.95 : 0.85);
     const startX = (matrixWidth - gridSize) / 2;
     const startY = (matrixHeight - gridSize) / 2;
     const step = gridSize / 8; // 8 gaps for 9 nodes
@@ -893,6 +917,9 @@ if (document.readyState === 'loading') {
 
 // --- MASTER ANIMATION LOOP ---
 function masterLoop() {
+    // Pause all heavy rendering if the browser tab is inactive (Saves Battery/CPU)
+    if (document.hidden) { requestAnimationFrame(masterLoop); return; }
+
     // Always run these core animations
     animateCursor();
 

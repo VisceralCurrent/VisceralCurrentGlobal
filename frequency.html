@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visceral Current | Frequency Assessment</title>
+    <meta name="theme-color" content="#050a0f">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased bg-[#050a0f] text-white selection:bg-visceral-scarlett/30 selection:text-white overflow-hidden h-screen w-screen">
+
+    <!-- Ambient Background Glows -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute w-[800px] h-[800px] bg-slate-500/10 blur-[150px] rounded-full top-[-20%] right-[-10%] glow-entity"></div>
+        <div class="absolute w-[600px] h-[600px] bg-visceral-scarlett/10 blur-[150px] rounded-full bottom-[-10%] left-[-10%] glow-entity"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 py-6 px-6 md:px-12 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-4 group cursor-pointer z-50">
+            <div class="w-8 h-8 border border-white/30 rounded-sm flex items-center justify-center rotate-45 group-hover:border-visceral-scarlett transition-colors">
+                <span class="text-white font-bold -rotate-45 text-xs group-hover:text-visceral-scarlett">VC</span>
+            </div>
+            <span class="font-cinzel text-lg tracking-[0.2em] font-bold text-white uppercase group-hover:text-visceral-scarlett transition-colors hidden md:block">Visceral Current</span>
+        </a>
+        <div class="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-mono z-50 flex items-center gap-2">
+            <div class="w-1.5 h-1.5 rounded-full bg-visceral-scarlett animate-pulse"></div> Phase Shift Diagnostics
+        </div>
+    </nav>
+
+    <!-- Assessment Container -->
+    <main class="relative z-10 h-full flex flex-col items-center justify-center px-6">
+        <div id="assessment-card" class="glass-panel w-full max-w-3xl rounded-3xl p-8 md:p-14 border-t-2 border-t-visceral-scarlett/50 shadow-[0_0_50px_rgba(225,29,72,0.1)] transition-all duration-700 transform">
+            
+            <!-- Progress Bar -->
+            <div id="progress-container" class="w-full h-1 bg-white/10 rounded-full mb-12 overflow-hidden hidden">
+                <div id="progress-bar" class="h-full bg-visceral-scarlett w-0 transition-all duration-500"></div>
+            </div>
+
+            <!-- Content Area -->
+            <div id="content-area" class="text-center min-h-[300px] flex flex-col justify-center transition-opacity duration-500">
+                <!-- Initial Hook -->
+                <span class="text-visceral-scarlett font-mono text-xs tracking-[0.3em] uppercase block mb-4">Diagnostics</span>
+                <h1 class="text-3xl md:text-5xl font-cinzel font-bold text-white mb-6">Locate Your Coordinate</h1>
+                <p class="text-gray-400 font-light leading-relaxed mb-10 max-w-lg mx-auto">To scale your capacity to absolute infinity, we must first map your current baseline. This diagnostic will determine your operational frequency.</p>
+                
+                <button onclick="startAssessment()" class="btn-gold mx-auto px-10 py-4 bg-white text-black rounded-sm hover:bg-visceral-scarlett hover:text-white transition duration-300 font-bold uppercase tracking-[0.2em] text-xs shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                    Initiate Scan
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        const questions = [
+            {
+                q: "When confronted with unexpected volatility or systemic failure, what is your immediate visceral reaction?",
+                options: [
+                    { text: "Frustration, resistance, and a desire to force the situation back to normal.", score: 100 },
+                    { text: "Detachment. I calculate the variables and look for a logical workaround.", score: 300 },
+                    { text: "Recognition. I see it as a Phase Shift (ϕ) providing raw kinetic fuel for growth.", score: 528 }
+                ]
+            },
+            {
+                q: "How do you currently measure the success of your daily actions?",
+                options: [
+                    { text: "By immediate material gain, survival, and defending my status.", score: 100 },
+                    { text: "By the alignment of my long-term strategy and technical efficiency.", score: 300 },
+                    { text: "By the infinite sum of Purpose (P) and Connection (C) to my tribe.", score: 528 }
+                ]
+            },
+            {
+                q: "Where is your mental focus predominantly anchored?",
+                options: [
+                    { text: "Trapped in the labels, regrets, and narratives of the past.", score: 100 },
+                    { text: "Anxiously planning, theorizing, and bracing for the future.", score: 300 },
+                    { text: "Grounded entirely in the Eternal Now, ready to act with pure intent.", score: 528 }
+                ]
+            }
+        ];
+
+        let currentQ = 0;
+        let totalScore = 0;
+        
+        const contentArea = document.getElementById('content-area');
+        const progressBar = document.getElementById('progress-bar');
+        const progressContainer = document.getElementById('progress-container');
+
+        function startAssessment() {
+            progressContainer.classList.remove('hidden');
+            fadeTransition(() => renderQuestion(0));
+        }
+
+        function renderQuestion(index) {
+            const qData = questions[index];
+            progressBar.style.width = `${((index) / questions.length) * 100}%`;
+            
+            let optionsHtml = '';
+            qData.options.forEach((opt, i) => {
+                optionsHtml += `
+                    <button onclick="selectOption(${opt.score})" class="w-full text-left p-5 md:p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-visceral-scarlett/10 hover:border-visceral-scarlett/50 transition-all duration-300 group">
+                        <div class="flex items-start gap-4">
+                            <div class="w-6 h-6 rounded-full border border-gray-600 group-hover:border-visceral-scarlett flex-shrink-0 mt-0.5 flex items-center justify-center">
+                                <div class="w-2 h-2 bg-visceral-scarlett rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            </div>
+                            <span class="text-gray-300 group-hover:text-white font-light text-sm md:text-base leading-relaxed">${opt.text}</span>
+                        </div>
+                    </button>
+                `;
+            });
+
+            contentArea.innerHTML = `
+                <span class="text-gray-500 font-mono text-[10px] tracking-[0.3em] uppercase block mb-4">Parameter 0${index + 1} // 03</span>
+                <h2 class="text-xl md:text-3xl font-cinzel text-white mb-10 leading-tight">${qData.q}</h2>
+                <div class="space-y-4 w-full max-w-2xl mx-auto flex flex-col">
+                    ${optionsHtml}
+                </div>
+            `;
+        }
+
+        function selectOption(score) {
+            totalScore += score;
+            currentQ++;
+            
+            if (currentQ < questions.length) {
+                fadeTransition(() => renderQuestion(currentQ));
+            } else {
+                progressBar.style.width = '100%';
+                fadeTransition(renderCalculation);
+            }
+        }
+
+        function renderCalculation() {
+            contentArea.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-10">
+                    <div class="w-16 h-16 border-t-2 border-r-2 border-visceral-scarlett rounded-full animate-spin mb-8"></div>
+                    <h2 class="text-2xl font-cinzel text-white mb-2 uppercase tracking-widest">Integrating Phase Shift</h2>
+                    <p class="text-gray-500 font-mono text-xs uppercase tracking-[0.3em] animate-pulse">Calculating Infinite Sum (S)...</p>
+                </div>
+            `;
+            
+            setTimeout(() => fadeTransition(renderResult), 2500);
+        }
+
+        function renderResult() {
+            const averageScore = Math.round(totalScore / questions.length);
+            let resultText, accentColor;
+
+            if (averageScore >= 450) {
+                accentColor = "text-visceral-gold";
+                resultText = "You are operating at maximum capacity. You view chaos as raw material and are ready to integrate the full 81-Node architecture to build an infinite legacy.";
+            } else if (averageScore >= 250) {
+                accentColor = "text-[#00e5ff]";
+                resultText = "You possess strong intellectual composure, but you are still relying on logic rather than visceral intuition. It is time to bridge the gap and trigger the Phase Shift.";
+            } else {
+                accentColor = "text-visceral-scarlett";
+                resultText = "You are currently experiencing severe systemic friction. The old paradigm is forcing you into a corner. You require immediate multidimensional alignment.";
+            }
+
+            contentArea.innerHTML = `
+                <span class="${accentColor} font-mono text-xs tracking-[0.3em] uppercase block mb-4">Scan Complete</span>
+                <h2 class="text-5xl md:text-7xl font-cinzel font-bold text-white mb-2">${averageScore} <span class="text-2xl text-gray-500">Hz</span></h2>
+                <p class="text-gray-400 font-mono text-[10px] uppercase tracking-widest mb-10 border-b border-white/10 pb-6 inline-block">Operating Frequency Detected</p>
+                
+                <p class="text-gray-300 font-light leading-relaxed mb-12 max-w-xl mx-auto text-lg">${resultText}</p>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                    <a href="matrix81.html" class="w-full sm:w-auto px-10 py-4 bg-white text-black rounded-sm hover:bg-gray-200 transition duration-300 font-bold uppercase tracking-[0.2em] text-xs shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                        Align The 81 Nodes
+                    </a>
+                </div>
+            `;
+        }
+
+        function fadeTransition(callback) {
+            contentArea.style.opacity = '0';
+            setTimeout(() => {
+                callback();
+                contentArea.style.opacity = '1';
+            }, 500);
+        }
+    </script>
+</body>
+</html>

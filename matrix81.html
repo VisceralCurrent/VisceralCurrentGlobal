@@ -6,7 +6,6 @@
     <title>Visceral Current | The 81-Node Sacred Matrix</title>
     <meta name="theme-color" content="#050a0f">
     
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;600&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     
@@ -60,7 +59,6 @@
             border-radius: 50%;
             background: rgba(255,255,255,0.02);
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
         .glass-panel:hover .node-dot {
@@ -95,9 +93,9 @@
     
     <!-- Ambient Background Glows -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute w-[600px] h-[600px] bg-[#00e5ff]/10 blur-[150px] rounded-full top-[-10%] left-[-10%]"></div>
-        <div class="absolute w-[700px] h-[700px] bg-[#a855f7]/15 blur-[150px] rounded-full top-[20%] right-[20%]"></div>
-        <div class="absolute w-[800px] h-[800px] bg-[#D4AF37]/10 blur-[150px] rounded-full bottom-[-20%] right-[-10%]"></div>
+        <div class="absolute w-[600px] h-[600px] bg-[#00e5ff]/10 blur-[150px] rounded-full top-[-10%] left-[-10%] glow-entity"></div>
+        <div class="absolute w-[700px] h-[700px] bg-[#a855f7]/15 blur-[150px] rounded-full top-[20%] right-[20%] glow-entity"></div>
+        <div class="absolute w-[800px] h-[800px] bg-[#D4AF37]/10 blur-[150px] rounded-full bottom-[-20%] right-[-10%] glow-entity"></div>
     </div>
 
     <!-- Navigation -->
@@ -374,15 +372,17 @@
         // Compile DOM structure efficiently
         realmsData.forEach((realm, index) => {
             let nodesListHTML = '';
-            let dotsHTML = '';
             realm.nodes.forEach((node, i) => {
-                nodesListHTML += `<li id="text-${index}-${i}" onmouseenter="highlightNode(${index}, ${i})" onmouseleave="resetNode(${index}, ${i})" onclick="openQuoteModal(${index}, ${i})" class="text-sm text-gray-400 flex items-center gap-3 cursor-pointer transition-colors py-0.5">
-                    <span class="text-[#D4AF37]/50 text-[10px] font-mono transition-colors">[0${i+1}]</span> 
-                    <span class="border-b border-transparent transition-colors pb-0.5">${node}</span>
+                nodesListHTML += `<li onclick="openQuoteModal(${index}, ${i})" class="text-sm text-gray-400 flex items-center gap-3 cursor-pointer hover:text-white transition-colors group/node py-0.5">
+                    <span class="text-[#D4AF37]/50 text-[10px] font-mono group-hover/node:text-[#00e5ff] transition-colors">[0${i+1}]</span> 
+                    <span class="border-b border-transparent group-hover/node:border-[#00e5ff]/50 transition-colors pb-0.5">${node}</span>
                 </li>`;
-                
-                dotsHTML += `<div id="dot-${index}-${i}" onmouseenter="highlightNode(${index}, ${i})" onmouseleave="resetNode(${index}, ${i})" onclick="openQuoteModal(${index}, ${i})" class="node-dot" title="Node [0${i+1}]: ${node}"></div>`;
             });
+
+            let dotsHTML = '';
+            for(let i=0; i<9; i++) {
+                dotsHTML += `<div class="node-dot"></div>`;
+            }
 
             // Calculate cascade delay based on index for scroll reveal
             const delay = (index % 3) * 100;
@@ -445,41 +445,6 @@
             }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
             newCards.forEach(card => cardObserver.observe(card));
         }, 100);
-
-        // --- NODE INTERACTION LOGIC ---
-        function highlightNode(realmIndex, nodeIndex) {
-            const dot = document.getElementById(`dot-${realmIndex}-${nodeIndex}`);
-            const text = document.getElementById(`text-${realmIndex}-${nodeIndex}`);
-            
-            if (dot) {
-                dot.style.backgroundColor = '#00e5ff';
-                dot.style.boxShadow = '0 0 10px #00e5ff';
-                dot.style.transform = 'scale(1.5)';
-            }
-            if (text) {
-                text.classList.remove('text-gray-400');
-                text.classList.add('text-white');
-                text.children[0].classList.replace('text-[#D4AF37]/50', 'text-[#00e5ff]');
-                text.children[1].classList.replace('border-transparent', 'border-[#00e5ff]/50');
-            }
-        }
-
-        function resetNode(realmIndex, nodeIndex) {
-            const dot = document.getElementById(`dot-${realmIndex}-${nodeIndex}`);
-            const text = document.getElementById(`text-${realmIndex}-${nodeIndex}`);
-            
-            if (dot) {
-                dot.style.backgroundColor = '';
-                dot.style.boxShadow = '';
-                dot.style.transform = '';
-            }
-            if (text) {
-                text.classList.remove('text-white');
-                text.classList.add('text-gray-400');
-                text.children[0].classList.replace('text-[#00e5ff]', 'text-[#D4AF37]/50');
-                text.children[1].classList.replace('border-[#00e5ff]/50', 'border-transparent');
-            }
-        }
 
         // --- MODAL INTERACTION LOGIC ---
         const quoteModal = document.getElementById('quote-modal');

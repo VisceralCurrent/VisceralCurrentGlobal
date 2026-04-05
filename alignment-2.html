@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Codex 81 | Visceral Alignment</title>
+    <title>The Codex 81 | Visceral Alignment (Triad II)</title>
     
-    <!-- Primary Meta Tags -->
     <meta name="theme-color" content="#050a0f">
     
-    <!-- KaTeX for Math Rendering -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     
-    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;600;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -21,7 +18,6 @@
     <style>
         :root {
             --bg-color: #050a0f;
-            /* Electric Blue Starting Values */
             --accent-r: 0;
             --accent-g: 229;
             --accent-b: 255;
@@ -42,12 +38,10 @@
         .border-accent { border-color: var(--accent); }
         .bg-accent { background-color: var(--accent); }
         
-        /* The Ambient Background */
         .chameleon-bg {
             background: radial-gradient(circle at 50% 0%, rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.1) 0%, var(--bg-color) 100%);
         }
 
-        /* Glassmorphism */
         .glass {
             background: rgba(10, 12, 15, 0.6);
             backdrop-filter: blur(16px);
@@ -60,7 +54,6 @@
             box-shadow: 0 10px 40px -10px rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.15);
         }
 
-        /* Node Card Animations */
         .node-card {
             aspect-ratio: 1/1;
             cursor: pointer;
@@ -77,7 +70,6 @@
         }
         .node-card:hover::before { transform: translateX(100%); }
 
-        /* Staggered Node Entrance */
         .node-enter {
             opacity: 0;
             transform: translateY(20px) scale(0.95);
@@ -87,7 +79,6 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Overlay Logic */
         #detail-overlay {
             opacity: 0;
             pointer-events: none;
@@ -103,7 +94,6 @@
             font-weight: 300;
         }
         
-        /* Dynamic Synergetic Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.3); border-radius: 4px; transition: background 0.3s; }
@@ -112,10 +102,8 @@
 </head>
 <body class="chameleon-bg selection:bg-[var(--accent)] selection:text-[#050a0f]">
 
-    <!-- Synchronicity Constellation Canvas -->
     <canvas id="canvas-bg" class="fixed inset-0 -z-10 opacity-40"></canvas>
 
-    <!-- Node Detail Overlay (The Alignment Protocol) -->
     <div id="detail-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#020305]/95 backdrop-blur-xl p-4 md:p-8" onclick="closeDetail()">
         <div class="glass max-w-5xl w-full max-h-[90vh] overflow-y-auto rounded-2xl relative shadow-2xl" onclick="event.stopPropagation()">
             <button class="absolute top-6 right-6 mono text-accent hover:text-white transition uppercase text-xs tracking-widest z-10" onclick="closeDetail()">[ Close ]</button>
@@ -123,20 +111,18 @@
         </div>
     </div>
 
-    <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass px-6 md:px-12 py-4 flex justify-between items-center border-t-0 border-l-0 border-r-0">
         <a href="index.html" class="flex items-center gap-4 group cursor-pointer">
             <div class="w-2 h-2 rounded-full animate-pulse shadow-[0_0_10px_var(--accent)] bg-accent transition-colors duration-300"></div>
             <div class="text-lg cinzel font-black tracking-widest uppercase glow text-white">Visceral Current</div>
         </a>
         <div class="hidden md:flex gap-8 mono text-[10px] uppercase tracking-[0.2em] text-gray-500">
-            <span>Freq: <span class="text-white">528Hz</span></span>
+            <span>Freq: <span class="text-white">639Hz</span></span>
             <span>State: <span class="text-white">Seeking</span></span>
             <span id="sync-status" class="text-accent transition-colors duration-300 font-bold">0% Aligned</span>
         </div>
     </nav>
 
-    <!-- Hero: The Summons -->
     <section class="min-h-[100dvh] flex flex-col justify-center items-center px-6 text-center relative pt-20">
         <div class="mono text-accent text-[10px] md:text-xs mb-8 tracking-[0.5em] md:tracking-[1em] uppercase opacity-70 transition-colors duration-300">
             Total Individual Power Optimization
@@ -153,21 +139,19 @@
         </div>
     </section>
 
-    <!-- The 81 Node Matrix -->
     <section class="py-24 px-4 md:px-12 lg:px-24">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="cinzel text-3xl md:text-4xl font-bold uppercase tracking-widest mb-4">The Mastery 360 Grid <span class="text-accent">// Triad I</span></h2>
+                <h2 class="cinzel text-3xl md:text-4xl font-bold uppercase tracking-widest mb-4">The Mastery 360 Grid <span class="text-accent">// Triad II</span></h2>
                 <p class="mono text-xs text-gray-500 uppercase tracking-[0.2em] mb-8">Select a node to initiate alignment protocol</p>
                 
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="alignment.html" class="px-6 py-2 rounded-sm text-xs tracking-widest uppercase font-bold transition-all" style="border: 1px solid var(--accent); background-color: rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.1); color: var(--accent); box-shadow: 0 0 15px rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.2);">Triad I (01-27)</a>
-                    <a href="alignment-2.html" class="px-6 py-2 border border-white/10 hover:border-white/30 text-gray-400 hover:text-white rounded-sm text-xs tracking-widest uppercase transition-all">Triad II (28-54)</a>
+                    <a href="alignment.html" class="px-6 py-2 border border-white/10 hover:border-white/30 text-gray-400 hover:text-white rounded-sm text-xs tracking-widest uppercase transition-all">Triad I (01-27)</a>
+                    <a href="alignment-2.html" class="px-6 py-2 rounded-sm text-xs tracking-widest uppercase font-bold transition-all" style="border: 1px solid var(--accent); background-color: rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.1); color: var(--accent); box-shadow: 0 0 15px rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.2);">Triad II (28-54)</a>
                     <a href="alignment-3.html" class="px-6 py-2 border border-white/10 hover:border-white/30 text-gray-400 hover:text-white rounded-sm text-xs tracking-widest uppercase transition-all">Triad III (55-81)</a>
                 </div>
             </div>
 
-            <!-- Life Areas Legend -->
             <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-4 mb-12 text-center">
                 <div class="mono text-[9px] md:text-[10px] tracking-widest uppercase text-gray-400 border-b border-white/10 pb-2">I. Ego</div>
                 <div class="mono text-[9px] md:text-[10px] tracking-widest uppercase text-gray-400 border-b border-white/10 pb-2">II. Action</div>
@@ -180,12 +164,10 @@
                 <div class="mono text-[9px] md:text-[10px] tracking-widest uppercase text-gray-400 border-b border-white/10 pb-2">IX. Infinite</div>
             </div>
 
-            <!-- Grid Container -->
             <div class="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-9 gap-2 md:gap-4" id="node-container"></div>
         </div>
     </section>
 
-    <!-- Footer: The Legacy & Integration -->
     <footer class="py-32 text-center px-6 relative overflow-hidden border-t border-white/5">
         <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent z-0"></div>
         <div class="max-w-4xl mx-auto glass p-8 md:p-16 rounded-3xl relative z-10 shadow-2xl">
@@ -208,133 +190,51 @@
     </footer>
 
     <script>
-        // --- CORE DATA ARCHITECTURE ---
         const realms = [
             { 
-                name: "REALM 1: FOUNDATION", 
-                duality: "Force vs. Potentiality", 
-                understanding: {
-                    anchor: "Power vs. Force (Hawkins) & The 48 Laws of Power (Greene). Understanding the raw, heavy mechanics of human nature, manipulation, and the energetic drain of shame, guilt, and pride.",
-                    ascent: "The Seven Spiritual Laws of Success (Chopra). The realization of pure potentiality, where nothing is forced and the universe provides effortlessly.",
-                    balance: "Calibrated Power. Using Greene's worldly laws not to attack, but to build an unbreakable fortress so that Chopra's spiritual laws have a safe, quiet place to reside."
-                },
-                strategy: {
-                    step1Title: "Map the Terrain (Anchor)", step1: "Identify exactly where you are using 'Force' (struggling) in your life and where external forces are manipulating you.",
-                    step2Title: "Drop the Weight (Ascent)", step2: "Practice the Law of Least Effort. Stop defending your ego for 24 hours. Watch how the universe organizes itself around your silence.",
-                    step3Title: "Erect the Temple (Balance)", step3: "Set absolute, impenetrable boundaries while keeping your internal state completely open and unbothered."
-                }
+                name: "REALM 1: FOUNDATION", duality: "Force vs. Potentiality", 
+                understanding: { anchor: "Power vs. Force (Hawkins) & The 48 Laws of Power (Greene). Understanding the raw, heavy mechanics of human nature, manipulation, and the energetic drain of shame, guilt, and pride.", ascent: "The Seven Spiritual Laws of Success (Chopra). The realization of pure potentiality, where nothing is forced and the universe provides effortlessly.", balance: "Calibrated Power. Using Greene's worldly laws not to attack, but to build an unbreakable fortress so that Chopra's spiritual laws have a safe, quiet place to reside." },
+                strategy: { step1Title: "Map the Terrain (Anchor)", step1: "Identify exactly where you are using 'Force' (struggling) in your life and where external forces are manipulating you.", step2Title: "Drop the Weight (Ascent)", step2: "Practice the Law of Least Effort. Stop defending your ego for 24 hours. Watch how the universe organizes itself around your silence.", step3Title: "Erect the Temple (Balance)", step3: "Set absolute, impenetrable boundaries while keeping your internal state completely open and unbothered." }
             },
             { 
-                name: "REALM 2: IDENTITY", 
-                duality: "The Labels of the Past vs. The Void of 'No-Self'", 
-                understanding: {
-                    anchor: "The 'Prisoner,' the 'Addict,' the 'Foster Child.' The heavy labels placed upon you by the system (the 12-year absence, the crashes).",
-                    ascent: "The Book: On the Taboo Against Knowing Who You Are (Watts). The realization that you are 'nothing special'—just the universe experiencing itself.",
-                    balance: "The Architect of Legacy. Taking the labels of the past and mathematically converting them into Phase Shifts (\\(\\phi\\))."
-                },
-                strategy: {
-                    step1Title: "Own the Rap Sheet (Anchor)", step1: "Write down every failure, every crash, and every label you've run from. Do not hide from them. They are raw data.",
-                    step2Title: "Dissolve the Story (Ascent)", step2: "Meditate on the absolute insignificance of your personal drama in the face of the cosmos.",
-                    step3Title: "Build the Empire (Balance)", step3: "Use the data of your past to build a legacy. You act not to 'clear your name,' but to show those coming after you the man you chose to become."
-                }
+                name: "REALM 2: IDENTITY", duality: "The Labels of the Past vs. The Void of 'No-Self'", 
+                understanding: { anchor: "The 'Prisoner,' the 'Addict,' the 'Foster Child.' The heavy labels placed upon you by the system (the 12-year absence, the crashes).", ascent: "The Book: On the Taboo Against Knowing Who You Are (Watts). The realization that you are 'nothing special'—just the universe experiencing itself.", balance: "The Architect of Legacy. Taking the labels of the past and mathematically converting them into Phase Shifts (\\(\\phi\\))." },
+                strategy: { step1Title: "Own the Rap Sheet (Anchor)", step1: "Write down every failure, every crash, and every label you've run from. Do not hide from them. They are raw data.", step2Title: "Dissolve the Story (Ascent)", step2: "Meditate on the absolute insignificance of your personal drama in the face of the cosmos.", step3Title: "Build the Empire (Balance)", step3: "Use the data of your past to build a legacy. You act not to 'clear your name,' but to show those coming after you the man you chose to become." }
             },
             { 
-                name: "REALM 3: ACTION", 
-                duality: "Brutal Grind vs. Passive Dreaming", 
-                understanding: {
-                    anchor: "Pure ambition, hustle culture, 'making things happen' through sheer willpower, leading to eventual burnout.",
-                    ascent: "The Way of the Peaceful Warrior (Millman). Wu-wei. Action through non-action.",
-                    balance: "Visceral Momentum. Applying the frequency equation: \\(V(t) = A \\sin(2\\pi ft + \\phi)\\). You find the exact resonance where discipline becomes effortless."
-                },
-                strategy: {
-                    step1Title: "Audit the Friction (Anchor)", step1: "Where are you burning the most energy for the least return? Cut the inefficient actions immediately.",
-                    step2Title: "Find the Silence (Ascent)", step2: "Before any major move, pause until you feel a 'gut-level' truth guiding you. If it's frantic, don't move.",
-                    step3Title: "Strike with Certainty (Balance)", step3: "When the frequency aligns, move with absolute, devastating precision. No hesitation."
-                }
+                name: "REALM 3: ACTION", duality: "Brutal Grind vs. Passive Dreaming", 
+                understanding: { anchor: "Pure ambition, hustle culture, 'making things happen' through sheer willpower, leading to eventual burnout.", ascent: "The Way of the Peaceful Warrior (Millman). Wu-wei. Action through non-action.", balance: "Visceral Momentum. Applying the frequency equation: \\(V(t) = A \\sin(2\\pi ft + \\phi)\\). You find the exact resonance where discipline becomes effortless." },
+                strategy: { step1Title: "Audit the Friction (Anchor)", step1: "Where are you burning the most energy for the least return? Cut the inefficient actions immediately.", step2Title: "Find the Silence (Ascent)", step2: "Before any major move, pause until you feel a 'gut-level' truth guiding you. If it's frantic, don't move.", step3Title: "Strike with Certainty (Balance)", step3: "When the frequency aligns, move with absolute, devastating precision. No hesitation." }
             },
             { 
-                name: "REALM 4: CONFLICT", 
-                duality: "War vs. Pacifism", 
-                understanding: {
-                    anchor: "The 33 Strategies of War (Greene). Viewing the world as a zero-sum game of competitors and threats.",
-                    ascent: "The Teachings of Don Juan (Castaneda). Stepping entirely outside the battlefield. Stopping the internal dialogue and viewing adversaries not as enemies, but as energy currents.",
-                    balance: "Strategic Synergy. Operating at such a high frequency of authentic power that competition becomes irrelevant."
-                },
-                strategy: {
-                    step1Title: "Anticipate the Strike (Anchor)", step1: "Read the board. Know your competitors, understand the market, and foresee the challenges before they arrive.",
-                    step2Title: "Shift the Paradigm (Ascent)", step2: "Refuse to engage in petty squabbles. Step back and view the 'conflict' as a cosmic lesson designed specifically for your refinement.",
-                    step3Title: "Disarm Through Value (Balance)", step3: "Win the war by providing so much undeniable value and synergetic connection to your Tribe that your 'enemies' are rendered obsolete."
-                }
+                name: "REALM 4: CONFLICT", duality: "War vs. Pacifism", 
+                understanding: { anchor: "The 33 Strategies of War (Greene). Viewing the world as a zero-sum game of competitors and threats.", ascent: "The Teachings of Don Juan (Castaneda). Stepping entirely outside the battlefield. Stopping the internal dialogue and viewing adversaries not as enemies, but as energy currents.", balance: "Strategic Synergy. Operating at such a high frequency of authentic power that competition becomes irrelevant." },
+                strategy: { step1Title: "Anticipate the Strike (Anchor)", step1: "Read the board. Know your competitors, understand the market, and foresee the challenges before they arrive.", step2Title: "Shift the Paradigm (Ascent)", step2: "Refuse to engage in petty squabbles. Step back and view the 'conflict' as a cosmic lesson designed specifically for your refinement.", step3Title: "Disarm Through Value (Balance)", step3: "Win the war by providing so much undeniable value and synergetic connection to your Tribe that your 'enemies' are rendered obsolete." }
             },
             { 
-                name: "REALM 5: INTELLECT", 
-                duality: "Rigid Dogma vs. Ungrounded Mysticism", 
-                understanding: {
-                    anchor: "The Great Books / Classical Logic. The analytical, rigid structure of the 3D reality. The rules, the math, the syntax.",
-                    ascent: "Zen philosophies, Wayne Dyer's Wishes Fulfilled. The realm of intuition, imagination, and the unseen.",
-                    balance: "The Surgical Mind. Sharpening the intellect to a razor's edge using logic, but allowing intuition to guide the hand that holds the blade."
-                },
-                strategy: {
-                    step1Title: "Study the Masters (Anchor)", step1: "Read heavily. Understand how the world works. Master the technical skills (like building professional websites).",
-                    step2Title: "Trust the Gut (Ascent)", step2: "When logic fails or overcomplicates, sit in the silence and wait for the 'knowing' to arrive.",
-                    step3Title: "Execute the Code (Balance)", step3: "Build systems based on deep spiritual truths but executed with flawless, professional, technical precision."
-                }
+                name: "REALM 5: INTELLECT", duality: "Rigid Dogma vs. Ungrounded Mysticism", 
+                understanding: { anchor: "The Great Books / Classical Logic. The analytical, rigid structure of the 3D reality. The rules, the math, the syntax.", ascent: "Zen philosophies, Wayne Dyer's Wishes Fulfilled. The realm of intuition, imagination, and the unseen.", balance: "The Surgical Mind. Sharpening the intellect to a razor's edge using logic, but allowing intuition to guide the hand that holds the blade." },
+                strategy: { step1Title: "Study the Masters (Anchor)", step1: "Read heavily. Understand how the world works. Master the technical skills (like building professional websites).", step2Title: "Trust the Gut (Ascent)", step2: "When logic fails or overcomplicates, sit in the silence and wait for the 'knowing' to arrive.", step3Title: "Execute the Code (Balance)", step3: "Build systems based on deep spiritual truths but executed with flawless, professional, technical precision." }
             },
             { 
-                name: "REALM 6: FREQUENCY", 
-                duality: "Despair vs. Toxic Positivity", 
-                understanding: {
-                    anchor: "The depths of grief, the 'water and light' trauma of the beginning, the isolation of a prison cell.",
-                    ascent: "The 528 Hz frequency, the awe of the universe, unshakeable joy.",
-                    balance: "The Alchemist. You do not ignore the pain; you use it as the dense material required to spark the fire of transformation."
-                },
-                strategy: {
-                    step1Title: "Feel the Gravity (Anchor)", step1: "When heavy emotions hit, do not numb them. Sit with them. Measure their weight.",
-                    step2Title: "Locate the Miracle (Ascent)", step2: "Seek out the awe in the world. Look at a summer storm rolling in, recognize the mathematical majesty of a cloud formation.",
-                    step3Title: "Transmute the Energy (Balance)", step3: "Use the pain of the past as the exact fuel source required to project your new reality into existence."
-                }
+                name: "REALM 6: FREQUENCY", duality: "Despair vs. Toxic Positivity", 
+                understanding: { anchor: "The depths of grief, the 'water and light' trauma of the beginning, the isolation of a prison cell.", ascent: "The 528 Hz frequency, the awe of the universe, unshakeable joy.", balance: "The Alchemist. You do not ignore the pain; you use it as the dense material required to spark the fire of transformation." },
+                strategy: { step1Title: "Feel the Gravity (Anchor)", step1: "When heavy emotions hit, do not numb them. Sit with them. Measure their weight.", step2Title: "Locate the Miracle (Ascent)", step2: "Seek out the awe in the world. Look at a summer storm rolling in, recognize the mathematical majesty of a cloud formation.", step3Title: "Transmute the Energy (Balance)", step3: "Use the pain of the past as the exact fuel source required to project your new reality into existence." }
             },
             { 
-                name: "REALM 7: TIME", 
-                duality: "Burden of the Past vs. Illusion of the Future", 
-                understanding: {
-                    anchor: "Regret. The 12-year absence. The chronological timeline of dates (10/5/20, 10/22/92) that lock us into a linear narrative of 'lost time.'",
-                    ascent: "The Eternal Now. The spiritual truth that the past is a memory and the future is an imagination.",
-                    balance: "The Phase Shift. Recognizing that time is not a cage, but a variable of refinement. Every detour was mathematically required to put you at this exact coordinate."
-                },
-                strategy: {
-                    step1Title: "Acknowledge the Timeline (Anchor)", step1: "Document your history. Respect the chronological path that brought you here.",
-                    step2Title: "Enter the Present (Ascent)", step2: "Bring all your focus, power, and capability into the current second. Breathe into the 'now.'",
-                    step3Title: "Calculate the Return (Balance)", step3: "See your 'lost time' not as a deficit, but as a Phase Shift (\\(\\phi\\)). You spent 12 years gathering the exact data required to launch the empire."
-                }
+                name: "REALM 7: TIME", duality: "Burden of the Past vs. Illusion of the Future", 
+                understanding: { anchor: "Regret. The 12-year absence. The chronological timeline of dates (10/5/20, 10/22/92) that lock us into a linear narrative of 'lost time.'", ascent: "The Eternal Now. The spiritual truth that the past is a memory and the future is an imagination.", balance: "The Phase Shift. Recognizing that time is not a cage, but a variable of refinement. Every detour was mathematically required to put you at this exact coordinate." },
+                strategy: { step1Title: "Acknowledge the Timeline (Anchor)", step1: "Document your history. Respect the chronological path that brought you here.", step2Title: "Enter the Present (Ascent)", step2: "Bring all your focus, power, and capability into the current second. Breathe into the 'now.'", step3Title: "Calculate the Return (Balance)", step3: "See your 'lost time' not as a deficit, but as a Phase Shift (\\(\\phi\\)). You spent 12 years gathering the exact data required to launch the empire." }
             },
             { 
-                name: "REALM 8: PURPOSE", 
-                duality: "Selfish Gain vs. Martyrdom", 
-                understanding: {
-                    anchor: "Pursuing success purely for survival, status, or to prove others wrong.",
-                    ascent: "Dharma. Giving everything away, losing yourself entirely in the service of others.",
-                    balance: "The Infinite Sum. Building immense wealth and power so that you can distribute it endlessly to your Tribe and your bloodline."
-                },
-                strategy: {
-                    step1Title: "Define the Metric (Anchor)", step1: "Decide exactly what success looks like in the material world (revenue, reach, structure).",
-                    step2Title: "Align the Soul (Ascent)", step2: "Ensure that the pursuit of that metric honors the 'Star-written' destiny of your soul.",
-                    step3Title: "Initiate the Flow (Balance)", step3: "Build the business (VanFlowCo) so that the bigger it gets, the more deeply it connects (C) people to their own truth."
-                }
+                name: "REALM 8: PURPOSE", duality: "Selfish Gain vs. Martyrdom", 
+                understanding: { anchor: "Pursuing success purely for survival, status, or to prove others wrong.", ascent: "Dharma. Giving everything away, losing yourself entirely in the service of others.", balance: "The Infinite Sum. Building immense wealth and power so that you can distribute it endlessly to your Tribe and your bloodline." },
+                strategy: { step1Title: "Define the Metric (Anchor)", step1: "Decide exactly what success looks like in the material world (revenue, reach, structure).", step2Title: "Align the Soul (Ascent)", step2: "Ensure that the pursuit of that metric honors the 'Star-written' destiny of your soul.", step3Title: "Initiate the Flow (Balance)", step3: "Build the business (VanFlowCo) so that the bigger it gets, the more deeply it connects (C) people to their own truth." }
             },
             { 
-                name: "REALM 9: LEGACY", 
-                duality: "Isolation vs. The Collective", 
-                understanding: {
-                    anchor: "The lonely journey. The foster child abandoned. The individual struggling against the world.",
-                    ascent: "Universal consciousness. The belief that we are all one entity.",
-                    balance: "The Global Codex. Taking the most intensely personal, painful parts of your individual story and structuring them so perfectly that they become a universal map for others."
-                },
-                strategy: {
-                    step1Title: "Heal the Origin (Anchor)", step1: "Forgive the origin story. Accept the abandonment and the incarcerations as the required curriculum for your specific degree in human nature.",
-                    step2Title: "Recognize the Mirror (Ascent)", step2: "See yourself in the client. Realize that every person who comes to Visceral Current is just another version of you, looking for the way home.",
-                    step3Title: "Publish the Equation (Balance)", step3: "Let the world see the empire you built. By being an undeniable example of transformation, your personal legacy becomes a public roadmap."
-                }
+                name: "REALM 9: LEGACY", duality: "Isolation vs. The Collective", 
+                understanding: { anchor: "The lonely journey. The foster child abandoned. The individual struggling against the world.", ascent: "Universal consciousness. The belief that we are all one entity.", balance: "The Global Codex. Taking the most intensely personal, painful parts of your individual story and structuring them so perfectly that they become a universal map for others." },
+                strategy: { step1Title: "Heal the Origin (Anchor)", step1: "Forgive the origin story. Accept the abandonment and the incarcerations as the required curriculum for your specific degree in human nature.", step2Title: "Recognize the Mirror (Ascent)", step2: "See yourself in the client. Realize that every person who comes to Visceral Current is just another version of you, looking for the way home.", step3Title: "Publish the Equation (Balance)", step3: "Let the world see the empire you built. By being an undeniable example of transformation, your personal legacy becomes a public roadmap." }
             }
         ];
 
@@ -350,26 +250,25 @@
             { quote: "He who has a why to live can bear almost any how.", author: "Friedrich Nietzsche", principle: "Purpose bridges the gap between chaos and order." }
         ];
 
-        // Generate 27 Nodes for Triad I (Nodes 1 - 27)
+        // Generate 27 Nodes for Triad II (Nodes 28 - 54)
         const nodes = Array.from({length: 27}, (_, i) => {
-            const realmIdx = Math.floor(i / 9);
+            const realmIdx = Math.floor(i / 9) + 3;
             const libIdx = i % 9;
             return {
-                id: i + 1,
+                id: i + 28,
                 realm: realms[realmIdx],
                 insight: libraryData[libIdx]
             };
         });
 
-        // --- 528Hz VISCERAL AUDIO ENGINE ---
         let audioCtx, oscillator, gainNode;
         function initAudio() {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 oscillator = audioCtx.createOscillator();
                 gainNode = audioCtx.createGain();
-                oscillator.type = 'sine'; // Pure mathematical wave
-                oscillator.frequency.value = 528; // The Miracle Resonance
+                oscillator.type = 'sine';
+                oscillator.frequency.value = 639; // 639Hz Frequency for Triad II
                 gainNode.gain.value = 0;
                 oscillator.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
@@ -391,11 +290,9 @@
             }
         }
 
-        // Initialize Grid
         const container = document.getElementById('node-container');
         nodes.forEach((node, index) => {
             const el = document.createElement('div');
-            // Add node-enter class and calculate staggered delay
             el.className = 'node-card glass group flex flex-col items-center justify-center rounded-lg border border-white/5 transition-colors duration-300 node-enter';
             el.style.animationDelay = `${index * 15}ms`;
             
@@ -404,7 +301,6 @@
                 <div class="cinzel text-accent font-bold text-lg md:text-xl group-hover:scale-125 transition-transform duration-300">${node.id}</div>
             `;
             
-            // Majestic 3D Tilt Effect on Hover (Desktop Only)
             if (window.matchMedia("(pointer: fine)").matches) {
                 el.addEventListener('mousemove', (e) => {
                     const rect = el.getBoundingClientRect();
@@ -425,19 +321,16 @@
             container.appendChild(el);
         });
 
-        // --- UI DETAIL LOGIC (MODAL) ---
         function showDetail(node) {
-            playResonance(); // Trigger 528Hz Audio
+            playResonance();
             const overlay = document.getElementById('detail-overlay');
             const content = document.getElementById('detail-content');
             
             content.innerHTML = `
                 <div class="grid lg:grid-cols-2 gap-10 items-start">
-                    <!-- Left: The 3-Fold Understanding -->
                     <div>
                         <div class="mono text-accent text-xs mb-4 uppercase tracking-[0.2em] font-bold">${node.realm.name} Realm // Node ${node.id}</div>
                         <h2 class="cinzel text-3xl md:text-4xl font-black mb-8 uppercase leading-[1.1] tracking-wide text-white">${node.realm.duality}</h2>
-                        
                         <div class="space-y-6">
                             <div class="pl-4 border-l-2 border-gray-600">
                                 <span class="block mono text-[10px] text-gray-400 uppercase tracking-widest mb-1">The Anchor (Low-Frequency)</span>
@@ -453,23 +346,16 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Right: The 3-Fold Strategy & Application -->
                     <div class="bg-black/40 border border-white/10 rounded-xl p-6 md:p-8 inset-shadow flex flex-col h-full relative overflow-hidden">
-                        <!-- Top Progress Bar -->
                         <div class="absolute top-0 left-0 w-full h-1 bg-white/5">
                             <div id="modal-progress-bar" class="h-full bg-accent w-0 transition-all duration-[2400ms] ease-out shadow-[0_0_15px_var(--accent)]"></div>
                         </div>
-
                         <div class="flex justify-between items-end mb-6 border-b border-white/10 pb-4">
                             <h3 class="cinzel text-xl text-white uppercase tracking-widest">The 3-Fold Strategy</h3>
                             <span id="modal-progress-text" class="mono text-[10px] text-accent tracking-[0.2em] font-bold">0% INTEGRATED</span>
                         </div>
-                        
                         <div class="space-y-6 flex-1 relative pl-5 border-l border-white/10 ml-2">
-                            <!-- Vertical Progress Line -->
                             <div id="modal-progress-line" class="absolute top-0 -left-[1px] w-[2px] bg-accent h-0 transition-all duration-[2400ms] ease-out shadow-[0_0_10px_var(--accent)]"></div>
-                            
                             <div class="strategy-step opacity-0 translate-x-4 transition-all duration-700 relative">
                                 <div class="absolute -left-[25px] top-1.5 w-2 h-2 rounded-full bg-accent shadow-[0_0_8px_var(--accent)] scale-0 transition-transform duration-300 step-dot"></div>
                                 <span class="block mono text-[10px] text-gray-500 uppercase tracking-widest mb-1">I. ${node.realm.strategy.step1Title}</span>
@@ -486,7 +372,6 @@
                                 <p class="text-sm text-white font-medium">${node.realm.strategy.step3}</p>
                             </div>
                         </div>
-
                         <div class="pt-8 mt-8 border-t border-white/5 strategy-step opacity-0 translate-y-4 transition-all duration-700">
                             <span class="block mono text-[10px] text-gray-500 uppercase mb-3 tracking-[0.2em]">Node Insight (\(\\nu\))</span>
                             <p class="text-sm font-light text-gray-400 mb-6 italic">"${node.insight.quote}" — ${node.insight.author}</p>
@@ -499,12 +384,8 @@
             `;
             
             overlay.classList.add('active');
-            // Trigger MathJax on newly injected dynamic math content
-            if(window.katex) {
-                renderMathInElement(content, { delimiters: [{left: "\\(", right: "\\)", display: false}] });
-            }
+            if(window.katex) renderMathInElement(content, { delimiters: [{left: "\\(", right: "\\)", display: false}] });
             
-            // Trigger Progress Animations
             setTimeout(() => {
                 const progressBar = document.getElementById('modal-progress-bar');
                 const progressLine = document.getElementById('modal-progress-line');
@@ -515,18 +396,13 @@
                 if(progressBar) progressBar.style.width = '100%';
                 if(progressLine) progressLine.style.height = '100%';
                 
-                // Animate text counter
                 let pct = 0;
                 const counter = setInterval(() => {
                     pct += 2;
-                    if(pct >= 100) {
-                        pct = 100;
-                        clearInterval(counter);
-                    }
+                    if(pct >= 100) { pct = 100; clearInterval(counter); }
                     if(progressText) progressText.innerText = `${pct}% INTEGRATED`;
-                }, 48); // Synchronized to ~2400ms duration
+                }, 48);
 
-                // Reveal steps sequentially
                 steps.forEach((step, idx) => {
                     setTimeout(() => {
                         step.classList.remove('opacity-0', 'translate-x-4', 'translate-y-4');
@@ -537,12 +413,10 @@
         }
 
         function closeDetail() {
-            stopResonance(); // Fade out 528Hz Audio
+            stopResonance();
             document.getElementById('detail-overlay').classList.remove('active');
         }
 
-        // --- THE CHAMELEON ENGINE ---
-        // Mathematically interpolates RGB from Electric Blue (#00e5ff) to Visceral Gold (#d4af37)
         window.addEventListener('scroll', () => {
             const scrollH = document.documentElement.scrollHeight - window.innerHeight;
             const pct = Math.min(Math.max(window.scrollY / scrollH, 0), 1);
@@ -557,19 +431,15 @@
             
             const alignPct = Math.round(pct * 100);
             document.getElementById('sync-status').innerText = `${alignPct}% Aligned`;
-            
-            // Canvas fades out slightly at the bottom to focus on the text
             canvas.style.opacity = 0.4 - (pct * 0.2);
         });
 
-        // --- CONSTELLATION CANVAS ENGINE ---
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let particles = [];
         const connectionDistance = 150;
 
         function initCanvas() {
-            // High DPI (Retina) Support
             const dpr = window.devicePixelRatio || 1;
             canvas.width = window.innerWidth * dpr;
             canvas.height = window.innerHeight * dpr;
@@ -587,8 +457,6 @@
 
         function draw() {
             ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-            
-            // Pull dynamic RGB color from root
             const rootStyles = getComputedStyle(document.documentElement);
             const r = rootStyles.getPropertyValue('--accent-r').trim();
             const g = rootStyles.getPropertyValue('--accent-g').trim();
@@ -598,8 +466,6 @@
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
-
-                    // Performance optimization: square distance check avoids expensive Math.sqrt when possible
                     const distSq = dx * dx + dy * dy;
                     const connDistSq = connectionDistance * connectionDistance;
 
@@ -625,19 +491,13 @@
                 ctx.fill();
             });
             
-            if (!document.hidden) {
-                requestAnimationFrame(draw);
-            } else {
-                setTimeout(() => requestAnimationFrame(draw), 200); // Throttled idle loop
-            }
+            if (!document.hidden) requestAnimationFrame(draw);
+            else setTimeout(() => requestAnimationFrame(draw), 200);
         }
 
-        // --- INITIALIZATION ---
         window.addEventListener('load', () => {
             initCanvas();
             draw();
-            
-            // Initialize KaTeX Math
             if (window.katex) {
                 katex.render("A = \\int_{p}^{o} (\\nu \\cdot \\phi) \\, dt = \\infty", document.getElementById('hero-math'), { displayMode: true });
                 katex.render("S = \\lim_{t \\to \\infty} \\sum_{n=1}^{81} \\frac{P \\cdot C}{\\phi^n}", document.getElementById('footer-math'), { displayMode: true });

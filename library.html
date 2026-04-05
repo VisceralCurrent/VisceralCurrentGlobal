@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visceral Current | Library of Resonance</title>
+    <meta name="theme-color" content="#050a0f">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- MathJax for Equations -->
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            chtml: { displayAlign: 'center' }
+        };
+    </script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased bg-[#050a0f] text-white selection:bg-[#D4AF37]/30 selection:text-black overflow-x-hidden">
+
+    <!-- Ambient Background Glows -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute w-[800px] h-[800px] bg-[#D4AF37]/5 blur-[150px] rounded-full top-[-20%] left-[-20%] glow-entity"></div>
+        <div class="absolute w-[600px] h-[600px] bg-[#00e5ff]/5 blur-[150px] rounded-full bottom-[10%] right-[-10%] glow-entity"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-panel py-4 px-6 md:px-12 flex justify-between items-center border-t-0 border-l-0 border-r-0 bg-[#050a0f]/80 backdrop-blur-md border-b border-white/10">
+        <a href="index.html" class="flex items-center gap-4 group cursor-pointer">
+            <div class="w-8 h-8 border border-[#D4AF37]/80 rounded-sm flex items-center justify-center rotate-45 group-hover:bg-[#D4AF37]/10 transition-colors">
+                <span class="text-[#D4AF37] font-bold -rotate-45 text-xs">VC</span>
+            </div>
+            <span class="font-cinzel text-lg tracking-[0.2em] font-bold text-white uppercase group-hover:text-[#D4AF37] transition-colors">Visceral Current</span>
+        </a>
+        <div class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-mono">
+            Archive: <span class="text-[#D4AF37]">Library of Resonance</span>
+        </div>
+    </nav>
+
+    <!-- Mastery 360: Library of Resonance -->
+    <section class="pt-40 pb-32 px-6 relative z-10 min-h-screen">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24 reveal active">
+                <span class="text-[#D4AF37] font-mono text-xs tracking-[0.3em] uppercase block mb-3">Mastery 360</span>
+                <h1 class="text-4xl md:text-6xl font-cinzel font-bold text-white tracking-wide">The Library of Resonance</h1>
+                <div class="w-24 h-[1px] bg-[#D4AF37]/50 mx-auto mt-8 mb-8"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">Each node acts as a resonance chamber across the multiverse. Below are the decrypted architectural blueprints for the first three primary sectors.</p>
+            </div>
+
+            <div class="space-y-24">
+                <!-- Sector I -->
+                <div class="space-y-8 reveal active">
+                    <div class="border-b border-[#D4AF37]/30 pb-4">
+                        <h4 class="text-2xl font-cinzel font-bold text-white uppercase tracking-widest"><span class="text-[#D4AF37] mr-2">Sector I:</span> Power &amp; Strategy</h4>
+                        <p class="text-xs text-gray-500 font-mono tracking-widest uppercase mt-2">Focus: Navigating the mechanics of human interaction.</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="node-card glass-panel bg-[#0f1115]/60 p-6 rounded-lg border-l-2 border-l-[#D4AF37]/50 hover:border-l-[#D4AF37] transition-colors cursor-pointer group" onclick="toggleAccordion(this)">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="font-mono text-[#D4AF37] text-lg">Node 01</span>
+                                <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+                            </div>
+                            <p class="text-sm text-white font-medium mb-1">The 48 Laws of Power, The 33 Strategies of War</p>
+                            <p class="text-[10px] text-gray-500 uppercase tracking-widest font-mono mb-2">Power &amp; Strategy</p>
+                            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 opacity-0">
+                                <div class="pt-4 mt-2 border-t border-white/10 space-y-3">
+                                    <p class="text-xs text-gray-400 mb-3"><span class="text-[#D4AF37]">Resonance:</span> Leverage, Timing, Discretion, Adaptability</p>
+                                    <div class="text-[11px] text-gray-500 space-y-2 font-mono">
+                                        <p><strong class="text-white">Light:</strong> Master leverage to maximize Area of Impact (A).</p>
+                                        <p><strong class="text-gray-400">Shadow:</strong> Recognize deception and ruthless dominance.</p>
+                                        <p><strong class="text-[#D4AF37]">Synthesis:</strong> Perform a Phase Shift (\(\phi\)) to command 528 Hz.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="node-card glass-panel bg-[#0f1115]/60 p-6 rounded-lg border-l-2 border-l-[#D4AF37]/30 hover:border-l-[#D4AF37] transition-colors cursor-pointer group" onclick="toggleAccordion(this)">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="font-mono text-[#D4AF37] text-lg">Node 02</span>
+                                <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+                            </div>
+                            <p class="text-sm text-white font-medium mb-1">The Art of War, The Prince, The 50th Law</p>
+                            <p class="text-[10px] text-gray-500 uppercase tracking-widest font-mono mb-2">Tactical Efficiency</p>
+                            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 opacity-0">
+                                <div class="pt-4 mt-2 border-t border-white/10 space-y-3">
+                                    <p class="text-xs text-gray-400 mb-3"><span class="text-[#D4AF37]">Resonance:</span> Terrain, Logistics, Morale, Intelligence</p>
+                                    <div class="text-[11px] text-gray-500 space-y-2 font-mono">
+                                        <p><strong class="text-white">Light:</strong> Calculate Infinite Sum (S) of strategic alliances.</p>
+                                        <p><strong class="text-gray-400">Shadow:</strong> Exploit structural vulnerability and momentum.</p>
+                                        <p><strong class="text-[#D4AF37]">Synthesis:</strong> Deploy silent, absolute force with precision.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="node-card glass-panel bg-[#0f1115]/60 p-6 rounded-lg border-l-2 border-l-[#D4AF37]/30 hover:border-l-[#D4AF37] transition-colors cursor-pointer group" onclick="toggleAccordion(this)">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="font-mono text-[#D4AF37] text-lg">Node 03</span>
+                                <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+                            </div>
+                            <p class="text-sm text-white font-medium mb-1">Laws of Human Nature, The Daily Laws</p>
+                            <p class="text-[10px] text-gray-500 uppercase tracking-widest font-mono mb-2">Psychological Mapping</p>
+                            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 opacity-0">
+                                <div class="pt-4 mt-2 border-t border-white/10 space-y-3">
+                                    <p class="text-xs text-gray-400 mb-3"><span class="text-[#D4AF37]">Resonance:</span> Envy, Narcissism, Purpose, Empathy</p>
+                                    <div class="text-[11px] text-gray-500 space-y-2 font-mono">
+                                        <p><strong class="text-white">Light:</strong> Coax a client into action through deep understanding.</p>
+                                        <p><strong class="text-gray-400">Shadow:</strong> Navigate compulsion and short-sightedness.</p>
+                                        <p><strong class="text-[#D4AF37]">Synthesis:</strong> Audit the Codex for emotional boundaries.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sector II & III Grid -->
+                <div class="grid lg:grid-cols-2 gap-12 reveal active">
+                    <div class="space-y-8">
+                        <div class="border-b border-[#00e5ff]/30 pb-4">
+                            <h4 class="text-2xl font-cinzel font-bold text-white uppercase tracking-widest"><span class="text-[#00e5ff] mr-2">Sector II:</span> Consciousness</h4>
+                            <p class="text-xs text-gray-500 font-mono tracking-widest uppercase mt-2">Focus: Aligning with the certainty of synchronicity.</p>
+                        </div>
+                        <div class="node-card glass-panel bg-[#0f1115]/60 p-6 rounded-lg border-l-2 border-l-blue-900/50 hover:border-l-blue-500 transition-colors cursor-pointer group" onclick="toggleAccordion(this)">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="font-mono text-blue-400 text-lg">Node 10</span>
+                                <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+                            </div>
+                            <p class="text-sm text-white font-medium mb-2">Power vs. Force, Letting Go, Map of Consciousness</p>
+                            <p class="text-[10px] text-gray-500 uppercase tracking-widest font-mono mb-2">Consciousness Scale</p>
+                            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 opacity-0">
+                                <div class="pt-4 mt-2 border-t border-white/10 space-y-3">
+                                    <p class="text-xs text-gray-400 mb-3"><span class="text-blue-400">Resonance:</span> Calibration, Integrity, Courage, Reason</p>
+                                    <div class="text-[11px] text-gray-500 space-y-2 font-mono">
+                                        <p><strong class="text-white">Light:</strong> Calibrate project Area of Impact against the Log Scale.</p>
+                                        <p><strong class="text-gray-400">Shadow:</strong> Identify hidden pride or fear dictating decisions.</p>
+                                        <p><strong class="text-blue-400">Synthesis:</strong> Release resistance; shift from forcing to flowing.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div class="border-b border-[#ef4444]/30 pb-4">
+                            <h4 class="text-2xl font-cinzel font-bold text-white uppercase tracking-widest"><span class="text-[#ef4444] mr-2">Sector III:</span> Warrior</h4>
+                            <p class="text-xs text-gray-500 font-mono tracking-widest uppercase mt-2">Focus: Breaking the mirrors of self-reflection.</p>
+                        </div>
+                        <div class="node-card glass-panel bg-[#0f1115]/60 p-6 rounded-lg border-l-2 border-l-red-900/50 hover:border-l-red-500 transition-colors cursor-pointer group" onclick="toggleAccordion(this)">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="font-mono text-red-400 text-lg">Node 19</span>
+                                <i class="fas fa-chevron-down text-gray-600 transition-transform duration-300"></i>
+                            </div>
+                            <p class="text-sm text-white font-medium mb-2">Journey to Ixtlan, A Separate Reality, Don Juan</p>
+                            <p class="text-[10px] text-gray-500 uppercase tracking-widest font-mono mb-2">The Warrior's Path</p>
+                            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 opacity-0">
+                                <div class="pt-4 mt-2 border-t border-white/10 space-y-3">
+                                    <p class="text-xs text-gray-400 mb-3"><span class="text-red-400">Resonance:</span> Awareness, Stalking, Intent, The Flyer</p>
+                                    <div class="text-[11px] text-gray-500 space-y-2 font-mono">
+                                        <p><strong class="text-white">Light:</strong> Build the Codex for the Dreaming body.</p>
+                                        <p><strong class="text-gray-400">Shadow:</strong> Confront the Flyer and internal dialogue.</p>
+                                        <p><strong class="text-red-400">Synthesis:</strong> Erase a Phase Shift (\(\phi\)) &amp; stalk with silence.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center pt-16 reveal active">
+                    <button class="text-xs font-mono tracking-[0.3em] text-gray-500 hover:text-[#D4AF37] transition-colors uppercase border-b border-dashed border-gray-700 hover:border-[#D4AF37] pb-1">
+                        Awaiting Decryption: Sectors V - IX
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center border-t border-white/5 relative z-10 bg-[#050a0f]">
+        <p class="text-gray-500 text-xs tracking-[0.4em] uppercase font-mono">Visceral Current Global &copy; 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

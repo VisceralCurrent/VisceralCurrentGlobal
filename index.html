@@ -29,9 +29,6 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
     <!-- Fonts & Icons -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -50,42 +47,6 @@
 
     <!-- Three.js for 3D Interactive Modal (Deferred to prevent render blocking) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        visceral: {
-                            gold: '#00e5ff',
-                            dark: '#050a0f',
-                            card: 'rgba(15, 17, 21, 0.65)',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                        cinzel: ['Cinzel', 'serif'],
-                    },
-                    animation: {
-                        'slow-spin': 'spin 20s linear infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        pulseGlow: {
-                            '0%, 100%': { opacity: 0.4, transform: 'scale(1)' },
-                            '50%': { opacity: 0.8, transform: 'scale(1.05)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -120,16 +81,16 @@
     </script>
 
     <!-- Cinematic Video Background -->
-    <video id="background-video" class="fixed inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-80 blur-[2px] scale-105" autoplay loop muted playsinline>
+    <video id="background-video" class="fixed inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-80 blur-[2px] scale-105 will-change-transform transform-gpu" autoplay loop muted playsinline loading="lazy" poster="./assets/og-image.jpg">
         <source src="./assets/MVI_1995.MP4" type="video/mp4">
         <source src="./assets/MVI_1995.mp4" type="video/mp4">
     </video>
 
     <!-- Ambient Background Glows -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute rounded-full blur-[150px] glow-entity w-[600px] h-[600px] bg-[#a855f7]/15 top-[10%] left-[-10%] animate-pulse-glow"></div>
-        <div class="absolute rounded-full blur-[150px] glow-entity w-[700px] h-[700px] bg-[#00e5ff]/10 bottom-[20%] right-[20%] animate-pulse-glow" style="animation-delay: 1s;"></div>
-        <div class="absolute rounded-full blur-[150px] glow-entity w-[800px] h-[800px] bg-[#D4AF37]/10 bottom-[-20%] right-[-10%] animate-pulse-glow" style="animation-delay: 2s;"></div>
+        <div class="absolute rounded-full blur-[150px] glow-entity w-[600px] h-[600px] bg-visceral-scarlett/15 top-[10%] left-[-10%] animate-pulse-glow"></div>
+        <div class="absolute rounded-full blur-[150px] glow-entity w-[700px] h-[700px] bg-slate-400/10 bottom-[20%] right-[20%] animate-pulse-glow" style="animation-delay: 1s;"></div>
+        <div class="absolute rounded-full blur-[150px] glow-entity w-[800px] h-[800px] bg-gray-500/10 bottom-[-20%] right-[-10%] animate-pulse-glow" style="animation-delay: 2s;"></div>
     </div>
 
     <!-- Navigation -->
@@ -182,6 +143,8 @@
         <a href="research.html" target="_blank" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Architecture</a>
         <a href="alignment.html" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Alignment</a>
         <a href="matrix81.html" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Sacred Matrix</a>
+        <a href="portfolio.html" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Portfolio</a>
+        <a href="library.html" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Library</a>
         <a href="#contact" class="text-xl md:text-2xl font-cinzel tracking-widest hover:text-visceral-gold transition mobile-link">Legacy</a>
         <button id="close-menu-btn" class="absolute top-8 right-8 text-3xl text-gray-500 hover:text-white">
             <i class="fas fa-times"></i>
@@ -277,7 +240,7 @@
     </div>
 
     <!-- Hero Section -->
-    <header class="relative min-h-screen flex items-center justify-center pt-20 px-6 z-10">
+    <header class="relative min-h-[100dvh] flex items-center justify-center pt-20 px-6 z-10">
         <div class="max-w-5xl w-full text-center space-y-10 reveal">
             <div class="inline-block relative">
                 <h2 class="text-visceral-gold tracking-[0.4em] font-semibold text-xs md:text-sm uppercase mb-4 drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]" style="font-family: 'Space Grotesk', sans-serif;">Christopher Bryce Van Houten | Architecting the Infinite</h2>
@@ -313,17 +276,17 @@
             
             <h1 class="text-6xl md:text-7xl lg:text-[7rem] font-bold cinzel leading-[1.1] text-white tracking-tight drop-shadow-2xl reveal delay-100">
                 VISCERAL<br>
-                <span class="gradient-text-mystic drop-shadow-[0_0_30px_rgba(168,85,247,0.6)]">CURRENT</span>
+                <span class="gradient-text-storm drop-shadow-[0_0_30px_rgba(225,29,72,0.6)]">CURRENT</span>
             </h1>
             
             <p class="max-w-3xl mx-auto text-gray-300 text-lg md:text-xl font-light leading-relaxed reveal delay-100" style="font-family: 'Space Grotesk', sans-serif;">
-                Human Capacity Optimization through the Mathematics of Synchronicity. Mapping the 9 Realms of Perception from the Basement Libraries to the Event Horizon. Integrating the Phase Shift (\(\phi\)).
+                Optimization through Awareness. Human Capacity Optimization through the Mathematics of Synchronicity. Mapping the 9 Realms of Perception from the Basement Libraries to the Event Horizon.
             </p>
             
             <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8 reveal delay-200">
-                <button onclick="document.querySelector('.portal-toggle').click()" class="btn-gold w-full sm:w-auto px-10 py-4 bg-visceral-gold text-black rounded-sm hover:bg-yellow-500 transition duration-300 font-bold uppercase tracking-[0.2em] text-xs shadow-[0_0_20px_rgba(212,175,55,0.4)]">
-                    Open The 360 Portal
-                </button>
+                <a href="frequency.html" class="btn-gold w-full sm:w-auto px-10 py-4 bg-visceral-scarlett text-white rounded-sm hover:bg-white hover:text-black transition duration-300 font-bold uppercase tracking-[0.2em] text-xs shadow-[0_0_20px_rgba(225,29,72,0.4)] flex items-center justify-center">
+                    Identify Your Current Frequency
+                </a>
                 <a href="#formula" class="group w-full sm:w-auto px-10 py-4 bg-transparent border border-white/20 rounded-sm hover:border-white hover:bg-white hover:text-black transition duration-300 font-semibold uppercase tracking-[0.2em] text-xs flex items-center justify-center" style="font-family: 'Space Grotesk', sans-serif;">
                     View Equations <i class="fas fa-arrow-down ml-3 group-hover:translate-y-1 transition-transform"></i>
                 </a>
@@ -369,6 +332,9 @@
                         <p class="scroll-highlight text-sm text-gray-100 font-light leading-relaxed">
                             This creates a global, synergetic system for scaling impact from chaos into perfect, mathematical clarity.
                         </p>
+                        <p class="scroll-highlight text-sm text-gray-100 font-light leading-relaxed mt-4">
+                            Integrating the Phase Shifts—from the structural collapse in Victorville, the recalibration in Cedar City, to the deep expanse of Montana—as undeniable proof of the system's absolute resilience.
+                        </p>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4 border-t border-gray-800 pt-6">
@@ -398,6 +364,24 @@
                     <p class="text-gray-400 leading-relaxed font-light text-lg">
                     Success is the infinite sum of <strong class="text-white font-medium">Purpose (P)</strong> and <strong class="text-white font-medium">Connection (C)</strong>, refined by the friction of the Phase Shift. This is the blueprint for a legacy of Universal Sovereignty—one designed to outlast time itself.
                     </p>
+                    
+                    <!-- Interactive Slider -->
+                    <div class="mt-8 p-6 glass-panel rounded-xl border-l-2 border-visceral-scarlett/50 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-visceral-scarlett/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-end mb-2">
+                                <label class="text-xs text-gray-400 uppercase tracking-widest font-mono">Phase Shift Friction (<span class="text-visceral-scarlett font-bold font-serif text-sm">ϕ</span>)</label>
+                                <span id="phi-display" class="text-white font-mono text-lg">1.618</span>
+                            </div>
+                            <input type="range" min="1.01" max="3.00" step="0.01" value="1.618" class="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-visceral-scarlett" id="phi-slider" oninput="updatePhi(this.value)">
+                            <div class="flex justify-between items-center mt-4">
+                                <span class="text-[10px] text-gray-500 uppercase tracking-widest">High Friction</span>
+                                <span id="s-display" class="text-visceral-gold font-mono font-bold text-sm tracking-widest">S = Integrating...</span>
+                                <span class="text-[10px] text-gray-500 uppercase tracking-widest">Flow State</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="pt-6 border-t border-gray-800">
                         <button onclick="calculateImpact()" class="group flex items-center text-xs tracking-[0.2em] uppercase text-visceral-gold font-bold hover:text-white transition-colors">
                             Initialize Frequency Pulse 
@@ -525,7 +509,7 @@
                     <p class="text-xs text-visceral-gold font-mono tracking-widest uppercase mb-6">Corporate Optimization</p>
                     <p class="text-gray-400 font-light text-sm mb-6">The corporate entity focused exclusively on infinite potential. We align businesses with the mathematics of synchronicity and the Infinite Sum of Success.</p>
                     <ul class="text-xs text-gray-500 space-y-2 font-mono">
-                        <li>> Digital Conduit Engineering</li>
+                        <li>> Life-Architecture Consulting</li>
                         <li>> 81-Node Duality Mapping</li>
                         <li>> Infinite Potential Scaling</li>
                     </ul>
@@ -534,7 +518,7 @@
                 <div class="node-card glass-panel p-8 rounded-xl border-l-2 border-l-blue-500/50 reveal delay-200">
                     <h4 class="text-2xl font-cinzel font-bold text-white mb-2">ScarlettSky</h4>
                     <p class="text-xs text-blue-400 font-mono tracking-widest uppercase mb-6">Creative & Media Design</p>
-                    <p class="text-gray-400 font-light text-sm mb-6">The creative wing of the empire. Majestic, deeply considered web and media design built from the soul up for high-level clients and legacy seekers.</p>
+                    <p class="text-gray-400 font-light text-sm mb-6">The creative wing of the empire. Professional website building, brand identity, and cinematic visual legacy built from the soul up.</p>
                     <ul class="text-xs text-gray-500 space-y-2 font-mono">
                         <li>> Narrative Documenting</li>
                         <li>> Formless UI/UX Aesthetic</li>
