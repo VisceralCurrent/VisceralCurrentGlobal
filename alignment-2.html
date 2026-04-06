@@ -23,7 +23,7 @@
 
     <style>
         :root {
-            --bg-color: #050a0f;
+            --bg-color: #030508;
             --accent-r: 0;
             --accent-g: 229;
             --accent-b: 255;
@@ -45,7 +45,9 @@
         .bg-accent { background-color: var(--accent); }
         
         .chameleon-bg {
-            background: radial-gradient(circle at 50% 0%, rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.1) 0%, var(--bg-color) 100%);
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 15% 50%, rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.08), transparent 40%),
+                              radial-gradient(circle at 85% 30%, rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.05), transparent 50%);
         }
 
         .glass {
@@ -108,7 +110,13 @@
 </head>
 <body class="chameleon-bg selection:bg-[var(--accent)] selection:text-[#050a0f]">
 
-    <canvas id="canvas-bg" class="fixed inset-0 -z-10 opacity-40"></canvas>
+    <!-- Deep Cosmic Ethereal Nebula Layers -->
+    <div class="fixed inset-0 pointer-events-none -z-20 overflow-hidden">
+        <div class="absolute w-[800px] h-[800px] rounded-full blur-[150px] bg-indigo-900/20 top-[-20%] left-[-10%] animate-pulse-glow"></div>
+        <div class="absolute w-[600px] h-[600px] rounded-full blur-[120px] bg-fuchsia-900/10 bottom-[-10%] right-[-10%]" style="animation: pulseGlow 6s ease-in-out infinite alternate;"></div>
+    </div>
+
+    <canvas id="canvas-bg" class="fixed inset-0 -z-10 opacity-80 mix-blend-screen"></canvas>
 
     <div id="detail-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#020305]/95 backdrop-blur-xl p-4 md:p-8" onclick="closeDetail()">
         <div class="glass max-w-5xl w-full max-h-[90vh] overflow-y-auto rounded-2xl relative shadow-2xl" onclick="event.stopPropagation()">
@@ -437,13 +445,12 @@
             
             const alignPct = Math.round(pct * 100);
             document.getElementById('sync-status').innerText = `${alignPct}% Aligned`;
-            canvas.style.opacity = 0.4 - (pct * 0.2);
+            canvas.style.opacity = 0.8 - (pct * 0.3);
         });
 
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        const connectionDistance = 150;
 
         function initCanvas() {
             const dpr = window.devicePixelRatio || 1;
@@ -451,13 +458,15 @@
             canvas.height = window.innerHeight * dpr;
             ctx.scale(dpr, dpr);
             
-            const particleCount = window.innerWidth < 768 ? 20 : 80; 
+            const particleCount = window.innerWidth < 768 ? 60 : 150; 
             particles = Array.from({length: particleCount}, () => ({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                vx: (Math.random() - 0.5) * 0.3,
-                vy: (Math.random() - 0.5) * 0.3,
-                s: Math.random() * 1.5 + 0.5
+                vx: (Math.random() - 0.5) * 0.1,
+                vy: (Math.random() - 0.5) * 0.1,
+                s: Math.random() * 1.5 + 0.2,
+                alpha: Math.random(),
+                alphaChange: (Math.random() * 0.02) - 0.01
             }));
         }
 
@@ -468,32 +477,27 @@
             const g = rootStyles.getPropertyValue('--accent-g').trim();
             const b = rootStyles.getPropertyValue('--accent-b').trim();
             
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distSq = dx * dx + dy * dy;
-                    const connDistSq = connectionDistance * connectionDistance;
-
-                    if (distSq < connDistSq) {
-                        const distance = Math.sqrt(distSq);
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${1 - distance/connectionDistance})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
             particles.forEach(p => {
                 p.x += p.vx; p.y += p.vy;
-                if(p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
-                if(p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+                if(p.x < 0) p.x = window.innerWidth;
+                if(p.x > window.innerWidth) p.x = 0;
+                if(p.y < 0) p.y = window.innerHeight;
+                if(p.y > window.innerHeight) p.y = 0;
+                
+                p.alpha += p.alphaChange;
+                if (p.alpha <= 0.1 || p.alpha >= 0.8) p.alphaChange *= -1;
+                
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.s, 0, Math.PI*2);
+                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${p.alpha})`;
+                
+                if (p.s > 1.2) {
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.8)`;
+                } else {
+                    ctx.shadowBlur = 0;
+                }
+                
                 ctx.fill();
             });
             

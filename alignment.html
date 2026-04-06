@@ -26,7 +26,7 @@
 
     <style>
         :root {
-            --bg-color: #050a0f;
+            --bg-color: #030508;
             /* Electric Blue Starting Values */
             --accent-r: 0;
             --accent-g: 229;
@@ -50,7 +50,9 @@
         
         /* The Ambient Background */
         .chameleon-bg {
-            background: radial-gradient(circle at 50% 0%, rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.1) 0%, var(--bg-color) 100%);
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 15% 50%, rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.08), transparent 40%),
+                              radial-gradient(circle at 85% 30%, rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.05), transparent 50%);
         }
 
         /* Glassmorphism */
@@ -118,8 +120,14 @@
 </head>
 <body class="chameleon-bg selection:bg-[var(--accent)] selection:text-[#050a0f]">
 
-    <!-- Synchronicity Constellation Canvas -->
-    <canvas id="canvas-bg" class="fixed inset-0 -z-10 opacity-40"></canvas>
+    <!-- Deep Cosmic Ethereal Nebula Layers -->
+    <div class="fixed inset-0 pointer-events-none -z-20 overflow-hidden">
+        <div class="absolute w-[800px] h-[800px] rounded-full blur-[150px] bg-indigo-900/20 top-[-20%] left-[-10%] animate-pulse-glow"></div>
+        <div class="absolute w-[600px] h-[600px] rounded-full blur-[120px] bg-fuchsia-900/10 bottom-[-10%] right-[-10%]" style="animation: pulseGlow 6s ease-in-out infinite alternate;"></div>
+    </div>
+
+    <!-- Cosmic Starfield Canvas -->
+    <canvas id="canvas-bg" class="fixed inset-0 -z-10 opacity-80 mix-blend-screen"></canvas>
 
     <!-- Node Detail Overlay (The Alignment Protocol) -->
     <div id="detail-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#020305]/95 backdrop-blur-xl p-4 md:p-8" onclick="closeDetail()">
@@ -151,7 +159,7 @@
             Infinite<br><span class="glow text-white">Potential</span>
         </h1>
         <div id="hero-math" class="formula-container my-10 text-accent transition-colors duration-300"></div>
-        <p class="max-w-2xl text-gray-400 font-light leading-relaxed text-sm md:text-lg px-4">
+        <p class="max-w-2xl text-gray-300 font-light leading-relaxed text-sm md:text-lg px-4">
             "Your detours were not delays; they were Phase Shifts (\(\phi\)) preparing you for this exact frequency. Identify your area of friction. Select your node. Map your visceral current to the mathematical certainty of the universe."
         </p>
         <div class="absolute bottom-10 animate-bounce opacity-50 cursor-pointer text-accent transition-colors duration-300" onclick="window.scrollTo(0, window.innerHeight)">
@@ -164,7 +172,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="cinzel text-3xl md:text-4xl font-bold uppercase tracking-widest mb-4">The Mastery 360 Grid <span class="text-accent">// Triad I</span></h2>
-                <p class="mono text-xs text-gray-500 uppercase tracking-[0.2em] mb-8">Select a node to initiate alignment protocol</p>
+                <p class="mono text-xs text-gray-400 uppercase tracking-[0.2em] mb-8">Select a node to initiate alignment protocol</p>
                 
                 <div class="flex flex-wrap justify-center gap-4">
                     <a href="alignment.html" class="px-6 py-2 rounded-sm text-xs tracking-widest uppercase font-bold transition-all" style="border: 1px solid var(--accent); background-color: rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.1); color: var(--accent); box-shadow: 0 0 15px rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.2);">Triad I (01-27)</a>
@@ -197,7 +205,7 @@
         <div class="max-w-4xl mx-auto glass p-8 md:p-16 rounded-3xl relative z-10 shadow-2xl">
             <div id="footer-math" class="mb-10 formula-container text-white/80"></div>
             <h3 class="cinzel text-3xl md:text-5xl font-black mb-6 uppercase tracking-widest glow text-white">You Are The Architect</h3>
-            <p class="text-gray-400 mb-10 max-w-xl mx-auto leading-relaxed text-sm md:text-base font-light">
+            <p class="text-gray-300 mb-10 max-w-xl mx-auto leading-relaxed text-sm md:text-base font-light">
                 We are not chasing—we are choosing. By integrating your past into your origin, you ensure your area of impact is infinite. This system is synergetic. It is harmonious. It is undeniable.
             </p>
             <div class="flex flex-wrap justify-center gap-6 mono text-[10px] uppercase tracking-widest text-accent opacity-80 transition-colors duration-300">
@@ -367,36 +375,6 @@
             };
         });
 
-        // --- 528Hz VISCERAL AUDIO ENGINE ---
-        let audioCtx, oscillator, gainNode;
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                oscillator = audioCtx.createOscillator();
-                gainNode = audioCtx.createGain();
-                oscillator.type = 'sine'; // Pure mathematical wave
-                oscillator.frequency.value = 528; // The Miracle Resonance
-                gainNode.gain.value = 0;
-                oscillator.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                oscillator.start();
-            }
-        }
-        function playResonance() {
-            if (!audioCtx) initAudio();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-            gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 1.5);
-        }
-        function stopResonance() {
-            if (audioCtx && gainNode) {
-                gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-                gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
-                gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.0);
-            }
-        }
-
         // Initialize Grid
         const container = document.getElementById('node-container');
         nodes.forEach((node, index) => {
@@ -433,7 +411,6 @@
 
         // --- UI DETAIL LOGIC (MODAL) ---
         function showDetail(node) {
-            playResonance(); // Trigger 528Hz Audio
             const overlay = document.getElementById('detail-overlay');
             const content = document.getElementById('detail-content');
             
@@ -543,7 +520,6 @@
         }
 
         function closeDetail() {
-            stopResonance(); // Fade out 528Hz Audio
             document.getElementById('detail-overlay').classList.remove('active');
         }
 
@@ -565,14 +541,13 @@
             document.getElementById('sync-status').innerText = `${alignPct}% Aligned`;
             
             // Canvas fades out slightly at the bottom to focus on the text
-            canvas.style.opacity = 0.4 - (pct * 0.2);
+            canvas.style.opacity = 0.8 - (pct * 0.3);
         });
 
-        // --- CONSTELLATION CANVAS ENGINE ---
+        // --- COSMIC STARFIELD CANVAS ENGINE ---
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        const connectionDistance = 150;
 
         function initCanvas() {
             // High DPI (Retina) Support
@@ -581,13 +556,15 @@
             canvas.height = window.innerHeight * dpr;
             ctx.scale(dpr, dpr);
             
-            const particleCount = window.innerWidth < 768 ? 20 : 80; 
+            const particleCount = window.innerWidth < 768 ? 60 : 150; 
             particles = Array.from({length: particleCount}, () => ({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                vx: (Math.random() - 0.5) * 0.3,
-                vy: (Math.random() - 0.5) * 0.3,
-                s: Math.random() * 1.5 + 0.5
+                vx: (Math.random() - 0.5) * 0.1,
+                vy: (Math.random() - 0.5) * 0.1,
+                s: Math.random() * 1.5 + 0.2,
+                alpha: Math.random(),
+                alphaChange: (Math.random() * 0.02) - 0.01
             }));
         }
 
@@ -600,34 +577,27 @@
             const g = rootStyles.getPropertyValue('--accent-g').trim();
             const b = rootStyles.getPropertyValue('--accent-b').trim();
             
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-
-                    // Performance optimization: square distance check avoids expensive Math.sqrt when possible
-                    const distSq = dx * dx + dy * dy;
-                    const connDistSq = connectionDistance * connectionDistance;
-
-                    if (distSq < connDistSq) {
-                        const distance = Math.sqrt(distSq);
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${1 - distance/connectionDistance})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
             particles.forEach(p => {
                 p.x += p.vx; p.y += p.vy;
-                if(p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
-                if(p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+                if(p.x < 0) p.x = window.innerWidth;
+                if(p.x > window.innerWidth) p.x = 0;
+                if(p.y < 0) p.y = window.innerHeight;
+                if(p.y > window.innerHeight) p.y = 0;
+                
+                p.alpha += p.alphaChange;
+                if (p.alpha <= 0.1 || p.alpha >= 0.8) p.alphaChange *= -1;
+                
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.s, 0, Math.PI*2);
+                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${p.alpha})`;
+                
+                if (p.s > 1.2) {
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.8)`;
+                } else {
+                    ctx.shadowBlur = 0;
+                }
+                
                 ctx.fill();
             });
             
