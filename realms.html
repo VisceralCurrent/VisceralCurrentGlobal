@@ -34,376 +34,86 @@
     <link rel="stylesheet" href="/style.css" />
     
     <style>
-        :root {
-            --chameleon-gradient: linear-gradient(135deg, #00e5ff 0%, #4facfe 25%, #a855f7 50%, #d4af37 75%, #00e5ff 100%);
-        }
-        
-        /* Animated Gradient Border */
-        .chameleon-border {
-            position: relative;
-            background: rgba(10, 12, 15, 0.85);
-            border-radius: 1rem;
-            z-index: 1;
-        }
-        .chameleon-border::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: var(--chameleon-gradient);
+        /* The Majestic Chameleon Skin */
+        .chameleon-skin {
+            background: linear-gradient(135deg, #4f46e5, #0891b2, #c026d3, #4f46e5);
             background-size: 400% 400%;
-            z-index: -1;
-            border-radius: 1.1rem;
-            animation: shift 15s ease infinite;
-            opacity: 0.6;
+            animation: flow 15s ease infinite;
         }
-        @keyframes shift {
+        @keyframes flow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
         
-        /* 3D Card Flip Logic */
-        .realm-card {
-            perspective: 1000px;
-            height: 420px;
-            cursor: pointer;
-            display: block;
-        }
-        .realm-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-        }
-        .realm-card:hover .realm-card-inner {
-            transform: rotateY(180deg);
-        }
-        .realm-card-front, .realm-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .realm-card-front {
-            backdrop-filter: blur(12px);
-        }
-        .realm-card-back {
-            background: rgba(5, 7, 10, 0.95);
-            transform: rotateY(180deg);
-            background-image: radial-gradient(circle at top right, rgba(0, 229, 255, 0.05), transparent);
-        }
-        .three-fold-point {
-            border-left: 2px solid #00e5ff;
-            padding-left: 1rem;
-            margin-bottom: 1rem;
-            text-align: left;
-            width: 100%;
-        }
-        .math-display {
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 0.75rem;
-            border: 1px solid rgba(0, 229, 255, 0.2);
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-        .math-display:hover {
-            border-color: #00e5ff;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
-        }
+        /* 3D Multi-Stage CSS Utilities */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .animate-spin-slow { animation: spin 20s linear infinite; }
     </style>
 </head>
-<body class="bg-visceral-dark text-slate-300 font-sans overflow-x-hidden antialiased selection:bg-visceral-blue/30 selection:text-white">
+<body class="bg-[#0f172a] text-slate-300 font-sans overflow-x-hidden antialiased selection:bg-visceral-blue/30 selection:text-white">
     
+    <!-- The Majestic Nature & Chameleon Background -->
+    <div class="fixed inset-0 -z-10 bg-slate-900 pointer-events-none">
+        <div class="absolute inset-0 opacity-40">
+            <!-- Relic Image Base -->
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1200" alt="The Current" class="w-full h-full object-cover scale-110 blur-[2px]" />
+        </div>
+        <div class="absolute inset-0 chameleon-skin opacity-30 mix-blend-color-dodge"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/20 via-transparent to-slate-900/80"></div>
+    </div>
+
     <!-- Custom Cursor Setup (Hooks into script.js) -->
     <div id="custom-cursor-dot" class="fixed top-0 left-0 w-2 h-2 bg-visceral-blue rounded-full pointer-events-none z-[9999] transition-transform duration-75"></div>
     <div id="custom-cursor-ring" class="fixed top-0 left-0 w-8 h-8 border border-visceral-blue/50 rounded-full pointer-events-none z-[9998] transition-all duration-300 ease-out"></div>
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 border-b border-white/5 bg-visceral-dark/80 backdrop-blur-md">
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 border-b border-white/10 bg-[#0f172a]/80 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <a href="/" class="flex items-center gap-3 group text-white">
                 <i class="fas fa-bolt text-visceral-blue group-hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)] transition-all"></i>
                 <span class="font-serif font-bold text-xl tracking-widest">VISCERAL CURRENT</span>
             </a>
-            <a href="/" class="text-sm font-semibold text-slate-400 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300">
+            <a href="/" class="text-sm font-bold text-slate-300 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-300 uppercase tracking-widest">
                 RETURN TO HUB <i class="fas fa-arrow-right ml-2 text-xs"></i>
             </a>
         </div>
     </nav>
 
-    <!-- Main Content Background Glow -->
-    <div class="fixed top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-visceral-blue/10 blur-[150px] pointer-events-none z-0"></div>
-
     <main class="relative pt-32 pb-24 px-6 max-w-7xl mx-auto z-10">
-        <!-- Header Section -->
-        <header class="text-center mb-20 reveal">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 text-visceral-blue tracking-widest">
-                <i class="fas fa-compass"></i> ARCHITECTURE OF PERCEPTION
+        
+        <!-- Majestic Hero Section -->
+        <header class="text-center mb-24 reveal">
+            <div class="inline-block px-5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-visceral-blue font-bold text-xs uppercase tracking-widest mb-8 border border-white/20 shadow-2xl tracking-[0.4em]">
+                VanFlowCo • Multidimensional Warrior
             </div>
-            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg">
-                THE <span class="text-transparent bg-clip-text bg-gradient-to-r from-visceral-blue to-blue-500">9 REALMS</span>
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-white mb-8 drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] uppercase font-sans">
+                Mastery <span class="text-transparent bg-clip-text bg-gradient-to-r from-visceral-blue to-purple-500">360</span>
             </h1>
-            <p class="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed">
-                Navigate the multidimensional architecture of the Sovereign Protocol. Each realm represents a fundamental node of perception required to scale your area of impact to absolute infinity.
-            </p>
-            
-            <div class="math-display mt-10">
-                $$ A = \int_{p}^{o} (\nu \cdot \phi) \, dt = \infty $$
+            <div class="max-w-4xl mx-auto bg-black/40 backdrop-blur-xl p-10 rounded-[4rem] border border-white/10 shadow-2xl">
+                <p class="text-xl md:text-2xl text-white/90 font-black uppercase tracking-tight leading-tight italic">
+                    Rooted in the 9 senses of harmonious action: 3 for understanding, 2 for the dance, and 1 now to embody all nine—power unto itself.
+                </p>
+                <p class="text-lg text-visceral-blue mt-6 font-medium">
+                    The trick is mastery across all nine realms of perception in order to create the 10th dimension of peace.
+                </p>
             </div>
+            
+            <button id="vision-btn" onclick="toggleGlobalVision()" class="mt-12 group relative inline-flex items-center justify-center gap-4 px-10 py-6 rounded-full font-black text-xl transition-all duration-700 shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:scale-105 active:scale-95 border-2 border-white/30 bg-white/10 text-white backdrop-blur-xl">
+                <i id="vision-btn-icon" class="fas fa-eye text-2xl transition-transform"></i> 
+                <span id="vision-btn-text">ACTIVATE 360° VISION</span>
+            </button>
         </header>
 
-        <!-- The 9 Realms Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Realm 1 -->
-            <a href="/matrix81.html" class="realm-card reveal">
-                <div class="realm-card-inner">
-                    <div class="realm-card-front chameleon-border">
-                        <i class="fas fa-dot-circle text-5xl mb-4 text-visceral-blue"></i>
-                        <h3 class="text-2xl font-bold uppercase tracking-widest text-white font-serif mt-2">I. The Origin</h3>
-                        <p class="mt-4 text-gray-500 text-sm">Potential & Past (p)</p>
-                    </div>
-                    <div class="realm-card-back">
-                        <h4 class="text-xl font-bold mb-6 text-visceral-blue font-serif">The 3-Fold Understanding</h4>
-                        <div class="three-fold-point" style="border-color: #00e5ff;">
-                            <span class="block font-bold text-white text-sm">Potential</span>
-                            <span class="text-xs text-gray-400">The kinetic seed of all movement.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #a855f7;">
-                            <span class="block font-bold text-white text-sm">Past (p)</span>
-                            <span class="text-xs text-gray-400">Transmuting history into undeniable fuel.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #d4af37;">
-                            <span class="block font-bold text-white text-sm">Intent</span>
-                            <span class="text-xs text-gray-400">Quantifying the market before writing code.</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Realm 2 -->
-            <a href="/matrix81.html" class="realm-card reveal" style="transition-delay: 100ms;">
-                <div class="realm-card-inner">
-                    <div class="realm-card-front chameleon-border">
-                        <i class="fas fa-wave-square text-5xl mb-4 text-visceral-blue"></i>
-                        <h3 class="text-2xl font-bold uppercase tracking-widest text-white font-serif mt-2">II. Visceral Current</h3>
-                        <p class="mt-4 text-gray-500 text-sm">Kinetic Presence (ν)</p>
-                    </div>
-                    <div class="realm-card-back">
-                        <h4 class="text-xl font-bold mb-6 text-visceral-blue font-serif">The 3-Fold Understanding</h4>
-                        <div class="three-fold-point" style="border-color: #00e5ff;">
-                            <span class="block font-bold text-white text-sm">Presence</span>
-                            <span class="text-xs text-gray-400">Existing fully in the absolute Now.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #a855f7;">
-                            <span class="block font-bold text-white text-sm">Electric Flow</span>
-                            <span class="text-xs text-gray-400">Measuring focus and allocated resources.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #d4af37;">
-                            <span class="block font-bold text-white text-sm">Alignment</span>
-                            <span class="text-xs text-gray-400">Harmonizing action with universal frequency.</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Realm 3 -->
-            <a href="/matrix81.html" class="realm-card reveal" style="transition-delay: 200ms;">
-                <div class="realm-card-inner">
-                    <div class="realm-card-front chameleon-border">
-                        <i class="fas fa-infinity text-5xl mb-4 text-visceral-blue"></i>
-                        <h3 class="text-2xl font-bold uppercase tracking-widest text-white font-serif mt-2">III. Infinite Sum</h3>
-                        <p class="mt-4 text-gray-500 text-sm">Legacy & Scaling (S)</p>
-                    </div>
-                    <div class="realm-card-back">
-                        <h4 class="text-xl font-bold mb-6 text-visceral-blue font-serif">The 3-Fold Understanding</h4>
-                        <div class="three-fold-point" style="border-color: #00e5ff;">
-                            <span class="block font-bold text-white text-sm">Integration</span>
-                            <span class="text-xs text-gray-400">The final compounding over time (dt).</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #a855f7;">
-                            <span class="block font-bold text-white text-sm">Legacy</span>
-                            <span class="text-xs text-gray-400">Building an empire that outlasts the architect.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #d4af37;">
-                            <span class="block font-bold text-white text-sm">Scaling</span>
-                            <span class="text-xs text-gray-400">If it doesn't scale to infinity, pivot.</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Realm 4 -->
-            <a href="/matrix81.html" class="realm-card reveal" style="transition-delay: 300ms;">
-                <div class="realm-card-inner">
-                    <div class="realm-card-front chameleon-border">
-                        <i class="fas fa-hurricane text-5xl mb-4 text-visceral-gold"></i>
-                        <h3 class="text-2xl font-bold uppercase tracking-widest text-white font-serif mt-2">IV. Eye of the Storm</h3>
-                        <p class="mt-4 text-gray-500 text-sm">Composure & Neutrality</p>
-                    </div>
-                    <div class="realm-card-back">
-                        <h4 class="text-xl font-bold mb-6 text-visceral-gold font-serif">The 3-Fold Understanding</h4>
-                        <div class="three-fold-point" style="border-color: #00e5ff;">
-                            <span class="block font-bold text-white text-sm">Center Mass</span>
-                            <span class="text-xs text-gray-400">Holding the core while variables shift.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #a855f7;">
-                            <span class="block font-bold text-white text-sm">Neutrality</span>
-                            <span class="text-xs text-gray-400">Detaching emotional turbulence from outcomes.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #d4af37;">
-                            <span class="block font-bold text-white text-sm">Architecture</span>
-                            <span class="text-xs text-gray-400">Structuring the mind as an impenetrable fortress.</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Realm 5 -->
-            <a href="/matrix81.html" class="realm-card reveal" style="transition-delay: 400ms;">
-                <div class="realm-card-inner">
-                    <div class="realm-card-front chameleon-border">
-                        <i class="fas fa-chess-knight text-5xl mb-4 text-visceral-gold"></i>
-                        <h3 class="text-2xl font-bold uppercase tracking-widest text-white font-serif mt-2">V. Mentalist's Gambit</h3>
-                        <p class="mt-4 text-gray-500 text-sm">Formless Precision</p>
-                    </div>
-                    <div class="realm-card-back">
-                        <h4 class="text-xl font-bold mb-6 text-visceral-gold font-serif">The 3-Fold Understanding</h4>
-                        <div class="three-fold-point" style="border-color: #00e5ff;">
-                            <span class="block font-bold text-white text-sm">Formlessness</span>
-                            <span class="text-xs text-gray-400">Erasing rigid structure to become fluid water.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #a855f7;">
-                            <span class="block font-bold text-white text-sm">Adaptability</span>
-                            <span class="text-xs text-gray-400">Molding to the terrain without resistance.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #d4af37;">
-                            <span class="block font-bold text-white text-sm">Precision</span>
-                            <span class="text-xs text-gray-400">Striking with absolute mathematical certainty.</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Realm 6 -->
-            <a href="/matrix81.html" class="realm-card reveal" style="transition-delay: 500ms;">
-                <div class="realm-card-inner">
-                    <div class="realm-card-front chameleon-border">
-                        <i class="fas fa-crown text-5xl mb-4 text-visceral-gold"></i>
-                        <h3 class="text-2xl font-bold uppercase tracking-widest text-white font-serif mt-2">VI. The Empire Builder</h3>
-                        <p class="mt-4 text-gray-500 text-sm">Christ-Consciousness</p>
-                    </div>
-                    <div class="realm-card-back">
-                        <h4 class="text-xl font-bold mb-6 text-visceral-gold font-serif">The 3-Fold Understanding</h4>
-                        <div class="three-fold-point" style="border-color: #00e5ff;">
-                            <span class="block font-bold text-white text-sm">Expansion</span>
-                            <span class="text-xs text-gray-400">Operating far beyond the limitations of ego.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #a855f7;">
-                            <span class="block font-bold text-white text-sm">Ecosystem</span>
-                            <span class="text-xs text-gray-400">Fostering autonomy within the collective system.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #d4af37;">
-                            <span class="block font-bold text-white text-sm">Sovereignty</span>
-                            <span class="text-xs text-gray-400">Guiding the tribe to their own infinite potential.</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Realm 7 -->
-            <a href="/matrix81.html" class="realm-card reveal" style="transition-delay: 600ms;">
-                <div class="realm-card-inner">
-                    <div class="realm-card-front chameleon-border">
-                        <i class="fas fa-bolt text-5xl mb-4 text-purple-400"></i>
-                        <h3 class="text-2xl font-bold uppercase tracking-widest text-white font-serif mt-2">VII. Phase Shift</h3>
-                        <p class="mt-4 text-gray-500 text-sm">Transmutation (ϕ)</p>
-                    </div>
-                    <div class="realm-card-back">
-                        <h4 class="text-xl font-bold mb-6 text-purple-400 font-serif">The 3-Fold Understanding</h4>
-                        <div class="three-fold-point" style="border-color: #00e5ff;">
-                            <span class="block font-bold text-white text-sm">Friction</span>
-                            <span class="text-xs text-gray-400">Recognizing systemic resistance as a signal.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #a855f7;">
-                            <span class="block font-bold text-white text-sm">Fuel</span>
-                            <span class="text-xs text-gray-400">Converting volatility into undeniable kinetic energy.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #d4af37;">
-                            <span class="block font-bold text-white text-sm">Trajectory</span>
-                            <span class="text-xs text-gray-400">Shifting the angle to bypass obsolete paradigms.</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Realm 8 -->
-            <a href="/matrix81.html" class="realm-card reveal" style="transition-delay: 700ms;">
-                <div class="realm-card-inner">
-                    <div class="realm-card-front chameleon-border">
-                        <i class="fas fa-balance-scale-right text-5xl mb-4 text-purple-400"></i>
-                        <h3 class="text-2xl font-bold uppercase tracking-widest text-white font-serif mt-2">VIII. Zero Point</h3>
-                        <p class="mt-4 text-gray-500 text-sm">Absolute Equilibrium</p>
-                    </div>
-                    <div class="realm-card-back">
-                        <h4 class="text-xl font-bold mb-6 text-purple-400 font-serif">The 3-Fold Understanding</h4>
-                        <div class="three-fold-point" style="border-color: #00e5ff;">
-                            <span class="block font-bold text-white text-sm">Equilibrium</span>
-                            <span class="text-xs text-gray-400">Achieving perfect mental and physical stillness.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #a855f7;">
-                            <span class="block font-bold text-white text-sm">Calculation</span>
-                            <span class="text-xs text-gray-400">Weighing the potential Area of Impact (A).</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #d4af37;">
-                            <span class="block font-bold text-white text-sm">Execution</span>
-                            <span class="text-xs text-gray-400">The decisive, mathematically calculated strike.</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Realm 9 -->
-            <a href="/matrix81.html" class="realm-card reveal" style="transition-delay: 800ms;">
-                <div class="realm-card-inner">
-                    <div class="realm-card-front chameleon-border">
-                        <i class="fas fa-globe text-5xl mb-4 text-purple-400"></i>
-                        <h3 class="text-2xl font-bold uppercase tracking-widest text-white font-serif mt-2">IX. Sovereignty</h3>
-                        <p class="mt-4 text-gray-500 text-sm">The Final Integration</p>
-                    </div>
-                    <div class="realm-card-back">
-                        <h4 class="text-xl font-bold mb-6 text-purple-400 font-serif">The 3-Fold Understanding</h4>
-                        <div class="three-fold-point" style="border-color: #00e5ff;">
-                            <span class="block font-bold text-white text-sm">Integration</span>
-                            <span class="text-xs text-gray-400">The harmonic convergence of all 9 preceding realms.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #a855f7;">
-                            <span class="block font-bold text-white text-sm">Autonomy</span>
-                            <span class="text-xs text-gray-400">Existing completely free from external systemic control.</span>
-                        </div>
-                        <div class="three-fold-point" style="border-color: #d4af37;">
-                            <span class="block font-bold text-white text-sm">The Current</span>
-                            <span class="text-xs text-gray-400">Riding the Visceral Current outward into infinity.</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
+        <!-- The 3-Stage Dynamic Grid -->
+        <div id="realms-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- Injected via Vanilla JS below -->
         </div>
         
         <!-- Footer with Formulas -->
-        <footer class="mt-24 border-t border-white/10 pt-16 text-center pb-8 reveal" style="transition-delay: 200ms;">
+        <footer class="mt-32 border-t border-white/10 pt-16 text-center pb-8 reveal">
             <div class="max-w-4xl mx-auto px-4">
                 <p class="mb-10 uppercase tracking-[0.3em] text-xs text-visceral-gold font-mono">Visceral Current Codex Core</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -425,5 +135,141 @@
 
     <!-- Load Global Interactions -->
     <script type="module" src="/script.js"></script>
+    
+    <!-- Dynamic 3-Stage Realm Rendering -->
+    <script>
+        // The raw data from Mastery 360
+        const realmsData = [
+            { id: 1, school: "The Origin", dualTitle: "Potential vs. Past", dualDesc: "The foundational seed of all kinetic movement.", left: "Regret", right: "Delusion", icon: 'fa-circle-dot', unityTitle: "Kinetic Seed", lawSummary: "Transmute History into Fuel", unityDesc: "The origin point of the current. We do not execute action until the intent is quantified and the past is integrated.", leakTitle: "The Ghost Timeline", leakExperience: "Being paralyzed by historical failures instead of recognizing them as necessary mathematical Phase Shifts.", masterIcon: 'fa-seedling', formula: "p (Past)" },
+            { id: 2, school: "Visceral Current", dualTitle: "Action vs. Paralysis", dualDesc: "Measuring the raw electric flow of focus and resources.", left: "Burnout", right: "Inaction", icon: 'fa-wave-square', unityTitle: "Kinetic Presence", lawSummary: "Real-Time Alignment", unityDesc: "Existing fully in the absolute Now. Harmonizing action with universal frequency to achieve effortless momentum.", leakTitle: "The Grindstone", leakExperience: "Expending massive amounts of energy through sheer force, fighting the current instead of riding it.", masterIcon: 'fa-bolt', formula: "ν (Kinetic Presence)" },
+            { id: 3, school: "Infinite Sum", dualTitle: "Creation vs. Consumption", dualDesc: "The final integration over time.", left: "Scarcity", right: "Greed", icon: 'fa-infinity', unityTitle: "Absolute Abundance", lawSummary: "Scale to Infinity", unityDesc: "Building an architecture that outlasts its creator. If the result doesn't scale to infinity, pivot the frequency.", leakTitle: "Zero-Sum Growth", leakExperience: "Extracting value until exhaustion. Operating on the belief that for you to win, someone else must lose.", masterIcon: 'fa-cubes', formula: "S = ∫(P·C)" },
+            { id: 4, school: "Eye of the Storm", dualTitle: "Composure vs. Chaos", dualDesc: "Internal architecture designed to hold center mass.", left: "Reactivity", right: "Apathy", icon: 'fa-hurricane', unityTitle: "Stoic Neutrality", lawSummary: "Impenetrable Center", unityDesc: "Holding the core while variables shift. Detaching emotional turbulence from outcomes to strike with absolute clarity.", leakTitle: "Emotional Turbulence", leakExperience: "Allowing external volatility and the actions of others to dictate your internal state and kinetic output.", masterIcon: 'fa-shield-halved', formula: "Center Mass" },
+            { id: 5, school: "Mentalist's Gambit", dualTitle: "Formless vs. Rigid", dualDesc: "Erasing rigid structure to become fluid water.", left: "Dogma", right: "Chaos", icon: 'fa-chess-knight', unityTitle: "Formless Precision", lawSummary: "Adapt without Resistance", unityDesc: "Molding to the terrain perfectly. Erasing rigid methodology to strike with absolute mathematical certainty.", leakTitle: "The Rigid Cage", leakExperience: "Clinging to obsolete structures and rigid plans when the terrain has already fundamentally changed.", masterIcon: 'fa-water', formula: "Fluidity" },
+            { id: 6, school: "The Empire Builder", dualTitle: "Expansion vs. Ego", dualDesc: "Fostering an ecosystem that thrives autonomously.", left: "Hubris", right: "Isolation", icon: 'fa-crown', unityTitle: "Universal Sovereignty", lawSummary: "The Expansion Equation", unityDesc: "Operating far beyond the limitations of ego to foster autonomy within the collective system.", leakTitle: "The Dictator's Trap", leakExperience: "Attempting to control every node through micromanagement, choking the natural synchronicity of the system.", masterIcon: 'fa-globe', formula: "Christ-Consciousness" },
+            { id: 7, school: "Phase Shift", dualTitle: "Friction vs. Fuel", dualDesc: "Converting periods of deep systemic resistance into energy.", left: "Victimhood", right: "Denial", icon: 'fa-bolt', unityTitle: "Transmutation", lawSummary: "Recognize the Signal", unityDesc: "Converting volatility into undeniable kinetic fuel. Shifting the angle of approach to bypass obsolete paradigms.", leakTitle: "Systemic Collapse", leakExperience: "Viewing obstacles and massive failures as endpoints rather than the necessary friction required to evolve.", masterIcon: 'fa-arrow-up-right-dots', formula: "ϕ (Friction)" },
+            { id: 8, school: "Zero Point", dualTitle: "Stillness vs. Motion", dualDesc: "Achieving perfect equilibrium before the decisive strike.", left: "Impulse", right: "Hesitation", icon: 'fa-scale-balanced', unityTitle: "Absolute Equilibrium", lawSummary: "The Calculated Strike", unityDesc: "Achieving perfect mental and physical stillness. Weighing the potential Area of Impact before executing the maneuver.", leakTitle: "The Frantic Mind", leakExperience: "Moving before the calculation is complete. Wasting resources on actions that do not align with the Area of Impact.", masterIcon: 'fa-bullseye', formula: "A = ∫(ν·ϕ)dt" },
+            { id: 9, school: "Sovereignty", dualTitle: "Autonomy vs. Control", dualDesc: "The harmonic convergence of all preceding realms.", left: "Dependence", right: "Tyranny", icon: 'fa-fingerprint', unityTitle: "The Final Integration", lawSummary: "Riding the Visceral Current", unityDesc: "Existing completely free from external systemic control. Riding the Visceral Current outward into absolute infinity.", leakTitle: "The Matrix Illusion", leakExperience: "Remaining bound to external systems, relying on institutions to dictate your worth, trajectory, and power.", masterIcon: 'fa-sun', formula: "∞ (Absolute)" }
+        ];
+
+        const grid = document.getElementById('realms-grid');
+        
+        realmsData.forEach((realm, index) => {
+            const delay = (index % 3) * 100;
+            
+            const cardHTML = `
+                <div class="realm-card-container perspective-1000 w-full h-[620px] md:h-[580px] cursor-pointer reveal delay-${delay}" data-stage="0" onclick="cycleStage(this)">
+                    <div class="card-inner relative w-full h-full transition-transform duration-1000 transform-style-3d">
+                        
+                        <!-- Stage 0: Battle -->
+                        <div class="face-0 absolute inset-0 backface-hidden bg-white/10 backdrop-blur-2xl rounded-[2.5rem] p-8 border border-white/20 flex flex-col items-center justify-between text-center shadow-2xl transition-opacity duration-500 opacity-100">
+                            <div class="w-full">
+                                <div class="p-4 bg-white/20 rounded-full shadow-xl mb-4 inline-block">
+                                    <i class="fas ${realm.icon} text-white text-3xl"></i>
+                                </div>
+                                <div class="text-[10px] font-mono text-[var(--visceral-blue,#00e5ff)] uppercase tracking-[0.3em] mb-1">Duality State:</div>
+                                <h3 class="text-xl font-black text-white uppercase mb-4 tracking-tighter">${realm.school}</h3>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-2xl font-bold text-white leading-tight">${realm.dualTitle}</h4>
+                                <p class="text-sm text-white/60 italic px-4 leading-relaxed font-medium">"${realm.dualDesc}"</p>
+                            </div>
+                            <div class="mt-6 flex flex-col items-center gap-4 w-full border-t border-white/10 pt-6">
+                                <div class="flex gap-6 text-[10px] font-mono font-black tracking-widest text-white/40">
+                                    <span class="text-red-400 uppercase">${realm.left}</span>
+                                    <span>VS</span>
+                                    <span class="text-blue-400 uppercase">${realm.right}</span>
+                                </div>
+                                <div class="text-[10px] text-[var(--visceral-blue,#00e5ff)] font-bold animate-pulse flex items-center gap-2 uppercase tracking-widest">
+                                    CALIBRATE FORCE <i class="fas fa-rotate text-[10px]"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stage 1: Leak -->
+                        <div class="face-1 absolute inset-0 bg-red-950/90 backdrop-blur-2xl rounded-[2.5rem] p-8 border border-red-500/30 flex flex-col items-center justify-center text-center shadow-2xl transition-opacity duration-500 opacity-0" style="transform: rotateY(-90deg);">
+                            <i class="fas fa-triangle-exclamation text-red-500 mb-6 animate-bounce text-5xl"></i>
+                            <div class="text-[10px] font-mono text-red-400 uppercase tracking-[0.3em] mb-2">Calibration: FORCE < 200</div>
+                            <h4 class="text-2xl font-black text-white uppercase mb-4 tracking-tighter">${realm.leakTitle}</h4>
+                            <p class="text-sm text-red-100 italic mb-8 leading-relaxed">"${realm.leakExperience}"</p>
+                            <div class="p-4 bg-black/40 rounded-2xl border border-red-500/20 text-[11px] text-red-200 font-mono uppercase tracking-widest font-black">Energy Bleed</div>
+                        </div>
+
+                        <!-- Stage 2: Mastery -->
+                        <div class="face-2 absolute inset-0 backface-hidden rounded-[2.5rem] p-8 text-white flex flex-col items-center justify-between text-center shadow-[0_0_50px_rgba(34,211,238,0.3)] overflow-hidden chameleon-skin transition-opacity duration-500 opacity-0" style="transform: rotateY(180deg);">
+                            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#00e5ff] via-purple-400 to-indigo-500"></div>
+                            <div class="w-full text-center">
+                                <div class="text-[10px] font-mono text-[#00e5ff] mb-4 uppercase tracking-[0.3em]">Power > 200</div>
+                                <div class="p-3 bg-white/10 rounded-full mb-4 ring-2 ring-[#00e5ff]/50 relative inline-block">
+                                    <i class="fas ${realm.masterIcon} text-4xl text-white px-2 py-1"></i>
+                                    <button onclick="speakText(event, '${realm.unityDesc.replace(/'/g, "\\'")}')" class="absolute -top-2 -right-6 p-3 bg-white text-indigo-900 rounded-full hover:scale-110 shadow-xl transition-all z-20">
+                                        <i class="fas fa-volume-high text-sm"></i>
+                                    </button>
+                                </div>
+                                <h4 class="text-2xl font-black text-white uppercase tracking-tight">${realm.unityTitle}</h4>
+                                <h5 class="text-sm font-black text-[#00e5ff] uppercase italic mt-1">"${realm.lawSummary}"</h5>
+                            </div>
+                            <p class="text-xs text-indigo-50 leading-relaxed font-medium px-2 italic">"${realm.unityDesc}"</p>
+                            <div class="mt-4 text-[10px] font-mono text-[#00e5ff] bg-black/30 backdrop-blur-md px-6 py-4 rounded-full border border-white/10 w-full font-serif">${realm.formula}</div>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+            grid.insertAdjacentHTML('beforeend', cardHTML);
+        });
+
+        // Global interactions & cycle states logic
+        let globalVision = false;
+        
+        function toggleGlobalVision() {
+            globalVision = !globalVision;
+            const cards = document.querySelectorAll('.realm-card-container');
+            const btnText = document.getElementById('vision-btn-text');
+            const btnIcon = document.getElementById('vision-btn-icon');
+            
+            if (globalVision) {
+                btnText.innerText = "RETURN TO BATTLE";
+                btnIcon.className = "fas fa-rotate-left text-2xl animate-spin-slow";
+                cards.forEach(card => updateStage(card, 2));
+            } else {
+                btnText.innerText = "ACTIVATE 360° VISION";
+                btnIcon.className = "fas fa-eye text-2xl transition-transform";
+                cards.forEach(card => updateStage(card, 0));
+            }
+        }
+
+        function cycleStage(element) {
+            let current = parseInt(element.getAttribute('data-stage') || '0');
+            updateStage(element, (current + 1) % 3);
+        }
+
+        function updateStage(element, stage) {
+            element.setAttribute('data-stage', stage);
+            const inner = element.querySelector('.card-inner');
+            const face0 = element.querySelector('.face-0');
+            const face1 = element.querySelector('.face-1');
+            const face2 = element.querySelector('.face-2');
+
+            if(stage === 0) {
+                inner.style.transform = 'rotateY(0deg)';
+                face0.style.opacity = '1'; face1.style.opacity = '0'; face2.style.opacity = '0';
+            } else if(stage === 1) {
+                inner.style.transform = 'rotateY(90deg)';
+                face0.style.opacity = '0'; face1.style.opacity = '1'; face2.style.opacity = '0';
+            } else if(stage === 2) {
+                inner.style.transform = 'rotateY(180deg)';
+                face0.style.opacity = '0'; face1.style.opacity = '0'; face2.style.opacity = '1';
+            }
+        }
+
+        function speakText(e, text) {
+            e.stopPropagation(); // Prevents the card from flipping when clicked
+            if (window.speechSynthesis.speaking) return;
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.pitch = 0.9;
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
 </body>
 </html>
