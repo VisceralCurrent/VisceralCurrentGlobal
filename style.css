@@ -20,6 +20,16 @@ body {
     background-attachment: fixed;
 }
 
+/* WCAG 2.1 Accessibility: Seizure Prevention & Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 /* Cinematic Vignette Overlay - Frames the site like a camera lens */
 body::after {
     content: '';

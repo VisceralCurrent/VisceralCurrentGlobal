@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 // --- MOCK CLIENT DATA ---
@@ -57,7 +57,8 @@ const CLIENT_DATA = {
 };
 
 // --- COMPONENTS ---
-const MetricCard = ({ data }) => (
+// Advanced Memoization: Prevent unnecessary re-renders of heavy UI elements
+const MetricCard = React.memo(({ data }) => (
     <div className={`relative p-6 rounded-2xl border ${data.border} bg-[#0a0c10]/80 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden group`}>
         <div className={`absolute top-0 left-0 w-1 h-full ${data.bg.replace('/10', '')}`}></div>
         <div className="flex justify-between items-start mb-4">
@@ -69,11 +70,18 @@ const MetricCard = ({ data }) => (
         <p className="text-xs font-mono tracking-widest uppercase text-slate-500 mb-3">{data.label}</p>
         <p className="text-sm text-slate-400 leading-relaxed font-light">{data.desc}</p>
     </div>
-);
+));
 
 export default function DashboardApp() {
     const [activeProject, setActiveProject] = useState('vanflow');
-    const project = CLIENT_DATA[activeProject];
+    
+    // Computation Caching: Only recalculate the active project data when the ID changes
+    const project = useMemo(() => CLIENT_DATA[activeProject], [activeProject]);
+
+    // Identity Stability: Stable callback for button interactions
+    const handleProjectChange = useCallback((id) => {
+        setActiveProject(id);
+    }, []);
 
     return (
         <div className="flex h-full w-full relative">
@@ -98,7 +106,7 @@ export default function DashboardApp() {
                     <div className="space-y-2">
                         {Object.values(CLIENT_DATA).map(p => (
                             <button 
-                                key={p.id} onClick={() => setActiveProject(p.id)}
+                                key={p.id} onClick={() => handleProjectChange(p.id)}
                                 className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${activeProject === p.id ? 'bg-[#00e5ff]/10 text-[#00e5ff] border border-[#00e5ff]/30 shadow-[inset_0_0_15px_rgba(0,229,255,0.05)]' : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'}`}
                             >
                                 <i className={`fas fa-circle-notch mr-3 text-[10px] ${activeProject === p.id ? 'animate-spin' : 'opacity-50'}`}></i>

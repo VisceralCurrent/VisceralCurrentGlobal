@@ -72,12 +72,12 @@ mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 // --- Mastery 360 Portal Logic ---
 function togglePortal() {
     if (!masterySidebar) return;
-    const isClosed = masterySidebar.classList.contains('translate-x-full');
+    const isClosed = masterySidebar.classList.contains('-translate-x-full');
     if (isClosed) {
-        masterySidebar.classList.remove('translate-x-full');
+        masterySidebar.classList.remove('-translate-x-full');
         document.body.style.overflow = 'hidden';
     } else {
-        masterySidebar.classList.add('translate-x-full');
+        masterySidebar.classList.add('-translate-x-full');
         document.body.style.overflow = 'auto';
     }
 }
@@ -96,7 +96,7 @@ portalLinks.forEach(link => {
             setTimeout(() => { window.location.href = href; }, 300);
         }
         
-        if (!masterySidebar.classList.contains('translate-x-full')) {
+        if (!masterySidebar.classList.contains('-translate-x-full')) {
             togglePortal();
         }
     });
@@ -333,7 +333,7 @@ function stop528Hz() {
 
 // --- Enhanced Canvas Synchronicity Engine ---
 const canvas = document.getElementById('frequencyCanvas');
-const ctx = canvas.getContext('2d');
+const ctx = canvas ? canvas.getContext('2d') : null;
 const statusMsg = document.getElementById('statusMessage');
 
 let time = 0;
@@ -344,11 +344,12 @@ let isPerturbed = false;
 
 function resizeCanvas() {
     if (!canvas || !canvas.parentElement) return;
-    // High DPI support
+    // High DPI (Retina) support per High-Performance Canvas Optimization standards
     const rect = canvas.parentElement.getBoundingClientRect();
-    canvas.width = rect.width * 2;
-    canvas.height = rect.height * 2;
-    ctx.scale(2, 2);
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // Reset and scale securely
     canvas.style.width = `${rect.width}px`;
     canvas.style.height = `${rect.height}px`;
 }
@@ -504,6 +505,7 @@ let scene, camera, renderer, codexObject, animationId;
 let is3DInitialized = false;
 
 function init3DCodex() {
+    if (!codex3dContainer) return;
     if (is3DInitialized) return;
     is3DInitialized = true;
 
@@ -624,6 +626,7 @@ function init3DCodex() {
 }
 
 function openCodexModal() {
+    if (!codexModal || !codexModalContent) return;
     codexModal.classList.remove('pointer-events-none', 'opacity-0');
     codexModalContent.classList.remove('scale-95', 'opacity-0');
     document.body.style.overflow = 'hidden';
@@ -658,6 +661,7 @@ function openCodexModal() {
 }
 
 function closeCodexModal() {
+    if (!codexModal || !codexModalContent) return;
     codexModal.classList.add('pointer-events-none', 'opacity-0');
     codexModalContent.classList.add('scale-95', 'opacity-0');
     document.body.style.overflow = 'auto';
@@ -680,6 +684,7 @@ const terminalOutput = document.getElementById('terminal-output');
 let terminalTimeoutIds = [];
 
 function downloadUserManual() {
+    if (!terminalModal || !terminalContent || !terminalOutput) return;
     terminalModal.classList.remove('pointer-events-none', 'opacity-0');
     terminalContent.classList.remove('scale-95', 'opacity-0');
     document.body.style.overflow = 'hidden';
@@ -773,8 +778,15 @@ let matrixTime = 0;
 
 function initMatrix() {
     if (!matrixCanvas) return;
-    matrixWidth = matrixCanvas.width = matrixCanvas.offsetWidth;
-    matrixHeight = matrixCanvas.height = matrixCanvas.offsetHeight;
+    
+    // Hardware-Aware Execution: HiDPI Canvas Scaling
+    const dpr = window.devicePixelRatio || 1;
+    matrixWidth = matrixCanvas.offsetWidth;
+    matrixHeight = matrixCanvas.offsetHeight;
+    
+    matrixCanvas.width = matrixWidth * dpr;
+    matrixCanvas.height = matrixHeight * dpr;
+    if (matrixCtx) matrixCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
     
     matrixNodes = [];
     const cols = 9;
@@ -895,6 +907,9 @@ function bootstrapApplication() {
         // Initialize 81 Node Matrix
         initMatrix();
 
+        // Initialize Base44 Torus Knot
+        initTorusKnot();
+
         // Setup performance observers
         setupPerformanceObservers();
 
@@ -922,6 +937,7 @@ function masterLoop() {
 
     // Always run these core animations
     animateCursor();
+    drawTorus();
 
     // Conditionally run expensive canvas animations only when they are visible
     if (appState.isFrequencyCanvasVisible) {
@@ -934,6 +950,7 @@ function masterLoop() {
     // Run scroll-dependent animations
     updateParallax();
     updateScrollHighlights();
+    updateTimelineParallax();
 
     requestAnimationFrame(masterLoop);
 }
@@ -960,3 +977,94 @@ window.addEventListener('resize', () => {
         initMatrix();
     }, 250);
 });
+
+// --- Hero Torus Knot (Base44 Upgrade) ---
+let torusScene, torusCamera, torusRenderer, torusMesh;
+let isTorusInitialized = false;
+
+function initTorusKnot() {
+    const container = document.getElementById('torus-canvas-container');
+    if (!container) return;
+    
+    if (typeof THREE === 'undefined') {
+        setTimeout(initTorusKnot, 100);
+        return;
+    }
+    
+    torusScene = new THREE.Scene();
+    torusCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    torusCamera.position.z = 25;
+
+    torusRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    torusRenderer.setSize(window.innerWidth, window.innerHeight);
+    torusRenderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(torusRenderer.domElement);
+
+    // Throttle rendering geometry dynamically for mobile
+    const segments = window.innerWidth < 768 ? 64 : 150;
+    const geometry = new THREE.TorusKnotGeometry(12, 1.5, segments, 20);
+    
+    const material = new THREE.MeshPhysicalMaterial({
+        color: 0x00e5ff,
+        emissive: 0xd4af37,
+        emissiveIntensity: 0.15,
+        metalness: 0.8,
+        roughness: 0.2,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.25
+    });
+
+    torusMesh = new THREE.Mesh(geometry, material);
+    torusScene.add(torusMesh);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+    torusScene.add(ambientLight);
+    
+    const pointLight = new THREE.PointLight(0x00e5ff, 2, 100);
+    pointLight.position.set(10, 10, 10);
+    torusScene.add(pointLight);
+
+    isTorusInitialized = true;
+}
+
+let tMouseX = 0, tMouseY = 0;
+window.addEventListener('mousemove', (e) => {
+    tMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+    tMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+});
+
+function drawTorus() {
+    if (!isTorusInitialized || !torusMesh) return;
+    
+    // Natural ambient rotation
+    torusMesh.rotation.x += 0.002;
+    torusMesh.rotation.y += 0.003;
+    
+    // Mouse-reactive quantum intent
+    torusMesh.rotation.x += tMouseY * 0.02;
+    torusMesh.rotation.y += tMouseX * 0.02;
+
+    torusRenderer.render(torusScene, torusCamera);
+}
+
+// --- Phase Shift Parallax Timeline ---
+function updateTimelineParallax() {
+    const timelineItems = document.querySelectorAll('.parallax-timeline-item');
+    if (!timelineItems.length) return;
+    
+    const windowHeight = window.innerHeight;
+    
+    timelineItems.forEach((item, index) => {
+        const rect = item.getBoundingClientRect();
+        const centerOffset = (rect.top + rect.height / 2) - (windowHeight / 2);
+        
+        const speed = index % 2 === 0 ? 0.05 : 0.08;
+        const yOffset = centerOffset * speed;
+        
+        const content = item.querySelector('.glass-panel');
+        if (content) {
+            content.style.transform = `translateY(${yOffset}px)`;
+        }
+    });
+}
