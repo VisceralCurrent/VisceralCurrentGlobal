@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Codex 81 | Visceral Alignment (Triad II)</title>
+    <title>The Codex 81 | Domain Awareness (Triad II)</title>
     
     <meta name="theme-color" content="#050a0f">
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -156,13 +157,13 @@
     <section class="py-24 px-4 md:px-12 lg:px-24">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="cinzel text-3xl md:text-4xl font-bold uppercase tracking-widest mb-4">The Mastery 360 Grid <span class="text-accent">// Triad II</span></h2>
+                <h2 class="cinzel text-3xl md:text-4xl font-bold uppercase tracking-widest mb-4">The Mastery 360 Grid <span class="text-accent">// Triad II: Domain Awareness</span></h2>
                 <p class="mono text-xs text-gray-500 uppercase tracking-[0.2em] mb-8">Select a node to initiate alignment protocol</p>
                 
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="alignment.html" class="px-6 py-2 border border-white/10 hover:border-white/30 text-gray-400 hover:text-white rounded-sm text-xs tracking-widest uppercase transition-all">Triad I (01-27)</a>
-                    <a href="alignment-2.html" class="px-6 py-2 rounded-sm text-xs tracking-widest uppercase font-bold transition-all" style="border: 1px solid var(--accent); background-color: rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.1); color: var(--accent); box-shadow: 0 0 15px rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.2);">Triad II (28-54)</a>
-                    <a href="alignment-3.html" class="px-6 py-2 border border-white/10 hover:border-white/30 text-gray-400 hover:text-white rounded-sm text-xs tracking-widest uppercase transition-all">Triad III (55-81)</a>
+                    <a href="alignment.html" class="px-6 py-2 border border-white/10 hover:border-white/30 text-gray-400 hover:text-white rounded-sm text-xs tracking-widest uppercase transition-all">Triad I: Self-Discovery (01-27)</a>
+                    <a href="alignment-2.html" class="px-6 py-2 rounded-sm text-xs tracking-widest uppercase font-bold transition-all" style="border: 1px solid var(--accent); background-color: rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.1); color: var(--accent); box-shadow: 0 0 15px rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.2);">Triad II: Domain Awareness (28-54)</a>
+                    <a href="alignment-3.html" class="px-6 py-2 border border-white/10 hover:border-white/30 text-gray-400 hover:text-white rounded-sm text-xs tracking-widest uppercase transition-all">Triad III: Infinite Strategy (55-81)</a>
                 </div>
             </div>
 
@@ -253,25 +254,42 @@
         ];
 
         const libraryData = [
-            { quote: "Power is silent and effortless. Force requires a constant supply of energy.", author: "David Hawkins", principle: "True power does not need to announce itself." },
-            { quote: "Assume formlessness. By being as fluid as water, you are impossible to grasp.", author: "Robert Greene", principle: "Rigidity is the enemy of longevity." },
-            { quote: "The only way to make sense out of change is to plunge into it, move with it, and join the dance.", author: "Alan Watts", principle: "Resistance creates suffering; acceptance creates momentum." },
-            { quote: "In the middle of the movement and the chaos, keep stillness inside of you.", author: "Deepak Chopra", principle: "Your internal state commands your external reality." },
-            { quote: "A path without a heart is never enjoyable. You have to work hard even to take it.", author: "Carlos Castaneda", principle: "Alignment requires visceral, gut-level resonance." },
-            { quote: "When you change the way you look at things, the things you look at change.", author: "Wayne Dyer", principle: "Perception is the phase shift (ϕ) of reality." },
-            { quote: "The supreme art of war is to subdue the enemy without fighting.", author: "Sun Tzu", principle: "Victory is won through positioning, not collision." },
-            { quote: "The universe is change; our life is what our thoughts make it.", author: "Marcus Aurelius", principle: "Composure and self-respect are the ultimate armor." },
-            { quote: "He who has a why to live can bear almost any how.", author: "Friedrich Nietzsche", principle: "Purpose bridges the gap between chaos and order." }
+            { quote: "Some things benefit from shocks; they thrive and grow when exposed to volatility.", author: "Nassim Nicholas Taleb", action: "Structure your system to gain from disorder. Do not hide from volatility; build an architecture that metabolizes it." },
+            { quote: "Nothing in life is as important as you think it is, while you are thinking about it.", author: "Daniel Kahneman", action: "Override immediate emotional impulse. Engage your deep analytical calculation before deploying kinetic energy." },
+            { quote: "Invert, always invert: Turn a situation or problem upside down. Look at it backward.", author: "Charlie Munger", action: "Identify exactly how to guarantee failure in your current project, then map the exact mathematical opposite." },
+            { quote: "Pain + Reflection = Progress.", author: "Ray Dalio", action: "Log today's failure objectively. Extract the mathematical principle behind the friction without emotional attachment." },
+            { quote: "The first principle is that you must not fool yourself, and you are the easiest person to fool.", author: "Richard Feynman", action: "Strip the complex problem down to its undeniable base truths. Build up only from what is absolutely verifiable." },
+            { quote: "People don't buy what you do; they buy why you do it.", author: "Simon Sinek", action: "Ensure the Origin (o) of your current pursuit is anchored in absolute truth, otherwise the scaling will collapse." },
+            { quote: "Competition is for losers. If you want to create and capture lasting value, look to build a monopoly.", author: "Peter Thiel", action: "Stop competing in crowded margins. Initiate a Phase Shift (ϕ) to create an entirely new paradigm of value." },
+            { quote: "You can't connect the dots looking forward; you can only connect them looking backwards.", author: "Steve Jobs", action: "Trust your intuition. Present isolated actions will synthesize perfectly in the future Area of Impact." },
+            { quote: "Compound interest is the eighth wonder of the world. He who understands it, earns it.", author: "Albert Einstein", action: "Let your synergetic connections compound daily. Do not interrupt the math of consistency." },
+            { quote: "We can only see a short distance ahead, but we can see plenty there that needs to be done.", author: "Alan Turing", action: "Automate the repetitive friction in your ecosystem so the mind can focus purely on infinite expansion." },
+            { quote: "There are children playing in the streets who could solve some of my top problems in physics.", author: "J. Robert Oppenheimer", action: "Initiate the one small, unconventional keystone habit today that will trigger an explosive chain reaction." },
+            { quote: "That brain of mine is something more than merely mortal; as time will show.", author: "Ada Lovelace", action: "View your emotional landscape as data to be processed, not a reality to be trapped by. Code the solution." },
+            { quote: "A manager's output = the output of his organization + the output of the neighboring organizations under his influence.", author: "Andy Grove", action: "Maximize the leverage of your time by delegating low-impact friction to automated systems or allied nodes." },
+            { quote: "A bad system will beat a good person every time.", author: "W. Edwards Deming", action: "Stop blaming the individual components. Fix the macro-architecture of the system causing the friction." },
+            { quote: "Disruptive technology should be framed as a marketing challenge, not a technological one.", author: "Clayton Christensen", action: "Willingly cannibalize your own outdated methods before the market (or reality) forces the Phase Shift upon you." },
+            { quote: "There are no silver bullets, only lead bullets.", author: "Ben Horowitz", action: "Embrace the terror of the void. Sovereign leadership requires standing alone in the Phase Shift and doing the hard work." },
+            { quote: "Software is eating the world.", author: "Marc Andreessen", action: "Digitize and scale your analog value. Transform physical effort into infinite digital capacity." },
+            { quote: "The function of the margin of safety is, in essence, that of rendering unnecessary an accurate estimate of the future.", author: "Benjamin Graham", action: "Build redundancy into your timeline so that unexpected friction (ϕ) becomes utterly irrelevant." },
+            { quote: "The majesty of simplicity.", author: "John Bogle", action: "Strip away the complex financial, mental, and social derivatives. Hold the center mass of the equation." },
+            { quote: "You can't predict. You can prepare.", author: "Howard Marks", action: "Recognize where you are in the emotional and economic cycle, and operate deliberately counter to the herd." },
+            { quote: "Rich people acquire assets. The poor and middle class acquire liabilities that they think are assets.", author: "Robert Kiyosaki", action: "Audit your energetic portfolio. Cut the people, habits, and thoughts that drain kinetic fuel." },
+            { quote: "What gets measured gets managed.", author: "Peter Drucker", action: "Quantify your daily Visceral Current (ν) output to ensure progressive scaling toward the Infinite Sum." },
+            { quote: "Forget rich versus poor. Think leveraged versus un-leveraged.", author: "Naval Ravikant", action: "Disconnect your inputs from your outputs. Scale your impact using code, capital, or digital media." },
+            { quote: "Don't tell me what you think, tell me what you have in your portfolio.", author: "Nassim Nicholas Taleb", action: "Do not trust advice from those who do not share the physical risk of the Phase Shift. Skin in the game is required." },
+            { quote: "You must know the big ideas in the big disciplines and use them routinely.", author: "Charlie Munger", action: "Cross-reference your current problem against biology, physics, and history. Find the universal law." },
+            { quote: "Radical truth and radical transparency.", author: "Ray Dalio", action: "Speak the absolute, unvarnished, mathematical truth to your core team today. Eliminate hidden friction." },
+            { quote: "The Area of Impact must be infinite.", author: "The Visceral Codex", action: "Ensure that for every unit of energy spent today, the entire system benefits permanently." }
         ];
 
         // Generate 27 Nodes for Triad II (Nodes 28 - 54)
         const nodes = Array.from({length: 27}, (_, i) => {
             const realmIdx = Math.floor(i / 9) + 3;
-            const libIdx = i % 9;
             return {
                 id: i + 28,
                 realm: realms[realmIdx],
-                insight: libraryData[libIdx]
+                insight: libraryData[i]
             };
         });
 
@@ -388,10 +406,17 @@
                         </div>
                         <div class="pt-8 mt-8 border-t border-white/5 strategy-step opacity-0 translate-y-4 transition-all duration-700">
                             <span class="block mono text-[10px] text-gray-500 uppercase mb-3 tracking-[0.2em]">Node Insight (\(\\nu\))</span>
-                            <p class="text-sm font-light text-gray-400 mb-6 italic">"${node.insight.quote}" — ${node.insight.author}</p>
-                            <button onclick="closeDetail()" class="w-full py-4 bg-accent/10 text-accent border border-accent/50 hover:bg-accent hover:text-black transition-colors uppercase text-xs font-bold tracking-widest rounded-sm">
+                            <p class="text-sm font-light text-gray-400 mb-5 italic">"${node.insight.quote}" — ${node.insight.author}</p>
+                            <div class="bg-accent/5 border-l-2 border-accent p-4 mb-6 rounded-r-md">
+                                <span class="block text-[10px] text-accent font-bold uppercase tracking-widest mb-2">Universal Course of Action</span>
+                                <p class="text-xs text-white font-medium leading-relaxed">${node.insight.action}</p>
+                            </div>
+                            <button onclick="closeDetail()" class="w-full py-4 bg-accent/10 text-accent border border-accent/50 hover:bg-accent hover:text-[#030508] transition-colors uppercase text-xs font-bold tracking-widest rounded-sm shadow-[0_0_15px_rgba(var(--accent-r),var(--accent-g),var(--accent-b),0.1)] hover:shadow-[0_0_30px_rgba(var(--accent-r),var(--accent-g),var(--accent-b),0.4)]">
                                 Acknowledge & Align
                             </button>
+                            <a href="matrix81.html#system" class="mt-4 w-full py-4 bg-transparent border border-white/10 hover:border-white text-gray-400 hover:text-white transition-colors uppercase text-[10px] md:text-xs font-bold tracking-widest rounded-sm flex items-center justify-center gap-3 text-center">
+                                <i class="fas fa-project-diagram text-accent"></i> View in 81-Node Sacred Matrix
+                            </a>
                         </div>
                     </div>
                 </div>

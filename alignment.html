@@ -11,6 +11,7 @@
     <!-- KaTeX for Math Rendering -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -171,13 +172,13 @@
     <section class="py-24 px-4 md:px-12 lg:px-24">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="cinzel text-3xl md:text-4xl font-bold uppercase tracking-widest mb-4">The Mastery 360 Grid <span class="text-accent">// Triad I</span></h2>
+                <h2 class="cinzel text-3xl md:text-4xl font-bold uppercase tracking-widest mb-4">The Mastery 360 Grid <span class="text-accent">// Triad I: Self-Discovery</span></h2>
                 <p class="mono text-xs text-gray-400 uppercase tracking-[0.2em] mb-8">Select a node to initiate alignment protocol</p>
                 
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="alignment.html" class="px-6 py-2 rounded-sm text-xs tracking-widest uppercase font-bold transition-all" style="border: 1px solid var(--accent); background-color: rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.1); color: var(--accent); box-shadow: 0 0 15px rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.2);">Triad I (01-27)</a>
-                    <a href="alignment-2.html" class="px-6 py-2 border border-white/10 hover:border-white/30 text-gray-400 hover:text-white rounded-sm text-xs tracking-widest uppercase transition-all">Triad II (28-54)</a>
-                    <a href="alignment-3.html" class="px-6 py-2 border border-white/10 hover:border-white/30 text-gray-400 hover:text-white rounded-sm text-xs tracking-widest uppercase transition-all">Triad III (55-81)</a>
+                    <a href="alignment.html" class="px-6 py-2 rounded-sm text-xs tracking-widest uppercase font-bold transition-all" style="border: 1px solid var(--accent); background-color: rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.1); color: var(--accent); box-shadow: 0 0 15px rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.2);">Triad I: Self-Discovery (01-27)</a>
+                    <a href="alignment-2.html" class="px-6 py-2 border border-white/10 hover:border-white/30 text-gray-400 hover:text-white rounded-sm text-xs tracking-widest uppercase transition-all">Triad II: Domain Awareness (28-54)</a>
+                    <a href="alignment-3.html" class="px-6 py-2 border border-white/10 hover:border-white/30 text-gray-400 hover:text-white rounded-sm text-xs tracking-widest uppercase transition-all">Triad III: Infinite Strategy (55-81)</a>
                 </div>
             </div>
 
@@ -353,25 +354,42 @@
         ];
 
         const libraryData = [
-            { quote: "Power is silent and effortless. Force requires a constant supply of energy.", author: "David Hawkins", principle: "True power does not need to announce itself." },
-            { quote: "Assume formlessness. By being as fluid as water, you are impossible to grasp.", author: "Robert Greene", principle: "Rigidity is the enemy of longevity." },
-            { quote: "The only way to make sense out of change is to plunge into it, move with it, and join the dance.", author: "Alan Watts", principle: "Resistance creates suffering; acceptance creates momentum." },
-            { quote: "In the middle of the movement and the chaos, keep stillness inside of you.", author: "Deepak Chopra", principle: "Your internal state commands your external reality." },
-            { quote: "A path without a heart is never enjoyable. You have to work hard even to take it.", author: "Carlos Castaneda", principle: "Alignment requires visceral, gut-level resonance." },
-            { quote: "When you change the way you look at things, the things you look at change.", author: "Wayne Dyer", principle: "Perception is the phase shift (ϕ) of reality." },
-            { quote: "The supreme art of war is to subdue the enemy without fighting.", author: "Sun Tzu", principle: "Victory is won through positioning, not collision." },
-            { quote: "The universe is change; our life is what our thoughts make it.", author: "Marcus Aurelius", principle: "Composure and self-respect are the ultimate armor." },
-            { quote: "He who has a why to live can bear almost any how.", author: "Friedrich Nietzsche", principle: "Purpose bridges the gap between chaos and order." }
+            { quote: "Power is silent and effortless. Force requires a constant supply of energy.", author: "David Hawkins", action: "Stop pushing against the current. Release the need to control the outcome and let the kinetic energy of the system do the heavy lifting." },
+            { quote: "Assume formlessness. By being as fluid as water, you are impossible to grasp.", author: "Robert Greene", action: "Drop your rigid plans for today. Adapt your strategy perfectly to the terrain the market (or your environment) is offering right now." },
+            { quote: "The only way to make sense out of change is to plunge into it, move with it, and join the dance.", author: "Alan Watts", action: "Identify the exact point of friction you are avoiding. Walk directly into it and convert that resistance into Phase Shift (ϕ) fuel." },
+            { quote: "In the middle of movement and chaos, keep stillness inside of you.", author: "Deepak Chopra", action: "Find the 'Eye of the Storm'. Take 5 minutes of absolute silence before executing your next business or personal maneuver." },
+            { quote: "A path without a heart is never enjoyable. You have to work hard even to take it.", author: "Carlos Castaneda", action: "Audit your current primary project. If it lacks visceral resonance, pivot your trajectory immediately." },
+            { quote: "When you change the way you look at things, the things you look at change.", author: "Wayne Dyer", action: "Reframe your current greatest obstacle as the exact mathematical friction required to scale." },
+            { quote: "The supreme art of war is to subdue the enemy without fighting.", author: "Sun Tzu", action: "Remove yourself from a direct conflict today. Win by elevating your Area of Impact (A) beyond their reach." },
+            { quote: "The universe is change; our life is what our thoughts make it.", author: "Marcus Aurelius", action: "Accept the loss of an old identity. The void left behind is where the new Visceral Current will flow." },
+            { quote: "He who has a why to live can bear almost any how.", author: "Friedrich Nietzsche", action: "Define your 'P' (Purpose) so clearly that the 'ϕ' (Friction) becomes irrelevant noise." },
+            { quote: "Until you make the unconscious conscious, it will direct your life and you will call it fate.", author: "Carl Jung", action: "Identify the shadow loop driving your recurring failure and mathematically isolate it." },
+            { quote: "Nature does not hurry, yet everything is accomplished.", author: "Lao Tzu", action: "Eliminate artificial urgency. Slow down to your natural resonant frequency and execute with smooth precision." },
+            { quote: "The lion cannot protect himself from traps, and the fox cannot defend himself from wolves.", author: "Niccolò Machiavelli", action: "Employ both raw, undeniable execution and hyper-aware strategic navigation today." },
+            { quote: "As above, so below, as within, so without, as the universe, so the soul.", author: "Hermes Trismegistus", action: "Clean your immediate physical environment. The macro-empire reflects your micro-habits." },
+            { quote: "When the way comes to an end, then change - having changed, you pass through.", author: "I Ching", action: "If a system is deadlocked, do not push harder. Introduce a radical Phase Shift to alter the rules of the game." },
+            { quote: "There are no ordinary moments.", author: "Dan Millman", action: "Treat your next mundane task as a sacred training ground for absolute, unbreakable focus." },
+            { quote: "If you want to find the secrets of the universe, think in terms of energy, frequency and vibration.", author: "Nikola Tesla", action: "Stop measuring success in fiat currency alone. Measure it in resonant synergetic output." },
+            { quote: "Play iterated games. All the returns in life, whether in wealth, relationships, or knowledge, come from compound interest.", author: "Naval Ravikant", action: "Audit your connection variable (C). Cut ties with short-term extractors and invest in infinite scalers." },
+            { quote: "Be water, my friend.", author: "Bruce Lee", action: "When you meet resistance today, do not crash against it. Flow around it, absorb its momentum, and continue forward." },
+            { quote: "Out beyond ideas of wrongdoing and rightdoing there is a field. I'll meet you there.", author: "Rumi", action: "Step out of the binary 'Right vs. Wrong' paradigm. Operate from the 3rd point of holistic synthesis." },
+            { quote: "We suffer more often in imagination than in reality.", author: "Epictetus", action: "Ground yourself in the 'Now' (o). The anxiety of the future holds zero kinetic weight." },
+            { quote: "The day you resolve to do it, is your lucky day.", author: "Leonardo da Vinci", action: "Do not wait for perfect conditions. The Visceral Current requires a spark to begin the flow." },
+            { quote: "No man is more unhappy than he who never faces adversity. For he is not permitted to prove himself.", author: "Seneca", action: "Seek out a deliberate challenge today to test the tensile strength of your internal architecture." },
+            { quote: "Do nothing which is of no use.", author: "Miyamoto Musashi", action: "Audit your calendar. Erase any action that does not directly feed the Infinite Sum (S)." },
+            { quote: "The mind is everything. What you think you become.", author: "Buddha", action: "Install a mental firewall. Reject low-frequency thoughts before they consume kinetic energy." },
+            { quote: "Chance favors the prepared mind.", author: "Louis Pasteur", action: "Synchronicity is not random. It is mathematically drawn to high-capacity preparation. Build capacity." },
+            { quote: "It is not the length of life, but the depth of life.", author: "Ralph Waldo Emerson", action: "Maximize the Area of Impact (A) of this current hour. Make it so deep it echoes into tomorrow." },
+            { quote: "We do not chase; we choose.", author: "The Visceral Codex", action: "Stop pursuing external validation. Plant your Origin (o) coordinate and let the universe align to your gravity." }
         ];
 
         // Generate 27 Nodes for Triad I (Nodes 1 - 27)
         const nodes = Array.from({length: 27}, (_, i) => {
             const realmIdx = Math.floor(i / 9);
-            const libIdx = i % 9;
             return {
                 id: i + 1,
                 realm: realms[realmIdx],
-                insight: libraryData[libIdx]
+                insight: libraryData[i]
             };
         });
 
@@ -472,10 +490,17 @@
 
                         <div class="pt-8 mt-8 border-t border-white/5 strategy-step opacity-0 translate-y-4 transition-all duration-700">
                             <span class="block mono text-[10px] text-gray-500 uppercase mb-3 tracking-[0.2em]">Node Insight (\(\\nu\))</span>
-                            <p class="text-sm font-light text-gray-400 mb-6 italic">"${node.insight.quote}" — ${node.insight.author}</p>
-                            <button onclick="closeDetail()" class="w-full py-4 bg-accent/10 text-accent border border-accent/50 hover:bg-accent hover:text-black transition-colors uppercase text-xs font-bold tracking-widest rounded-sm">
+                            <p class="text-sm font-light text-gray-400 mb-5 italic">"${node.insight.quote}" — ${node.insight.author}</p>
+                            <div class="bg-accent/5 border-l-2 border-accent p-4 mb-6 rounded-r-md">
+                                <span class="block text-[10px] text-accent font-bold uppercase tracking-widest mb-2">Universal Course of Action</span>
+                                <p class="text-xs text-white font-medium leading-relaxed">${node.insight.action}</p>
+                            </div>
+                            <button onclick="closeDetail()" class="w-full py-4 bg-accent/10 text-accent border border-accent/50 hover:bg-accent hover:text-[#030508] transition-colors uppercase text-xs font-bold tracking-widest rounded-sm shadow-[0_0_15px_rgba(var(--accent-r),var(--accent-g),var(--accent-b),0.1)] hover:shadow-[0_0_30px_rgba(var(--accent-r),var(--accent-g),var(--accent-b),0.4)]">
                                 Acknowledge & Align
                             </button>
+                            <a href="matrix81.html#system" class="mt-4 w-full py-4 bg-transparent border border-white/10 hover:border-white text-gray-400 hover:text-white transition-colors uppercase text-[10px] md:text-xs font-bold tracking-widest rounded-sm flex items-center justify-center gap-3 text-center">
+                                <i class="fas fa-project-diagram text-accent"></i> View in 81-Node Sacred Matrix
+                            </a>
                         </div>
                     </div>
                 </div>

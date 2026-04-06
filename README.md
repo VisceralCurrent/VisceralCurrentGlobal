@@ -2,7 +2,7 @@
 
 > *"Human Capacity Optimization through the Mathematics of Synchronicity. We do not chase; we choose."*
 
-**Visceral Current** is a synergetic digital architecture built to reflect the mathematical certainty of the universe. It serves as the central hub for a legacy of Universal Sovereignty—housing **VanFlowCo**, **ScarlettSky**, and **Tension Treenets**. 
+**Visceral Current** is a synergetic digital architecture built to reflect the mathematical certainty of the universe. It serves as the central hub for a legacy of Universal Sovereignty—housing **VanFlowCo**, **ScarlettSky**, and **Tension Treenets** (Founded and owned by Cooper Van Houten). 
 
 This repository contains a high-performance, zero-build static ecosystem powered by vanilla web technologies, deep mathematics, and cinematic visual rendering.
 

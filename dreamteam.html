@@ -148,7 +148,11 @@
                 </div>
                 <div>
                     <label class="mono text-[10px] text-amber-500 uppercase tracking-widest block mb-2">Origin Coordinate (Birthdate)</label>
-                    <input type="date" id="input-date" required class="w-full bg-white/5 border border-white/10 rounded-sm p-4 text-base md:text-sm appearance-none text-white font-mono tracking-widest focus:border-amber-500/50 outline-none transition-colors [color-scheme:dark]">
+                    <div class="grid grid-cols-3 gap-4">
+                        <input type="text" inputmode="numeric" pattern="\d*" maxlength="2" id="input-month" required placeholder="MM" class="w-full bg-white/5 border border-white/10 rounded-sm p-4 text-base md:text-sm appearance-none text-white font-mono tracking-widest text-center focus:border-amber-500/50 outline-none transition-colors">
+                        <input type="text" inputmode="numeric" pattern="\d*" maxlength="2" id="input-day" required placeholder="DD" class="w-full bg-white/5 border border-white/10 rounded-sm p-4 text-base md:text-sm appearance-none text-white font-mono tracking-widest text-center focus:border-amber-500/50 outline-none transition-colors">
+                        <input type="text" inputmode="numeric" pattern="\d*" maxlength="4" id="input-year" required placeholder="YYYY" class="w-full bg-white/5 border border-white/10 rounded-sm p-4 text-base md:text-sm appearance-none text-white font-mono tracking-widest text-center focus:border-amber-500/50 outline-none transition-colors">
+                    </div>
                 </div>
                 <button type="submit" class="w-full py-4 bg-amber-600/20 border border-amber-500/50 text-amber-500 text-xs font-bold uppercase tracking-[0.3em] hover:bg-amber-500 hover:text-black transition-all duration-300 mt-4 rounded-sm flex justify-center items-center gap-3 group">
                     <i class="fas fa-satellite-dish group-hover:animate-spin"></i> Initialize Mapping
@@ -312,7 +316,11 @@
             e.preventDefault();
             
             const name = document.getElementById('input-name').value;
-            const date = document.getElementById('input-date').value;
+            const month = document.getElementById('input-month').value.padStart(2, '0');
+            const day = document.getElementById('input-day').value.padStart(2, '0');
+            const year = document.getElementById('input-year').value;
+            
+            const date = `${year}-${month}-${day}`;
             const submitBtn = this.querySelector('button');
             
             // UI Loading State
@@ -351,15 +359,10 @@
                         </div>
                         <span class="text-[10px] mono uppercase tracking-widest text-[#00D2FF] block mb-2">${roles[idx]}</span>
                         <h4 class="text-lg font-bold text-white mb-3">${teamData.title}</h4>
-                        <p class="text-xs text-gray-400 font-light leading-relaxed">Required to offset your natural Phase Shift (\\(\\phi\\)). This coordinate brings ${teamData.theme.split(' & ')[0].toLowerCase()} to your frequency.</p>
+                        <p class="text-xs text-gray-400 font-light leading-relaxed">Required to offset your natural Phase Shift (ϕ). This coordinate brings ${teamData.theme.split(' & ')[0].toLowerCase()} to your frequency.</p>
                     `;
                     teamGrid.appendChild(card);
                 });
-                
-                // Trigger MathJax for newly injected text
-                if (window.katex) {
-                    renderMathInElement(teamGrid, { delimiters: [{left: "\\(", right: "\\)", display: false}] });
-                }
                 
                 // Reveal Results
                 const resultsSection = document.getElementById('results-section');

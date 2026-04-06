@@ -156,6 +156,11 @@
         realmsData.forEach((realm, index) => {
             const delay = (index % 3) * 100;
             
+            // Triad Mapping Intelligence
+            let triadLink = 'alignment.html'; let triadName = 'Triad I: Self-Discovery';
+            if (realm.id >= 4 && realm.id <= 6) { triadLink = 'alignment-2.html'; triadName = 'Triad II: Domain Awareness'; }
+            if (realm.id >= 7) { triadLink = 'alignment-3.html'; triadName = 'Triad III: Infinite Strategy'; }
+            
             const cardHTML = `
                 <div class="realm-card-container perspective-1000 w-full h-[620px] md:h-[580px] cursor-pointer reveal delay-${delay}" data-stage="0" onclick="cycleStage(this)">
                     <div class="card-inner relative w-full h-full transition-transform duration-1000 transform-style-3d">
@@ -210,6 +215,10 @@
                             </div>
                             <p class="text-xs text-indigo-50 leading-relaxed font-medium px-2 italic">"${realm.unityDesc}"</p>
                             <div class="mt-4 text-[10px] font-mono text-[#00e5ff] bg-black/30 backdrop-blur-md px-6 py-4 rounded-full border border-white/10 w-full font-serif">${realm.formula}</div>
+                            
+                            <a href="${triadLink}" class="mt-5 inline-flex items-center gap-2 px-6 py-2.5 bg-black/50 hover:bg-white border border-white/20 hover:border-white rounded-full text-[10px] font-bold font-mono uppercase tracking-widest text-white hover:text-black transition-all shadow-xl group">
+                                <i class="fas fa-dungeon text-[var(--visceral-blue,#00e5ff)] group-hover:text-black"></i> Align in ${triadName}
+                            </a>
                         </div>
 
                     </div>

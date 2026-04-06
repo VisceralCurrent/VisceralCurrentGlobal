@@ -1,44 +1,387 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visceral Current | Client Portal</title>
+    <title>Visceral Portal | The Multidimensional LMS</title>
     
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="Visceral Current | Client Portal">
     <meta name="theme-color" content="#050a0f">
     
-    <!-- Resource Hints -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://unpkg.com">
-
-    <!-- FontAwesome Icons -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
     
-    <!-- Global Styles (Tailwind Injection) -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Tailwind CSS (Restored for Absolute Stability) -->
+    <!-- Tailwind & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
     <script>
-        tailwind.config = { theme: { extend: { colors: { 'visceral-gold': '#00e5ff', 'visceral-dark': '#050a0f', 'visceral-scarlett': '#e11d48', visceral: { gold: '#00e5ff', dark: '#050a0f', scarlett: '#e11d48', card: 'rgba(15, 17, 21, 0.65)' } }, fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'], cinzel: ['Cinzel', 'serif'] }, animation: { 'slow-spin': 'spin 20s linear infinite', 'float': 'float 6s ease-in-out infinite', 'pulse-glow': 'pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }, keyframes: { float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } }, pulseGlow: { '0%, 100%': { opacity: 0.4, transform: 'scale(1)' }, '50%': { opacity: 0.8, transform: 'scale(1.05)' } } } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'visceral-gold': '#00e5ff', 'visceral-dark': '#050a0f', 'visceral-purple': '#a855f7' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], cinzel: ['Cinzel', 'serif'], mono: ['Space Mono', 'monospace'] },
+                    animation: { 'pulse-glow': 'pulseGlow 4s ease-in-out infinite alternate', 'spin-slow': 'spin 20s linear infinite' },
+                    keyframes: { pulseGlow: { '0%': { opacity: 0.3, transform: 'scale(1)' }, '100%': { opacity: 0.6, transform: 'scale(1.05)' } } }
+                }
+            }
+        }
     </script>
-    
+
     <style>
-        /* Emerald/Cyan Portal Scrollbar */
+        body { background-color: #030508; color: #e2e8f0; overflow-x: hidden; }
+        
+        /* The Ethereal LMS Background */
+        .cosmic-bg {
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 229, 255, 0.05), transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.05), transparent 50%);
+        }
+
+        /* Glassmorphism Panels */
+        .glass {
+            background: rgba(10, 12, 15, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+        .glass:hover { border-color: rgba(0, 229, 255, 0.3); }
+        
+        .glow-text { text-shadow: 0 0 15px rgba(0, 229, 255, 0.5); }
+
+        /* Smooth Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: rgba(5, 7, 10, 0.5); }
-        ::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.2); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 229, 255, 0.5); }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 229, 255, 0.6); }
+
+        /* Hide ugly number arrows but keep numeric keypad on mobile */
+        input[type="text"] { -moz-appearance: textfield; }
     </style>
 </head>
-<body class="antialiased bg-[#050a0f] text-slate-200 m-0 p-0 h-[100dvh] w-screen overflow-hidden selection:bg-emerald-500/30">
+<body class="cosmic-bg selection:bg-visceral-gold/30 selection:text-white">
 
-    <div id="portal-root"></div>
+    <!-- Deep Ethereal Nebula -->
+    <div class="fixed inset-0 pointer-events-none -z-20 overflow-hidden">
+        <div class="absolute w-[800px] h-[800px] rounded-full blur-[150px] bg-visceral-purple/10 top-[-20%] left-[-10%] animate-pulse-glow"></div>
+        <div class="absolute w-[600px] h-[600px] rounded-full blur-[120px] bg-visceral-gold/5 bottom-[-10%] right-[-10%] animate-pulse-glow" style="animation-delay: 2s;"></div>
+    </div>
 
-    <!-- Vite Entry Point (Updated Path) -->
-    <script type="module" src="./main-dashboard.jsx"></script>
+    <!-- STATE 1: CALIBRATION PORTAL (Randonautica Intent Setter) -->
+    <section id="calibration-state" class="min-h-screen flex items-center justify-center px-6 relative z-10 transition-opacity duration-700">
+        <div class="max-w-md w-full glass p-10 rounded-3xl text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-visceral-gold to-transparent"></div>
+            
+            <div class="w-16 h-16 mx-auto bg-visceral-gold/10 rounded-full flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(0,229,255,0.2)]">
+                <i class="fas fa-compass text-2xl text-visceral-gold animate-pulse"></i>
+            </div>
+            
+            <h1 class="font-cinzel text-3xl font-bold text-white mb-2 uppercase tracking-widest">Identify Coordinate</h1>
+            <p class="text-xs font-mono text-gray-500 uppercase tracking-widest mb-8">Quantum Intent Initializer</p>
+            
+            <form id="calibration-form" class="space-y-6 text-left">
+                <div>
+                    <label class="font-mono text-[10px] text-visceral-gold uppercase tracking-widest block mb-2">Designation (Name)</label>
+                    <input type="text" id="input-name" required placeholder="Enter designation..." class="w-full bg-black/40 border border-white/10 rounded-lg p-4 text-sm text-white font-mono tracking-widest focus:border-visceral-gold/50 outline-none transition-colors shadow-inner">
+                </div>
+                
+                <div>
+                    <label class="font-mono text-[10px] text-visceral-gold uppercase tracking-widest block mb-2">Origin Point (Birthdate)</label>
+                    <!-- 3-Box Input System: Eliminates clunky date pickers -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <input type="text" inputmode="numeric" pattern="\d*" maxlength="2" id="input-mm" required placeholder="MM" class="w-full bg-black/40 border border-white/10 rounded-lg p-4 text-sm text-white font-mono tracking-widest text-center focus:border-visceral-gold/50 outline-none transition-colors shadow-inner">
+                        <input type="text" inputmode="numeric" pattern="\d*" maxlength="2" id="input-dd" required placeholder="DD" class="w-full bg-black/40 border border-white/10 rounded-lg p-4 text-sm text-white font-mono tracking-widest text-center focus:border-visceral-gold/50 outline-none transition-colors shadow-inner">
+                        <input type="text" inputmode="numeric" pattern="\d*" maxlength="4" id="input-yyyy" required placeholder="YYYY" class="w-full bg-black/40 border border-white/10 rounded-lg p-4 text-sm text-white font-mono tracking-widest text-center focus:border-visceral-gold/50 outline-none transition-colors shadow-inner">
+                    </div>
+                </div>
+                
+                <button type="submit" class="w-full py-4 bg-visceral-gold/10 border border-visceral-gold/50 text-visceral-gold text-xs font-bold uppercase tracking-[0.2em] hover:bg-visceral-gold hover:text-black transition-all duration-300 rounded-lg flex justify-center items-center gap-3 mt-4">
+                    <i class="fas fa-satellite-dish"></i> Lock Coordinates
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- STATE 2: THE MULTIDIMENSIONAL LMS DASHBOARD (Hidden Initially) -->
+    <section id="dashboard-state" class="hidden min-h-screen flex-col md:flex-row relative z-10 opacity-0 transition-opacity duration-1000">
+        
+        <!-- Canvas-Style Sidebar -->
+        <aside class="w-full md:w-64 glass border-r border-white/5 flex flex-col md:h-screen sticky top-0 z-20">
+            <div class="p-6 border-b border-white/5 flex items-center justify-between md:block">
+                <div class="flex items-center gap-3 group cursor-pointer">
+                    <i class="fas fa-bolt text-visceral-gold group-hover:scale-110 transition-transform"></i>
+                    <span class="font-cinzel text-lg font-bold text-white tracking-widest">PORTAL</span>
+                </div>
+                <div class="md:mt-2 text-[9px] font-mono text-gray-500 uppercase tracking-[0.3em]">Mastery 360 LMS</div>
+            </div>
+            
+            <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-2 flex md:flex-col gap-2 md:gap-0 overflow-x-auto md:overflow-visible">
+                <a href="#" class="flex items-center gap-4 px-4 py-3 bg-visceral-gold/10 text-visceral-gold rounded-lg border border-visceral-gold/30 text-sm font-semibold transition-all whitespace-nowrap">
+                    <i class="fas fa-layer-group w-5"></i> The Zero Point
+                </a>
+                <a href="#modules" class="flex items-center gap-4 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all whitespace-nowrap">
+                    <i class="fas fa-book-open w-5"></i> Modules
+                </a>
+                <a href="alignment.html" class="flex items-center gap-4 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all whitespace-nowrap">
+                    <i class="fas fa-crosshairs w-5"></i> Visceral Alignment
+                </a>
+                <a href="matrix81.html" class="flex items-center gap-4 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all whitespace-nowrap">
+                    <i class="fas fa-project-diagram w-5"></i> Sacred Matrix
+                </a>
+                <a href="realms.html" class="flex items-center gap-4 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all whitespace-nowrap">
+                    <i class="fas fa-compass w-5"></i> The 9 Realms
+                </a>
+                <a href="dreamteam.html" class="flex items-center gap-4 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all whitespace-nowrap">
+                    <i class="fas fa-users-rays w-5"></i> Synergy Mapper
+                </a>
+            </nav>
+            
+            <div class="p-6 border-t border-white/5 hidden md:block">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-gray-400">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="overflow-hidden">
+                        <p id="dash-user-name" class="text-sm font-bold text-white truncate"></p>
+                        <p class="text-[10px] text-visceral-gold font-mono uppercase tracking-widest">Active Seeker</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Canvas -->
+        <main class="flex-1 p-6 md:p-10 lg:p-16 h-screen overflow-y-auto">
+            
+            <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/5 pb-8">
+                <div>
+                    <h1 class="font-cinzel text-4xl md:text-5xl font-bold text-white mb-2">Command Center</h1>
+                    <p class="text-gray-400 font-light">Your Multidimensional Architecture is online.</p>
+                </div>
+                <div class="glass px-6 py-4 rounded-2xl flex items-center gap-6 border-visceral-purple/30">
+                    <div>
+                        <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest text-right mb-1">Operating Frequency</p>
+                        <p class="text-2xl font-bold text-white text-right"><span id="dash-hz" class="text-visceral-purple glow-text"></span> Hz</p>
+                    </div>
+                    <i class="fas fa-wave-square text-3xl text-visceral-purple opacity-80"></i>
+                </div>
+            </header>
+
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                
+                <!-- Left Column: The Randonautica Tracker -->
+                <div class="xl:col-span-1 space-y-8">
+                    <!-- Path of Least Resistance Card -->
+                    <div class="glass p-8 rounded-3xl relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-visceral-gold/10 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/2"></div>
+                        
+                        <div class="flex items-center gap-3 mb-6">
+                            <i class="fas fa-location-crosshairs text-visceral-gold animate-pulse"></i>
+                            <h2 class="font-mono text-xs text-visceral-gold uppercase tracking-widest">Optimal Entry Point</h2>
+                        </div>
+                        
+                        <h3 id="dash-realm-title" class="font-cinzel text-3xl font-bold text-white mb-1">Realm --</h3>
+                        <p id="dash-archetype" class="text-sm text-gray-400 italic font-serif border-b border-white/10 pb-4 mb-4"></p>
+                        
+                        <div class="bg-black/40 rounded-xl p-5 border border-white/5 mb-6">
+                            <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-2">Sacred Matrix Coordinate</p>
+                            <p class="text-3xl font-bold text-white font-mono tracking-tighter">NODE <span id="dash-node-num" class="text-visceral-gold">--</span></p>
+                        </div>
+                        
+                        <p class="text-sm font-light text-gray-400 leading-relaxed mb-6">
+                            Based on your origin data, this is your path of least resistance. Entering the ecosystem here ensures the highest Area of Impact ($A$).
+                        </p>
+                        
+                        <a href="matrix81.html" class="block w-full text-center py-3 bg-visceral-gold text-black text-xs font-bold uppercase tracking-widest rounded hover:bg-white transition-colors">
+                            Explore Coordinate
+                        </a>
+                    </div>
+                    
+                    <!-- SpeedGrader / Visceral Feedback -->
+                    <div class="glass p-8 rounded-3xl border-t-2 border-t-visceral-purple">
+                        <h2 class="font-mono text-xs text-visceral-purple uppercase tracking-widest mb-4"><i class="fas fa-pen-nib mr-2"></i> The Visceral Log</h2>
+                        <p class="text-xs text-gray-400 font-light mb-4">Submit your daily intent to calculate its synergetic weight.</p>
+                        <textarea class="w-full bg-black/40 border border-white/10 rounded-lg p-4 text-sm text-white font-mono focus:border-visceral-purple/50 outline-none h-24 resize-none mb-4" placeholder="Enter your Focus (P) and Target (C)..."></textarea>
+                        <button class="w-full py-3 bg-visceral-purple/10 border border-visceral-purple/50 text-visceral-purple text-xs font-bold uppercase tracking-widest rounded hover:bg-visceral-purple hover:text-white transition-colors">
+                            Calculate Impact
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right Column: The LMS Syllabus Modules -->
+                <div class="xl:col-span-2" id="modules">
+                    <div class="glass p-8 md:p-10 rounded-3xl h-full">
+                        <div class="flex items-center justify-between mb-8">
+                            <h2 class="font-cinzel text-2xl font-bold text-white uppercase tracking-widest">Syllabus / Modules</h2>
+                            <div class="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Progression: 33%</div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <!-- Module 1: Completed -->
+                            <div class="bg-black/30 border border-emerald-500/30 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:bg-black/50 transition-colors">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 shrink-0">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] font-mono text-emerald-400 uppercase tracking-widest mb-1">Module 01 // Completed</p>
+                                        <h3 class="font-cinzel text-xl text-white font-bold mb-1">The Descent</h3>
+                                        <p class="text-xs text-gray-400 font-light">Acknowledging the origin and mapping the initial friction of the Phase Shift.</p>
+                                    </div>
+                                </div>
+                                <div class="px-4 py-2 border border-emerald-500/30 text-emerald-400 rounded text-[10px] font-mono uppercase tracking-widest shrink-0">
+                                    100% Mastered
+                                </div>
+                            </div>
+                            
+                            <!-- Module 2: Active -->
+                            <div class="bg-visceral-gold/5 border border-visceral-gold/50 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:bg-visceral-gold/10 transition-colors relative overflow-hidden group">
+                                <div class="absolute left-0 top-0 w-1 h-full bg-visceral-gold shadow-[0_0_10px_#00e5ff]"></div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-visceral-gold/20 flex items-center justify-center text-visceral-gold shrink-0 shadow-[0_0_15px_rgba(0,229,255,0.3)]">
+                                        <i class="fas fa-unlock"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] font-mono text-visceral-gold uppercase tracking-widest mb-1 animate-pulse">Module 02 // Active</p>
+                                        <h3 class="font-cinzel text-xl text-white font-bold mb-1">Visceral Alignment</h3>
+                                        <p class="text-xs text-gray-400 font-light">Navigating the dualities of perception to locate the exact mathematical balance.</p>
+                                    </div>
+                                </div>
+                                <a href="alignment.html" class="px-6 py-3 bg-visceral-gold text-black rounded text-[10px] font-bold font-mono uppercase tracking-widest shrink-0 hover:bg-white transition-colors flex items-center gap-2">
+                                    Enter Module <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                            
+                            <!-- Module 3: Locked -->
+                            <div class="bg-black/40 border border-white/5 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 opacity-60">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-500 shrink-0">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-1">Module 03 // Locked</p>
+                                        <h3 class="font-cinzel text-xl text-white font-bold mb-1">The Infinite Sum</h3>
+                                        <p class="text-xs text-gray-500 font-light">Scaling the visceral current into an eternal architecture. Requires completion of Module 02.</p>
+                                    </div>
+                                </div>
+                                <div class="px-4 py-2 border border-white/10 text-gray-500 rounded text-[10px] font-mono uppercase tracking-widest shrink-0">
+                                    Pre-reqs not met
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="mt-16 text-center border-t border-white/5 pt-8">
+                <p class="font-serif text-white tracking-wide text-xl mb-1">Visceral Current</p>
+                <p class="text-[10px] font-mono text-gray-600 uppercase tracking-[0.3em]">Knowledge Architecture // Version 1.0</p>
+            </footer>
+            
+        </main>
+    </section>
+
+    <script>
+        // --- The 3-Box Auto-Advance Logic ---
+        const mm = document.getElementById('input-mm');
+        const dd = document.getElementById('input-dd');
+        const yyyy = document.getElementById('input-yyyy');
+
+        mm.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+            if (this.value.length >= 2) dd.focus();
+        });
+        dd.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+            if (this.value.length >= 2) yyyy.focus();
+        });
+        yyyy.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+            if (this.value.length >= 4) yyyy.blur();
+        });
+
+        // --- Multidimensional Codex Data ---
+        // Maps a Life Path number (1-9) directly to a starting Realm and Node
+        const CODEX_MAP = {
+            1: { realm: "I. The Origin", node: 1, freq: 396, archetype: "The Kinetic Seed (Creator)" },
+            2: { realm: "II. Visceral Current", node: 10, freq: 417, archetype: "The Harmonizer (Diplomat)" },
+            3: { realm: "III. Infinite Sum", node: 19, freq: 528, archetype: "The Broadcaster (Communicator)" },
+            4: { realm: "IV. Eye of the Storm", node: 28, freq: 639, archetype: "The Foundation (Architect)" },
+            5: { realm: "V. Mentalist's Gambit", node: 37, freq: 741, archetype: "The Phase Shifter (Explorer)" },
+            6: { realm: "VI. The Empire Builder", node: 46, freq: 852, archetype: "The Visionary (Healer)" },
+            7: { realm: "VII. Phase Shift", node: 55, freq: 963, archetype: "The Analyst (Mystic)" },
+            8: { realm: "VIII. Zero Point", node: 64, freq: 432, archetype: "The Powerhouse (Executive)" },
+            9: { realm: "IX. Sovereignty", node: 73, freq: 528, archetype: "The Universal Integrator" }
+        };
+
+        // Safe Life Path Calculator
+        function calculateLifePath(m, d, y) {
+            const sumString = (str) => str.split('').reduce((acc, val) => acc + parseInt(val), 0);
+            let total = sumString(m) + sumString(d) + sumString(y);
+            
+            while (total > 9 && total !== 11 && total !== 22 && total !== 33) {
+                total = sumString(total.toString());
+            }
+            
+            // Map Master numbers down for the 9-Realm matrix index mapping
+            if (total === 11) return 2;
+            if (total === 22) return 4;
+            if (total === 33) return 6;
+            
+            return total;
+        }
+
+        // --- Portal Initialization Logic ---
+        const calibForm = document.getElementById('calibration-form');
+        const state1 = document.getElementById('calibration-state');
+        const state2 = document.getElementById('dashboard-state');
+
+        calibForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('input-name').value;
+            const m = mm.value.padStart(2, '0');
+            const d = dd.value.padStart(2, '0');
+            const y = yyyy.value;
+
+            // Ensure valid date input length before proceeding
+            if(y.length !== 4) {
+                alert("Please enter a valid 4-digit year.");
+                return;
+            }
+
+            const btn = calibForm.querySelector('button');
+            btn.innerHTML = '<i class="fas fa-circle-notch animate-spin"></i> Synthesizing...';
+            
+            setTimeout(() => {
+                // Calculate Data
+                const lp = calculateLifePath(m, d, y);
+                const userMap = CODEX_MAP[lp] || CODEX_MAP[1];
+
+                // Populate Dashboard
+                document.getElementById('dash-user-name').innerText = name || "Seeker";
+                document.getElementById('dash-hz').innerText = userMap.freq;
+                document.getElementById('dash-realm-title').innerText = userMap.realm;
+                document.getElementById('dash-archetype').innerText = `Life Path ${lp} // ${userMap.archetype}`;
+                document.getElementById('dash-node-num').innerText = String(userMap.node).padStart(2, '0');
+
+                // Transition UI
+                state1.classList.add('opacity-0');
+                setTimeout(() => {
+                    state1.classList.add('hidden');
+                    state2.classList.remove('hidden');
+                    // Slight delay before fading in for dramatic effect
+                    setTimeout(() => {
+                        state2.classList.remove('opacity-0');
+                    }, 50);
+                }, 700);
+                
+            }, 1200); // Faux loading for dramatic cinematic pacing
+        });
+    </script>
 </body>
 </html>
