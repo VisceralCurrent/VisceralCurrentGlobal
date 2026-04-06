@@ -516,13 +516,6 @@
                 ctx.arc(p.x, p.y, p.s, 0, Math.PI*2);
                 ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${p.alpha})`;
                 
-                if (p.s > 1.2) {
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.8)`;
-                } else {
-                    ctx.shadowBlur = 0;
-                }
-                
                 ctx.fill();
             });
             
