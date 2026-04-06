@@ -46,9 +46,6 @@
     </script>
     <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <!-- Three.js for 3D Interactive Modal (Deferred to prevent render blocking) -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
     <link rel="stylesheet" href="style.css">
     
     <!-- Tailwind CSS (Restored for Absolute Stability) -->
@@ -90,7 +87,7 @@
     <!-- Optimized Elegant Gold & Black Ambient Background -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-visceral-dark">
         <!-- The Flux Matrix (Codex Core Visualizer) -->
-        <div class="absolute inset-0 flex items-center justify-center opacity-60 mix-blend-screen transition-all duration-1000">
+        <div class="absolute inset-0 flex items-center justify-center opacity-60 mix-blend-screen transition-all duration-1000 will-change-transform transform-gpu">
             <svg viewBox="0 0 100 100" class="w-full h-full max-w-[1200px] max-h-[1200px] animate-[pulse_8s_ease-in-out_infinite]" preserveAspectRatio="xMidYMid meet">
                 <defs>
                     <linearGradient id="flux-1" x1="0%" y1="0%" x2="50%" y2="50%">

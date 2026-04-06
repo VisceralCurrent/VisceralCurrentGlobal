@@ -931,6 +931,8 @@ if (document.readyState === 'loading') {
 }
 
 // --- MASTER ANIMATION LOOP ---
+let lastScrollY = -1;
+
 function masterLoop() {
     // Pause all heavy rendering if the browser tab is inactive (Saves Battery/CPU)
     if (document.hidden) { requestAnimationFrame(masterLoop); return; }
@@ -947,10 +949,13 @@ function masterLoop() {
         drawMatrix();
     }
 
-    // Run scroll-dependent animations
-    updateParallax();
-    updateScrollHighlights();
-    updateTimelineParallax();
+    // Run heavy scroll-dependent calculations ONLY if the user is actually scrolling
+    if (lastScrollY !== window.scrollY) {
+        updateParallax();
+        updateScrollHighlights();
+        updateTimelineParallax();
+        lastScrollY = window.scrollY;
+    }
 
     requestAnimationFrame(masterLoop);
 }
