@@ -19,6 +19,7 @@ export default defineConfig({
         matrix81: resolve(__dirname, 'matrix81.html'),
         realms: resolve(__dirname, 'realms.html'),
         alignment: resolve(__dirname, 'alignment.html'),
+        empire: resolve(__dirname, 'empire.html'),
         alignment2: resolve(__dirname, 'alignment-2.html'),
         alignment3: resolve(__dirname, 'alignment-3.html'),
         strategic: resolve(__dirname, 'strategic.html'),

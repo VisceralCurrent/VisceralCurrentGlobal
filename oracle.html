@@ -3,201 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visceral Current | The Oracle</title>
-    <meta name="theme-color" content="#050a0f">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Visceral Current | The Visceral Oracle</title>
     
-    <style>
-        body {
-            background-color: #050a0f;
-            color: #e2e8f0;
-            font-family: 'Inter', sans-serif;
-            overflow: hidden; /* Lock scroll to make it a true app interface */
-        }
-        .cinzel { font-family: 'Cinzel', serif; }
-        .mono { font-family: 'Space Mono', monospace; }
-        .glass {
-            background: rgba(15, 17, 21, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 229, 255, 0.15);
-        }
-        
-        /* Custom Scrollbar for the chat */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.3); border-radius: 3px; }
-        
-        .typing-indicator span {
-            animation: blink 1.4s infinite both;
-            height: 4px; width: 4px; background: #D4AF37; border-radius: 50%; display: inline-block; margin: 0 2px;
-        }
-        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes blink { 0% { opacity: 0.2; } 20% { opacity: 1; } 100% { opacity: 0.2; } }
-    </style>
-</head>
-<body class="h-[100dvh] w-screen flex flex-col selection:bg-[#00e5ff]/30">
+    <meta name="theme-color" content="#050a0f">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Global Styles & Glassmorphism -->
+    <link rel="stylesheet" href="style.css">
 
-    <!-- Ambient Background -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute w-[600px] h-[600px] bg-[#00e5ff]/10 blur-[150px] rounded-full top-[-10%] left-[-10%]"></div>
-        <div class="absolute w-[800px] h-[800px] bg-[#D4AF37]/15 blur-[150px] rounded-full bottom-[-20%] right-[-10%]"></div>
-    </div>
-
-    <!-- Header -->
-    <header class="glass z-10 py-4 px-6 flex justify-between items-center border-t-0 border-l-0 border-r-0">
-        <a href="index.html" class="flex items-center gap-3 group">
-            <div class="w-2 h-2 bg-[#D4AF37] rounded-full group-hover:scale-150 transition-transform shadow-[0_0_10px_#D4AF37]"></div>
-            <span class="cinzel text-lg font-bold tracking-widest uppercase text-white">Visceral Current</span>
-        </a>
-        <div class="mono text-[10px] text-[#D4AF37] tracking-[0.2em] uppercase animate-pulse">
-            Oracle Link Established
-        </div>
-    </header>
-
-    <!-- Chat Interface -->
-    <main class="flex-1 overflow-hidden flex flex-col relative z-10 max-w-4xl mx-auto w-full p-4 md:p-6">
-        
-        <div id="chat-container" class="flex-1 overflow-y-auto pr-2 space-y-6 pb-6">
-            <!-- Initial System Message -->
-            <div class="flex gap-4">
-                <div class="w-8 h-8 rounded border border-[#D4AF37]/50 bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37] shrink-0 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
-                    <i class="fas fa-eye"></i>
-                </div>
-                <div class="glass p-4 rounded-2xl rounded-tl-sm w-full md:w-[85%]">
-                    <p class="mono text-[10px] text-[#D4AF37] uppercase tracking-widest mb-2">System Genesis</p>
-                    <p class="text-sm md:text-base text-gray-300 font-light leading-relaxed [text-shadow:0_0_12px_rgba(212,175,55,0.3)]">
-                        Welcome to the Visceral Oracle. I am the interactive synthesis of the 81-Node Codex. Input your current friction, your business coordinate, or your philosophical inquiry. We will extract the mathematical strategy required for your Phase Shift.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Input Area -->
-        <div class="pt-4 border-t border-white/10 mt-2">
-            <form id="oracle-form" class="relative">
-                <textarea id="user-input" rows="2" placeholder="Describe your current reality..." class="w-full glass rounded-xl py-4 pl-4 pr-16 text-base md:text-sm appearance-none text-white placeholder-gray-500 focus:outline-none focus:border-[#00e5ff]/50 transition-colors resize-none mono"></textarea>
-                <button type="submit" class="absolute right-3 bottom-4 w-10 h-10 bg-[#00e5ff]/10 border border-[#00e5ff]/30 text-[#00e5ff] rounded-lg hover:bg-[#00e5ff] hover:text-black transition-all flex items-center justify-center">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </form>
-        </div>
-    </main>
-
+    <!-- Tailwind CSS (Ecosystem Standard) -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        const chatContainer = document.getElementById('chat-container');
-        const oracleForm = document.getElementById('oracle-form');
-        const userInput = document.getElementById('user-input');
-
-        // Submit on Enter (Shift+Enter for newline)
-        userInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                oracleForm.dispatchEvent(new Event('submit'));
-            }
-        });
-
-        oracleForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const text = userInput.value.trim();
-            if (!text) return;
-
-            appendUserMessage(text);
-            userInput.value = '';
-            
-            showTypingIndicator();
-            
-            // Simulate complex calculation time
-            setTimeout(() => {
-                removeTypingIndicator();
-                const response = generateCodexResponse(text);
-                appendOracleMessage(response);
-            }, 1800 + Math.random() * 1500);
-        });
-
-        function appendUserMessage(text) {
-            const msgHtml = `
-                <div class="flex gap-4 flex-row-reverse">
-                    <div class="w-8 h-8 rounded border border-[#00e5ff]/50 bg-[#00e5ff]/10 flex items-center justify-center text-[#00e5ff] shrink-0 shadow-[0_0_10px_rgba(0,229,255,0.2)]">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="bg-white/10 border border-white/10 p-4 rounded-2xl rounded-tr-sm w-full md:w-[85%] text-right">
-                        <p class="text-sm text-gray-200 font-light leading-relaxed">${text}</p>
-                    </div>
-                </div>
-            `;
-            chatContainer.insertAdjacentHTML('beforeend', msgHtml);
-            scrollToBottom();
-        }
-
-        function appendOracleMessage(htmlContent) {
-            const msgHtml = `
-                <div class="flex gap-4">
-                    <div class="w-8 h-8 rounded border border-[#D4AF37]/50 bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37] shrink-0 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <div class="glass p-5 rounded-2xl rounded-tl-sm w-full md:w-[85%] shadow-[0_0_15px_rgba(212,175,55,0.05)] border-l-2 border-l-[#D4AF37]">
-                        <p class="mono text-[10px] text-[#D4AF37] uppercase tracking-widest mb-3 border-b border-white/10 pb-2 inline-block">Codex Synthesis</p>
-                        <div class="text-sm md:text-base text-gray-300 font-light leading-relaxed space-y-4 [text-shadow:0_0_12px_rgba(212,175,55,0.3)]">
-                            ${htmlContent}
-                        </div>
-                    </div>
-                </div>
-            `;
-            chatContainer.insertAdjacentHTML('beforeend', msgHtml);
-            scrollToBottom();
-        }
-
-        function showTypingIndicator() {
-            const msgHtml = `
-                <div id="typing-indicator" class="flex gap-4">
-                    <div class="w-8 h-8 rounded border border-[#D4AF37]/50 bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37] shrink-0 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
-                        <i class="fas fa-circle-notch animate-spin"></i>
-                    </div>
-                    <div class="glass p-4 rounded-2xl rounded-tl-sm flex items-center">
-                        <div class="typing-indicator"><span></span><span></span><span></span></div>
-                    </div>
-                </div>
-            `;
-            chatContainer.insertAdjacentHTML('beforeend', msgHtml);
-            scrollToBottom();
-        }
-
-        function removeTypingIndicator() {
-            const indicator = document.getElementById('typing-indicator');
-            if (indicator) indicator.remove();
-        }
-
-        function scrollToBottom() {
-            chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' });
-        }
-
-        // --- THE ORACLE ENGINE LOGIC ---
-        function generateCodexResponse(input) {
-            const length = input.length;
-            
-            const library = [
-                { principle: "Power vs. Force", action: "Stop forcing the outcome. Calibrate your Area of Impact to a higher frequency. The resistance you are feeling is a sign you are using sheer willpower instead of alignment." },
-                { principle: "The Mentalist's Gambit", action: "Assume formlessness. By being as fluid as water, the current obstacle cannot grasp you. Read the board, remove your emotional attachment, and strike silently." },
-                { principle: "The Phase Shift (\\(\\phi\\))", action: "This is not a delay; it is a Phase Shift. You are gathering the dense material required to spark the fire of transformation. Transmute this friction into kinetic fuel." },
-                { principle: "The Infinite Sum", action: "Evaluate the Schedule 2 (Purchases/Resources) against this problem. Eliminate the operational friction. If this action does not serve the infinite legacy, discard it." }
-            ];
-
-            // Pseudo-random selection based on user input length to give consistent answers to the same questions
-            const selected = library[length % library.length];
-            
-            return `
-                <p>Based on your coordinates, the system detects a distortion in your Visceral Current. You are currently operating in the realm of <strong>${selected.principle.split(' ')[0]}</strong>.</p>
-                <div class="bg-black/40 p-4 border-l-2 border-[#D4AF37] rounded-r-lg my-4">
-                    <span class="block mono text-[10px] text-[#D4AF37] uppercase tracking-widest mb-1">Strategic Directive</span>
-                    <p class="text-white [text-shadow:0_0_15px_rgba(212,175,55,0.6)]">${selected.action}</p>
-                </div>
-                <p>Apply the equation: <span class="mono text-[#00e5ff] [text-shadow:0_0_12px_rgba(0,229,255,0.5)]">A = ∫(ν · ϕ) dt = ∞</span>. Do not chase the solution. Choose the frequency that renders the problem obsolete.</p>
-            `;
-        }
+        tailwind.config = { theme: { extend: { colors: { 'visceral-gold': '#00e5ff', 'visceral-dark': '#050a0f', 'visceral-scarlett': '#e11d48', visceral: { gold: '#00e5ff', dark: '#050a0f', scarlett: '#e11d48', card: 'rgba(15, 17, 21, 0.65)' } }, fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'], cinzel: ['Cinzel', 'serif'], mono: ['Space Mono', 'monospace'] }, animation: { 'slow-spin': 'spin 20s linear infinite', 'float': 'float 6s ease-in-out infinite', 'pulse-glow': 'pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }, keyframes: { float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } }, pulseGlow: { '0%, 100%': { opacity: 0.4, transform: 'scale(1)' }, '50%': { opacity: 0.8, transform: 'scale(1.05)' } } } } } }
     </script>
+</head>
+<body class="antialiased bg-[#050a0f] text-slate-200 m-0 p-0 overflow-x-hidden min-h-screen w-screen">
+
+    <!-- Custom Cursor Setup -->
+    <div id="custom-cursor-dot" class="fixed top-0 left-0 w-2 h-2 bg-visceral-gold rounded-full pointer-events-none z-[9999] mix-blend-screen shadow-[0_0_10px_rgba(0,229,255,0.8)]"></div>
+    <div id="custom-cursor-ring" class="fixed top-0 left-0 w-8 h-8 border border-visceral-gold/50 rounded-full pointer-events-none z-[9998] transition-colors duration-300"></div>
+
+    <!-- Navigation Anchor -->
+    <nav class="w-full relative z-50 py-6 px-6 md:px-12 pointer-events-none">
+        <a href="index.html" class="inline-flex items-center gap-3 text-slate-500 hover:text-white transition-colors group pointer-events-auto">
+            <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+            <span class="font-mono text-[10px] uppercase tracking-widest">Return to Matrix</span>
+        </a>
+    </nav>
+
+    <!-- React App Mount Point -->
+    <div id="root-oracle"></div>
+
+    <!-- Global Script Execution (Cursor) -->
+    <script src="script.js"></script>
+    
+    <!-- Vite Entry Point -->
+    <script type="module" src="./main-oracle.jsx"></script>
 </body>
 </html>

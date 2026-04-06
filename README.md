@@ -4,7 +4,7 @@
 
 **Visceral Current** is a synergetic digital architecture built to reflect the mathematical certainty of the universe. It serves as the central hub for a legacy of Universal Sovereignty—housing **VanFlowCo**, **ScarlettSky**, and **Tension Treenets** (Founded and owned by Cooper Van Houten). 
 
-This repository contains a high-performance, zero-build static ecosystem powered by vanilla web technologies, deep mathematics, and cinematic visual rendering.
+This repository contains a high-performance ecosystem powered by Vite, React, deep mathematics, and cinematic visual rendering.
 
 ---
 
@@ -36,7 +36,7 @@ A condensed, high-impact landing page engineered for direct corporate alignment 
 
 ### 3. The Architecture Dashboard (`research.html`)
 A structural wireframe mapping the taxonomy of Education, Economics, and the Human Condition.
-- Utilizes an in-browser React and Babel compiler (via CDN) to render complex component-based UI without requiring a local Node.js build pipeline.
+- Recently migrated to Vite for high-performance React component rendering (`ResearchApp.jsx`).
 
 ### 4. Predictive Performance Architecture (`predictive.html`)
 A hyper-modern, cinematic alternative landing page focusing on the integration of deep accounting principles and business metrics into digital infrastructure.
@@ -58,29 +58,26 @@ A massive, interactive 9x9 sacred geometry grid deducing the square root of 81.
 
 ## ⚙️ Technical Stack
 
-This project avoids complex build pipelines (Webpack, npm, Node.js) in favor of absolute deployment simplicity. Every dependency is optimized and delivered via global enterprise CDNs.
-
-- **Core:** HTML5, CSS3, Vanilla JavaScript (ES6+)
+- **Core:** Vite, HTML5, CSS3, Vanilla JavaScript (ES6+)
 - **Styling:** Tailwind CSS (via CDN) + Custom Glassmorphism (`rgba` + `backdrop-filter`)
 - **Typography:** Google Fonts (Cinzel, Inter, Playfair Display) & FontAwesome 6
 - **Mathematics:** MathJax (for rendering LaTeX equations)
 - **3D Rendering:** Three.js (WebGL)
-- **Prototyping Engine:** React 18 + Babel Standalone
+- **Components:** React 18 + Recharts
 
 ---
 
 ## 🚀 Deployment & Setup
 
-Because this ecosystem uses a **Zero-Build Architecture**, it is inherently ready for production deployment on any static host.
-
-**To deploy to GitHub Pages:**
-1. Upload all files to your main branch on GitHub.
-2. Go to the repository **Settings** > **Pages**.
-3. Set the source to `Deploy from a branch` and select your `main` branch.
-4. Save. The Visceral Current is now online.
+**To deploy to GitHub Pages (Automated via Script):**
+Simply run the deployment script to compile the Vite build and push the `dist` folder to your `gh-pages` branch:
+```bash
+chmod +x deploy.sh
+./deploy.sh
+```
 
 **Local Development:**
-Simply open `index.html`, `strategic.html`, or `research.html` directly in any modern web browser. No local server is required.
+Run `npm install` followed by `npm run dev` to launch the Vite local development server.
 
 ---
 

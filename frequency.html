@@ -26,6 +26,10 @@
         <div class="absolute w-[600px] h-[600px] bg-visceral-scarlett/10 blur-[150px] rounded-full bottom-[-10%] left-[-10%] glow-entity"></div>
     </div>
 
+    <!-- Custom Cursor Setup -->
+    <div id="custom-cursor-dot" class="fixed top-0 left-0 w-2 h-2 bg-visceral-scarlett rounded-full pointer-events-none z-[9999] mix-blend-screen shadow-[0_0_10px_rgba(225,29,72,0.8)]"></div>
+    <div id="custom-cursor-ring" class="fixed top-0 left-0 w-8 h-8 border border-visceral-scarlett/50 rounded-full pointer-events-none z-[9998] transition-colors duration-300"></div>
+
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 py-6 px-6 md:px-12 flex justify-between items-center">
         <a href="index.html" class="flex items-center gap-4 group cursor-pointer z-50">
@@ -88,6 +92,22 @@
                     { text: "Anxiously planning, theorizing, and bracing for the future.", score: 300 },
                     { text: "Grounded entirely in the Eternal Now, ready to act with pure intent.", score: 528 }
                 ]
+            },
+            {
+                q: "How do you process the timeline of your past failures or 'lost years'?",
+                options: [
+                    { text: "As a deficit. Time lost that I must frantically work to make up for.", score: 100 },
+                    { text: "As a learning experience. I logically extract the lessons and try not to repeat them.", score: 300 },
+                    { text: "As mathematical friction. They were necessary Phase Shifts required to place me at this exact coordinate.", score: 528 }
+                ]
+            },
+            {
+                q: "When constructing your network or team, what is your primary metric for inclusion?",
+                options: [
+                    { text: "Utility. What they can immediately do for me and my status.", score: 100 },
+                    { text: "Skillset. Professional competence and resume achievements.", score: 300 },
+                    { text: "Resonance. A synergetic understanding of the Current. No dead weight.", score: 528 }
+                ]
             }
         ];
 
@@ -122,7 +142,7 @@
             });
 
             contentArea.innerHTML = `
-                <span class="text-gray-500 font-mono text-[10px] tracking-[0.3em] uppercase block mb-4">Parameter 0${index + 1} // 03</span>
+                <span class="text-gray-500 font-mono text-[10px] tracking-[0.3em] uppercase block mb-4">Parameter 0${index + 1} // 0${questions.length}</span>
                 <h2 class="text-xl md:text-3xl font-cinzel text-white mb-10 leading-tight">${qData.q}</h2>
                 <div class="space-y-4 w-full max-w-2xl mx-auto flex flex-col">
                     ${optionsHtml}
@@ -145,36 +165,58 @@
         function renderCalculation() {
             contentArea.innerHTML = `
                 <div class="flex flex-col items-center justify-center py-10">
-                    <div class="w-16 h-16 border-t-2 border-r-2 border-visceral-scarlett rounded-full animate-spin mb-8"></div>
-                    <h2 class="text-2xl font-cinzel text-white mb-2 uppercase tracking-widest">Integrating Phase Shift</h2>
-                    <p class="text-gray-500 font-mono text-xs uppercase tracking-[0.3em] animate-pulse">Calculating Infinite Sum (S)...</p>
+                    <div class="w-16 h-16 border-t-2 border-r-2 border-visceral-scarlett rounded-full animate-[spin_1s_linear_infinite] mb-8"></div>
+                    <h2 class="text-2xl font-cinzel text-white mb-4 uppercase tracking-widest">Integrating Phase Shift</h2>
+                    <div class="text-gray-400 font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] space-y-4">
+                        <p class="animate-pulse">Mapping Kinetic Potential ($\\nu$)...</p>
+                        <p class="animate-pulse" style="animation-delay: 0.5s;">Calculating: $$S = \\lim_{t \\to \\infty} \\sum_{n=1}^{\\infty} \\frac{P \\cdot C}{\\phi^n}$$</p>
+                    </div>
                 </div>
             `;
             
-            setTimeout(() => fadeTransition(renderResult), 2500);
+            // Trigger MathJax to render the injected equations cinematically
+            if(window.MathJax) {
+                MathJax.typesetPromise([contentArea]);
+            }
+            
+            setTimeout(() => fadeTransition(renderResult), 3500);
         }
 
         function renderResult() {
             const averageScore = Math.round(totalScore / questions.length);
-            let resultText, accentColor;
+            let resultText, accentColor, frequency, status, directive;
 
             if (averageScore >= 450) {
-                accentColor = "text-visceral-gold";
-                resultText = "You are operating at maximum capacity. You view chaos as raw material and are ready to integrate the full 81-Node architecture to build an infinite legacy.";
-            } else if (averageScore >= 250) {
                 accentColor = "text-[#00e5ff]";
-                resultText = "You possess strong intellectual composure, but you are still relying on logic rather than visceral intuition. It is time to bridge the gap and trigger the Phase Shift.";
+                status = "Zero Point Equilibrium";
+                frequency = "528 Hz";
+                resultText = "You are operating at absolute capacity. You view chaos as raw material and are mathematically prepared to integrate the full 81-Node architecture. Your Area of Impact (A) scales infinitely.";
+                directive = "Execute The Matrix.";
+            } else if (averageScore >= 250) {
+                accentColor = "text-[#D4AF37]";
+                status = "Kinetic Instability";
+                frequency = "417 Hz";
+                resultText = "You possess strong intellectual composure, but you are still relying on force rather than visceral intuition. You are burning excess energy managing friction ($\\phi$). It is time to bridge the gap.";
+                directive = "Consult the Oracle to refine your coordinate.";
             } else {
                 accentColor = "text-visceral-scarlett";
-                resultText = "You are currently experiencing severe systemic friction. The old paradigm is forcing you into a corner. You require immediate multidimensional alignment.";
+                status = "Severe Systemic Friction";
+                frequency = "200 Hz";
+                resultText = "You are currently experiencing massive systemic friction. The old paradigm is forcing you into a corner, draining your kinetic presence. You require immediate multidimensional alignment to halt the energy bleed.";
+                directive = "Begin Phase I Alignment.";
             }
 
             contentArea.innerHTML = `
-                <span class="${accentColor} font-mono text-xs tracking-[0.3em] uppercase block mb-4">Scan Complete</span>
-                <h2 class="text-5xl md:text-7xl font-cinzel font-bold text-white mb-2">${averageScore} <span class="text-2xl text-gray-500">Hz</span></h2>
+                <span class="${accentColor} font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase block mb-4">Diagnostic Complete // ${status}</span>
+                <h2 class="text-5xl md:text-7xl font-cinzel font-bold text-white mb-2">${frequency}</h2>
                 <p class="text-gray-400 font-mono text-[10px] uppercase tracking-widest mb-10 border-b border-white/10 pb-6 inline-block">Operating Frequency Detected</p>
                 
-                <p class="text-gray-300 font-light leading-relaxed mb-12 max-w-xl mx-auto text-lg">${resultText}</p>
+                <p class="text-gray-300 font-light leading-relaxed mb-8 max-w-xl mx-auto text-sm md:text-base">${resultText}</p>
+                
+                <div class="bg-black/30 border border-white/5 p-4 rounded-lg mb-10 max-w-md mx-auto">
+                    <span class="block text-[10px] text-gray-500 font-mono uppercase tracking-widest mb-2">Codex Directive</span>
+                    <span class="text-sm font-bold text-white tracking-wider">${directive}</span>
+                </div>
                 
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
                     <a href="matrix81.html" class="w-full sm:w-auto px-10 py-4 bg-white text-black rounded-sm hover:bg-gray-200 transition duration-300 font-bold uppercase tracking-[0.2em] text-xs shadow-[0_0_20px_rgba(255,255,255,0.2)]">
@@ -188,9 +230,16 @@
             contentArea.style.opacity = '0';
             setTimeout(() => {
                 callback();
+                // Re-trigger MathJax just in case equations are in the new view
+                if(window.MathJax) {
+                    MathJax.typesetPromise([contentArea]);
+                }
                 contentArea.style.opacity = '1';
             }, 500);
         }
     </script>
+    
+    <!-- Link Global Script for Cursor & Effects -->
+    <script src="script.js"></script>
 </body>
 </html>
