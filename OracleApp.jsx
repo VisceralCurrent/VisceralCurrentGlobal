@@ -83,8 +83,8 @@ export default function OracleApp() {
             
             {/* Ambient Deep Field Glows */}
             <div className="absolute inset-0 pointer-events-none -z-10">
-                <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-[#00e5ff]/10 blur-[150px] rounded-full animate-pulse-glow"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] bg-[#d4af37]/5 blur-[150px] rounded-full animate-pulse-glow" style={{ animationDelay: '2s' }}></div>
+                <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full animate-pulse-glow" style={{ background: 'radial-gradient(circle, rgba(0,229,255,0.1) 0%, transparent 70%)' }}></div>
+                <div className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] rounded-full animate-pulse-glow" style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%)', animationDelay: '2s' }}></div>
             </div>
 
             {/* Header */}

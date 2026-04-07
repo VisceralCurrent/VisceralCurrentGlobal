@@ -370,7 +370,8 @@ function drawWaves() {
     const layers = [
         { color: 'rgba(0, 229, 255, 0.15)', freqMod: 0.8, ampMod: 1.5, phaseMod: 0, lineWidth: 1 },
         { color: 'rgba(0, 229, 255, 0.4)', freqMod: 1.2, ampMod: 0.8, phaseMod: 2, lineWidth: 2 },
-        { color: 'rgba(0, 229, 255, 1)', freqMod: 1.0, ampMod: 1.0, phaseMod: 1, lineWidth: 3 }
+        { color: 'rgba(0, 229, 255, 0.15)', freqMod: 1.0, ampMod: 1.0, phaseMod: 1, lineWidth: 12 }, // High-performance faux glow
+        { color: 'rgba(0, 229, 255, 0.8)', freqMod: 1.0, ampMod: 1.0, phaseMod: 1, lineWidth: 3 }
     ];
 
     // The Breathing Universe Mechanic: Oscillates global amplitude smoothly
@@ -381,13 +382,8 @@ function drawWaves() {
         ctx.lineWidth = layer.lineWidth;
         ctx.strokeStyle = layer.color;
         
-        // Add a slight glow to the main wave
-        if(layer.lineWidth === 3) {
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = 'rgba(0, 229, 255, 0.5)';
-        } else {
-            ctx.shadowBlur = 0;
-        }
+        // Bypass costly shadowBlur to guarantee absolute 60fps rendering
+        ctx.shadowBlur = 0;
 
         ctx.moveTo(0, centerY);
 
