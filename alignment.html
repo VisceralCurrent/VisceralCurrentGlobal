@@ -552,24 +552,33 @@
 
         // --- THE CHAMELEON ENGINE ---
         // Mathematically interpolates RGB from Electric Blue (#00e5ff) to Visceral Gold (#d4af37)
+        let isChameleonTicking = false;
+
         window.addEventListener('scroll', () => {
-            const scrollH = document.documentElement.scrollHeight - window.innerHeight;
-            const pct = Math.min(Math.max(window.scrollY / scrollH, 0), 1);
-            
-            const r = Math.round(0 + (212 - 0) * pct);
-            const g = Math.round(229 + (175 - 229) * pct);
-            const b = Math.round(255 + (55 - 255) * pct);
-            
-            document.documentElement.style.setProperty('--accent-r', r);
-            document.documentElement.style.setProperty('--accent-g', g);
-            document.documentElement.style.setProperty('--accent-b', b);
-            
-            const alignPct = Math.round(pct * 100);
-            document.getElementById('sync-status').innerText = `${alignPct}% Aligned`;
-            
-            // Canvas fades out slightly at the bottom to focus on the text
-            canvas.style.opacity = 0.8 - (pct * 0.3);
-        });
+            if (!isChameleonTicking) {
+                window.requestAnimationFrame(() => {
+                    const scrollH = document.documentElement.scrollHeight - window.innerHeight;
+                    const pct = Math.min(Math.max(window.scrollY / (scrollH || 1), 0), 1);
+                    
+                    const r = Math.round(0 + (212 - 0) * pct);
+                    const g = Math.round(229 + (175 - 229) * pct);
+                    const b = Math.round(255 + (55 - 255) * pct);
+                    
+                    document.documentElement.style.setProperty('--accent-r', r);
+                    document.documentElement.style.setProperty('--accent-g', g);
+                    document.documentElement.style.setProperty('--accent-b', b);
+                    
+                    const alignPct = Math.round(pct * 100);
+                    const syncEl = document.getElementById('sync-status');
+                    if (syncEl) syncEl.innerText = `${alignPct}% Aligned`;
+                    
+                    // Canvas fades out slightly at the bottom to focus on the text
+                    canvas.style.opacity = 0.8 - (pct * 0.3);
+                    isChameleonTicking = false;
+                });
+                isChameleonTicking = true;
+            }
+        }, { passive: true });
 
         // --- COSMIC STARFIELD CANVAS ENGINE ---
         const canvas = document.getElementById('canvas-bg');

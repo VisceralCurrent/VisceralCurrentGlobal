@@ -319,6 +319,20 @@
                 $$S = \lim_{t \to \infty} \sum_{n=1}^{\infty} \frac{P \cdot C}{\phi^n} \quad \text{and} \quad A = \int_{p}^{o} (\nu \cdot \phi) \, dt = \infty$$
             </div>
         </div>
+        
+        <!-- Sales/Authority Element: Live Metric Ticker -->
+        <div class="glass-panel p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-l-4 border-l-[#d4af37] reveal delay-300">
+            <div>
+                <h3 class="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-1 flex items-center gap-2">
+                    <div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_5px_#22c55e]"></div> Global Ecosystem Velocity
+                </h3>
+                <div class="text-3xl md:text-4xl font-cinzel font-bold text-white flex items-center gap-2">
+                    <span class="text-[#d4af37] text-2xl">∞</span> 
+                    <span id="equity-ticker" class="font-mono tracking-tighter drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]">14,204,930</span>
+                </div>
+            </div>
+            <i class="fas fa-chart-line text-4xl text-[#d4af37] opacity-30"></i>
+        </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-6 md:px-12 relative z-10 pb-24">
@@ -480,12 +494,13 @@
             <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-transparent to-transparent opacity-50 pointer-events-none"></div>
             
             <div class="relative z-10">
-                <h3 class="text-2xl md:text-4xl font-black font-cinzel mb-6 tracking-[0.1em] text-white uppercase">The Universal Intersection</h3>
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full border border-white/20 bg-white/5 text-white font-bold text-2xl mb-6 shadow-[0_0_30px_rgba(255,255,255,0.2)] animate-pulse-glow">1</div>
+                <h3 class="text-2xl md:text-4xl font-black font-cinzel mb-6 tracking-[0.1em] text-white uppercase">The Power of One. The Power of All.</h3>
                 <p class="text-xl md:text-2xl text-[#00e5ff] mb-6 font-serif italic max-w-4xl mx-auto leading-relaxed">
-                    "Harmonizing the essence of church and state, spirit and body, throughout the entirety of all that is."
+                    "The absolute intersection of Spirit and Strategy. Harmonizing the essence of church and state, intuition and calculus, throughout the entirety of all that is."
                 </p>
                 <p class="text-slate-300 font-light max-w-3xl mx-auto mb-10 leading-relaxed">
-                    You may start in the spirit to discover your personal strategy, or you may ground yourself in raw, undeniable results to realize the spiritual architecture beneath it. Either way, the Visceral Current is absolute.
+                    You may start in the ethereal (Spirit) to discover your personal trajectory, or you may ground yourself in raw, undeniable results (Strategy) to realize the spiritual architecture beneath it. When both align at the Zero Point, the Visceral Current becomes absolute.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-6 text-sm font-mono tracking-widest">
                     <a href="alignment.html" class="bg-[#00e5ff] text-black px-8 py-4 rounded-full font-bold shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:scale-105 hover:bg-white transition-all cursor-pointer flex items-center justify-center gap-3">
@@ -520,5 +535,19 @@
 
     <!-- Global Script Execution (Scroll Reveals, Cursor, Parallax) -->
     <script src="script.js"></script>
+    
+    <!-- Dynamic Ticker Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ticker = document.getElementById('equity-ticker');
+            if(ticker) {
+                let val = 14204930;
+                setInterval(() => {
+                    val += Math.floor(Math.random() * 150) + 10;
+                    ticker.innerText = val.toLocaleString();
+                }, 1800);
+            }
+        });
+    </script>
 </body>
 </html>

@@ -20,9 +20,9 @@ const closePortalBtn = document.getElementById('close-portal-btn');
 const infiniteProgress = document.getElementById('infinite-progress');
 const infiniteMath = document.getElementById('infinite-math');
 
-window.addEventListener('scroll', () => {
+function updateNavAndProgress(scrollTop) {
     if (navbar) {
-        if (window.scrollY > 50) {
+        if (scrollTop > 50) {
             navbar.classList.add('bg-visceral-dark/80', 'backdrop-blur-md', 'border-white/10', 'py-3');
             navbar.classList.remove('bg-transparent', 'border-transparent', 'py-4');
         } else {
@@ -32,7 +32,6 @@ window.addEventListener('scroll', () => {
     }
 
     // Infinite Sum Progress Tracker Calculation
-    const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercent = Math.min(scrollTop / (docHeight || 1), 1);
     
@@ -51,7 +50,7 @@ window.addEventListener('scroll', () => {
             infiniteMath.style.opacity = '0';
         }
     }
-});
+}
 
 function toggleMenu() {
     if (!mobileMenu) return;
@@ -213,12 +212,18 @@ window.addEventListener('mousemove', (e) => {
 });
 
 function animateCursor() {
-    // Smoothly interpolate the ring to the target coordinates and scale
-    ringX += (cMouseX - ringX) * 0.15;
-    ringY += (cMouseY - ringY) * 0.15;
-    currentScale += (targetScale - currentScale) * 0.15;
+    if (!cursorRing) return;
     
-    if (cursorRing) {
+    const diffX = cMouseX - ringX;
+    const diffY = cMouseY - ringY;
+    const diffScale = targetScale - currentScale;
+    
+    // Only write to the DOM if there is a meaningful visual change to preserve CPU cycles
+    if (Math.abs(diffX) > 0.1 || Math.abs(diffY) > 0.1 || Math.abs(diffScale) > 0.01) {
+        ringX += diffX * 0.15;
+        ringY += diffY * 0.15;
+        currentScale += diffScale * 0.15;
+        
         cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) scale(${currentScale})`;
     }
 }
@@ -263,19 +268,26 @@ function toggleAccordion(element) {
 // --- 3D Tilt Effect for Node Cards ---
 const nodeCards = document.querySelectorAll('.node-card');
 nodeCards.forEach(card => {
+    let isTilting = false;
     card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left; // X position within the card
-        const y = e.clientY - rect.top;  // Y position within the card
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = ((y - centerY) / centerY) * -8; // Max 8 degrees of tilt
-        const rotateY = ((x - centerX) / centerX) * 8;
-        
-        card.style.transition = 'transform 0.1s ease-out, border-color 0.4s ease, box-shadow 0.4s ease';
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px) scale3d(1.02, 1.02, 1.02)`;
+        if (!isTilting) {
+            window.requestAnimationFrame(() => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; 
+                const y = e.clientY - rect.top;  
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -8; 
+                const rotateY = ((x - centerX) / centerX) * 8;
+                
+                card.style.transition = 'transform 0.1s ease-out, border-color 0.4s ease, box-shadow 0.4s ease';
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px) scale3d(1.02, 1.02, 1.02)`;
+                isTilting = false;
+            });
+            isTilting = true;
+        }
     });
     
     card.addEventListener('mouseleave', () => {
@@ -288,6 +300,38 @@ nodeCards.forEach(card => {
         }, { once: true }); // Clean up inline styles after reset transition completes
     });
 });
+
+// --- Spirit & Strategy Singularity Slider ---
+const singularitySlider = document.getElementById('spirit-strategy-slider');
+const singularityResult = document.getElementById('singularity-result');
+const zeroPointLabel = document.getElementById('zero-point-label');
+
+if (singularitySlider) {
+    singularitySlider.addEventListener('input', (e) => {
+        const val = e.target.value;
+        
+        // Snap to center logic
+        if (val >= 48 && val <= 52) {
+            singularitySlider.value = 50;
+            singularityResult.classList.remove('opacity-0', 'scale-95');
+            singularityResult.classList.add('scale-100');
+            zeroPointLabel.classList.add('text-white', 'scale-110', 'drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]');
+            zeroPointLabel.classList.remove('text-[#d4af37]');
+            
+            if (window.play528Hz) window.play528Hz();
+        } else {
+            singularityResult.classList.add('opacity-0', 'scale-95');
+            singularityResult.classList.remove('scale-100');
+            zeroPointLabel.classList.remove('text-white', 'scale-110', 'drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]');
+            zeroPointLabel.classList.add('text-[#d4af37]');
+            
+            if (window.stop528Hz) window.stop528Hz();
+        }
+    });
+    
+    // Trigger initial check
+    singularitySlider.dispatchEvent(new Event('input'));
+}
 
 // --- 528Hz Visceral Frequency Audio ---
 let audioCtx;
@@ -947,6 +991,7 @@ function masterLoop() {
 
     // Run heavy scroll-dependent calculations ONLY if the user is actually scrolling
     if (lastScrollY !== window.scrollY) {
+        updateNavAndProgress(window.scrollY);
         updateParallax();
         updateScrollHighlights();
         updateTimelineParallax();

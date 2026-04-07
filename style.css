@@ -65,8 +65,8 @@ a, button, .node-card, .glass-panel {
 /* Glassmorphism Framework */
 .glass-panel {
     background: linear-gradient(145deg, rgba(15, 17, 21, 0.5) 0%, rgba(5, 7, 10, 0.8) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(0, 229, 255, 0.08);
     border-top: 1px solid rgba(0, 229, 255, 0.25);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
@@ -74,6 +74,7 @@ a, button, .node-card, .glass-panel {
     will-change: transform, border-color, box-shadow;
     position: relative;
     overflow: hidden;
+    transform: translateZ(0); /* Forces GPU Compositing */
 }
 
 /* The Sovereign Sweep - Light reflection on hover */
@@ -144,6 +145,12 @@ a, button, .node-card, .glass-panel {
     will-change: transform, opacity, filter;
     transform: translateZ(0);
     backface-visibility: hidden;
+}
+
+/* Global GPU Acceleration for heavy background pulse animations */
+.animate-pulse-glow {
+    transform: translate3d(0, 0, 0);
+    will-change: transform, opacity;
 }
 
 /* Scroll Reveal Sequencing */
@@ -218,4 +225,29 @@ a, button, .node-card, .glass-panel {
 }
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 229, 255, 0.6);
+}
+
+/* Custom Zero Point Slider */
+input[type=range].slider-thumb-gold::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.9), inset 0 0 5px rgba(0,0,0,0.5);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+input[type=range].slider-thumb-gold::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+}
+input[type=range].slider-thumb-gold::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.9), inset 0 0 5px rgba(0,0,0,0.5);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }

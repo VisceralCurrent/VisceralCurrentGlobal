@@ -58,6 +58,22 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.3); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(0, 229, 255, 0.6); }
+        
+        /* Travel/Experience: Quantum Radar Sweep */
+        .radar-sweep {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 150%; height: 150%;
+            background: conic-gradient(from 0deg at 50% 50%, transparent 75%, rgba(0, 229, 255, 0.3) 100%);
+            transform-origin: center;
+            animation: radarSpin 4s linear infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+        @keyframes radarSpin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
     </style>
 </head>
 <body class="cosmic-bg selection:bg-visceral-gold/30 selection:text-white">
@@ -71,6 +87,11 @@
     <!-- STATE 1: CALIBRATION PORTAL (Randonautica Intent Setter) -->
     <section id="calibration-state" class="min-h-screen flex items-center justify-center px-6 relative z-10 transition-opacity duration-700">
         <div class="max-w-md w-full glass p-10 rounded-3xl text-center relative overflow-hidden">
+            
+            <!-- Radar Background Effect -->
+            <div class="radar-sweep"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#050a0f_90%)] pointer-events-none z-[-1]"></div>
+
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-visceral-gold to-transparent"></div>
             
             <div class="w-16 h-16 mx-auto bg-visceral-gold/10 rounded-full flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(0,229,255,0.2)]">
@@ -205,6 +226,16 @@
                         <button class="w-full py-3 bg-visceral-purple/10 border border-visceral-purple/50 text-visceral-purple text-xs font-bold uppercase tracking-widest rounded hover:bg-visceral-purple hover:text-white transition-colors">
                             Calculate Impact
                         </button>
+                    </div>
+                    
+                    <!-- Social Media / Community Element: Live Ecosystem Pulse -->
+                    <div class="glass p-6 rounded-3xl mt-8 border-l-2 border-l-visceral-gold">
+                        <h2 class="font-mono text-[10px] text-visceral-gold uppercase tracking-widest mb-4 flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 bg-visceral-gold rounded-full animate-pulse"></div> Live Ecosystem Pulse
+                        </h2>
+                        <div id="synergy-feed" class="space-y-3 h-28 overflow-hidden relative flex flex-col justify-end pb-2">
+                            <!-- Feed items will be injected here via JS -->
+                        </div>
                     </div>
                 </div>
                 
@@ -379,6 +410,27 @@
                 
             }, 1200); // Faux loading for dramatic cinematic pacing
         });
+
+        // --- Social Proof: Live Ecosystem Pulse Logic ---
+        const feedNames = ["Seeker_09", "Architect_44", "Mystic_77", "Executive_12", "Visionary_33", "Operator_81", "Catalyst_03"];
+        const feedActions = ["aligned with Node", "calibrated Phase Shift at", "unlocked Realm", "achieved Zero Point at"];
+        const feedFeed = document.getElementById('synergy-feed');
+        
+        function generateFeedItem() {
+            if(!feedFeed) return;
+            const name = feedNames[Math.floor(Math.random() * feedNames.length)];
+            const action = feedActions[Math.floor(Math.random() * feedActions.length)];
+            const node = Math.floor(Math.random() * 81) + 1;
+            
+            const el = document.createElement('div');
+            el.className = 'text-[10px] font-mono text-gray-400 animate-[fadeIn_0.5s_ease-out]';
+            el.innerHTML = `<span class="text-white">${name}</span> ${action} <span class="text-visceral-gold font-bold">${String(node).padStart(2, '0')}</span>`;
+            
+            feedFeed.prepend(el);
+            if (feedFeed.children.length > 4) feedFeed.removeChild(feedFeed.lastElementChild);
+        }
+        setInterval(generateFeedItem, 2800); // Inject new network activity every 2.8s
+        generateFeedItem(); generateFeedItem(); // Initial population
     </script>
 </body>
 </html>

@@ -238,6 +238,43 @@
                 </div>
             </div>
         </section>
+
+        <!-- SECTION 3: THE SINGULARITY (SPIRIT & STRATEGY) -->
+        <section id="singularity" class="reveal border-t border-white/5 pt-16">
+            <div class="glass-panel p-10 md:p-16 rounded-3xl text-center relative overflow-hidden group border-t-4 border-[#d4af37]">
+                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#d4af37]/10 via-transparent to-transparent opacity-50 pointer-events-none"></div>
+                <div class="relative z-10">
+                    <div class="inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#d4af37]/50 bg-[#d4af37]/10 text-[#d4af37] font-bold text-xl mb-6 shadow-[0_0_15px_rgba(212,175,55,0.3)] animate-pulse-glow">1</div>
+                    <h3 class="text-3xl md:text-5xl font-black font-cinzel mb-4 tracking-[0.1em] text-white uppercase drop-shadow-lg">The Singularity</h3>
+                    <p class="text-xl md:text-2xl text-[#d4af37] mb-8 font-serif italic max-w-4xl mx-auto leading-relaxed">
+                        "The Power of One. The Power of All."
+                    </p>
+                    <p class="text-slate-300 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+                        Slide to locate the exact Zero Point where Ethereal Spirit and Kinetic Strategy converge. At absolute center, the 81 nodes collapse into infinite potential.
+                    </p>
+                    
+                    <div class="max-w-xl mx-auto mb-8 relative">
+                        <div class="flex justify-between text-xs font-mono tracking-widest text-slate-400 mb-4 uppercase">
+                            <span class="text-[#a855f7]">Spirit (Flow)</span>
+                            <span class="text-[#d4af37] font-bold transition-all duration-300" id="zero-point-label">Zero Point</span>
+                            <span class="text-[#00e5ff]">Strategy (Logic)</span>
+                        </div>
+                        <div class="relative w-full h-4 flex items-center">
+                            <input type="range" id="spirit-strategy-slider" min="0" max="100" value="15" class="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer outline-none slider-thumb-gold relative z-20 transition-all duration-300">
+                            <div class="absolute left-1/2 top-1/2 w-[2px] h-8 bg-[#d4af37] -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_15px_#d4af37]"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="h-20 flex flex-col items-center justify-center">
+                        <div id="singularity-result" class="opacity-0 transition-opacity duration-500 transform scale-95 data-active:scale-100">
+                            <span class="px-8 py-3 bg-white text-black font-cinzel font-bold tracking-[0.2em] rounded-md shadow-[0_0_40px_rgba(212,175,55,0.8)] uppercase animate-pulse inline-block">
+                                Sovereignty Achieved : ∞
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="border-t border-white/5 pt-12 pb-16 text-center relative z-10 bg-[#020406]">
@@ -309,6 +346,20 @@
                     // Trigger global script cursor interaction effect manually
                     if(window.play528Hz) window.play528Hz();
                     setTimeout(() => { if(window.stop528Hz) window.stop528Hz(); }, 500);
+                    
+                    // Quantum Ripple Effect across the matrix
+                    document.querySelectorAll('.realm-node').forEach((n, idx) => {
+                        const nCol = idx % 9;
+                        const nRow = Math.floor(idx / 9);
+                        const dist = Math.sqrt(Math.pow(nCol - subIndex, 2) + Math.pow(nRow - groupIndex, 2));
+                        
+                        setTimeout(() => {
+                            n.style.transform = 'scale(1.4)';
+                            setTimeout(() => {
+                                if (!n.classList.contains('active-node')) n.style.transform = '';
+                            }, 250);
+                        }, dist * 40); // Ripple speed
+                    });
                 };
                 grid.appendChild(node);
             }
