@@ -87,10 +87,231 @@
         </div>
     </section>
 
+    <!-- Tension Treenet Architecture Mapping -->
+    <section class="py-24 px-6 relative z-10 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center space-x-6 mb-12 reveal">
+                <h2 class="text-2xl md:text-3xl font-cinzel font-bold uppercase tracking-widest text-white">Structural Synthesis: The Treenet</h2>
+                <div class="h-px flex-1 bg-gradient-to-r from-[#ef4444]/50 to-transparent"></div>
+            </div>
+
+            <div class="glass-panel p-8 md:p-12 rounded-3xl relative overflow-hidden border-t-4 border-t-[#ef4444] reveal shadow-[0_0_40px_rgba(239,68,68,0.1)]">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-cinzel font-bold text-white tracking-widest">Mapping Biology to Architecture</h3>
+                        <p class="text-slate-400 font-light leading-relaxed">
+                            A Tension Treenet is not merely a physical structure; it is the external manifestation of the founder's internal capacity. We map the biological nodes of <strong>Tensile Strength</strong>, <strong>Kinetic Output</strong>, and <strong>Somatic Resonance</strong> directly into load-bearing external geometry.
+                        </p>
+                        <div class="space-y-4 font-mono text-xs my-6">
+                            <div class="flex items-center gap-4 text-slate-300 bg-black/30 p-3 rounded-lg border border-white/5">
+                                <div class="w-2 h-2 rounded-full bg-[#00e5ff] shadow-[0_0_8px_#00e5ff] animate-pulse"></div>
+                                <span>Biological Nodes (Internal Capacity)</span>
+                            </div>
+                            <div class="flex items-center gap-4 text-slate-300 bg-black/30 p-3 rounded-lg border border-white/5">
+                                <div class="w-2 h-2 rounded-full bg-[#ef4444] shadow-[0_0_8px_#ef4444] animate-pulse" style="animation-delay: 1s;"></div>
+                                <span>Treenet Nodes (External Architecture)</span>
+                            </div>
+                        </div>
+                        <button onclick="deployTreenet()" id="deploy-btn" class="px-8 py-4 bg-white/5 hover:bg-[#ef4444] border border-[#ef4444]/50 text-[#ef4444] hover:text-white rounded-sm font-bold uppercase tracking-widest text-xs transition-all duration-500 shadow-[0_0_15px_rgba(239,68,68,0.2)] hover:shadow-[0_0_30px_rgba(239,68,68,0.5)] flex items-center gap-3 group">
+                            <i class="fas fa-spider group-hover:scale-110 transition-transform"></i> Initiate Structural Weave
+                        </button>
+                    </div>
+                    <div class="relative h-[400px] w-full rounded-2xl bg-black/50 border border-white/5 overflow-hidden flex items-center justify-center">
+                        <canvas id="treenet-canvas" class="absolute inset-0 w-full h-full"></canvas>
+                        <div id="treenet-status" class="absolute bottom-4 left-4 font-mono text-[10px] text-slate-500 uppercase tracking-widest bg-black/60 px-4 py-2 rounded backdrop-blur border border-white/10">
+                            Status: <span class="text-[#ef4444] animate-pulse">Awaiting Deployment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="py-12 text-center border-t border-white/5 relative z-10 bg-[#050a0f]">
         <p class="text-gray-500 text-xs tracking-[0.4em] uppercase font-mono">Visceral Current Global &copy; 2026</p>
     </footer>
 
     <script src="script.js"></script>
+    
+    <!-- Dynamic Treenet Canvas Engine -->
+    <script>
+        const tnCanvas = document.getElementById('treenet-canvas');
+        const tnCtx = tnCanvas ? tnCanvas.getContext('2d') : null;
+        let tnNodes = [];
+        let tnConnections = [];
+        let isDeploying = false;
+        let weaveProgress = 0;
+
+        function initTreenet() {
+            if (!tnCanvas) return;
+            const rect = tnCanvas.parentElement.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            tnCanvas.width = rect.width * dpr;
+            tnCanvas.height = rect.height * dpr;
+            tnCtx.scale(dpr, dpr);
+            
+            const w = rect.width;
+            const h = rect.height;
+            const cx = w / 2;
+            const cy = h / 2;
+
+            tnNodes = [];
+            tnConnections = [];
+
+            // 0: Center (The Sovereign Origin)
+            tnNodes.push({ id: 0, x: cx, y: cy, label: 'The Sovereign', type: 'core', currentX: cx, currentY: cy });
+            
+            // Inner Ring (Biological Nodes)
+            for(let i=0; i<3; i++) {
+                const angle = (i * Math.PI * 2) / 3 - Math.PI/2;
+                tnNodes.push({ 
+                    id: i+1, 
+                    x: cx + Math.cos(angle) * 75, 
+                    y: cy + Math.sin(angle) * 75, 
+                    label: ['Kinetic Output', 'Tensile Strength', 'Somatic Resonance'][i],
+                    type: 'bio',
+                    currentX: cx, currentY: cy 
+                });
+                tnConnections.push({ from: 0, to: i+1, type: 'primary' });
+            }
+
+            // Outer Ring (Structural Nodes)
+            for(let i=0; i<6; i++) {
+                const angle = (i * Math.PI * 2) / 6 - Math.PI/2 + 0.5;
+                // Shift labels to fit nicely within canvas limits
+                const radius = window.innerWidth < 768 ? 110 : 150;
+                tnNodes.push({ 
+                    id: i+4, 
+                    x: cx + Math.cos(angle) * radius, 
+                    y: cy + Math.sin(angle) * radius, 
+                    label: ['Paracord Rigging', 'Load Geometry', 'Anchor Points', 'Tension Web', 'Spatial Harmony', 'Suspension'][i],
+                    type: 'structure',
+                    currentX: cx, currentY: cy 
+                });
+                // Connect to inner ring (Biology to Structure)
+                tnConnections.push({ from: (i%3)+1, to: i+4, type: 'secondary' });
+                // Connect outer nodes together (The Web)
+                tnConnections.push({ from: i+4, to: ((i+1)%6)+4, type: 'web' });
+            }
+        }
+
+        function drawTreenet() {
+            if(!tnCtx) return;
+            const rect = tnCanvas.parentElement.getBoundingClientRect();
+            tnCtx.clearRect(0, 0, rect.width, rect.height);
+
+            if(isDeploying) {
+                weaveProgress += 0.01; // Smooth weave speed
+                if(weaveProgress > 1) weaveProgress = 1;
+            }
+
+            // Ease nodes to their target geometric positions
+            tnNodes.forEach(n => {
+                if(isDeploying) {
+                    const ease = 1 - Math.pow(1 - weaveProgress, 3); // Cubic ease out
+                    n.currentX = n.currentX + (n.x - n.currentX) * 0.04 * ease;
+                    n.currentY = n.currentY + (n.y - n.currentY) * 0.04 * ease;
+                }
+            });
+
+            // Draw Geometric Connections
+            tnConnections.forEach(c => {
+                const from = tnNodes[c.from];
+                const to = tnNodes[c.to];
+                
+                const dist = Math.hypot(from.currentX - to.currentX, from.currentY - to.currentY);
+                if(dist > 5) {
+                    tnCtx.beginPath();
+                    tnCtx.moveTo(from.currentX, from.currentY);
+                    tnCtx.lineTo(to.currentX, to.currentY);
+                    
+                    if(c.type === 'primary') {
+                        tnCtx.strokeStyle = `rgba(0, 229, 255, ${weaveProgress})`;
+                        tnCtx.lineWidth = 2;
+                    } else if(c.type === 'secondary') {
+                        tnCtx.strokeStyle = `rgba(239, 68, 68, ${weaveProgress * 0.8})`;
+                        tnCtx.lineWidth = 1.5;
+                    } else {
+                        tnCtx.strokeStyle = `rgba(255, 255, 255, ${weaveProgress * 0.2})`;
+                        tnCtx.lineWidth = 1;
+                    }
+                    tnCtx.stroke();
+                }
+            });
+
+            // Draw Glowing Nodes
+            tnNodes.forEach(n => {
+                tnCtx.beginPath();
+                tnCtx.arc(n.currentX, n.currentY, n.type === 'core' ? 6 : (n.type === 'bio' ? 4 : 3), 0, Math.PI*2);
+                
+                if(n.type === 'core') {
+                    tnCtx.fillStyle = '#ffffff';
+                    tnCtx.shadowBlur = 15;
+                    tnCtx.shadowColor = '#ffffff';
+                } else if(n.type === 'bio') {
+                    tnCtx.fillStyle = '#00e5ff';
+                    tnCtx.shadowBlur = 10;
+                    tnCtx.shadowColor = '#00e5ff';
+                } else {
+                    tnCtx.fillStyle = '#ef4444';
+                    tnCtx.shadowBlur = 10;
+                    tnCtx.shadowColor = '#ef4444';
+                }
+                
+                tnCtx.fill();
+                tnCtx.shadowBlur = 0;
+
+                // Reveal Labels organically as nodes separate
+                if(weaveProgress > 0.6) {
+                    tnCtx.fillStyle = `rgba(255,255,255,${(weaveProgress - 0.6) * 2.5})`;
+                    tnCtx.font = '10px "Space Mono"';
+                    tnCtx.textAlign = 'center';
+                    // Slight vertical offset for legibility
+                    tnCtx.fillText(n.label, n.currentX, n.currentY - 12);
+                }
+            });
+
+            requestAnimationFrame(drawTreenet);
+        }
+
+        window.deployTreenet = function() {
+            if (isDeploying) return;
+            isDeploying = true;
+            
+            const btn = document.getElementById('deploy-btn');
+            const status = document.getElementById('treenet-status');
+            
+            if(btn) btn.innerHTML = '<i class="fas fa-circle-notch animate-spin"></i> Weaving Network...';
+            if(status) status.innerHTML = 'Status: <span class="text-[#00e5ff] font-bold">Network Expanding</span>';
+            
+            if (window.VisceralSymphony) window.VisceralSymphony.pulse();
+            
+            setTimeout(() => {
+                if(btn) {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Architecture Locked';
+                    btn.classList.add('bg-[#ef4444]', 'text-white', 'pointer-events-none');
+                    btn.classList.remove('bg-white/5', 'text-[#ef4444]');
+                }
+                if(status) status.innerHTML = 'Status: <span class="text-[#d4af37] font-bold">Total Sovereignty Achieved</span>';
+            }, 3000);
+        };
+
+        window.addEventListener('load', () => {
+            initTreenet();
+            drawTreenet();
+        });
+        
+        let tnResizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(tnResizeTimeout);
+            tnResizeTimeout = setTimeout(() => {
+                // Retain deployed state on resize
+                initTreenet();
+                if (isDeploying) {
+                    tnNodes.forEach(n => { n.currentX = n.x; n.currentY = n.y; });
+                }
+            }, 250);
+        });
+    </script>
 </body>
 </html>

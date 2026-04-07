@@ -66,7 +66,17 @@ function toggleMenu() {
 
 if (mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
 if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
-mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+mobileLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href && !href.startsWith('#') && !href.startsWith('mailto') && href !== '') {
+            e.preventDefault();
+            setTimeout(() => { window.location.href = href; }, 300); // Allow slide-out animation to finish
+        }
+        toggleMenu();
+    });
+});
 
 // --- Mastery 360 Portal Logic ---
 function togglePortal() {
@@ -90,7 +100,7 @@ portalLinks.forEach(link => {
         const href = link.getAttribute('href');
         
         // If navigating to a new page, prevent default to avoid the browser dropping the navigation during the slide animation
-        if (href && !href.startsWith('#')) {
+        if (href && !href.startsWith('#') && !href.startsWith('mailto') && href !== '') {
             e.preventDefault();
             setTimeout(() => { window.location.href = href; }, 300);
         }
@@ -100,6 +110,24 @@ portalLinks.forEach(link => {
         }
     });
 });
+
+// --- Lightning-Fast Page Prefetching (Synergy Engine) ---
+// Pre-loads internal pages when the user hovers over a link, making navigation instantaneous.
+const prefetchCache = new Set();
+
+document.addEventListener('mouseover', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    
+    const href = link.getAttribute('href');
+    if (href && href.endsWith('.html') && !prefetchCache.has(href)) {
+        const prefetchLink = document.createElement('link');
+        prefetchLink.rel = 'prefetch';
+        prefetchLink.href = href;
+        document.head.appendChild(prefetchLink);
+        prefetchCache.add(href);
+    }
+}, { passive: true });
 
 // --- Interactive Phi Slider Logic ---
 window.updatePhi = function(value) {
@@ -318,14 +346,14 @@ if (singularitySlider) {
             zeroPointLabel.classList.add('text-white', 'scale-110', 'drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]');
             zeroPointLabel.classList.remove('text-[#d4af37]');
             
-            if (window.play528Hz) window.play528Hz();
+            if (window.VisceralSymphony) window.VisceralSymphony.play(0.4);
         } else {
             singularityResult.classList.add('opacity-0', 'scale-95');
             singularityResult.classList.remove('scale-100');
             zeroPointLabel.classList.remove('text-white', 'scale-110', 'drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]');
             zeroPointLabel.classList.add('text-[#d4af37]');
             
-            if (window.stop528Hz) window.stop528Hz();
+            if (window.VisceralSymphony) window.VisceralSymphony.stop();
         }
     });
     
@@ -333,47 +361,91 @@ if (singularitySlider) {
     singularitySlider.dispatchEvent(new Event('input'));
 }
 
-// --- 528Hz Visceral Frequency Audio ---
-let audioCtx;
-let oscillator;
-let gainNode;
+// --- Visceral Symphony Engine (Cinematic Audio) ---
+const VisceralSymphony = {
+    ctx: null,
+    masterGain: null,
+    ambient: { audio: null, source: null, gain: null },
+    kinetic: { audio: null, source: null, gain: null },
+    initialized: false,
 
-function init528HzAudio() {
-    if (!audioCtx) {
-        // Initialize the audio context upon first user interaction
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        oscillator = audioCtx.createOscillator();
-        gainNode = audioCtx.createGain();
+    init() {
+        if (this.initialized) return;
+        try {
+            this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            this.masterGain = this.ctx.createGain();
+            this.masterGain.connect(this.ctx.destination);
 
-        oscillator.type = 'sine'; // Pure mathematical wave
-        oscillator.frequency.value = 528; // The Miracle Resonance
+            // Track 1: The Ethereal / Ambient (Spirit)
+            this.ambient.audio = new Audio('assets/audio/orchestral-ambient.mp3'); 
+            this.ambient.audio.loop = true;
+            this.ambient.audio.crossOrigin = "anonymous";
+            this.ambient.source = this.ctx.createMediaElementSource(this.ambient.audio);
+            this.ambient.gain = this.ctx.createGain();
+            this.ambient.gain.gain.value = 0;
+            this.ambient.source.connect(this.ambient.gain).connect(this.masterGain);
 
-        gainNode.gain.value = 0; // Start completely muted
+            // Track 2: The Kinetic / Strategy (Action Swell)
+            this.kinetic.audio = new Audio('assets/audio/cinematic-swell.mp3'); 
+            this.kinetic.audio.loop = true;
+            this.kinetic.audio.crossOrigin = "anonymous";
+            this.kinetic.source = this.ctx.createMediaElementSource(this.kinetic.audio);
+            this.kinetic.gain = this.ctx.createGain();
+            this.kinetic.gain.gain.value = 0;
+            this.kinetic.source.connect(this.kinetic.gain).connect(this.masterGain);
 
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        oscillator.start();
+            this.initialized = true;
+        } catch (e) {
+            console.warn("Symphony Engine initialization bypassed:", e);
+        }
+    },
+
+    play(intensity = 0.3) {
+        if (!this.initialized) this.init();
+        if (!this.ctx) return;
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        
+        this.ambient.audio.play().catch(() => {});
+        
+        this.ambient.gain.gain.cancelScheduledValues(this.ctx.currentTime);
+        this.ambient.gain.gain.setValueAtTime(this.ambient.gain.gain.value, this.ctx.currentTime);
+        this.ambient.gain.gain.linearRampToValueAtTime(intensity, this.ctx.currentTime + 2.0);
+    },
+
+    stop() {
+        if (!this.initialized || !this.ctx) return;
+        
+        this.ambient.gain.gain.cancelScheduledValues(this.ctx.currentTime);
+        this.ambient.gain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 1.5);
+        
+        this.kinetic.gain.gain.cancelScheduledValues(this.ctx.currentTime);
+        this.kinetic.gain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 1.5);
+        
+        // Pause playback to save memory once volume hits zero
+        setTimeout(() => {
+            if (this.ambient.gain.gain.value <= 0.01) this.ambient.audio.pause();
+            if (this.kinetic.gain.gain.value <= 0.01) this.kinetic.audio.pause();
+        }, 1600);
+    },
+    
+    pulse() {
+        if (!this.initialized) this.init();
+        if (!this.ctx) return;
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        
+        this.ambient.audio.play().catch(() => {});
+        this.kinetic.audio.play().catch(() => {});
+        
+        // Steady the ambient bed while spiking the cinematic strings
+        this.ambient.gain.gain.linearRampToValueAtTime(0.2, this.ctx.currentTime + 0.5);
+        
+        this.kinetic.gain.gain.cancelScheduledValues(this.ctx.currentTime);
+        this.kinetic.gain.gain.setValueAtTime(this.kinetic.gain.gain.value, this.ctx.currentTime);
+        this.kinetic.gain.gain.linearRampToValueAtTime(0.6, this.ctx.currentTime + 0.2); // Sharp swell
+        this.kinetic.gain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 3.0); // Long decay
     }
-}
-
-function play528Hz() {
-    if (!audioCtx) init528HzAudio();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-
-    // Smooth fade in to an ambient 10% volume
-    gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-    gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 1.5);
-}
-
-function stop528Hz() {
-    if (gainNode && audioCtx) {
-        // Smooth fade out back to absolute zero
-        gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-        gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
-        gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 2.0);
-    }
-}
+};
+window.VisceralSymphony = VisceralSymphony;
 
 // --- Enhanced Canvas Synchronicity Engine ---
 const canvas = document.getElementById('frequencyCanvas');
@@ -456,7 +528,7 @@ function drawWaves() {
 function shiftPhase() {
     if (isPerturbed) return; // Prevent spamming
     
-    play528Hz(); // Trigger the 528Hz resonance
+    if (window.VisceralSymphony) window.VisceralSymphony.pulse();
     
     baseFrequency = 0.04; // Speed up briefly
     const phrases = [
@@ -487,7 +559,7 @@ function shiftPhase() {
                 targetAmplitude = 40; // Return to normal
                 isPerturbed = false;
                 statusMsg.classList.add("animate-pulse");
-                stop528Hz(); // Fade out the resonance
+                if (window.VisceralSymphony) window.VisceralSymphony.stop();
             }, 1500);
         }
     }, 30);
@@ -497,7 +569,7 @@ function calculateImpact() {
     if (isPerturbed) return;
     isPerturbed = true;
 
-    play528Hz(); // Trigger the 528Hz resonance
+    if (window.VisceralSymphony) window.VisceralSymphony.play(0.3); 
 
     const messages = [
         "AUDITING 81-NODE MATRIX...",
@@ -530,7 +602,7 @@ function calculateImpact() {
                 baseFrequency = 0.015;
                 isPerturbed = false;
                 statusMsg.classList.add("animate-pulse");
-                stop528Hz(); // Fade out the resonance
+                if (window.VisceralSymphony) window.VisceralSymphony.stop();
             }, 3000);
         }
     }, 800);

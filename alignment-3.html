@@ -16,7 +16,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;600;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Tailwind CSS (Restored for Absolute Stability) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { theme: { extend: { colors: { 'visceral-gold': '#00e5ff', 'visceral-dark': '#050a0f', 'visceral-scarlett': '#e11d48', visceral: { gold: '#00e5ff', dark: '#050a0f', scarlett: '#e11d48', card: 'rgba(15, 17, 21, 0.65)' } }, fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'], cinzel: ['Cinzel', 'serif'] }, animation: { 'slow-spin': 'spin 20s linear infinite', 'float': 'float 6s ease-in-out infinite', 'pulse-glow': 'pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }, keyframes: { float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } }, pulseGlow: { '0%, 100%': { opacity: 0.4, transform: 'scale(1)' }, '50%': { opacity: 0.8, transform: 'scale(1.05)' } } } } } }
@@ -25,9 +24,9 @@
     <style>
         :root {
             --bg-color: #030508;
-            --accent-r: 0;
-            --accent-g: 229;
-            --accent-b: 255;
+            --accent-r: 225;
+            --accent-g: 29;
+            --accent-b: 72;
             --accent: rgb(var(--accent-r), var(--accent-g), var(--accent-b));
         }
         body {
@@ -48,7 +47,7 @@
         .chameleon-bg {
             background-color: var(--bg-color);
             background-image: radial-gradient(circle at 15% 50%, rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.08), transparent 40%),
-                              radial-gradient(circle at 85% 30%, rgba(var(--accent-r), var(--accent-g), var(--accent-b), 0.05), transparent 50%);
+                              radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.05), transparent 50%);
         }
 
         .glass {
@@ -111,10 +110,9 @@
 </head>
 <body class="chameleon-bg selection:bg-[var(--accent)] selection:text-[#050a0f]">
 
-    <!-- Deep Cosmic Ethereal Nebula Layers -->
     <div class="fixed inset-0 pointer-events-none -z-20 overflow-hidden">
-        <div class="absolute w-[800px] h-[800px] rounded-full top-[-20%] left-[-10%] animate-pulse-glow" style="background: radial-gradient(circle, rgba(49,46,129,0.2) 0%, transparent 70%);"></div>
-        <div class="absolute w-[600px] h-[600px] rounded-full bottom-[-10%] right-[-10%]" style="background: radial-gradient(circle, rgba(112,26,117,0.1) 0%, transparent 70%); animation: pulseGlow 6s ease-in-out infinite alternate;"></div>
+        <div class="absolute w-[800px] h-[800px] rounded-full top-[-20%] left-[-10%] animate-pulse-glow" style="background: radial-gradient(circle, rgba(225,29,72,0.15) 0%, transparent 70%);"></div>
+        <div class="absolute w-[600px] h-[600px] rounded-full bottom-[-10%] right-[-10%]" style="background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%); animation: pulseGlow 6s ease-in-out infinite alternate;"></div>
     </div>
 
     <canvas id="canvas-bg" class="fixed inset-0 -z-10 opacity-80 mix-blend-screen"></canvas>
@@ -133,7 +131,7 @@
         </a>
         <div class="hidden md:flex gap-8 mono text-[10px] uppercase tracking-[0.2em] text-gray-500">
             <span>Freq: <span class="text-white">852Hz</span></span>
-            <span>State: <span class="text-white">Seeking</span></span>
+            <span>State: <span class="text-white">Sovereign</span></span>
             <span id="sync-status" class="text-accent transition-colors duration-300 font-bold">0% Aligned</span>
         </div>
     </nav>
@@ -147,7 +145,7 @@
         </h1>
         <div id="hero-math" class="formula-container my-10 text-accent transition-colors duration-300"></div>
         <p class="max-w-2xl text-gray-400 font-light leading-relaxed text-sm md:text-lg px-4">
-            "Your detours were not delays; they were Phase Shifts (\(\phi\)) preparing you for this exact frequency. Identify your area of friction. Select your node. Map your visceral current to the mathematical certainty of the universe."
+            "The final integration. Every variable and detour was meticulously calculated to compound into this exact moment. Anchor the origin. Execute the Phase Shift. Assume absolute Sovereignty."
         </p>
         <div class="absolute bottom-10 animate-bounce opacity-50 cursor-pointer text-accent transition-colors duration-300" onclick="window.scrollTo(0, window.innerHeight)">
             <i class="fas fa-chevron-down text-2xl"></i>
@@ -158,7 +156,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="cinzel text-3xl md:text-4xl font-bold uppercase tracking-widest mb-4">The Mastery 360 Grid <span class="text-accent">// Triad III: Infinite Strategy</span></h2>
-                <p class="mono text-xs text-gray-500 uppercase tracking-[0.2em] mb-8">Select a node to initiate alignment protocol</p>
+                <p class="mono text-xs text-gray-500 uppercase tracking-[0.2em] mb-8">Select a node to initiate final integration</p>
                 
                 <div class="flex flex-wrap justify-center gap-4">
                     <a href="alignment.html" class="px-6 py-2 border border-white/10 hover:border-white/30 text-gray-400 hover:text-white rounded-sm text-xs tracking-widest uppercase transition-all">Triad I: Self-Discovery (01-27)</a>
@@ -206,86 +204,50 @@
 
     <script>
         const realms = [
-            { 
-                name: "REALM 1: FOUNDATION", duality: "Force vs. Potentiality", 
-                understanding: { anchor: "Power vs. Force (Hawkins) & The 48 Laws of Power (Greene). Understanding the raw, heavy mechanics of human nature, manipulation, and the energetic drain of shame, guilt, and pride.", ascent: "The Seven Spiritual Laws of Success (Chopra). The realization of pure potentiality, where nothing is forced and the universe provides effortlessly.", balance: "Calibrated Power. Using Greene's worldly laws not to attack, but to build an unbreakable fortress so that Chopra's spiritual laws have a safe, quiet place to reside." },
-                strategy: { step1Title: "Map the Terrain (Anchor)", step1: "Identify exactly where you are using 'Force' (struggling) in your life and where external forces are manipulating you.", step2Title: "Drop the Weight (Ascent)", step2: "Practice the Law of Least Effort. Stop defending your ego for 24 hours. Watch how the universe organizes itself around your silence.", step3Title: "Erect the Temple (Balance)", step3: "Set absolute, impenetrable boundaries while keeping your internal state completely open and unbothered." }
-            },
-            { 
-                name: "REALM 2: IDENTITY", duality: "The Labels of the Past vs. The Void of 'No-Self'", 
-                understanding: { anchor: "The 'Prisoner,' the 'Addict,' the 'Foster Child.' The heavy labels placed upon you by the system (the 12-year absence, the crashes).", ascent: "The Book: On the Taboo Against Knowing Who You Are (Watts). The realization that you are 'nothing special'—just the universe experiencing itself.", balance: "The Architect of Legacy. Taking the labels of the past and mathematically converting them into Phase Shifts (\\(\\phi\\))." },
-                strategy: { step1Title: "Own the Rap Sheet (Anchor)", step1: "Write down every failure, every crash, and every label you've run from. Do not hide from them. They are raw data.", step2Title: "Dissolve the Story (Ascent)", step2: "Meditate on the absolute insignificance of your personal drama in the face of the cosmos.", step3Title: "Build the Empire (Balance)", step3: "Use the data of your past to build a legacy. You act not to 'clear your name,' but to show those coming after you the man you chose to become." }
-            },
-            { 
-                name: "REALM 3: ACTION", duality: "Brutal Grind vs. Passive Dreaming", 
-                understanding: { anchor: "Pure ambition, hustle culture, 'making things happen' through sheer willpower, leading to eventual burnout.", ascent: "The Way of the Peaceful Warrior (Millman). Wu-wei. Action through non-action.", balance: "Visceral Momentum. Applying the frequency equation: \\(V(t) = A \\sin(2\\pi ft + \\phi)\\). You find the exact resonance where discipline becomes effortless." },
-                strategy: { step1Title: "Audit the Friction (Anchor)", step1: "Where are you burning the most energy for the least return? Cut the inefficient actions immediately.", step2Title: "Find the Silence (Ascent)", step2: "Before any major move, pause until you feel a 'gut-level' truth guiding you. If it's frantic, don't move.", step3Title: "Strike with Certainty (Balance)", step3: "When the frequency aligns, move with absolute, devastating precision. No hesitation." }
-            },
-            { 
-                name: "REALM 4: CONFLICT", duality: "War vs. Pacifism", 
-                understanding: { anchor: "The 33 Strategies of War (Greene). Viewing the world as a zero-sum game of competitors and threats.", ascent: "The Teachings of Don Juan (Castaneda). Stepping entirely outside the battlefield. Stopping the internal dialogue and viewing adversaries not as enemies, but as energy currents.", balance: "Strategic Synergy. Operating at such a high frequency of authentic power that competition becomes irrelevant." },
-                strategy: { step1Title: "Anticipate the Strike (Anchor)", step1: "Read the board. Know your competitors, understand the market, and foresee the challenges before they arrive.", step2Title: "Shift the Paradigm (Ascent)", step2: "Refuse to engage in petty squabbles. Step back and view the 'conflict' as a cosmic lesson designed specifically for your refinement.", step3Title: "Disarm Through Value (Balance)", step3: "Win the war by providing so much undeniable value and synergetic connection to your Tribe that your 'enemies' are rendered obsolete." }
-            },
-            { 
-                name: "REALM 5: INTELLECT", duality: "Rigid Dogma vs. Ungrounded Mysticism", 
-                understanding: { anchor: "The Great Books / Classical Logic. The analytical, rigid structure of the 3D reality. The rules, the math, the syntax.", ascent: "Zen philosophies, Wayne Dyer's Wishes Fulfilled. The realm of intuition, imagination, and the unseen.", balance: "The Surgical Mind. Sharpening the intellect to a razor's edge using logic, but allowing intuition to guide the hand that holds the blade." },
-                strategy: { step1Title: "Study the Masters (Anchor)", step1: "Read heavily. Understand how the world works. Master the technical skills (like building professional websites).", step2Title: "Trust the Gut (Ascent)", step2: "When logic fails or overcomplicates, sit in the silence and wait for the 'knowing' to arrive.", step3Title: "Execute the Code (Balance)", step3: "Build systems based on deep spiritual truths but executed with flawless, professional, technical precision." }
-            },
-            { 
-                name: "REALM 6: FREQUENCY", duality: "Despair vs. Toxic Positivity", 
-                understanding: { anchor: "The depths of grief, the 'water and light' trauma of the beginning, the isolation of a prison cell.", ascent: "The 528 Hz frequency, the awe of the universe, unshakeable joy.", balance: "The Alchemist. You do not ignore the pain; you use it as the dense material required to spark the fire of transformation." },
-                strategy: { step1Title: "Feel the Gravity (Anchor)", step1: "When heavy emotions hit, do not numb them. Sit with them. Measure their weight.", step2Title: "Locate the Miracle (Ascent)", step2: "Seek out the awe in the world. Look at a summer storm rolling in, recognize the mathematical majesty of a cloud formation.", step3Title: "Transmute the Energy (Balance)", step3: "Use the pain of the past as the exact fuel source required to project your new reality into existence." }
-            },
-            { 
-                name: "REALM 7: TIME", duality: "Burden of the Past vs. Illusion of the Future", 
-                understanding: { anchor: "Regret. The 12-year absence. The chronological timeline of dates (10/5/20, 10/22/92) that lock us into a linear narrative of 'lost time.'", ascent: "The Eternal Now. The spiritual truth that the past is a memory and the future is an imagination.", balance: "The Phase Shift. Recognizing that time is not a cage, but a variable of refinement. Every detour was mathematically required to put you at this exact coordinate." },
-                strategy: { step1Title: "Acknowledge the Timeline (Anchor)", step1: "Document your history. Respect the chronological path that brought you here.", step2Title: "Enter the Present (Ascent)", step2: "Bring all your focus, power, and capability into the current second. Breathe into the 'now.'", step3Title: "Calculate the Return (Balance)", step3: "See your 'lost time' not as a deficit, but as a Phase Shift (\\(\\phi\\)). You spent 12 years gathering the exact data required to launch the empire." }
-            },
-            { 
-                name: "REALM 8: PURPOSE", duality: "Selfish Gain vs. Martyrdom", 
-                understanding: { anchor: "Pursuing success purely for survival, status, or to prove others wrong.", ascent: "Dharma. Giving everything away, losing yourself entirely in the service of others.", balance: "The Infinite Sum. Building immense wealth and power so that you can distribute it endlessly to your Tribe and your bloodline." },
-                strategy: { step1Title: "Define the Metric (Anchor)", step1: "Decide exactly what success looks like in the material world (revenue, reach, structure).", step2Title: "Align the Soul (Ascent)", step2: "Ensure that the pursuit of that metric honors the 'Star-written' destiny of your soul.", step3Title: "Initiate the Flow (Balance)", step3: "Build the business (VanFlowCo) so that the bigger it gets, the more deeply it connects (C) people to their own truth." }
-            },
-            { 
-                name: "REALM 9: LEGACY", duality: "Isolation vs. The Collective", 
-                understanding: { anchor: "The lonely journey. The foster child abandoned. The individual struggling against the world.", ascent: "Universal consciousness. The belief that we are all one entity.", balance: "The Global Codex. Taking the most intensely personal, painful parts of your individual story and structuring them so perfectly that they become a universal map for others." },
-                strategy: { step1Title: "Heal the Origin (Anchor)", step1: "Forgive the origin story. Accept the abandonment and the incarcerations as the required curriculum for your specific degree in human nature.", step2Title: "Recognize the Mirror (Ascent)", step2: "See yourself in the client. Realize that every person who comes to Visceral Current is just another version of you, looking for the way home.", step3Title: "Publish the Equation (Balance)", step3: "Let the world see the empire you built. By being an undeniable example of transformation, your personal legacy becomes a public roadmap." }
-            }
+            { name: "REALM 1: FOUNDATION", duality: "Force vs. Potentiality", understanding: { anchor: "Understanding the raw, heavy mechanics of human nature, manipulation, and the energetic drain of shame, guilt, and pride.", ascent: "The realization of pure potentiality, where nothing is forced and the universe provides effortlessly.", balance: "Using worldly laws not to attack, but to build an unbreakable fortress so that spiritual laws have a safe, quiet place to reside." }, strategy: { step1Title: "Map the Terrain", step1: "Identify exactly where you are using 'Force' in your life.", step2Title: "Drop the Weight", step2: "Practice the Law of Least Effort. Stop defending your ego.", step3Title: "Erect the Temple", step3: "Set absolute, impenetrable boundaries while keeping your internal state open." } },
+            { name: "REALM 2: IDENTITY", duality: "The Labels of the Past vs. The Void of 'No-Self'", understanding: { anchor: "The heavy labels placed upon you by the system.", ascent: "The realization that you are 'nothing special'—just the universe experiencing itself.", balance: "Taking the labels of the past and mathematically converting them into Phase Shifts." }, strategy: { step1Title: "Own the Rap Sheet", step1: "Write down every failure and label you've run from.", step2Title: "Dissolve the Story", step2: "Meditate on the absolute insignificance of personal drama.", step3Title: "Build the Empire", step3: "Use the data of your past to build a legacy." } },
+            { name: "REALM 3: ACTION", duality: "Brutal Grind vs. Passive Dreaming", understanding: { anchor: "Pure ambition, hustle culture, 'making things happen' through sheer willpower.", ascent: "Action through non-action. Wu-wei.", balance: "Applying the frequency equation to find the exact resonance where discipline becomes effortless." }, strategy: { step1Title: "Audit the Friction", step1: "Where are you burning the most energy for the least return?", step2Title: "Find the Silence", step2: "Before any major move, pause until you feel a 'gut-level' truth.", step3Title: "Strike with Certainty", step3: "When the frequency aligns, move with absolute, devastating precision." } },
+            { name: "REALM 4: CONFLICT", duality: "War vs. Pacifism", understanding: { anchor: "Viewing the world as a zero-sum game of competitors and threats.", ascent: "Stepping entirely outside the battlefield. Viewing adversaries as energy currents.", balance: "Operating at such a high frequency of authentic power that competition becomes irrelevant." }, strategy: { step1Title: "Anticipate the Strike", step1: "Read the board and foresee the challenges before they arrive.", step2Title: "Shift the Paradigm", step2: "View the 'conflict' as a cosmic lesson designed specifically for your refinement.", step3Title: "Disarm Through Value", step3: "Win by providing so much undeniable value that enemies are rendered obsolete." } },
+            { name: "REALM 5: INTELLECT", duality: "Rigid Dogma vs. Ungrounded Mysticism", understanding: { anchor: "The analytical, rigid structure of the 3D reality.", ascent: "The realm of intuition, imagination, and the unseen.", balance: "Sharpening the intellect to a razor's edge using logic, but allowing intuition to guide it." }, strategy: { step1Title: "Study the Masters", step1: "Master the technical skills and understand how the world works.", step2Title: "Trust the Gut", step2: "When logic fails or overcomplicates, sit in the silence.", step3Title: "Execute the Code", step3: "Build systems based on deep spiritual truths but executed with flawless precision." } },
+            { name: "REALM 6: FREQUENCY", duality: "Despair vs. Toxic Positivity", understanding: { anchor: "The depths of grief and trauma.", ascent: "The awe of the universe, unshakeable joy.", balance: "Using pain as the dense material required to spark the fire of transformation." }, strategy: { step1Title: "Feel the Gravity", step1: "When heavy emotions hit, sit with them and measure their weight.", step2Title: "Locate the Miracle", step2: "Seek out the mathematical majesty of the world.", step3Title: "Transmute the Energy", step3: "Use the pain of the past as the fuel source to project your new reality." } },
+            { name: "REALM 7: TIME", duality: "Burden of the Past vs. Illusion of the Future", understanding: { anchor: "Regret and linear narratives of 'lost time.'", ascent: "The Eternal Now. The past is a memory, the future an imagination.", balance: "Recognizing time as a variable of refinement. Detours are required Phase Shifts." }, strategy: { step1Title: "Acknowledge the Timeline", step1: "Document your history and respect the chronological path.", step2Title: "Enter the Present", step2: "Bring all focus and power into the current second.", step3Title: "Calculate the Return", step3: "See 'lost time' as Phase Shift data required to launch the empire." } },
+            { name: "REALM 8: PURPOSE", duality: "Selfish Gain vs. Martyrdom", understanding: { anchor: "Pursuing success purely for survival or status.", ascent: "Giving everything away in the service of others.", balance: "Building immense wealth and power to distribute endlessly to your Tribe." }, strategy: { step1Title: "Define the Metric", step1: "Decide exactly what success looks like in the material world.", step2Title: "Align the Soul", step2: "Ensure the pursuit honors your destiny.", step3Title: "Initiate the Flow", step3: "Build systems that connect people deeply to their own truth as they scale." } },
+            { name: "REALM 9: LEGACY", duality: "Isolation vs. The Collective", understanding: { anchor: "The lonely journey and individual struggle.", ascent: "Universal consciousness and oneness.", balance: "Structuring your personal, painful story to become a universal map for others." }, strategy: { step1Title: "Heal the Origin", step1: "Forgive the origin story and accept the curriculum.", step2Title: "Recognize the Mirror", step2: "See yourself in everyone seeking the way home.", step3Title: "Publish the Equation", step3: "Let your empire become a public, undeniable roadmap of transformation." } }
         ];
 
         const libraryData = [
-            { quote: "If you only knew the magnificence of the 3, 6 and 9, then you would have the key to the universe.", author: "Nikola Tesla", action: "Align your daily routines to harmonic mathematical cycles. Operating in sync with natural law reduces friction to zero." },
-            { quote: "For every action, there is an equal and opposite reaction.", author: "Isaac Newton", action: "Calculate the inevitable pushback of your next major move. Build the counter-balance into the architecture before you execute." },
-            { quote: "Measure what is measurable, and make measurable what is not so.", author: "Galileo Galilei", action: "Make the unseen friction in your life visible and quantifiable. You cannot optimize an invisible Phase Shift." },
-            { quote: "Nature uses as little as possible of anything.", author: "Johannes Kepler", action: "Find the elliptical rhythm of your energy. Do not force linear output; embrace the natural orbit of your capacity." },
-            { quote: "To know that we know what we know, and to know that we do not know what we do not know, that is true knowledge.", author: "Nicolaus Copernicus", action: "Remove your ego from the center of the equation to see the true system functioning around you." },
-            { quote: "Information is not lost in a black hole.", author: "Stephen Hawking", action: "Trust that no visceral experience or data from your past trauma is ever truly lost. It is stored potential waiting to be activated." },
-            { quote: "We are made of star-stuff. We are a way for the cosmos to know itself.", author: "Carl Sagan", action: "View your immediate physical limitations and stress against the backdrop of cosmic infinity. The pressure drops instantly." },
-            { quote: "Consciousness is not a computation.", author: "Roger Penrose", action: "Allow your intuition to collapse the wave function of multiple possibilities. Logic maps the terrain; intuition walks it." },
-            { quote: "The opposite of a correct statement is a false statement. But the opposite of a profound truth may well be another profound truth.", author: "Niels Bohr", action: "Hold two opposing truths in your mind simultaneously without forcing a resolution. Mastery exists in the paradox." },
-            { quote: "Science cannot solve the ultimate mystery of nature. And that is because, in the last analysis, we ourselves are a part of the mystery.", author: "Max Planck", action: "Realize that growth happens in sudden, explosive leaps (quanta), not perfectly smooth slopes." },
-            { quote: "What we observe is not nature itself, but nature exposed to our method of questioning.", author: "Werner Heisenberg", action: "Accept that you cannot know both the exact position and momentum of your future. Focus on the trajectory." },
-            { quote: "The task is not so much to see what no one has yet seen; but to think what nobody has yet thought, about that which everybody sees.", author: "Erwin Schrödinger", action: "Until you execute, all outcomes are possible in superposition. Make the choice and collapse the reality." },
-            { quote: "In science one tries to tell people, in such a way as to be understood by everyone, something that no one ever knew before.", author: "Paul Dirac", action: "For every creative force you deploy, prepare to integrate its shadow counterpart. Balance the equation." },
-            { quote: "The only laws of matter are those which our minds must fabricate.", author: "James Clerk Maxwell", action: "Unify your separate passions into one cohesive, oscillating field of impact. Let the currents merge." },
-            { quote: "Nothing in life is to be feared, it is only to be understood.", author: "Marie Curie", action: "Replace the fear of the unknown Phase Shift with clinical, intense, mathematical curiosity." },
-            { quote: "Before I came here I was confused about this subject. Having listened to your lecture I am still confused. But on a higher level.", author: "Enrico Fermi", action: "Do not wait for perfect data; make the hyper-calculated leap with what you have. Estimate the infinite." },
-            { quote: "I don't mind your thinking slowly; I mind your publishing faster than you think.", author: "Wolfgang Pauli", action: "Two identical energies cannot occupy the same space. Differentiate your unique frequency entirely." },
-            { quote: "Intellect distinguishes between the possible and the impossible; reason distinguishes between the sensible and the senseless.", author: "Max Born", action: "Shift your environment to maximize the mathematical probability of synchronicity occurring." },
-            { quote: "I do not think that the wireless waves I have discovered will have any practical application.", author: "Heinrich Hertz", action: "Ensure your internal frequency is powerful enough to be received by the external network. Broadcast undeniable value." },
-            { quote: "Nothing is too wonderful to be true, if it be consistent with the laws of nature.", author: "Michael Faraday", action: "Generate kinetic energy in others simply by moving powerfully and silently through their field via magnetic induction." },
-            { quote: "The future is a world limited by ourselves.", author: "André-Marie Ampère", action: "Remove the resistance in your daily schedule to maximize the flow of visceral current. Clean the conduit." },
-            { quote: "Resistance is futile.", author: "Georg Ohm", action: "Calculate the exact voltage needed to break through your current psychological barriers. Apply the pressure." },
-            { quote: "The language of experiment is more authoritative than any reasoning.", author: "Alessandro Volta", action: "Build an internal battery of composed silence and stoicism to deploy during total system chaos." },
-            { quote: "It is not the strongest of the species that survive, nor the most intelligent, but the one most responsive to change.", author: "James Watt", action: "Consistency of output over time is geometrically superior to sporadic bursts of fragmented genius." },
-            { quote: "Energy can neither be created nor destroyed; it can only be transferred or changed from one form to another.", author: "James Prescott Joule", action: "Transmute the heat of your anger, grief, or trauma into pure, mechanical, empire-building work." },
-            { quote: "Time is an illusion.", author: "Albert Einstein", action: "Time accelerates when you are aligned with your Visceral Current. Enter the absolute flow state." },
-            { quote: "The Infinite Sum.", author: "The Visceral Codex", action: "Release the need to witness the final result. Build an architecture designed for a timeline that outlives you." }
+            { quote: "E = mc². Energy is simply Mass multiplied by the Speed of Light squared.", author: "Albert Einstein", history: "The system has historically demanded we hit a biological breaking point, enforcing exhaustion as a metric of hard work.", present: "Mass only converts to infinite energy under extreme velocity and pressure. Move at the speed of truth without hesitation.", future: "This shatters your biological ceiling. It is the mathematical formula for generating absolute, limit-breaking power." },
+            { quote: "The ceiling is an illusion projected by the trailing data of the observer.", author: "Visceral Synthesis", history: "We have artificially capped our potential based on historical trailing data, believing that past limits dictate future capacity.", present: "When the system says you have reached maximum capacity, initiate a Phase Shift. Realize the architecture of the soul has no limit.", future: "This completely removes imposter syndrome. It allows you to scale the Area of Impact (A) endlessly into the 10th Dimension." },
+            { quote: "Spooky action at a distance is simply the universe communicating instantaneously.", author: "Albert Einstein", history: "We believed that localized decisions were isolated, failing to understand how small compromises echoed across the macro-system.", present: "Understand Quantum Entanglement. A shift in your Origin (o) instantly alters your Infinite Sum (S) across all dimensions of the empire.", future: "This demands total alignment. It proves that your private actions and highest frequencies echo across the multiverse instantaneously." },
+            { quote: "A human being is a part of the whole called by us universe, a part limited in time and space.", author: "Albert Einstein", history: "The illusion of isolation caused humanity to sacrifice the individual for the collective, achieving greatness for neither.", present: "Collapse the illusion. Attain absolute individual sovereignty, recognizing that the Power of One is the exact mechanism that powers the All.", future: "This gives your personal success profound, universal meaning. It is the foundational requirement for liberating your entire tribe." },
+            { quote: "Once we accept our limits, we go beyond them.", author: "Albert Einstein", history: "Egos have failed to shatter their boundaries because they refused to accurately map them out of fear of looking weak.", present: "Mathematically define your flaws and limits today. You cannot break a perimeter until you have accurately surveyed its walls.", future: "This turns weakness into a tactical map. It prevents systemic over-leveraging and guarantees progressive, structural scaling." },
+            { quote: "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.", author: "Albert Einstein", history: "Markets inevitably crash because the herd operates on primitive panic, greed, and reactionary fiat metrics.", present: "Do not anchor your strategy to the logic of the masses. Operate solely on the Visceral Current, independent of the herd's delusion.", future: "This provides immunity to FOMO. It allows you to remain calm and capitalize heavily on global volatility and systemic corrections." },
+            { quote: "There is no end to education. The whole of life... is a process of learning.", author: "Jiddu Krishnamurti", history: "Empires have fallen because their founders stagnated at the apex, believing the 81st node was the end of the journey.", present: "Maintain the beginner's mind even at the height of your power. Recognize the 81st Node as the 1st Node of the next dimensional octave.", future: "This prevents arrogant stagnation. It ensures perpetual corporate evolution and guarantees the matrix remains a continuous Torus." },
+            { quote: "Any intelligent fool can make things bigger and more complex. It takes a touch of genius to move in the opposite direction.", author: "Albert Einstein", history: "Massive revenue has frequently destroyed companies by introducing unmanageable bloat, operational drag, and fatal complexity.", present: "Scale down the friction. Use minimal inputs to generate the maximum Area of Impact. Cut any process that does not serve the Current.", future: "This simplifies your daily life. It creates the ultimate lean, anti-fragile machine that is highly profitable and impossible to break." },
+            { quote: "I live in that solitude which is painful in youth, but delicious in the years of maturity.", author: "Albert Einstein", history: "Leaders have suffered deeply from the isolation of executive command, viewing the loneliness of the summit as a curse.", present: "Embrace the isolation of leadership. Reframe the thin air at the apex as necessary protection from low-frequency interference.", future: "This protects the command center. It ensures your vision remains absolute, unclouded by the doubts of those who cannot see the math." },
+            { quote: "To punish me for my contempt for authority, fate made me an authority myself.", author: "Albert Einstein", history: "Rebels exhausted their energy fighting corrupt systems from the outside, ultimately being crushed by the machine they hated.", present: "Stop fighting the system. Focus entirely on becoming an undeniably massive gravity well that the system is forced to revolve around.", future: "This ends the exhausting fight against the 'Man'. You do not overthrow the paradigm; you simply become the new paradigm." },
+            { quote: "Look deep into nature, and then you will understand everything better.", author: "Albert Einstein", history: "Corporations failed to scale when their financial calculus lost its organic root code, becoming synthetic and brittle.", present: "When the corporate math fails or feels disjointed, return to the Origin (o). The answers are always written in Light and Water.", future: "This grounds you in visceral reality. It proves that biomimicry and natural law are the ultimate, unbreakable corporate strategies." },
+            { quote: "If you can't explain it simply, you don't understand it well enough.", author: "Albert Einstein", history: "Teams have misaligned and failed because leadership tolerated hidden friction (ϕ) and obfuscation in the core architecture.", present: "Attempt to define your entire empire in one single, penetrating sentence. If you cannot, simplify the code immediately.", future: "This forces absolute mental clarity. It aligns the entire force to one vector, ensuring every department moves with synergetic intent." },
+            { quote: "It is not that I'm so smart. But I stay with the questions much longer.", author: "Albert Einstein", history: "Brilliant minds quit just before the breakthrough because the friction of the unknown became too agonizing to bear.", present: "Hold the tension. The fabric of reality is stretching. The Infinite Sum (S) manifests just past the point where average minds surrender.", future: "This builds unbreakable resilience. The pain of the forge is the exact barrier to entry that keeps your competitors out." },
+            { quote: "Try not to become a man of success, but rather try to become a man of value.", author: "Albert Einstein", history: "Chasing the trailing fiat metric of 'success' has consistently repelled true wealth, leaving the pursuer spiritually bankrupt.", present: "Success is a fiat illusion; Value is a universal current. Output undeniable value to the network, and success will mathematically balance itself.", future: "This cures greed. It guarantees the long-term survival of the empire by making your existence mandatory to the ecosystem." },
+            { quote: "Coincidence is God's way of remaining anonymous.", author: "Albert Einstein", history: "The uncalibrated mind attributes 'lucky breaks' and perfectly timed events to random, chaotic, meaningless noise.", present: "Recognize stacked coincidences as mathematical proof of alignment. When synchronicity strikes, you are riding the exact center of the Current.", future: "This builds immense faith. It proves the Codex is functioning perfectly, allowing you to trust the invisible architecture." },
+            { quote: "Weakness of attitude becomes weakness of character.", author: "Albert Einstein", history: "10-figure empires have collapsed overnight because the founder compromised their frequency 'just once' for a shortcut.", present: "Never lower your frequency. Defend your internal composure and attitude with lethal precision. Do not let the rot enter the root system.", future: "This maintains the purity of the vessel. It ensures that as the empire scales to infinity, its structural integrity remains pristine." },
+            { quote: "The true sign of intelligence is not knowledge but imagination.", author: "Albert Einstein", history: "Industries died because they attempted to solve tomorrow's unprecedented problems using dead data mapped from the past.", present: "Data only maps what has already died. Use your Visceral Current to imagine an entirely new dimension of commerce and connection.", future: "This unleashes the inner child. It creates the 'Blue Ocean' strategy, where you operate in a realm with absolutely zero competitors." },
+            { quote: "In matters of truth and justice, there is no difference between large and small problems.", author: "Albert Einstein", history: "Leaders betrayed the lowest-tier client, incorrectly assuming that a micro-failure wouldn't impact the macro-reputation.", present: "Maintain absolute, fierce integrity in the micro-transactions. The macro-empire is simply a fractal projection of the smallest node.", future: "This creates a flawless conscience. It builds an unassailable brand reputation that external forces cannot tarnish or dismantle." },
+            { quote: "Blind belief in authority is the greatest enemy of truth.", author: "Albert Einstein", history: "Innovators stalled their own potential waiting for industry gatekeepers, boards, or institutions to validate their vision.", present: "Reject the gatekeepers. If the medical, educational, or financial institutions fail the math test, build your own parallel structure.", future: "This liberates you from the need for permission. It is the birth of the disruptive monopoly, rendering the old authorities obsolete." },
+            { quote: "I never made one of my discoveries through the process of rational thinking.", author: "Albert Einstein", history: "Executives stalled at the spreadsheet, paralyzed and unable to make the final call because the logical data was tied.", present: "Honor the 'Gut-Level' knowing. The Visceral Current processes quantum data millions of times faster than the conscious intellect.", future: "This connects you directly to source. It provides the executive edge that artificial intelligence can never replicate or predict." },
+            { quote: "The most incomprehensible thing about the world is that it is comprehensible.", author: "Albert Einstein", history: "Humanity shrank from the overwhelming scale of the cosmos, believing the universe was just random, chaotic, hostile noise.", present: "Do not be intimidated. The 81 Nodes prove that all chaos, conflict, and emotion can be mapped, measured, and mathematically mastered.", future: "This removes existential dread entirely. It turns the terrifying unknown into a highly structured, actionable schematic for growth." },
+            { quote: "We all know that light travels faster than sound. That's why certain people appear bright until you hear them speak.", author: "Albert Einstein", history: "Empires were infiltrated from within because leaders allowed charismatic charlatans to hijack the narrative without proof.", present: "Operate strictly on results. Do not allow anyone to attach to your Visceral Current without providing undeniable mathematical proof of impact.", future: "This hones your bullshit detector. It keeps the corporate culture elite, lethal, and free of parasitic energy drains." },
+            { quote: "The only source of knowledge is experience.", author: "Albert Einstein", history: "Generations suffered 'analysis paralysis', forever researching, planning, and preparing without ever stepping into the arena.", present: "Right now: Close the books. Step off the digital platform. Launch the architecture into the physical world and gather live telemetry.", future: "This kills procrastination. It initiates the actual generation of revenue and impact, converting potential energy into kinetic reality." },
+            { quote: "Without deep reflection one knows from daily life that one exists for other people.", author: "Albert Einstein", history: "Conquerors achieved absolute wealth and power, only to find the summit entirely hollow because they hoarded the victory.", present: "Realize the final integration of the empire is service. You scaled to absolute power specifically so you could lift the entire Tribe with your gravity.", future: "This is the ultimate fulfillment of the human condition. It creates a generational dynasty that outlives your physical vessel." },
+            { quote: "A new type of thinking is essential if mankind is to survive and move toward higher levels.", author: "Albert Einstein", history: "The old world relied on the brute Force of extraction, leading to ecological, economic, and spiritual systemic collapse.", present: "You are the Architect. It is your mandate to usher in the new era of synergetic Power and higher, mathematically verified consciousness.", future: "This gives you a profound, heroic purpose. It positions your empire not just to profit, but to save and elevate the macro-economy." },
+            { quote: "There is no logical way to the discovery of these elemental laws. There is only the way of intuition.", author: "Albert Einstein", history: "Seekers lost their way attempting to logically navigate the terrifying, formless spaces between the 81 Nodes of reality.", present: "Trust the Visceral Current. It is the unbroken, invisible line connecting your Origin (o) directly to your Infinite Sum (S).", future: "This brings absolute peace of mind. It is the flawless, automated navigation system of the empire, guiding you in the dark." },
+            { quote: "The Absolute is simply the Zero Point scaled to Infinity.", author: "The Visceral Codex", history: "Fear of completion caused leaders to self-sabotage right at the finish line, afraid of what happens when the journey ends.", present: "Assume Absolute Sovereignty. The 81 Nodes are perfectly aligned. The Triad of Violence is shattered. Execute the final equation without fear.", future: "You become undeniable. You are the Architect. The Current flows through you. $$S = \\infty$$" }
         ];
 
         // Generate 27 Nodes for Triad III (Nodes 55 - 81)
         const nodes = Array.from({length: 27}, (_, i) => {
-            const realmIdx = Math.floor(i / 9) + 6;
+            const realmIdx = Math.floor(i / 9) + 6; // Maps to Realms 7, 8, 9
             return {
                 id: i + 55,
                 realm: realms[realmIdx],
@@ -293,33 +255,12 @@
             };
         });
 
-        let audioCtx, oscillator, gainNode;
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                oscillator = audioCtx.createOscillator();
-                gainNode = audioCtx.createGain();
-                oscillator.type = 'sine';
-                oscillator.frequency.value = 852; // 852Hz Frequency for Triad III
-                gainNode.gain.value = 0;
-                oscillator.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                oscillator.start();
-            }
-        }
         function playResonance() {
-            if (!audioCtx) initAudio();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-            gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 1.5);
+            if (window.VisceralSymphony) window.VisceralSymphony.pulse();
         }
+        
         function stopResonance() {
-            if (audioCtx && gainNode) {
-                gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-                gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
-                gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.0);
-            }
+            if (window.VisceralSymphony) window.VisceralSymphony.stop();
         }
 
         const container = document.getElementById('node-container');
@@ -462,9 +403,10 @@
             const scrollH = document.documentElement.scrollHeight - window.innerHeight;
             const pct = Math.min(Math.max(window.scrollY / scrollH, 0), 1);
             
-            const r = Math.round(0 + (212 - 0) * pct);
-            const g = Math.round(229 + (175 - 229) * pct);
-            const b = Math.round(255 + (55 - 255) * pct);
+            // Triad III Chameleon: Scarlett/Ruby (#E11D48) to Sovereign Gold (#d4af37)
+            const r = Math.round(225 + (212 - 225) * pct);
+            const g = Math.round(29 + (175 - 29) * pct);
+            const b = Math.round(72 + (55 - 72) * pct);
             
             document.documentElement.style.setProperty('--accent-r', r);
             document.documentElement.style.setProperty('--accent-g', g);

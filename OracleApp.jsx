@@ -97,8 +97,9 @@ export default function OracleApp() {
                     <p className="text-slate-500 mt-2 font-mono tracking-[0.2em] text-[10px] uppercase">Direct Inquiry into the 81-Node Matrix</p>
                 </div>
                 <div className="text-center md:text-right flex flex-col md:items-end">
-                    <div className="font-mono text-[#00e5ff] text-xs bg-black/40 px-4 py-2 rounded-lg border border-white/10 shadow-[0_0_15px_rgba(0,229,255,0.1)]">
-                        S = lim (t→∞) ∑ (P·C) / ϕⁿ
+                    <div className="font-mono text-[#00e5ff] text-[10px] md:text-xs bg-black/40 px-4 py-2 rounded-lg border border-white/10 shadow-[0_0_15px_rgba(0,229,255,0.1)] flex flex-col items-end gap-1">
+                        <span>S = lim (t→∞) ∑ (P·C) / ϕⁿ</span>
+                        <span className="text-purple-400">A = ∫ (ν·ϕ) dt = ∞</span>
                     </div>
                     <div className="font-mono text-[#d4af37] text-[10px] mt-2 tracking-widest uppercase">
                         VanFlowCo Logic Systems
@@ -165,7 +166,8 @@ export default function OracleApp() {
                         <div className="space-y-3 font-mono text-[10px] text-slate-400 uppercase tracking-widest">
                             <p className="animate-[pulse_1s_ease-in-out_infinite]">Mapping Timeline Variables (dt)...</p>
                             <p className="animate-[pulse_1.5s_ease-in-out_infinite]" style={{animationDelay: '0.5s'}}>Transmuting "{formData.phaseShift}" into Kinetic Potential...</p>
-                            <p className="animate-[pulse_2s_ease-in-out_infinite]" style={{animationDelay: '1s'}}>Aligning 81-Node Architecture...</p>
+                            <p className="animate-[pulse_2s_ease-in-out_infinite]" style={{animationDelay: '1s'}}>Integrating Biological Impact: A = ∫(ν·ϕ)dt...</p>
+                            <p className="animate-[pulse_2.5s_ease-in-out_infinite]" style={{animationDelay: '1.5s'}}>Aligning 81-Node Architecture...</p>
                         </div>
                     </div>
                 )}
@@ -246,6 +248,15 @@ export default function OracleApp() {
                                                 Every action you take from this node forward must scale to infinity. If a structural decision does not mathematically serve 
                                                 <span className="text-[#00e5ff] font-medium"> {formData.anchor}</span>, it is instantly removed from the board. 
                                                 Force relies on friction to build; Power—utilizing composure, precision, and your Root {metrics.root} resonance—effortlessly commands it.
+                                            </p>
+                                        </div>
+
+                                        <div className="bg-black/30 border border-white/5 p-6 rounded-xl border-l-2 border-l-purple-500 hover:bg-black/50 transition-colors">
+                                            <h4 className="text-white font-cinzel font-bold mb-3 text-lg flex items-center gap-3">
+                                                <i className="fas fa-dna text-purple-500"></i> 3. Area of Biological Impact
+                                            </h4>
+                                            <p className="text-slate-300 text-sm leading-relaxed font-light">
+                                                Your physical and systemic architecture is now mathematically bound to <span className="text-purple-400 font-mono">A = ∫(ν·ϕ)dt = ∞</span>. By integrating the trauma of the past into the perfection of your origin, the systemic friction of <span className="text-purple-400 font-medium italic">"{formData.phaseShift}"</span> is rendered as mere fuel for the infinite run.
                                             </p>
                                         </div>
                                     </div>
