@@ -465,7 +465,7 @@ function resizeCanvas() {
     const dpr = window.devicePixelRatio || 1;
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // Reset and scale securely
+    if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // Reset and scale securely
     canvas.style.width = `${rect.width}px`;
     canvas.style.height = `${rect.height}px`;
 }
@@ -546,11 +546,13 @@ function shiftPhase() {
     const targetPhrase = phrases[Math.floor(Math.random() * phrases.length)];
     
     // Typewriter effect for status message
-    statusMsg.innerText = "";
-    statusMsg.classList.remove("animate-pulse");
+    if (statusMsg) {
+        statusMsg.innerText = "";
+        statusMsg.classList.remove("animate-pulse");
+    }
     
     const typeWriter = setInterval(() => {
-        statusMsg.innerText += targetPhrase.charAt(charIndex);
+        if (statusMsg) statusMsg.innerText += targetPhrase.charAt(charIndex);
         charIndex++;
         if (charIndex >= targetPhrase.length) {
             clearInterval(typeWriter);
@@ -558,7 +560,7 @@ function shiftPhase() {
                 baseFrequency = 0.015; // Reset speed
                 targetAmplitude = 40; // Return to normal
                 isPerturbed = false;
-                statusMsg.classList.add("animate-pulse");
+                if (statusMsg) statusMsg.classList.add("animate-pulse");
                 if (window.VisceralSymphony) window.VisceralSymphony.stop();
             }, 1500);
         }
@@ -583,13 +585,14 @@ function calculateImpact() {
     ];
     
     let i = 0;
-    statusMsg.classList.remove("animate-pulse");
+    if (statusMsg) statusMsg.classList.remove("animate-pulse");
     
     // Scroll down to the visualizer smoothly
-    document.getElementById('frequencyCanvas').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const freqCanvas = document.getElementById('frequencyCanvas');
+    if (freqCanvas) freqCanvas.scrollIntoView({ behavior: 'smooth', block: 'center' });
     
     const interval = setInterval(() => {
-        statusMsg.innerText = messages[i];
+        if (statusMsg) statusMsg.innerText = messages[i];
         // Exponentially increase perturbation and speed
         targetAmplitude = 60 + (i * 25) + (Math.random() * 20);
         baseFrequency = 0.015 + (i * 0.01); 
@@ -601,7 +604,7 @@ function calculateImpact() {
                 targetAmplitude = 40;
                 baseFrequency = 0.015;
                 isPerturbed = false;
-                statusMsg.classList.add("animate-pulse");
+                if (statusMsg) statusMsg.classList.add("animate-pulse");
                 if (window.VisceralSymphony) window.VisceralSymphony.stop();
             }, 3000);
         }

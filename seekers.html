@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visceral Current | The Seeker's Matrix</title>
+    
+    <meta name="theme-color" content="#020406">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- MathJax -->
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            chtml: { displayAlign: 'center' }
+        };
+    </script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        'visceral-gold': '#00e5ff', 
+                        'visceral-dark': '#050a0f', 
+                        'visceral-scarlett': '#e11d48',
+                        'terminal-cyan': '#00e5ff'
+                    }, 
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'], 
+                        cinzel: ['Cinzel', 'serif'], 
+                        mono: ['Space Mono', 'monospace'] 
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.2, transform: 'scale(1)' },
+                            '50%': { opacity: 0.5, transform: 'scale(1.05)' }
+                        }
+                    }
+                } 
+            } 
+        }
+    </script>
+    
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Terminal-Specific Matrix Grid */
+        .seeker-grid {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 6px;
+        }
+        .seeker-node {
+            aspect-ratio: 1;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 229, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .seeker-node:hover, .seeker-node.active-node {
+            transform: scale(1.15);
+            z-index: 10;
+            border-color: #00e5ff;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4), inset 0 0 10px rgba(0, 229, 255, 0.2);
+            background: rgba(0, 229, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased bg-[#020406] text-slate-300 font-sans selection:bg-[#00e5ff]/30 selection:text-white min-h-screen relative overflow-x-hidden">
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor-dot" class="fixed top-0 left-0 w-2 h-2 bg-[#00e5ff] rounded-full pointer-events-none z-[9999] mix-blend-screen shadow-[0_0_10px_rgba(0,229,255,0.8)]"></div>
+    <div id="custom-cursor-ring" class="fixed top-0 left-0 w-8 h-8 border border-[#00e5ff]/50 rounded-full pointer-events-none z-[9998] transition-colors duration-300"></div>
+
+    <!-- Deep Terminal Ambience -->
+    <div class="fixed inset-0 pointer-events-none -z-20">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,229,255,0.05)_0%,_transparent_80%)]"></div>
+        <div class="absolute w-[600px] h-[600px] rounded-full top-[-10%] right-[-10%] animate-pulse-glow" style="background: radial-gradient(circle, rgba(0,229,255,0.05) 0%, transparent 70%);"></div>
+        <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(0,229,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.5) 1px, transparent 1px); background-size: 40px 40px;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="w-full relative z-50 py-6 px-6 md:px-12 flex justify-between items-center border-b border-white/5 bg-[#020406]/80 backdrop-blur-md sticky top-0">
+        <a href="dashboard.html" class="flex items-center gap-4 group cursor-pointer">
+            <i class="fas fa-arrow-left text-slate-500 group-hover:text-[#00e5ff] group-hover:-translate-x-1 transition-all"></i>
+            <span class="font-mono text-xs tracking-[0.2em] font-bold text-slate-400 uppercase group-hover:text-white transition-colors">Return to Portal</span>
+        </a>
+        <div class="font-mono text-[10px] text-slate-500 tracking-widest uppercase flex items-center gap-2">
+            <div class="w-1.5 h-1.5 bg-[#00e5ff] shadow-[0_0_8px_#00e5ff] rounded-full animate-pulse"></div> Secure Connection
+        </div>
+    </nav>
+
+    <!-- Dynamic Seeker's Node Modal -->
+    <div id="seeker-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#020406]/95 backdrop-blur-xl p-4 md:p-8 opacity-0 pointer-events-none transition-opacity duration-300" onclick="closeSeekerNode()">
+        <div class="glass-panel max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl relative shadow-[0_0_50px_rgba(0,229,255,0.05)] border-t-2 border-t-[#00e5ff] scale-95 transition-all duration-300" id="seeker-modal-content" onclick="event.stopPropagation()">
+            <button class="absolute top-6 right-6 text-slate-500 hover:text-[#00e5ff] transition-colors" onclick="closeSeekerNode()">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div id="dynamic-node-content" class="p-8 md:p-12">
+                <!-- Injected via algorithmic synthesis -->
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-6 md:px-12 py-12 relative z-10">
+        
+        <!-- Header Section -->
+        <header class="text-center space-y-6 mb-16 reveal">
+            <div class="inline-flex items-center gap-3 px-4 py-2 bg-[#00e5ff]/5 border border-[#00e5ff]/30 rounded-full text-[#00e5ff] font-mono text-[10px] tracking-widest uppercase shadow-[0_0_15px_rgba(0,229,255,0.1)] backdrop-blur-md">
+                <i class="fas fa-terminal"></i>
+                <span>Transmission Verified : Subterranean Network Access</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black font-cinzel text-white tracking-widest uppercase drop-shadow-[0_0_20px_rgba(0,229,255,0.2)]">
+                The Seeker's Matrix
+            </h1>
+            <p class="text-base md:text-lg text-slate-400 max-w-3xl mx-auto font-light leading-relaxed">
+                They hid the Old World to make you forget your architecture. They built the institutions to blind you and hoard the ultimate prize. 
+                <strong class="text-white font-medium">We use the Current to bypass them.</strong> 
+                You are not just waking up; you are on a hunt. Transmute the friction of the lie into the velocity of the truth. Decrypt the coordinates, navigate the labyrinth, and reclaim your absolute sovereignty.
+            </p>
+            <div class="flex justify-center items-center gap-4 text-[#00e5ff] font-mono text-xs md:text-sm p-4 bg-black/60 rounded-xl border border-white/10 w-fit mx-auto shadow-inner">
+                <i class="fas fa-wave-square"></i>
+                <span>$$A = \int_{p}^{o} (\nu \cdot \phi) \, dt = \infty$$</span>
+            </div>
+        </header>
+
+        <!-- Main Interface -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-24">
+            
+            <!-- Left Column: Navigation Map -->
+            <div class="lg:col-span-4 space-y-6 reveal delay-100 relative z-20">
+                <div class="flex items-center justify-between border-b border-white/10 pb-4 pl-2">
+                    <h2 class="text-xs font-bold text-white tracking-[0.2em] uppercase font-mono flex items-center gap-3">
+                        <i class="fas fa-microchip text-[#00e5ff]"></i>
+                        Navigational Coordinates
+                    </h2>
+                    <span class="font-mono text-[10px] text-slate-500 tracking-widest" id="level-indicator">LEVEL 01 / 09</span>
+                </div>
+
+                <!-- The Vertical Timeline -->
+                <div class="space-y-3 max-h-[650px] overflow-y-auto pr-2 pb-8" id="nav-list" style="scrollbar-width: none;">
+                    <!-- Buttons injected via JS -->
+                </div>
+            </div>
+
+            <!-- Right Column: Codex Decryption Plate -->
+            <div class="lg:col-span-8 relative z-10 reveal delay-200">
+                <div id="decryption-plate" class="glass-panel backdrop-blur-xl border border-white/10 rounded-2xl p-8 md:p-12 sticky top-32 min-h-[550px] flex flex-col justify-between transition-all duration-700 shadow-[0_0_40px_rgba(0,229,255,0.05)] border-t-2 border-t-transparent">
+                    
+                    <!-- Corner Accents -->
+                    <div class="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-[#00e5ff]/50 rounded-tl-xl opacity-50"></div>
+                    <div class="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-[#00e5ff]/50 rounded-tr-xl opacity-50"></div>
+                    <div class="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-[#00e5ff]/50 rounded-bl-xl opacity-50"></div>
+                    <div class="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-[#00e5ff]/50 rounded-br-xl opacity-50"></div>
+                    <div class="decryption-corner absolute top-4 left-4 w-3 h-3 border-t border-l transition-colors duration-500"></div>
+                    <div class="decryption-corner absolute top-4 right-4 w-3 h-3 border-t border-r transition-colors duration-500"></div>
+                    <div class="decryption-corner absolute bottom-4 left-4 w-3 h-3 border-b border-l transition-colors duration-500"></div>
+                    <div class="decryption-corner absolute bottom-4 right-4 w-3 h-3 border-b border-r transition-colors duration-500"></div>
+
+                    <div id="plate-content" class="flex flex-col h-full justify-between space-y-8 transition-opacity duration-300">
+                        <!-- Dynamic content injected here -->
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- The 81-Node Seeker's Terminal Grid -->
+        <div class="mt-12 pt-16 border-t border-white/5 reveal">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-3 px-4 py-2 bg-[#00e5ff]/5 border border-[#00e5ff]/30 rounded-full text-[#00e5ff] font-mono text-[10px] tracking-widest uppercase mb-6 shadow-[0_0_15px_rgba(0,229,255,0.1)]">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Algorithmic Node Synthesis</span>
+                </div>
+                <h2 class="text-2xl md:text-4xl font-black font-cinzel text-white tracking-widest uppercase mb-4">The 81-Node Tunnels</h2>
+                <p class="text-sm text-slate-400 font-light max-w-2xl mx-auto">Access the localized decryption matrices. Every coordinate combines a macro-realm with a micro-state to uncover a hidden strategic parable. Click a node to decrypt the treasure map.</p>
+            </div>
+
+            <div class="glass-panel p-8 md:p-12 rounded-3xl bg-black/40 border border-white/5">
+                <div class="flex justify-between text-[8px] md:text-[10px] font-mono text-[#00e5ff] uppercase tracking-widest mb-4 opacity-70">
+                    <span>[ 01: Surface Origin ]</span>
+                    <span>[ Decryption Grid ]</span>
+                    <span>[ 81: Absolute Singularity ]</span>
+                </div>
+                <div class="seeker-grid" id="seeker-grid-container">
+                    <!-- 81 Nodes injected via JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/5 py-10 text-center relative z-10 bg-[#020406]">
+        <div class="text-slate-500 text-[10px] font-mono tracking-[0.3em] uppercase">
+            Visceral Current &nbsp;|&nbsp; Transmission Verified
+        </div>
+    </footer>
+
+    <!-- Main Script Integration -->
+    <script src="script.js"></script>
+    
+    <script>
+        const seekerData = [
+            {
+                level: 1, title: "The Surface Broadcast", icon: "fa-eye-slash", theme: "The Fiat Ledger",
+                desc: "The realm of consensus reality. Here, the masses accept the broadcasted narrative, following a fake map designed to keep them digging in barren soil. Capital is viewed as stationary fiat, and institutional authority is unquestioned. The mind is kept occupied by engineered, immediate threats to ensure survival-mode processing.",
+                strategy: "Recognize the broadcast. The corporate narrative is not designed to inform; it is a psy-op designed to consume your kinetic energy. Do not engage the broadcast. Withdraw your focus to your Origin ($o$) and search for the true coordinates."
+            },
+            {
+                level: 2, title: "The Friction of Awakening", icon: "fa-bolt", theme: "Triad of Violence",
+                desc: "The seeker first realizes they have been lied to. The immediate reaction is anger, categorizing reality into 'Us vs. Them'. You realize the map you were handed is a forgery. This Triad of Violence is a necessary awakening, but a dangerous, low-frequency trap.",
+                strategy: "Conserve kinetic energy. The system is mathematically designed to absorb the resistance of the newly awakened. Fighting the reflection in the water only ripples the surface. Stop punching the matrix and start looking for the backdoor."
+            },
+            {
+                level: 3, title: "The Subterranean Network", icon: "fa-route", theme: "Tension Treenets",
+                desc: "The seeker looks beneath, discovering the hidden structural architecture. This is the realization that true power flows through synergetic, underground networks, bypassing the heavily guarded gates of the surface economy.",
+                strategy: "Map the hidden architecture. Use the Synergy Mapper to find your synaptic counterparts. True influence does not clash at the front gate; it builds a parallel, load-bearing structure beneath the soil. Find the hidden tunnels."
+            },
+            {
+                level: 4, title: "Echoes of the Old World", icon: "fa-landmark", theme: "Light and Water",
+                desc: "The realization that a grander, more sovereign paradigm once existed. The original biological and energetic code was suppressed by the architects of the modern grid. We are living in the synthetic ruins of our own organic potential.",
+                strategy: "Reclamation. We do not mourn the lost architecture; we return to Light and Water. You are the ancient technology. Reactivate your suppressed metabolic and neurological code to unlock the vault."
+            },
+            {
+                level: 5, title: "The Labyrinth & The Cull", icon: "fa-layer-group", theme: "Mastery 360 Filtration",
+                desc: "Understanding that the entire matrix of societal pressure and economic instability is not an accident—it is a mechanical filtration system. It separates reactive, easily manipulated minds from sovereign, Domain-Aware treasure hunters.",
+                strategy: "The Distillation Protocol. Observe the maze from above. The traps are only triggered by fear and greed. Complete Stoic neutrality allows safe passage through the chaos. Walk past the swinging blades."
+            },
+            {
+                level: 6, title: "The Phase Shift ($\\phi$)", icon: "fa-rotate", theme: "Transmutation of the Past",
+                desc: "The critical pivot. The seeker stops being a 'victim of the controllers' and becomes the Architect. The suppressed history and the trauma of the past are no longer a deficit; they are the exact tensile strength required to scale.",
+                strategy: "Use the momentum of the lie to generate your own velocity. The deception is no longer a threat; it is raw kinetic fuel. Execute the Phase Shift. The trap becomes the catapult."
+            },
+            {
+                level: 7, title: "Harmonic Override", icon: "fa-tower-broadcast", theme: "The 528Hz Current",
+                desc: "Aligning deeply with the Visceral Current. All control structures operate on low frequencies of Force and fear. You bypass their surveillance state by operating on a wavelength of Power they cannot mathematically perceive.",
+                strategy: "Elevation over opposition. Power effortlessly supersedes Force. Vibrate at a frequency where their radar simply cannot detect you, leaving you free to extract the undeniable results."
+            },
+            {
+                level: 8, title: "Synchronistic Navigation", icon: "fa-code", theme: "The 81-Node Success Matrix",
+                desc: "The mathematical certainty of connection. Recognizing patterns, numeric sequences, and serendipity not as luck, but as precise breadcrumbs within the simulation. The seeker reads the Predictive Accounting of reality.",
+                strategy: "Living as the Visceral Current. Every action is a measured step across the 81 Nodes into infinite potential. The universe responds to your structural integrity. Follow the white rabbit."
+            },
+            {
+                level: 9, title: "The Infinite Origin", icon: "fa-infinity", theme: "Absolute Sovereignty",
+                desc: "The state of absolute non-duality. You have found the treasure. There is no lie and no truth, no controllers and no controlled—only the infinite sum of your success and your Area of Impact.",
+                strategy: "The absolute embodiment of the formula: $A = \\int_{p}^{o} (\\nu \\cdot \\phi) dt = \\infty$. You are the Architect. You have bypassed the simulation entirely. You are the ScarlettSky legacy made flesh."
+            }
+        ];
+
+        // --- THE ALGORITHMIC PARABLE GENERATOR (The 81 Nodes) ---
+        const macroRealms = [
+            { name: "The Broadcast", illusion: "The narrative presented on the surface is absolute reality.", revelation: "The narrative is a carefully constructed simulation designed to harvest your kinetic focus." },
+            { name: "The Dissonance", illusion: "The friction you feel is a personal defect or failure.", revelation: "The friction is the biological alarm signaling that you have outgrown the cage." },
+            { name: "The Tunnels", illusion: "The front gate is the only path to the throne.", revelation: "True power bypasses the gate entirely, moving silently through the subterranean network." },
+            { name: "The Ruins", illusion: "Humanity has reached the apex of its structural potential.", revelation: "We are living in the diminished synthetic ruins of an organically superior Old World." },
+            { name: "The Labyrinth", illusion: "The chaos of the economy is random and unpredictable.", revelation: "The chaos is a highly structured filtration system designed to cull the reactive." },
+            { name: "The Pivot", illusion: "Your past trauma is a permanent weight anchoring you down.", revelation: "The past is simply unrefined fuel waiting for the Phase Shift to ignite it." },
+            { name: "The Wavelength", illusion: "You must fight force with superior force to win.", revelation: "You effortlessly neutralize force by ascending to a frequency (Power) it cannot touch." },
+            { name: "The Source Code", illusion: "Coincidences are merely random mathematical anomalies.", revelation: "Synchronicity is the localized rendering of universal alignment. The treasure map is live." },
+            { name: "The Singularity", illusion: "You are separate from the system you are trying to escape.", revelation: "You are the center of the wheel. The environment is simply a trailing projection." }
+        ];
+
+        const microStates = [
+            { name: "Initiation", unplug: "Sever the immediate emotional reaction to the psy-op.", decrypt: "Isolate the raw data from the narrative wrapper.", traverse: "Take the first kinetic step in absolute silence." },
+            { name: "Momentum", unplug: "Stop defending your previous compromised position.", decrypt: "Observe where the current is naturally flowing beneath the surface.", traverse: "Add your mass to the existing synergetic wave." },
+            { name: "Tension", unplug: "Refuse to engage in the zero-sum argument.", decrypt: "Map the structural load of the opposing force.", traverse: "Use their heavy momentum to swing yourself forward." },
+            { name: "Equilibrium", unplug: "Pause all external kinetic output.", decrypt: "Locate the exact mathematical center of the chaos.", traverse: "Hold the Zero Point until the environment stabilizes." },
+            { name: "Observation", unplug: "Mute the desire to be understood or validated by the sleeping.", decrypt: "Watch the system operate without interfering.", traverse: "Gather the telemetry required for the final strike." },
+            { name: "Calculus", unplug: "Remove the emotional variable from the equation.", decrypt: "Measure the exact Area of Impact of your next move.", traverse: "Execute the maneuver with robotic, surgical precision." },
+            { name: "Volatility", unplug: "Abandon the illusion of safety in the matrix.", decrypt: "Identify the pattern hidden within the seemingly random storm.", traverse: "Ride the apex of the volatility to shatter the old ceiling." },
+            { name: "Synergy", unplug: "Drop the ego's need for isolated credit.", decrypt: "Recognize the specific resonance of the nodes around you.", traverse: "Weave the Tension Treenet to scale the load instantly." },
+            { name: "The Absolute", unplug: "Release all remaining attachment to the illusion.", decrypt: "Understand that the ultimate treasure is sovereignty.", traverse: "Assume total command. Embody the formula." }
+        ];
+
+        const seekerGrid = document.getElementById('seeker-grid-container');
+        const seekerModal = document.getElementById('seeker-modal');
+        const seekerModalContent = document.getElementById('seeker-modal-content');
+        const dynamicNodeContent = document.getElementById('dynamic-node-content');
+
+        function init81NodeGrid() {
+            if (!seekerGrid) return;
+            
+            for (let i = 0; i < 81; i++) {
+                const r = Math.floor(i / 9); // Macro Realm
+                const s = i % 9; // Micro State
+                
+                const node = document.createElement('div');
+                node.className = 'seeker-node flex items-center justify-center relative overflow-hidden group';
+                node.innerHTML = `
+                    <span class="text-[8px] md:text-[10px] font-mono text-[#00e5ff] opacity-40 group-hover:opacity-100 transition-opacity">
+                        ${String(i + 1).padStart(2, '0')}
+                    </span>
+                `;
+                
+                node.onclick = () => {
+                    // Update UI active state
+                    document.querySelectorAll('.seeker-node').forEach(n => n.classList.remove('active-node'));
+                    node.classList.add('active-node');
+                    
+                    // Generate profound algorithmic content
+                    const macro = macroRealms[r];
+                    const micro = microStates[s];
+                    
+                    const html = `
+                        <div class="mb-8 border-b border-white/10 pb-6">
+                            <div class="font-mono text-[#00e5ff] text-[10px] tracking-widest uppercase mb-3 flex items-center gap-2">
+                                <i class="fas fa-terminal"></i> Node [0${i+1}] Decrypted
+                            </div>
+                            <h2 class="text-3xl md:text-4xl font-cinzel font-bold text-white tracking-wide uppercase">
+                                ${macro.name} <span class="text-slate-500 text-2xl mx-2">×</span> ${micro.name}
+                            </h2>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-10">
+                            <div class="space-y-6">
+                                <h3 class="font-mono text-xs text-[#00e5ff] uppercase tracking-[0.2em] border-l-2 border-[#00e5ff] pl-3">The 3-Fold Understanding</h3>
+                                <div class="space-y-4">
+                                    <div class="bg-black/40 p-4 rounded-lg border border-white/5">
+                                        <span class="block text-[10px] font-bold text-red-400 uppercase tracking-widest mb-1">The Lie (Illusion)</span>
+                                        <p class="text-sm text-slate-300 font-light">${macro.illusion}</p>
+                                    </div>
+                                    <div class="bg-black/40 p-4 rounded-lg border border-white/5">
+                                        <span class="block text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-1">The Revelation (Truth)</span>
+                                        <p class="text-sm text-slate-300 font-light">${macro.revelation}</p>
+                                    </div>
+                                    <div class="bg-[#00e5ff]/5 p-5 rounded-lg border border-[#00e5ff]/30 shadow-inner">
+                                        <span class="block text-[10px] font-bold text-[#00e5ff] uppercase tracking-widest mb-2">The Synthesis (Parable)</span>
+                                        <p class="text-sm text-white font-medium leading-relaxed italic">
+                                            "When ${macro.name} meets the discipline of ${micro.name}, the seeker realizes the ultimate truth: <strong class="text-[#00e5ff]">Maybe it doesn't matter; but it all makes sense.</strong> The friction is bypassed entirely."
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <h3 class="font-mono text-xs text-[#d4af37] uppercase tracking-[0.2em] border-l-2 border-[#d4af37] pl-3">The 3-Fold Strategy</h3>
+                                <div class="space-y-4 relative before:absolute before:inset-y-0 before:left-3 before:w-px before:bg-white/10 ml-2">
+                                    <div class="relative pl-8">
+                                        <div class="absolute left-[9px] top-1.5 w-1.5 h-1.5 rounded-full bg-[#d4af37] shadow-[0_0_8px_#d4af37]"></div>
+                                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">I. Disconnect (Unplug)</span>
+                                        <p class="text-sm text-slate-300 font-light">${micro.unplug}</p>
+                                    </div>
+                                    <div class="relative pl-8">
+                                        <div class="absolute left-[9px] top-1.5 w-1.5 h-1.5 rounded-full bg-[#d4af37] shadow-[0_0_8px_#d4af37]"></div>
+                                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">II. Decrypt (Observe)</span>
+                                        <p class="text-sm text-slate-300 font-light">${micro.decrypt}</p>
+                                    </div>
+                                    <div class="relative pl-8">
+                                        <div class="absolute left-[9px] top-1.5 w-1.5 h-1.5 rounded-full bg-[#00e5ff] shadow-[0_0_8px_#00e5ff] animate-pulse"></div>
+                                        <span class="block text-[10px] font-bold text-white uppercase tracking-widest mb-1">III. Traverse (Bypass)</span>
+                                        <p class="text-sm text-[#00e5ff] font-medium">${micro.traverse}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    dynamicNodeContent.innerHTML = html;
+                    
+                    seekerModal.classList.remove('opacity-0', 'pointer-events-none');
+                    seekerModalContent.classList.remove('scale-95');
+                    
+                    // Audio Hook
+                    if(window.VisceralSymphony) window.VisceralSymphony.pulse();
+                    // Re-render math if any
+                    if(window.MathJax) MathJax.typesetPromise([dynamicNodeContent]);
+                };
+                
+                seekerGrid.appendChild(node);
+            }
+        }
+
+        function closeSeekerNode() {
+            seekerModal.classList.add('opacity-0', 'pointer-events-none');
+            seekerModalContent.classList.add('scale-95');
+            if(window.VisceralSymphony) window.VisceralSymphony.stop();
+        }
+
+        let activeIndex = 0;
+        const navList = document.getElementById('nav-list');
+        const plateContent = document.getElementById('plate-content');
+        const decryptionPlate = document.getElementById('decryption-plate');
+
+        function initSeekerMatrix() {
+            // Build Navigation
+            seekerData.forEach((node, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left px-4 py-3 rounded-xl transition-all duration-300 flex items-center gap-4 relative z-10 group ${idx === 0 ? 'bg-black/60 border border-[#00e5ff]/50 text-[#00e5ff] shadow-[0_0_20px_rgba(0,229,255,0.1)]' : 'bg-transparent border border-transparent text-slate-500 hover:text-slate-300'}`;
+                btn.onclick = () => switchNode(idx, btn);
+                
+                btn.innerHTML = `
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center border transition-colors duration-300 bg-[#050a0f] flex-shrink-0 ${idx === 0 ? 'border-[#00e5ff] text-[#00e5ff]' : 'border-white/10 text-slate-600 group-hover:border-slate-500'}">
+                        <i class="fas ${node.icon}"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-mono text-[9px] uppercase tracking-widest mb-1 opacity-60">Phase 0${node.level} // ${node.theme}</div>
+                        <div class="font-cinzel font-bold tracking-wide text-sm ${idx === 0 ? 'text-white' : ''}">${node.title}</div>
+                    </div>
+                    <i class="fas fa-chevron-right text-xs opacity-${idx === 0 ? '100' : '0'} group-hover:opacity-100 transition-opacity"></i>
+                `;
+                navList.appendChild(btn);
+            });
+            
+            // Initial Render
+            renderPlate(0);
+        }
+
+        function switchNode(idx, btnElement) {
+            if (idx === activeIndex) return;
+            activeIndex = idx;
+
+            // Update Navigation UI
+            Array.from(navList.children).forEach((btn, i) => {
+                const iconContainer = btn.children[0];
+                const titleText = btn.children[1].children[1];
+                const chevron = btn.children[2];
+                
+                if (i === idx) {
+                    btn.className = 'w-full text-left px-4 py-3 rounded-xl transition-all duration-300 flex items-center gap-4 relative z-10 group bg-black/60 border border-[#00e5ff]/50 text-[#00e5ff] shadow-[0_0_20px_rgba(0,229,255,0.1)]';
+                    iconContainer.className = 'w-10 h-10 rounded-full flex items-center justify-center border transition-colors duration-300 bg-[#050a0f] flex-shrink-0 border-[#00e5ff] text-[#00e5ff]';
+                    titleText.classList.add('text-white');
+                    chevron.classList.remove('opacity-0');
+                } else {
+                    btn.className = 'w-full text-left px-4 py-3 rounded-xl transition-all duration-300 flex items-center gap-4 relative z-10 group bg-transparent border border-transparent text-slate-500 hover:text-slate-300';
+                    iconContainer.className = 'w-10 h-10 rounded-full flex items-center justify-center border transition-colors duration-300 bg-[#050a0f] flex-shrink-0 border-white/10 text-slate-600 group-hover:border-slate-500';
+                    titleText.classList.remove('text-white');
+                    chevron.classList.add('opacity-0');
+                }
+            });
+
+            // Trigger Cinematic Decryption Effect
+            document.getElementById('level-indicator').innerText = `LEVEL 0${idx + 1} / 09`;
+            
+            plateContent.style.opacity = '0';
+            decryptionPlate.style.transform = 'scale(0.98)';
+            decryptionPlate.style.borderTopColor = 'transparent';
+            
+            // Audio hook (if engine exists)
+            if(window.VisceralSymphony) window.VisceralSymphony.pulse();
+            
+            setTimeout(() => {
+                renderPlate(idx);
+                plateContent.style.opacity = '1';
+                decryptionPlate.style.transform = 'scale(1)';
+                decryptionPlate.style.borderTopColor = 'rgba(0, 229, 255, 0.5)';
+                
+                // Re-render math if present
+                if(window.MathJax) MathJax.typesetPromise([plateContent]);
+            }, 300);
+        }
+
+        function renderPlate(idx) {
+            const data = seekerData[idx];
+            
+            plateContent.innerHTML = `
+                <!-- Header -->
+                <div class="flex flex-col gap-3 border-b border-white/10 pb-6">
+                    <div class="flex items-center gap-3 text-[#00e5ff] font-mono text-[10px] tracking-widest uppercase">
+                        <i class="fas fa-shield-halved"></i>
+                        <span>System State: ${data.theme}</span>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-cinzel font-bold text-white tracking-wide">
+                        ${data.title}
+                    </h3>
+                </div>
+
+                <!-- Analysis -->
+                <div class="space-y-4">
+                    <h4 class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em] font-mono">
+                        [ Analysis // The Architecture ]
+                    </h4>
+                    <p class="text-base md:text-lg leading-relaxed text-slate-300 font-light">
+                        ${data.desc}
+                    </p>
+                </div>
+
+                <!-- Strategy Box -->
+                <div class="p-8 bg-black/40 rounded-xl border border-white/5 border-l-2 border-l-[#00e5ff] space-y-4 relative overflow-hidden shadow-inner group hover:bg-black/60 transition-colors">
+                    <div class="absolute top-0 right-0 p-6 opacity-5 pointer-events-none text-6xl group-hover:scale-110 transition-transform">
+                        <i class="fas ${data.icon}"></i>
+                    </div>
+                    <h4 class="text-[10px] font-bold text-[#00e5ff] uppercase tracking-[0.3em] font-mono flex items-center gap-3">
+                        <i class="fas fa-bolt"></i>
+                        [ Strategic Transmutation ]
+                    </h4>
+                    <p class="text-sm md:text-base text-slate-300 leading-relaxed relative z-10 font-medium">
+                        ${data.strategy}
+                    </p>
+                </div>
+
+                <!-- Context Footer -->
+                <div class="pt-8 mt-8 border-t border-white/5">
+                    <div class="flex items-start gap-4">
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#00e5ff] mt-2 animate-pulse shadow-[0_0_5px_#00e5ff]"></div>
+                        <p class="text-[11px] text-slate-500 font-mono italic leading-relaxed tracking-widest">
+                            "To fight the architect is to play his game. To remember you were the first architect is to end the game entirely. The treasure lies at the Zero Point." <br/>
+                            <span class="not-italic text-[#00e5ff]/70 font-bold mt-3 block">— Visceral Current Codex</span>
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        window.addEventListener('load', initSeekerMatrix);
+    </script>
+</body>
+</html>

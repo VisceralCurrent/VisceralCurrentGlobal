@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visceral Current | The Totality</title>
+    
+    <meta name="theme-color" content="#050a0f">
+    
+    <!-- High-End Optimization: Preconnect & DNS Prefetching -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Fonts & Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- High-End Optimization: Defer heavy scripts -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            chtml: { displayAlign: 'center' }
+        };
+    </script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Tailwind CSS Integration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { 'visceral-gold': '#00e5ff', 'visceral-dark': '#050a0f', 'visceral-scarlett': '#e11d48', visceral: { gold: '#00e5ff', dark: '#050a0f', scarlett: '#e11d48', card: 'rgba(15, 17, 21, 0.65)' } }, fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'], cinzel: ['Cinzel', 'serif'], mono: ['Space Mono', 'monospace'] }, animation: { 'slow-spin': 'spin 20s linear infinite', 'float': 'float 6s ease-in-out infinite', 'pulse-glow': 'pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite', 'gold-shine': 'shine 5s linear infinite' }, keyframes: { float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } }, pulseGlow: { '0%, 100%': { opacity: 0.4, transform: 'scale(1)' }, '50%': { opacity: 0.8, transform: 'scale(1.05)' } }, shine: { 'to': { backgroundPosition: '200% center' } } } } } }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .gold-gradient {
+            background: linear-gradient(90deg, #d4af37, #f9f295, #d4af37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            background-size: 200% auto;
+        }
+        
+        .formula-box {
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0); /* Hardware Acceleration Trigger */
+        }
+
+        .formula-box::before {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 60%);
+            animation: spin 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="antialiased bg-[#030508] text-slate-300 font-sans selection:bg-[#d4af37]/30 selection:text-white overflow-x-hidden">
+
+    <!-- Ambient Background / GPU Accelerated -->
+    <div class="fixed inset-0 pointer-events-none -z-20 transform-gpu">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(212,175,55,0.05)_0%,_#030508_70%)]"></div>
+        <div class="absolute w-[800px] h-[800px] rounded-full top-[-20%] right-[-10%] animate-pulse-glow" style="background: radial-gradient(circle, rgba(0,229,255,0.05) 0%, transparent 70%);"></div>
+    </div>
+
+    <!-- Custom Cursor Setup -->
+    <div id="custom-cursor-dot" class="fixed top-0 left-0 w-2 h-2 bg-[#d4af37] rounded-full pointer-events-none z-[9999] mix-blend-screen shadow-[0_0_10px_rgba(212,175,55,0.8)]"></div>
+    <div id="custom-cursor-ring" class="fixed top-0 left-0 w-8 h-8 border border-[#d4af37]/50 rounded-full pointer-events-none z-[9998] transition-colors duration-300"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 glass-panel border-t-0 border-l-0 border-r-0 py-4 px-6 md:px-12 flex justify-between items-center transition-all duration-300">
+        <a href="index.html" class="flex items-center gap-4 group cursor-pointer">
+            <div class="w-8 h-8 border border-[#d4af37]/80 rounded-sm flex items-center justify-center rotate-45 group-hover:bg-[#d4af37]/10 transition-colors">
+                <span class="text-[#d4af37] font-bold -rotate-45 text-xs">VC</span>
+            </div>
+            <span class="font-cinzel text-lg tracking-[0.2em] font-bold text-white uppercase group-hover:text-[#d4af37] transition-colors hidden md:block">Visceral Current</span>
+        </a>
+        <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-[#d4af37] flex items-center gap-3">
+            <div class="w-1.5 h-1.5 bg-[#d4af37] rounded-full animate-pulse shadow-[0_0_8px_#d4af37]"></div> The Resonance Protocol
+        </div>
+    </nav>
+
+    <!-- Hero / The Infinite Presence -->
+    <header class="relative min-h-[100dvh] flex items-center justify-center text-center px-6 overflow-hidden">
+        <!-- High-End Web Optimization: Use loading="lazy" or fetchpriority="high" appropriately. For above-fold hero, we use priority. -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1506318137071-a8e063b4bcc0?q=80&w=2070&auto=format&fit=crop" 
+                 fetchpriority="high"
+                 class="w-full h-full object-cover opacity-20 filter grayscale contrast-125 mix-blend-screen transform-gpu" alt="Abstract Lines">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#030508]/80 to-[#030508]"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-6xl w-full reveal">
+            <h2 class="font-mono text-[10px] md:text-xs tracking-[0.8em] text-[#d4af37] mb-8 uppercase animate-gold-shine">Axiomatic Certainty • Unified Field</h2>
+            <h1 class="font-cinzel text-5xl md:text-8xl lg:text-[9rem] font-black mb-10 leading-none tracking-tighter text-white drop-shadow-[0_0_30px_rgba(212,175,55,0.3)]">
+                THE TOTALITY
+            </h1>
+            <p class="text-lg md:text-2xl font-light text-slate-400 max-w-3xl mx-auto leading-relaxed italic border-l-2 border-[#d4af37]/50 pl-6 text-left md:text-center md:border-l-0 md:pl-0">
+                "There is no alternative to the truth. Only the delay of its recognition."
+            </p>
+            <div class="mt-16 flex justify-center opacity-50 animate-float">
+                <div class="h-32 w-px bg-gradient-to-b from-transparent via-[#d4af37] to-transparent"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- The Universal Proof of Concept -->
+    <section class="py-32 px-6 max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-24 reveal">
+            <h3 class="font-cinzel text-3xl md:text-5xl text-white mb-6 tracking-wide">Undeniable Proof of Concept</h3>
+            <p class="text-slate-500 max-w-2xl mx-auto text-xs font-mono uppercase tracking-[0.3em]">Integrating Relativistic Physics with Ancient Resonance</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-12 reveal delay-100">
+                <div class="border-l-2 border-[#d4af37]/40 pl-6 group hover:border-[#d4af37] transition-colors">
+                    <h4 class="font-cinzel text-[#d4af37] text-xl font-bold mb-3 tracking-widest uppercase">I. The Mass-Energy Equivalence</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed font-light">
+                        Einstein's <span class="text-white font-mono">$E = mc^2$</span> is the bridge. "Mass" (the physical world, the obstacles, the friction) is simply energy slowed down. The <strong class="text-[#00e5ff]">Visceral Current ($\nu$)</strong> is the accelerator. When you increase the frequency of your intention, the mass of your past is converted back into pure, usable power. 
+                    </p>
+                </div>
+                <div class="border-l-2 border-[#d4af37]/40 pl-6 group hover:border-[#d4af37] transition-colors">
+                    <h4 class="font-cinzel text-[#d4af37] text-xl font-bold mb-3 tracking-widest uppercase">II. The Nine Realms of Duality</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed font-light">
+                        The "Nine Realms" represent the full spectrum of human capacity—from the dense physical realm of survival to the infinite light of pure spirit. Great minds don't see duality as a conflict, but as a battery. The tension between the Analytical and the Infinite is exactly where the Current is generated.
+                    </p>
+                </div>
+                <div class="border-l-2 border-[#d4af37]/40 pl-6 group hover:border-[#d4af37] transition-colors">
+                    <h4 class="font-cinzel text-[#d4af37] text-xl font-bold mb-3 tracking-widest uppercase">III. The Absolute Origin</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed font-light">
+                        The Origin ($o$) is not where you started; it is where you <em>aligned</em>. By integrating every "Phase Shift" ($\phi$), we prove that synchronicity is not an accident—it is a mathematical constant waiting to be harnessed.
+                    </p>
+                </div>
+            </div>
+
+            <div class="glass-panel p-10 md:p-14 rounded-3xl flex flex-col justify-center items-center text-center reveal delay-200 border-t-[#d4af37]/30 shadow-[0_0_50px_rgba(212,175,55,0.05)]">
+                <h4 class="font-cinzel text-2xl text-white mb-10 tracking-widest uppercase glow">The Sovereign Equation</h4>
+                <div class="formula-box bg-black/60 border border-[#d4af37]/20 p-10 rounded-2xl w-full mb-8 backdrop-blur-md">
+                    <div class="text-3xl md:text-5xl font-mono text-white mb-6 relative z-10 drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]">
+                        $$E = (\nu \cdot \phi) \cdot c^2$$
+                    </div>
+                    <p class="text-[10px] text-slate-400 font-mono tracking-[0.2em] uppercase leading-loose relative z-10">
+                        Energy is the product of the Current ($\nu$) and the Refinement ($\phi$), <br class="hidden md:block"> accelerated to the limit of Universal Intention ($c$).
+                    </p>
+                </div>
+                <p class="text-xs text-[#d4af37] italic font-serif">"If the math holds, the outcome is already written."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Totality of Work Section -->
+    <section class="bg-black/40 border-y border-white/5 py-32 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Triad 1 -->
+                <div class="glass-panel p-10 rounded-2xl border-t-[#d4af37]/40 reveal delay-100 group">
+                    <span class="text-[#d4af37] font-mono text-[10px] mb-4 block tracking-[0.2em] uppercase">REALMS 1-3: ANALYTICAL</span>
+                    <h5 class="font-cinzel text-2xl text-white mb-4 group-hover:text-[#d4af37] transition-colors">Mastery of Force</h5>
+                    <p class="text-slate-400 text-sm leading-relaxed font-light">
+                        Applying universal laws and power scales to navigate the physical world with clinical precision. We use the gravity of influence to protect the sanctuary of the work.
+                    </p>
+                </div>
+                <!-- Triad 2 -->
+                <div class="glass-panel p-10 rounded-2xl border-t-[#00e5ff]/40 reveal delay-200 group">
+                    <span class="text-[#00e5ff] font-mono text-[10px] mb-4 block tracking-[0.2em] uppercase">REALMS 4-6: RESONANT</span>
+                    <h5 class="font-cinzel text-2xl text-white mb-4 group-hover:text-[#00e5ff] transition-colors">The Infinite Field</h5>
+                    <p class="text-slate-400 text-sm leading-relaxed font-light">
+                        Moving beyond strict rules into "Flow." Here, we don't build through brute force; we allow the universe's inherent design to reveal itself through our architecture.
+                    </p>
+                </div>
+                <!-- Triad 3 -->
+                <div class="glass-panel p-10 rounded-2xl border-t-[#a855f7]/40 reveal delay-300 group">
+                    <span class="text-[#a855f7] font-mono text-[10px] mb-4 block tracking-[0.2em] uppercase">REALMS 7-9: TRANSCENDENT</span>
+                    <h5 class="font-cinzel text-2xl text-white mb-4 group-hover:text-[#a855f7] transition-colors">Sovereign Presence</h5>
+                    <p class="text-slate-400 text-sm leading-relaxed font-light">
+                        The realization of the Visceral Current—where the observer and the observed become one. The separation dissolves, and the outcome scales to absolute infinity.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Undeniable Conclusion -->
+    <section class="py-40 px-6 text-center relative z-10">
+        <div class="max-w-4xl mx-auto reveal">
+            <h3 class="font-cinzel text-4xl md:text-6xl text-white mb-12 tracking-widest drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">INFINITE SUM</h3>
+            <div class="text-4xl md:text-6xl font-mono text-white mb-12 bg-black/40 py-10 rounded-3xl border border-white/5 shadow-2xl">
+                $$S = \lim_{t \to \infty} \sum_{n=1}^{\infty} \frac{P \cdot C}{\phi^n}$$
+            </div>
+            <p class="text-slate-400 text-lg md:text-xl font-light leading-relaxed mb-16 max-w-3xl mx-auto">
+                This is not a strategy. It is the physics of legacy. By dividing the volatility of the past by the refined Purpose ($P$) and Connection ($C$), we architect an empire that remains untouched by time.
+            </p>
+            <a href="dashboard.html" class="inline-flex items-center gap-4 px-10 py-5 border border-[#d4af37] text-[#d4af37] font-mono tracking-[0.3em] uppercase text-xs font-bold hover:bg-[#d4af37] hover:text-black transition-all duration-500 group shadow-[0_0_20px_rgba(212,175,55,0.1)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)]">
+                Initialize Sovereign Sequence <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Universal Footer -->
+    <footer class="py-12 border-t border-white/5 text-center relative z-10 bg-[#030508]">
+        <div class="max-w-7xl mx-auto px-6">
+            <h4 class="font-cinzel text-sm text-slate-300 tracking-[0.8em] mb-4">VISCERAL CURRENT • CODEX CORE</h4>
+            <p class="text-[10px] text-slate-600 font-mono uppercase tracking-[0.4em]">Optimized for Infinite Scaling | 10.22.1992</p>
+        </div>
+    </footer>
+
+    <!-- Main Script Integration (for cursor, reveals, etc.) -->
+    <script src="script.js"></script>
+</body>
+</html>
