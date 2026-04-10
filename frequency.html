@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visceral Current | Frequency Assessment</title>
+    <title>Visceral Current | Discovering Essence</title>
     <meta name="theme-color" content="#050a0f">
-    
+
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -39,7 +39,7 @@
             <span class="font-cinzel text-lg tracking-[0.2em] font-bold text-white uppercase group-hover:text-visceral-scarlett transition-colors hidden md:block">Visceral Current</span>
         </a>
         <div class="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-mono z-50 flex items-center gap-2">
-            <div class="w-1.5 h-1.5 rounded-full bg-visceral-scarlett animate-pulse"></div> Phase Shift Diagnostics
+            <div class="w-1.5 h-1.5 rounded-full bg-visceral-scarlett animate-pulse"></div> Discovering Essence
         </div>
     </nav>
 
@@ -55,9 +55,9 @@
             <!-- Content Area -->
             <div id="content-area" class="text-center min-h-[300px] flex flex-col justify-center transition-opacity duration-500">
                 <!-- Initial Hook -->
-                <span class="text-visceral-scarlett font-mono text-xs tracking-[0.3em] uppercase block mb-4">Diagnostics</span>
-                <h1 class="text-3xl md:text-5xl font-cinzel font-bold text-white mb-6">Locate Your Coordinate</h1>
-                <p class="text-gray-400 font-light leading-relaxed mb-10 max-w-lg mx-auto">To scale your capacity to absolute infinity, we must first map your current baseline. This diagnostic will determine your operational frequency.</p>
+                <span class="text-visceral-scarlett font-mono text-xs tracking-[0.3em] uppercase block mb-4">Phase I: The Map</span>
+                <h1 class="text-3xl md:text-5xl font-cinzel font-bold text-white mb-6">Discovering Essence</h1>
+                <p class="text-gray-400 font-light leading-relaxed mb-10 max-w-lg mx-auto">To scale your capacity to absolute infinity, we must first map your core essence. This 12-stage matrix compresses time into efficient discovery, synthesizing raw data into foundational understanding.</p>
                 
                 <button onclick="startAssessment()" class="btn-gold mx-auto px-10 py-4 bg-white text-black rounded-sm hover:bg-visceral-scarlett hover:text-white transition duration-300 font-bold uppercase tracking-[0.2em] text-xs shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                     Initiate Scan
@@ -70,44 +70,172 @@
     <script>
         const questions = [
             {
-                q: "When confronted with unexpected volatility or systemic failure, what is your immediate visceral reaction?",
+                theme: "The Mechanics of Action",
+                q: "When confronted with an immovable obstacle or systemic failure, what is your immediate kinetic reaction?",
                 options: [
-                    { text: "Frustration, resistance, and a desire to force the situation back to normal.", score: 100 },
-                    { text: "Detachment. I calculate the variables and look for a logical workaround.", score: 300 },
-                    { text: "Recognition. I see it as a Phase Shift (ϕ) providing raw kinetic fuel for growth.", score: 528 }
-                ]
+                    { text: "Strike harder. Force compliance to regain control.", score: 100 },
+                    { text: "Analyze and sidestep. Find the path of least resistance.", score: 300 },
+                    { text: "Absorb its kinetic energy. Use its mass to accelerate my trajectory.", score: 528 }
+                ],
+                insight: {
+                    anchor: "Force generates counter-force. Striking the wall only damages the fist and depletes your finite reserves.",
+                    ascent: "Analysis avoids damage, but merely bypassing the obstacle leaves its massive potential energy untapped.",
+                    balance: "The Visceral Current absorbs the friction (ϕ). You do not fight the system; you mathematically consume its momentum."
+                }
             },
             {
-                q: "How do you currently measure the success of your daily actions?",
+                theme: "The Architecture of Identity",
+                q: "When stripped of your title, net worth, and past achievements, what remains of your architecture?",
                 options: [
-                    { text: "By immediate material gain, survival, and defending my status.", score: 100 },
-                    { text: "By the alignment of my long-term strategy and technical efficiency.", score: 300 },
-                    { text: "By the infinite sum of Purpose (P) and Connection (C) to my tribe.", score: 528 }
-                ]
+                    { text: "Vulnerability. A frantic need to rebuild status immediately.", score: 100 },
+                    { text: "A blank slate. The logical freedom to rewrite the narrative.", score: 300 },
+                    { text: "The Zero Point. The absolute, indestructible source code of my existence.", score: 528 }
+                ],
+                insight: {
+                    anchor: "Ego attaches to external fiat metrics. When the market collapses, the identity shatters with it.",
+                    ascent: "Logic recognizes the temporary nature of titles, offering a stoic, detached peace.",
+                    balance: "Sovereignty realizes that the Zero Point (o) is immortal. You are the Architect, not the building."
+                }
             },
             {
-                q: "Where is your mental focus predominantly anchored?",
+                theme: "The Geometry of Conflict",
+                q: "How do you respond to direct betrayal or a coordinated systemic attack?",
                 options: [
-                    { text: "Trapped in the labels, regrets, and narratives of the past.", score: 100 },
-                    { text: "Anxiously planning, theorizing, and bracing for the future.", score: 300 },
-                    { text: "Grounded entirely in the Eternal Now, ready to act with pure intent.", score: 528 }
-                ]
+                    { text: "Vengeance. I destroy the threat to protect my perimeter.", score: 100 },
+                    { text: "Detachment. I sever the connection and logically optimize my losses.", score: 300 },
+                    { text: "Transmutation. I identify the systemic flaw they exposed and integrate it as armor.", score: 528 }
+                ],
+                insight: {
+                    anchor: "Vengeance is an emotional tax paid to your enemies. It permanently drains your kinetic reserve.",
+                    ascent: "Severing ties stops the bleeding efficiently, but leaves the underlying systemic vulnerability unresolved.",
+                    balance: "Transmutation turns the attack into a free audit. You thank the enemy for exposing the flaw, then fortify the matrix."
+                }
             },
             {
-                q: "How do you process the timeline of your past failures or 'lost years'?",
+                theme: "The Calculus of Time",
+                q: "How do you quantify the 'lost years', detours, or massive failures of your past?",
                 options: [
-                    { text: "As a deficit. Time lost that I must frantically work to make up for.", score: 100 },
-                    { text: "As a learning experience. I logically extract the lessons and try not to repeat them.", score: 300 },
-                    { text: "As mathematical friction. They were necessary Phase Shifts required to place me at this exact coordinate.", score: 528 }
-                ]
+                    { text: "As a deficit. A permanent scar that puts me perpetually behind schedule.", score: 100 },
+                    { text: "As education. Expensive lessons that logically prevent future mistakes.", score: 300 },
+                    { text: "As mathematical necessity. The exact Phase Shift required to reach my current frequency.", score: 528 }
+                ],
+                insight: {
+                    anchor: "Regret is a low-frequency anchor. It forces you to continually pay psychological interest on a dead debt.",
+                    ascent: "Extracting lessons is efficient, but still views the event fundamentally as a 'mistake' to be managed.",
+                    balance: "Mathematical certainty dictates that every detour was the exact Phase Shift required to place you at this highly leveraged coordinate."
+                }
             },
             {
-                q: "When constructing your network or team, what is your primary metric for inclusion?",
+                theme: "The Flow of Capital",
+                q: "What is the true mathematical purpose of accumulating massive wealth?",
                 options: [
-                    { text: "Utility. What they can immediately do for me and my status.", score: 100 },
-                    { text: "Skillset. Professional competence and resume achievements.", score: 300 },
-                    { text: "Resonance. A synergetic understanding of the Current. No dead weight.", score: 528 }
-                ]
+                    { text: "Security. Shielding myself from the volatility and danger of the world.", score: 100 },
+                    { text: "Freedom. The logical ability to buy back my time and autonomy.", score: 300 },
+                    { text: "Kinetic Leverage. Funding the architecture to scale my Area of Impact to infinity.", score: 528 }
+                ],
+                insight: {
+                    anchor: "Hoarding resources out of fear signals to the universe that your default state is scarcity.",
+                    ascent: "Buying freedom is noble, but isolates you from the greater systemic flow of the collective.",
+                    balance: "Capital is simply stored kinetic energy. You accumulate it to deploy massive, infinite-scaling architecture for your tribe."
+                }
+            },
+            {
+                theme: "The Synergetic Network",
+                q: "On what fundamental basis do you select the nodes of your inner circle?",
+                options: [
+                    { text: "Utility. What they can actively do to advance my current position.", score: 100 },
+                    { text: "Competence. Their verifiable skills, intellect, and reliability.", score: 300 },
+                    { text: "Resonance. A synergetic frequency that mathematically balances my Phase Shift.", score: 528 }
+                ],
+                insight: {
+                    anchor: "Transactional relationships create brittle, highly volatile networks that instantly collapse under pressure.",
+                    ascent: "Competence builds highly functional teams, but logic alone cannot survive a true systemic crisis.",
+                    balance: "Synergy (C) multiplies force. A resonant tribe operates as a single organism, moving with unspoken, telepathic precision."
+                }
+            },
+            {
+                theme: "The Locus of Focus",
+                q: "Where does your conscious processing power predominantly reside?",
+                options: [
+                    { text: "The Past. Ruminating on trauma, old victories, or what could have been.", score: 100 },
+                    { text: "The Future. Strategizing, worrying, and constantly preparing for probability.", score: 300 },
+                    { text: "The Eternal Now. Converting present potential into undeniable kinetic reality.", score: 528 }
+                ],
+                insight: {
+                    anchor: "Living in the past guarantees its repetition. You are dedicating RAM to downloading dead data.",
+                    ascent: "Living in the future creates perpetual anxiety. You are suffering for events that do not yet exist.",
+                    balance: "The Eternal Now is the only dimension where Area of Impact (A) can be generated. Execution happens in the present millisecond."
+                }
+            },
+            {
+                theme: "The Void of the Unknown",
+                q: "When stepping into a completely alien paradigm or industry, what is your primary state?",
+                options: [
+                    { text: "Anxiety. A desperate scramble to establish control and familiarity.", score: 100 },
+                    { text: "Calculation. A methodical mapping of rules before taking calculated risks.", score: 300 },
+                    { text: "Awe. I am the observer, watching the universal math reveal its new geometry.", score: 528 }
+                ],
+                insight: {
+                    anchor: "Anxiety constricts the wave function. It forces you to operate at a biologically taxing survival frequency.",
+                    ascent: "Calculation mitigates risk, but over-analysis paralyzes the visceral instinct required for genius.",
+                    balance: "Awe expands capacity. When you observe the unknown with curiosity, you naturally align with the universe's expansive geometry."
+                }
+            },
+            {
+                theme: "The Destruction of Illusion",
+                q: "How do you react when a foundational, long-held belief of yours is proven mathematically false?",
+                options: [
+                    { text: "Defensiveness. I double down to protect my established identity.", score: 100 },
+                    { text: "Recalibration. I update my internal models to reflect the new data.", score: 300 },
+                    { text: "Liberation. I celebrate the destruction of a limitation. The ceiling was fake.", score: 528 }
+                ],
+                insight: {
+                    anchor: "Defending a dead paradigm is the ultimate waste of biological energy. It is intellectual suicide.",
+                    ascent: "Recalibration is incredibly healthy, updating the software without challenging the hardware.",
+                    balance: "Liberation occurs when you realize every shattered belief simply expands the perimeter of your empire. The ceiling was always an illusion."
+                }
+            },
+            {
+                theme: "The Absolute Sovereign",
+                q: "What is the ultimate, undeniable expression of executive power?",
+                options: [
+                    { text: "Dominance. The ability to make the environment and others obey my will.", score: 100 },
+                    { text: "Autonomy. Complete independence from the demands and control of the system.", score: 300 },
+                    { text: "Sovereignty. Generating a gravity well so massive that the environment naturally bends to me.", score: 528 }
+                ],
+                insight: {
+                    anchor: "Dominance requires constant, exhausting enforcement. The dictator never sleeps.",
+                    ascent: "Autonomy is peaceful, but true isolation prevents you from lifting others with your gravity.",
+                    balance: "Sovereignty is effortless. By mastering your internal architecture, the external world aligns to you mathematically. You become the sun."
+                }
+            },
+            {
+                theme: "The Structure of Chaos",
+                q: "How do you structure your daily operational flow amidst high volatility?",
+                options: [
+                    { text: "Reaction. Putting out fires and responding to the loudest external demands.", score: 100 },
+                    { text: "Regimentation. Strict, unyielding discipline that breaks down when interrupted.", score: 300 },
+                    { text: "Dynamic Equilibrium. A fluid architecture that absorbs chaos and remains centered.", score: 528 }
+                ],
+                insight: {
+                    anchor: "Reaction makes you a slave to the environment. You are a leaf caught in the hurricane.",
+                    ascent: "Rigid regimentation shatters when the Black Swan event arrives. It is too brittle to survive.",
+                    balance: "Dynamic Equilibrium bends but never breaks. You absorb the chaos, run it through your framework, and output pure order."
+                }
+            },
+            {
+                theme: "The Infinite Horizon",
+                q: "How do you view the eventual conclusion of your biological timeline?",
+                options: [
+                    { text: "With dread. A final deadline that makes all acquisition feel urgent and terrifying.", score: 100 },
+                    { text: "With stoicism. A natural biological conclusion that necessitates leaving a good name.", score: 300 },
+                    { text: "As a variable. My physical vessel ends, but the Infinite Sum (S) I architected echoes eternally.", score: 528 }
+                ],
+                insight: {
+                    anchor: "Dread limits your vision to a single biological lifespan, making true empire-building mathematically impossible.",
+                    ascent: "Stoicism accepts the end gracefully, but often fails to leverage the life for maximum generational velocity.",
+                    balance: "The Infinite Sum (S) outlives the flesh. You architect a system of value so undeniable that it continues to compound centuries after you are gone."
+                }
             }
         ];
 
@@ -142,7 +270,7 @@
             });
 
             contentArea.innerHTML = `
-                <span class="text-gray-500 font-mono text-[10px] tracking-[0.3em] uppercase block mb-4">Parameter 0${index + 1} // 0${questions.length}</span>
+                <span class="text-gray-500 font-mono text-[10px] tracking-[0.3em] uppercase block mb-4">Parameter ${String(index + 1).padStart(2, '0')} // ${questions.length}</span>
                 <h2 class="text-xl md:text-3xl font-cinzel text-white mb-10 leading-tight">${qData.q}</h2>
                 <div class="space-y-4 w-full max-w-2xl mx-auto flex flex-col">
                     ${optionsHtml}
@@ -152,6 +280,35 @@
 
         function selectOption(score) {
             totalScore += score;
+            fadeTransition(() => renderIntegration());
+        }
+
+        function renderIntegration() {
+            const qData = questions[currentQ];
+            contentArea.innerHTML = `
+                <span class="text-visceral-scarlett font-mono text-[10px] tracking-[0.3em] uppercase block mb-4">Integration Synthesis // Node ${String(currentQ + 1).padStart(2, '0')}</span>
+                <h2 class="text-2xl md:text-4xl font-cinzel text-white mb-10 leading-tight">${qData.theme}</h2>
+                <div class="space-y-4 w-full max-w-3xl mx-auto flex flex-col mb-10 text-left">
+                    <div class="p-5 md:p-6 bg-black/40 border-l-2 border-gray-600 rounded-r-xl">
+                        <h4 class="text-gray-400 font-mono text-[10px] tracking-widest uppercase mb-2">I. The Anchor (Force)</h4>
+                        <p class="text-sm font-light text-gray-300 leading-relaxed">${qData.insight.anchor}</p>
+                    </div>
+                    <div class="p-5 md:p-6 bg-black/40 border-l-2 border-white rounded-r-xl">
+                        <h4 class="text-white font-mono text-[10px] tracking-widest uppercase mb-2">II. The Ascent (Logic)</h4>
+                        <p class="text-sm font-light text-gray-200 leading-relaxed">${qData.insight.ascent}</p>
+                    </div>
+                    <div class="p-5 md:p-6 bg-black/40 border-l-2 border-visceral-scarlett rounded-r-xl shadow-[inset_0_0_20px_rgba(225,29,72,0.05)]">
+                        <h4 class="text-visceral-scarlett font-mono text-[10px] tracking-widest uppercase mb-2">III. Visceral Balance</h4>
+                        <p class="text-sm font-medium text-white leading-relaxed">${qData.insight.balance}</p>
+                    </div>
+                </div>
+                <button onclick="proceedToNext()" class="btn-gold mx-auto px-10 py-4 bg-white text-black rounded-sm hover:bg-visceral-scarlett hover:text-white transition duration-300 font-bold uppercase tracking-[0.2em] text-xs shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                    Acknowledge & Proceed
+                </button>
+            `;
+        }
+
+        function proceedToNext() {
             currentQ++;
             
             if (currentQ < questions.length) {
